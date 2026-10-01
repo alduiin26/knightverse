@@ -43,9 +43,15 @@
     .animate-pulse-gold {
       animation: pulse-gold 2.5s infinite ease-in-out;
     }
-    /* Siyah arka planı yok edip şimşekleri ve kalkanı kusursuz kaynaştıran stil */
     .blend-logo {
       mix-blend-mode: screen;
+    }
+    @keyframes float-box {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-float {
+      animation: float-box 4s ease-in-out infinite;
     }
   </style>
 </head>
@@ -68,7 +74,7 @@
   <nav class="fixed top-0 left-0 w-full z-50 bg-[#050505]/95 backdrop-blur-md border-b border-brand-border">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
       
-      <!-- LOGO AREA (BLEND SCREEN APPLIED) -->
+      <!-- LOGO AREA -->
       <a href="#" class="flex items-center gap-2">
         <img src="logoko.png" alt="KnightVerse Logo" class="h-11 sm:h-14 w-auto object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,215,0,0.4)]" />
       </a>
@@ -78,7 +84,9 @@
         <a href="#teaser" class="hover:text-brand-gold transition text-amber-300 flex items-center gap-1">
           <i data-lucide="play-circle" class="w-4 h-4"></i> Trailer
         </a>
-        <a href="#mint" class="hover:text-brand-gold transition">Genesis Mint</a>
+        <a href="#mint" class="hover:text-brand-gold transition text-brand-gold flex items-center gap-1">
+          <i data-lucide="box" class="w-4 h-4"></i> Genesis Mint
+        </a>
         <a href="#rarity" class="hover:text-brand-gold transition">Classes & Rarity</a>
         <a href="#bosses" class="hover:text-brand-gold transition text-red-400 flex items-center gap-1.5">
           <i data-lucide="skull" class="w-4 h-4"></i> World Bosses
@@ -109,7 +117,7 @@
     <!-- COMPACT MOBILE SUB-BAR (SINGLE ROW) -->
     <div class="lg:hidden border-t border-brand-border/60 bg-[#0a0a0a] px-2 py-1.5 flex items-center justify-between text-[11px]">
       <a href="#teaser" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-gold/40 text-brand-gold active:text-white transition text-center flex-1 mx-0.5">Trailer</a>
-      <a href="#mint" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5">Mint</a>
+      <a href="#mint" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-brand-gold active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5 font-bold">Mint</a>
       <a href="#rarity" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5">Classes</a>
       <a href="#bosses" class="px-1.5 py-1 rounded bg-[#161616] border border-red-950/80 text-red-400 active:text-white transition text-center flex-1 mx-0.5">Bosses</a>
       <a href="#phase0" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5">Phase 0</a>
@@ -121,7 +129,7 @@
   <header class="relative pt-28 sm:pt-36 pb-16 sm:pb-20 overflow-hidden border-b border-brand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
       
-      <!-- HERO EMBLEM PRESENTATION (BLEND SCREEN APPLIED, KARE KUTU KALDIRILDI) -->
+      <!-- HERO EMBLEM PRESENTATION -->
       <div class="flex justify-center mb-4 sm:mb-6">
         <div class="relative">
           <img src="logoko.png" alt="KnightVerse Faction Shield" class="w-36 sm:w-56 h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.45)] mx-auto animate-pulse-gold" />
@@ -192,52 +200,131 @@
     </div>
   </section>
 
-  <!-- MINT & TIERS -->
-  <section id="mint" class="py-16 sm:py-24 border-b border-brand-border bg-[#080808]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-        <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Tokenized Launch Allocation</h2>
-        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Genesis Level 1 Box Offering</h3>
-        <p class="text-xs sm:text-sm text-gray-400 mt-2">A strictly limited supply of 2,000 Level 1 Character Boxes launching on OpenSea via BNB Chain (USDT).</p>
+  <!-- GENESIS MINT SECTION WITH HERO LOOT CHEST SHOWCASE -->
+  <section id="mint" class="py-16 sm:py-24 border-b border-brand-border bg-[#070707] relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Tokenized Launch Offering</h2>
+        <h3 class="text-2xl sm:text-4xl font-extrabold text-white">Genesis Level 1 Box Mint</h3>
+        <p class="text-xs sm:text-sm text-gray-400 mt-2">Each Genesis Box contains 1 randomized Level 1 playable NFT character with native multiplier perks.</p>
       </div>
 
+      <!-- MAIN LOOT CHEST SHOWCASE PANEL -->
+      <div class="bg-brand-card/90 border border-brand-gold/30 rounded-2xl p-6 sm:p-10 mb-12 gold-glow backdrop-blur-sm">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- LEFT: 3D FLOATING LOOT CHEST -->
+          <div class="lg:col-span-5 flex flex-col items-center justify-center text-center relative">
+            <div class="relative w-64 sm:w-80 h-auto">
+              <!-- Radial background flare -->
+              <div class="absolute inset-0 bg-gradient-to-t from-amber-500/20 via-purple-600/10 to-transparent blur-2xl rounded-full"></div>
+              <img src="loot.png" alt="Genesis Loot Chest" class="relative w-full h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.4)] animate-float mx-auto" />
+            </div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/80 border border-brand-gold/40 text-brand-gold text-xs font-mono mt-3">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Verified Contract Asset
+            </div>
+          </div>
+
+          <!-- RIGHT: CHEST UTILITY & MINT STATUS -->
+          <div class="lg:col-span-7 flex flex-col justify-between">
+            <div>
+              <div class="flex flex-wrap items-center gap-2 mb-3">
+                <span class="px-2.5 py-0.5 rounded bg-brand-gold/20 text-brand-gold border border-brand-gold/40 text-xs font-bold uppercase tracking-wider">BNB Chain (BEP-721)</span>
+                <span class="px-2.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800 text-xs font-medium">Standard USDT Mint</span>
+              </div>
+              
+              <h4 class="text-xl sm:text-2xl font-bold text-white mb-3">Ancient Genesis Character Chest</h4>
+              <p class="text-xs sm:text-sm text-gray-300 leading-relaxed mb-6">
+                Open to summon a Warrior, Rogue, Mage, or Priest. Rarities range from Common to Legendary, directly determining your turn-based win rates, leaderboard placement, and daily $KNIGHT rewards.
+              </p>
+
+              <!-- MINT PROGRESS BAR -->
+              <div class="bg-[#181818] p-4 rounded-xl border border-brand-border/60 mb-6">
+                <div class="flex justify-between text-xs mb-2">
+                  <span class="text-gray-400 font-medium">Minting Phase Allocation:</span>
+                  <span class="text-brand-gold font-bold font-mono">1,290 / 2,000 Minted</span>
+                </div>
+                <div class="w-full bg-stone-900 rounded-full h-2.5 overflow-hidden border border-stone-800">
+                  <div class="bg-gradient-to-r from-amber-500 to-brand-gold h-2.5 rounded-full" style="width: 64.5%"></div>
+                </div>
+                <div class="flex justify-between text-[11px] text-gray-500 mt-2 font-mono">
+                  <span>64.5% Claimed</span>
+                  <span>FCFS Public Round Next</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="flex flex-col sm:flex-row items-center gap-3">
+              <a href="https://opensea.io" target="_blank" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-brand-gold text-black font-extrabold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">
+                <i data-lucide="sparkles" class="w-4 h-4"></i> Mint on OpenSea
+              </a>
+              <a href="#rarity" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#161616] border border-brand-border text-gray-300 text-sm hover:border-brand-gold hover:text-white transition flex items-center justify-center gap-2">
+                Inspect Character Rarities
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 MINT ROUND CARDS (WITH INTEGRATED MINI LOOT CHEST ACCENTS) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        <div class="bg-brand-card border border-brand-border rounded-xl p-5 sm:p-6 relative">
-          <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Team Reserve</div>
-          <div class="text-2xl sm:text-3xl font-black text-white mt-3">0 USDT <span class="text-xs font-normal text-gray-400">/ Free</span></div>
-          <div class="mt-4 pt-4 border-t border-brand-border/60 text-xs sm:text-sm space-y-2">
-            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white">10 Boxes</span></div>
+        
+        <!-- CARD 1 -->
+        <div class="bg-brand-card border border-brand-border rounded-xl p-5 relative overflow-hidden flex flex-col justify-between group">
+          <img src="loot.png" alt="Loot" class="absolute -bottom-6 -right-6 w-24 h-24 object-contain blend-logo opacity-20 group-hover:opacity-40 transition pointer-events-none" />
+          <div>
+            <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Team Reserve</div>
+            <div class="text-2xl sm:text-3xl font-black text-white mt-2">0 USDT <span class="text-xs font-normal text-gray-400">/ Free</span></div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5 relative z-10">
+            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">10 Boxes</span></div>
             <div class="flex justify-between"><span class="text-gray-400">Utility:</span> <span class="text-gray-300">Testing & Operations</span></div>
           </div>
         </div>
 
-        <div class="bg-brand-card border border-brand-border rounded-xl p-5 sm:p-6 relative">
-          <div class="text-xs font-semibold text-blue-400 uppercase tracking-wider">GTD Whitelist</div>
-          <div class="text-2xl sm:text-3xl font-black text-white mt-3">3 USDT</div>
-          <div class="mt-4 pt-4 border-t border-brand-border/60 text-xs sm:text-sm space-y-2">
-            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white">290 Boxes</span></div>
+        <!-- CARD 2 -->
+        <div class="bg-brand-card border border-brand-border rounded-xl p-5 relative overflow-hidden flex flex-col justify-between group">
+          <img src="loot.png" alt="Loot" class="absolute -bottom-6 -right-6 w-24 h-24 object-contain blend-logo opacity-25 group-hover:opacity-50 transition pointer-events-none" />
+          <div>
+            <div class="text-xs font-semibold text-blue-400 uppercase tracking-wider">GTD Whitelist</div>
+            <div class="text-2xl sm:text-3xl font-black text-white mt-2">3 USDT</div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5 relative z-10">
+            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">290 Boxes</span></div>
             <div class="flex justify-between"><span class="text-gray-400">Allocation:</span> <span class="text-gray-300">PR & Community Raffles</span></div>
           </div>
         </div>
 
-        <div class="bg-brand-card border border-brand-gold/40 rounded-xl p-5 sm:p-6 relative gold-glow">
+        <!-- CARD 3 (PRIORITY) -->
+        <div class="bg-brand-card border border-brand-gold/50 rounded-xl p-5 relative overflow-hidden flex flex-col justify-between gold-glow group">
           <div class="absolute -top-3 right-4 bg-brand-gold text-black text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Priority</div>
-          <div class="text-xs font-semibold text-brand-gold uppercase tracking-wider">Standard Whitelist</div>
-          <div class="text-2xl sm:text-3xl font-black text-white mt-3">7 USDT</div>
-          <div class="mt-4 pt-4 border-t border-brand-border/60 text-xs sm:text-sm space-y-2">
-            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white">700 Boxes</span></div>
+          <img src="loot.png" alt="Loot" class="absolute -bottom-6 -right-6 w-24 h-24 object-contain blend-logo opacity-35 group-hover:opacity-60 transition pointer-events-none" />
+          <div>
+            <div class="text-xs font-semibold text-brand-gold uppercase tracking-wider">Standard Whitelist</div>
+            <div class="text-2xl sm:text-3xl font-black text-white mt-2">7 USDT</div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5 relative z-10">
+            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">700 Boxes</span></div>
             <div class="flex justify-between"><span class="text-gray-400">Access:</span> <span class="text-gray-300">Active Community Roles</span></div>
           </div>
         </div>
 
-        <div class="bg-brand-card border border-brand-border rounded-xl p-5 sm:p-6 relative">
-          <div class="text-xs font-semibold text-purple-400 uppercase tracking-wider">FCFS Whitelist</div>
-          <div class="text-2xl sm:text-3xl font-black text-white mt-3">10 USDT</div>
-          <div class="mt-4 pt-4 border-t border-brand-border/60 text-xs sm:text-sm space-y-2">
-            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white">1,000 Boxes</span></div>
+        <!-- CARD 4 -->
+        <div class="bg-brand-card border border-brand-border rounded-xl p-5 relative overflow-hidden flex flex-col justify-between group">
+          <img src="loot.png" alt="Loot" class="absolute -bottom-6 -right-6 w-24 h-24 object-contain blend-logo opacity-25 group-hover:opacity-50 transition pointer-events-none" />
+          <div>
+            <div class="text-xs font-semibold text-purple-400 uppercase tracking-wider">FCFS Whitelist</div>
+            <div class="text-2xl sm:text-3xl font-black text-white mt-2">10 USDT</div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5 relative z-10">
+            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">1,000 Boxes</span></div>
             <div class="flex justify-between"><span class="text-gray-400">Public:</span> <span class="text-gray-300">Unminted at 15 USDT</span></div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -327,7 +414,7 @@
     </div>
   </section>
 
-  <!-- WORLD BOSSES & DUNGEON RAIDS SECTION -->
+  <!-- WORLD BOSSES & DUNGEON RAIDS SECTION (WITH LOOT DROP MINI ACCENT) -->
   <section id="bosses" class="py-16 sm:py-24 border-b border-brand-border bg-[#070707]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
@@ -353,7 +440,7 @@
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
             <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-amber-300 font-semibold">Fire Magic</span></div>
-            <div class="flex justify-between"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold">Warrior Relics</span></div>
+            <div class="flex justify-between items-center"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold flex items-center gap-1"><img src="loot.png" class="w-3.5 h-3.5 object-contain blend-logo inline" /> Warrior Relics</span></div>
           </div>
         </div>
 
@@ -371,7 +458,7 @@
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
             <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-emerald-300 font-semibold">Light Spells</span></div>
-            <div class="flex justify-between"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold">Rogue Daggers</span></div>
+            <div class="flex justify-between items-center"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold flex items-center gap-1"><img src="loot.png" class="w-3.5 h-3.5 object-contain blend-logo inline" /> Rogue Daggers</span></div>
           </div>
         </div>
 
@@ -389,7 +476,7 @@
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
             <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-purple-300 font-semibold">Holy Priest</span></div>
-            <div class="flex justify-between"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold">Epic Armor Shards</span></div>
+            <div class="flex justify-between items-center"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold flex items-center gap-1"><img src="loot.png" class="w-3.5 h-3.5 object-contain blend-logo inline" /> Epic Shards</span></div>
           </div>
         </div>
 
@@ -407,7 +494,7 @@
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
             <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-cyan-300 font-semibold">Glacier Spells</span></div>
-            <div class="flex justify-between"><span class="text-gray-400">Loot Drop:</span> <span class="text-brand-gold font-semibold">1,000 $KNIGHT</span></div>
+            <div class="flex justify-between items-center"><span class="text-gray-400">Loot Drop:</span> <span class="text-brand-gold font-semibold flex items-center gap-1"><img src="loot.png" class="w-3.5 h-3.5 object-contain blend-logo inline" /> 1,000 $KNIGHT</span></div>
           </div>
         </div>
       </div>
