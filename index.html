@@ -200,7 +200,7 @@
     </div>
   </section>
 
-  <!-- GENESIS MINT SECTION WITH HERO LOOT CHEST SHOWCASE -->
+  <!-- GENESIS MINT SECTION -->
   <section id="mint" class="py-16 sm:py-24 border-b border-brand-border bg-[#070707] relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
       
@@ -217,7 +217,6 @@
           <!-- LEFT: 3D FLOATING LOOT CHEST -->
           <div class="lg:col-span-5 flex flex-col items-center justify-center text-center relative">
             <div class="relative w-64 sm:w-80 h-auto">
-              <!-- Radial background flare -->
               <div class="absolute inset-0 bg-gradient-to-t from-amber-500/20 via-purple-600/10 to-transparent blur-2xl rounded-full"></div>
               <img src="loot.png" alt="Genesis Loot Chest" class="relative w-full h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.4)] animate-float mx-auto" />
             </div>
@@ -239,18 +238,18 @@
                 Open to summon a Warrior, Rogue, Mage, or Priest. Rarities range from Common to Legendary, directly determining your turn-based win rates, leaderboard placement, and daily $KNIGHT rewards.
               </p>
 
-              <!-- MINT PROGRESS BAR -->
+              <!-- DYNAMIC MINT PROGRESS BAR (INITIALIZED AT 0 / 2,000) -->
               <div class="bg-[#181818] p-4 rounded-xl border border-brand-border/60 mb-6">
                 <div class="flex justify-between text-xs mb-2">
                   <span class="text-gray-400 font-medium">Minting Phase Allocation:</span>
-                  <span class="text-brand-gold font-bold font-mono">1,290 / 2,000 Minted</span>
+                  <span id="mintCountText" class="text-brand-gold font-bold font-mono">0 / 2,000 Minted</span>
                 </div>
                 <div class="w-full bg-stone-900 rounded-full h-2.5 overflow-hidden border border-stone-800">
-                  <div class="bg-gradient-to-r from-amber-500 to-brand-gold h-2.5 rounded-full" style="width: 64.5%"></div>
+                  <div id="mintProgressBar" class="bg-gradient-to-r from-amber-500 to-brand-gold h-2.5 rounded-full transition-all duration-700" style="width: 0%"></div>
                 </div>
                 <div class="flex justify-between text-[11px] text-gray-500 mt-2 font-mono">
-                  <span>64.5% Claimed</span>
-                  <span>FCFS Public Round Next</span>
+                  <span id="mintPercentText">0.0% Claimed</span>
+                  <span class="text-brand-gold/90 font-semibold">Team Allocation Round (Takım Turu)</span>
                 </div>
               </div>
             </div>
@@ -269,57 +268,81 @@
         </div>
       </div>
 
-      <!-- 4 MINT ROUND CARDS (WITH INTEGRATED MINI LOOT CHEST ACCENTS) -->
+      <!-- 4 MINT ROUND CARDS (WITH LOOT CHEST PLACED DIRECTLY IN THE TOP-RIGHT EMPTY SPACE) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         
-        <!-- CARD 1 -->
-        <div class="bg-brand-card border border-brand-border rounded-xl p-5 relative overflow-hidden flex flex-col justify-between group">
-          <img src="loot.png" alt="Loot" class="absolute -bottom-6 -right-6 w-24 h-24 object-contain blend-logo opacity-20 group-hover:opacity-40 transition pointer-events-none" />
+        <!-- CARD 1: TEAM RESERVE -->
+        <div class="bg-brand-card border border-brand-border rounded-xl p-5 flex flex-col justify-between hover:border-stone-700 transition">
           <div>
-            <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Team Reserve</div>
-            <div class="text-2xl sm:text-3xl font-black text-white mt-2">0 USDT <span class="text-xs font-normal text-gray-400">/ Free</span></div>
+            <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Team Reserve</div>
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-2xl sm:text-3xl font-black text-white">0 USDT</div>
+                <div class="text-xs text-gray-400">/ Free Allocation</div>
+              </div>
+              <!-- Sandık görseli tam beyaz okun olduğu boşlukta -->
+              <img src="loot.png" alt="Chest" class="w-14 h-14 sm:w-16 sm:h-16 object-contain blend-logo drop-shadow-[0_0_12px_rgba(255,255,255,0.2)]" />
+            </div>
           </div>
-          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5 relative z-10">
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5">
             <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">10 Boxes</span></div>
             <div class="flex justify-between"><span class="text-gray-400">Utility:</span> <span class="text-gray-300">Testing & Operations</span></div>
           </div>
         </div>
 
-        <!-- CARD 2 -->
-        <div class="bg-brand-card border border-brand-border rounded-xl p-5 relative overflow-hidden flex flex-col justify-between group">
-          <img src="loot.png" alt="Loot" class="absolute -bottom-6 -right-6 w-24 h-24 object-contain blend-logo opacity-25 group-hover:opacity-50 transition pointer-events-none" />
+        <!-- CARD 2: GTD WHITELIST -->
+        <div class="bg-brand-card border border-blue-900/50 rounded-xl p-5 flex flex-col justify-between hover:border-blue-500/70 transition">
           <div>
-            <div class="text-xs font-semibold text-blue-400 uppercase tracking-wider">GTD Whitelist</div>
-            <div class="text-2xl sm:text-3xl font-black text-white mt-2">3 USDT</div>
+            <div class="text-xs font-semibold text-blue-400 uppercase tracking-wider mb-1">GTD Whitelist</div>
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-2xl sm:text-3xl font-black text-white">3 USDT</div>
+                <div class="text-xs text-blue-400/80">Guaranteed Tier</div>
+              </div>
+              <!-- Sandık görseli tam beyaz okun olduğu boşlukta -->
+              <img src="loot.png" alt="Chest" class="w-14 h-14 sm:w-16 sm:h-16 object-contain blend-logo drop-shadow-[0_0_14px_rgba(59,130,246,0.35)]" />
+            </div>
           </div>
-          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5 relative z-10">
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5">
             <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">290 Boxes</span></div>
             <div class="flex justify-between"><span class="text-gray-400">Allocation:</span> <span class="text-gray-300">PR & Community Raffles</span></div>
           </div>
         </div>
 
-        <!-- CARD 3 (PRIORITY) -->
-        <div class="bg-brand-card border border-brand-gold/50 rounded-xl p-5 relative overflow-hidden flex flex-col justify-between gold-glow group">
+        <!-- CARD 3: STANDARD WHITELIST (PRIORITY) -->
+        <div class="bg-brand-card border border-brand-gold/60 rounded-xl p-5 flex flex-col justify-between gold-glow relative">
           <div class="absolute -top-3 right-4 bg-brand-gold text-black text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Priority</div>
-          <img src="loot.png" alt="Loot" class="absolute -bottom-6 -right-6 w-24 h-24 object-contain blend-logo opacity-35 group-hover:opacity-60 transition pointer-events-none" />
           <div>
-            <div class="text-xs font-semibold text-brand-gold uppercase tracking-wider">Standard Whitelist</div>
-            <div class="text-2xl sm:text-3xl font-black text-white mt-2">7 USDT</div>
+            <div class="text-xs font-semibold text-brand-gold uppercase tracking-wider mb-1">Standard Whitelist</div>
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-2xl sm:text-3xl font-black text-white">7 USDT</div>
+                <div class="text-xs text-brand-gold/80">Standard Tier</div>
+              </div>
+              <!-- Sandık görseli tam beyaz okun olduğu boşlukta -->
+              <img src="loot.png" alt="Chest" class="w-14 h-14 sm:w-16 sm:h-16 object-contain blend-logo drop-shadow-[0_0_16px_rgba(255,215,0,0.5)] animate-pulse-gold" />
+            </div>
           </div>
-          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5 relative z-10">
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5">
             <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">700 Boxes</span></div>
             <div class="flex justify-between"><span class="text-gray-400">Access:</span> <span class="text-gray-300">Active Community Roles</span></div>
           </div>
         </div>
 
-        <!-- CARD 4 -->
-        <div class="bg-brand-card border border-brand-border rounded-xl p-5 relative overflow-hidden flex flex-col justify-between group">
-          <img src="loot.png" alt="Loot" class="absolute -bottom-6 -right-6 w-24 h-24 object-contain blend-logo opacity-25 group-hover:opacity-50 transition pointer-events-none" />
+        <!-- CARD 4: FCFS WHITELIST -->
+        <div class="bg-brand-card border border-purple-900/50 rounded-xl p-5 flex flex-col justify-between hover:border-purple-500/70 transition">
           <div>
-            <div class="text-xs font-semibold text-purple-400 uppercase tracking-wider">FCFS Whitelist</div>
-            <div class="text-2xl sm:text-3xl font-black text-white mt-2">10 USDT</div>
+            <div class="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-1">FCFS Whitelist</div>
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-2xl sm:text-3xl font-black text-white">10 USDT</div>
+                <div class="text-xs text-purple-400/80">Public: 15 USDT</div>
+              </div>
+              <!-- Sandık görseli tam beyaz okun olduğu boşlukta -->
+              <img src="loot.png" alt="Chest" class="w-14 h-14 sm:w-16 sm:h-16 object-contain blend-logo drop-shadow-[0_0_14px_rgba(168,85,247,0.35)]" />
+            </div>
           </div>
-          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5 relative z-10">
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5">
             <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">1,000 Boxes</span></div>
             <div class="flex justify-between"><span class="text-gray-400">Public:</span> <span class="text-gray-300">Unminted at 15 USDT</span></div>
           </div>
@@ -414,7 +437,7 @@
     </div>
   </section>
 
-  <!-- WORLD BOSSES & DUNGEON RAIDS SECTION (WITH LOOT DROP MINI ACCENT) -->
+  <!-- WORLD BOSSES & DUNGEON RAIDS SECTION -->
   <section id="bosses" class="py-16 sm:py-24 border-b border-brand-border bg-[#070707]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
@@ -612,7 +635,7 @@
               <circle cx="50" cy="50" r="40" fill="transparent" stroke="#f97316" stroke-width="12" stroke-dasharray="25.1 251.3" stroke-dashoffset="-163.4"></circle>
               <circle cx="50" cy="50" r="40" fill="transparent" stroke="#ef4444" stroke-width="12" stroke-dasharray="25.1 251.3" stroke-dashoffset="-188.5"></circle>
               <circle cx="50" cy="50" r="40" fill="transparent" stroke="#10b981" stroke-width="12" stroke-dasharray="25.1 251.3" stroke-dashoffset="-213.6"></circle>
-              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#6b7280" stroke-width="12" stroke-dasharray="12.6 251.3" stroke-dashoffset="-238.7"></circle>
+              <circle cx="50" cy="6b7280" r="40" fill="transparent" stroke="#6b7280" stroke-width="12" stroke-dasharray="12.6 251.3" stroke-dashoffset="-238.7"></circle>
             </svg>
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
               <span class="text-2xl sm:text-3xl font-black text-white">100M</span>
@@ -769,6 +792,26 @@
   <script>
     lucide.createIcons();
 
+    // DYNAMIC MINT PROGRESS CONTROLLER
+    // İleride kutular mintlendikçe bu sayıyı güncellemen yeterlidir (Örn: 250)
+    let currentMinted = 0; 
+    const maxSupply = 2000;
+
+    function updateMintUI(count) {
+      const percentage = ((count / maxSupply) * 100).toFixed(1);
+      const textElem = document.getElementById('mintCountText');
+      const barElem = document.getElementById('mintProgressBar');
+      const percentElem = document.getElementById('mintPercentText');
+
+      if (textElem) textElem.innerText = `${count.toLocaleString()} / ${maxSupply.toLocaleString()} Minted`;
+      if (barElem) barElem.style.width = `${percentage}%`;
+      if (percentElem) percentElem.innerText = `${percentage}% Claimed`;
+    }
+
+    // Sayfa açıldığında 0 / 2,000 olarak başlat
+    updateMintUI(currentMinted);
+
+    // BACKGROUND AUDIO AUTOPLAY ENGINE
     const audio = document.getElementById('bgMusic');
     const audioBtn = document.getElementById('audioToggle');
     const audioIcon = document.getElementById('audioIcon');
