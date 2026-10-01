@@ -30,107 +30,110 @@
       -webkit-text-fill-color: transparent;
     }
     .gold-glow {
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-    }
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
     }
   </style>
 </head>
 <body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black">
 
-  <!-- STICKY TOP NAVBAR -->
+  <!-- TOP NAVBAR -->
   <nav class="fixed top-0 left-0 w-full z-50 bg-[#050505]/95 backdrop-blur-md border-b border-brand-border">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-      <div class="flex items-center gap-2 sm:gap-3">
-        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-brand-gold/10 border border-brand-gold flex items-center justify-center font-black text-brand-gold text-lg sm:text-xl">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 h-14 sm:h-20 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-brand-gold/10 border border-brand-gold flex items-center justify-center font-black text-brand-gold text-base sm:text-xl">
           K
         </div>
-        <span class="text-lg sm:text-xl font-bold tracking-wider text-white">KNIGHT<span class="text-brand-gold">VERSE</span></span>
+        <span class="text-base sm:text-xl font-bold tracking-wider text-white">KNIGHT<span class="text-brand-gold">VERSE</span></span>
       </div>
 
       <!-- DESKTOP NAV -->
       <div class="hidden lg:flex items-center gap-6 text-sm font-medium">
         <a href="#mint" class="hover:text-brand-gold transition">Genesis Mint</a>
         <a href="#rarity" class="hover:text-brand-gold transition">Classes & Rarity</a>
-        <a href="#market" class="hover:text-brand-gold transition flex items-center gap-1.5 text-amber-300">
-          <i data-lucide="shopping-bag" class="w-4 h-4"></i> Store (5% OFF)
+        <a href="#bosses" class="hover:text-brand-gold transition flex items-center gap-1.5 text-red-400">
+          <i data-lucide="skull" class="w-4 h-4"></i> World Bosses
         </a>
-        <a href="#phase0" class="hover:text-brand-gold transition">Phase 0 Campaign</a>
+        <a href="market.html" class="hover:text-brand-gold transition flex items-center gap-1.5 text-amber-300">
+          <i data-lucide="store" class="w-4 h-4"></i> Store
+          <span class="text-[10px] bg-brand-gold/20 text-brand-gold border border-brand-gold/40 px-1.5 py-0.2 rounded font-mono">Coming Soon</span>
+        </a>
+        <a href="#phase0" class="hover:text-brand-gold transition">Phase 0</a>
         <a href="#tokenomics" class="hover:text-brand-gold transition">Tokenomics</a>
         <a href="#roadmap" class="hover:text-brand-gold transition">Roadmap</a>
       </div>
 
-      <div class="flex items-center gap-2">
-        <a href="#market" class="px-3 py-2 rounded-lg bg-[#141414] border border-brand-gold/40 text-brand-gold font-semibold text-xs hover:bg-brand-gold/10 transition flex items-center gap-1.5">
-          <i data-lucide="store" class="w-3.5 h-3.5"></i>
+      <!-- ACTIONS -->
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <a href="market.html" class="px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg bg-[#141414] border border-brand-gold/40 text-brand-gold font-semibold text-[11px] sm:text-xs hover:bg-brand-gold/10 transition flex items-center gap-1">
+          <i data-lucide="store" class="w-3 h-3"></i>
           <span>Market</span>
+          <span class="hidden sm:inline text-[9px] bg-brand-gold/20 text-brand-gold border border-brand-gold/40 px-1 rounded ml-0.5">Soon</span>
         </a>
-        <a href="https://opensea.io" target="_blank" class="px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-lg bg-brand-gold text-black font-semibold text-xs sm:text-sm hover:bg-brand-goldHover transition flex items-center gap-1.5">
-          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        <a href="https://opensea.io" target="_blank" class="px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-lg bg-brand-gold text-black font-semibold text-[11px] sm:text-sm hover:bg-brand-goldHover transition flex items-center gap-1">
+          <i data-lucide="external-link" class="w-3 h-3"></i>
           <span>OpenSea Mint</span>
         </a>
       </div>
     </div>
 
-    <!-- MOBILE SWIPEABLE CATEGORY BAR -->
-    <div class="lg:hidden border-t border-brand-border/60 bg-[#0a0a0a] px-3 py-2 overflow-x-auto no-scrollbar flex items-center gap-2 text-xs whitespace-nowrap">
-      <a href="#mint" class="px-3 py-1.5 rounded-full bg-[#181818] border border-brand-border text-gray-300 hover:text-white hover:border-brand-gold transition">Genesis Mint</a>
-      <a href="#rarity" class="px-3 py-1.5 rounded-full bg-[#181818] border border-brand-border text-gray-300 hover:text-white hover:border-brand-gold transition">Classes</a>
-      <a href="#market" class="px-3 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/50 text-brand-gold font-bold flex items-center gap-1">
-        <i data-lucide="shopping-bag" class="w-3 h-3"></i> Store (5% OFF)
-      </a>
-      <a href="#phase0" class="px-3 py-1.5 rounded-full bg-[#181818] border border-brand-border text-gray-300 hover:text-white hover:border-brand-gold transition">Phase 0</a>
-      <a href="#tokenomics" class="px-3 py-1.5 rounded-full bg-[#181818] border border-brand-border text-gray-300 hover:text-white hover:border-brand-gold transition">Tokenomics</a>
-      <a href="#roadmap" class="px-3 py-1.5 rounded-full bg-[#181818] border border-brand-border text-gray-300 hover:text-white hover:border-brand-gold transition">Roadmap</a>
+    <!-- COMPACT MOBILE SUB-BAR (SINGLE ROW, NO SCROLLBAR) -->
+    <div class="lg:hidden border-t border-brand-border/60 bg-[#0a0a0a] px-2 py-1.5 flex items-center justify-between text-[11px]">
+      <a href="#mint" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5">Mint</a>
+      <a href="#rarity" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5">Classes</a>
+      <a href="#bosses" class="px-1.5 py-1 rounded bg-[#161616] border border-red-950/80 text-red-400 active:text-white transition text-center flex-1 mx-0.5">Bosses</a>
+      <a href="#phase0" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5">Phase 0</a>
+      <a href="#tokenomics" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5">Token</a>
+      <a href="#roadmap" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5">Roadmap</a>
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
-  <header class="relative pt-36 sm:pt-44 pb-16 sm:pb-24 overflow-hidden border-b border-brand-border">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.06)_0,transparent_70%)]"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold uppercase tracking-wider mb-6">
+  <!-- HERO SECTION WITH CINEMATIC BACKGROUND VIDEO -->
+  <header class="relative pt-32 sm:pt-40 pb-20 sm:pb-32 overflow-hidden border-b border-brand-border min-h-[580px] sm:min-h-[680px] flex items-center">
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-40">
+      <source src="intro.mp4" type="video/mp4" />
+    </video>
+    <!-- Dark Vignette Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/75 to-[#050505]/85 z-0"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center w-full">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-black/60 backdrop-blur-md text-brand-gold text-xs font-semibold uppercase tracking-wider mb-6">
         <i data-lucide="shield" class="w-3.5 h-3.5"></i> A 22-Year MMORPG Legacy on BNB Chain
       </div>
-      <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+      <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight drop-shadow-2xl">
         BATTLE, EARN & OWN: <br />
         <span class="gold-gradient-text">KARUS VS HUMAN</span> REALM
       </h1>
-      <p class="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-400 mb-8 sm:mb-10 leading-relaxed">
-        Tactical Web3 MMORPG. Acquire character NFTs, conquer PvE dungeons, earn tokens, and access 5% discounted in-game Cash & Goldbar reserves.
+      <p class="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-300 mb-8 sm:mb-10 leading-relaxed drop-shadow">
+        Tactical Web3 MMORPG. Acquire character NFTs, conquer dungeon bosses, earn tokens, and trade in our upcoming secure P2P game marketplace.
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto sm:max-w-none">
-        <a href="#mint" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-brand-gold text-black font-bold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2">
+        <a href="#mint" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-brand-gold text-black font-bold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">
           Genesis Mint Rounds
         </a>
-        <a href="#market" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-[#141414] border border-brand-gold/40 text-brand-gold font-semibold text-sm hover:bg-brand-gold/10 transition flex items-center justify-center gap-2">
-          <i data-lucide="shopping-cart" class="w-4 h-4"></i> Visit Holder Store
+        <a href="#bosses" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-red-950/80 border border-red-800 text-red-200 font-semibold text-sm hover:bg-red-900 transition flex items-center justify-center gap-2">
+          <i data-lucide="skull" class="w-4 h-4 text-red-400"></i> Explore World Bosses
         </a>
-        <a href="#tokenomics" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-[#141414] border border-brand-border text-white font-medium text-sm hover:border-brand-gold transition flex items-center justify-center gap-2">
-          View Tokenomics
+        <a href="market.html" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-black/60 border border-brand-gold/40 text-brand-gold font-semibold text-sm hover:bg-brand-gold/10 transition flex items-center justify-center gap-2">
+          <i data-lucide="store" class="w-4 h-4"></i> Market (Soon)
         </a>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-brand-border/60">
-        <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
+        <div class="p-3 bg-black/60 backdrop-blur-md rounded-lg border border-brand-border/60">
           <div class="text-xl sm:text-2xl font-bold text-white">2,000 Boxes</div>
           <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Level 1 Genesis Supply</div>
         </div>
-        <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
+        <div class="p-3 bg-black/60 backdrop-blur-md rounded-lg border border-brand-border/60">
           <div class="text-xl sm:text-2xl font-bold text-brand-gold">BNB Chain</div>
           <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Low Gas (USDT Mint)</div>
         </div>
-        <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
+        <div class="p-3 bg-black/60 backdrop-blur-md rounded-lg border border-brand-border/60">
           <div class="text-xl sm:text-2xl font-bold text-white">5% Discount</div>
           <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Holder Cash & GB Store</div>
         </div>
-        <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
+        <div class="p-3 bg-black/60 backdrop-blur-md rounded-lg border border-brand-border/60">
           <div class="text-xl sm:text-2xl font-bold text-brand-gold">Max Lv 59</div>
           <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Turn-Based PvE Engine</div>
         </div>
@@ -273,68 +276,87 @@
     </div>
   </section>
 
-  <!-- 5% DISCOUNT MARKETPLACE -->
-  <section id="market" class="py-16 sm:py-24 border-b border-brand-border bg-[#080808]">
+  <!-- WORLD BOSSES & DUNGEON RAIDS SECTION -->
+  <section id="bosses" class="py-16 sm:py-24 border-b border-brand-border bg-[#070707]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12">
-        <div class="max-w-xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs font-semibold mb-4">
-            <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Sustainable Tokenomics
+      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 text-xs font-semibold mb-3">
+          <i data-lucide="flame" class="w-3.5 h-3.5"></i> PvE Raid Encounters
+        </div>
+        <h3 class="text-2xl sm:text-4xl font-extrabold text-white">Conquer the World Bosses</h3>
+        <p class="text-xs sm:text-sm text-gray-400 mt-2">Team up with fellow Karus and El Morad warriors. Defeat ancient subterranean monsters to secure rare armory boxes and token pools.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Boss 1: Orc King -->
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-amber-600 transition flex flex-col justify-between">
+          <div>
+            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
+              <img src="boss-orc.jpg" alt="Orc Chieftain" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-amber-500 text-base sm:text-lg">Orc Chieftain</h4>
+              <span class="text-[11px] text-gray-400 font-mono">Dungeon Lv 25</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-3">Brutal fortress gatekeeper armed with spiked war clubs.</p>
           </div>
-          <h3 class="text-2xl sm:text-4xl font-extrabold text-white mb-4 sm:mb-6">
-            In-Game NPoint & Goldbar Gateway
-          </h3>
-          <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mb-6">
-            Unlike traditional resellers, KnightVerse guarantees a permanent 5% discount on digital NPoint E-Pins and secure Goldbar transfers for ecosystem token holders. The discount margin is funded through smart contract volume (2% Sell Tax) and treasury reserves.
-          </p>
-          <div class="space-y-3 text-xs sm:text-sm">
-            <div class="flex items-center gap-3 text-gray-300">
-              <i data-lucide="zap" class="w-4 h-4 text-brand-gold shrink-0"></i>
-              <span><strong>Instant E-Pin:</strong> Automated code generation delivered immediately post-purchase.</span>
-            </div>
-            <div class="flex items-center gap-3 text-gray-300">
-              <i data-lucide="shield-check" class="w-4 h-4 text-brand-gold shrink-0"></i>
-              <span><strong>Secure Goldbar Trade:</strong> Verified, manual face-to-face game transfers.</span>
-            </div>
-            <div class="flex items-center gap-3 text-gray-300">
-              <i data-lucide="lock" class="w-4 h-4 text-brand-gold shrink-0"></i>
-              <span><strong>Holder Perk:</strong> Hold $KNIGHT tokens to unlock continuous store discounts.</span>
-            </div>
+          <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
+            <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-amber-300 font-semibold">Fire Magic</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold">Warrior Relics</span></div>
           </div>
         </div>
 
-        <div class="w-full lg:w-auto flex-1 max-w-lg bg-brand-card border border-brand-border rounded-2xl p-5 sm:p-6">
-          <div class="flex items-center justify-between pb-4 border-b border-brand-border mb-5 sm:mb-6">
-            <span class="text-xs uppercase font-bold text-gray-400 tracking-wider">Live Store Preview</span>
-            <span class="text-[11px] bg-brand-gold/10 text-brand-gold border border-brand-gold/30 px-2 py-0.5 rounded">5% Discount Applied</span>
-          </div>
-
-          <div class="space-y-3 sm:space-y-4">
-            <div class="flex items-center justify-between p-3.5 sm:p-4 rounded-xl bg-[#171717] border border-brand-border">
-              <div>
-                <div class="font-bold text-white text-xs sm:text-sm">3200 NPoints (Digital Code)</div>
-                <div class="text-[11px] text-gray-400">Automated Instant Delivery</div>
-              </div>
-              <div class="text-right">
-                <div class="text-xs text-gray-500 line-through">39.99 USDT</div>
-                <div class="text-xs sm:text-sm font-black text-brand-gold">37.99 USDT</div>
-              </div>
+        <!-- Boss 2: Venom Queen -->
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-emerald-600 transition flex flex-col justify-between">
+          <div>
+            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
+              <img src="boss-spider.jpg" alt="Venom Queen" class="w-full h-full object-cover" />
             </div>
-
-            <div class="flex items-center justify-between p-3.5 sm:p-4 rounded-xl bg-[#171717] border border-brand-border">
-              <div>
-                <div class="font-bold text-white text-xs sm:text-sm">1 Goldbar (Destan / Orestes)</div>
-                <div class="text-[11px] text-gray-400">Manual In-Game Trade</div>
-              </div>
-              <div class="text-right">
-                <div class="text-xs text-gray-500 line-through">18.50 USDT</div>
-                <div class="text-xs sm:text-sm font-black text-brand-gold">17.55 USDT</div>
-              </div>
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-emerald-400 text-base sm:text-lg">Venom Queen</h4>
+              <span class="text-[11px] text-gray-400 font-mono">Abyss Lv 40</span>
             </div>
+            <p class="text-xs text-gray-400 mb-3">Deep cave arachnid radiating acidic venom waves.</p>
           </div>
+          <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
+            <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-emerald-300 font-semibold">Light Spells</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold">Rogue Daggers</span></div>
+          </div>
+        </div>
 
-          <div class="mt-5 pt-4 border-t border-brand-border text-center">
-            <span class="text-[11px] text-gray-500">Store will be fully integrated with Web3 wallet connect in Phase 1.</span>
+        <!-- Boss 3: Void Behemoth -->
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-purple-600 transition flex flex-col justify-between">
+          <div>
+            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
+              <img src="boss-void.jpg" alt="Void Behemoth" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-purple-400 text-base sm:text-lg">Void Behemoth</h4>
+              <span class="text-[11px] text-gray-400 font-mono">Nether Lv 55</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-3">Shadow-armored dark titan infused with abyssal flames.</p>
+          </div>
+          <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
+            <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-purple-300 font-semibold">Holy Priest</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold">Epic Armor Shards</span></div>
+          </div>
+        </div>
+
+        <!-- Boss 4: Ignis the Dragon -->
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-red-600 transition flex flex-col justify-between">
+          <div>
+            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
+              <img src="boss-dragon.jpg" alt="Ignis the Ancient" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-red-500 text-base sm:text-lg">Ignis Ancient</h4>
+              <span class="text-[11px] text-red-400 font-mono">World Raid Lv 59</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-3">Ancient magma lord guarding the subterranean treasury.</p>
+          </div>
+          <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
+            <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-cyan-300 font-semibold">Glacier Spells</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Loot Drop:</span> <span class="text-brand-gold font-semibold">1,000 $KNIGHT</span></div>
           </div>
         </div>
       </div>
@@ -433,7 +455,7 @@
   </section>
 
   <!-- TOKENOMICS SECTION -->
-  <section id="tokenomics" class="py-16 sm:py-24 border-b border-brand-border">
+  <section id="tokenomics" class="py-16 sm:py-24 border-b border-brand-border bg-[#080808]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
         <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Sustainable Economy</h2>
@@ -546,7 +568,7 @@
   </section>
 
   <!-- ROADMAP -->
-  <section id="roadmap" class="py-16 sm:py-24 border-b border-brand-border bg-[#080808]">
+  <section id="roadmap" class="py-16 sm:py-24 border-b border-brand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
         <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Project Execution</h2>
