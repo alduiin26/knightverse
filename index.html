@@ -32,9 +32,32 @@
     .gold-glow {
       box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
     }
+    .video-glow {
+      box-shadow: 0 0 35px rgba(255, 215, 0, 0.15);
+    }
+    @keyframes pulse-gold {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.08); }
+    }
+    .animate-pulse-gold {
+      animation: pulse-gold 2s infinite ease-in-out;
+    }
   </style>
 </head>
 <body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black">
+
+  <!-- BACKGROUND AUDIO ELEMENT -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="theme.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- FLOATING AUDIO CONTROLLER (BOTTOM RIGHT) -->
+  <div class="fixed bottom-4 right-4 z-50">
+    <button id="audioToggle" class="flex items-center gap-2 px-3 py-2 rounded-full bg-black/80 backdrop-blur-md border border-brand-gold/40 text-brand-gold text-xs shadow-xl hover:bg-black transition">
+      <i id="audioIcon" data-lucide="volume-2" class="w-4 h-4 animate-pulse-gold"></i>
+      <span id="audioText" class="font-medium text-[11px] hidden sm:inline">Theme Audio</span>
+    </button>
+  </div>
 
   <!-- TOP NAVBAR -->
   <nav class="fixed top-0 left-0 w-full z-50 bg-[#050505]/95 backdrop-blur-md border-b border-brand-border">
@@ -48,12 +71,15 @@
 
       <!-- DESKTOP NAV -->
       <div class="hidden lg:flex items-center gap-6 text-sm font-medium">
+        <a href="#teaser" class="hover:text-brand-gold transition text-amber-300 flex items-center gap-1">
+          <i data-lucide="play-circle" class="w-4 h-4"></i> Trailer
+        </a>
         <a href="#mint" class="hover:text-brand-gold transition">Genesis Mint</a>
         <a href="#rarity" class="hover:text-brand-gold transition">Classes & Rarity</a>
-        <a href="#bosses" class="hover:text-brand-gold transition flex items-center gap-1.5 text-red-400">
+        <a href="#bosses" class="hover:text-brand-gold transition text-red-400 flex items-center gap-1.5">
           <i data-lucide="skull" class="w-4 h-4"></i> World Bosses
         </a>
-        <a href="market.html" class="hover:text-brand-gold transition flex items-center gap-1.5 text-amber-300">
+        <a href="market.html" class="hover:text-brand-gold transition flex items-center gap-1.5 text-gray-300">
           <i data-lucide="store" class="w-4 h-4"></i> Store
           <span class="text-[10px] bg-brand-gold/20 text-brand-gold border border-brand-gold/40 px-1.5 py-0.2 rounded font-mono">Coming Soon</span>
         </a>
@@ -76,70 +102,84 @@
       </div>
     </div>
 
-    <!-- COMPACT MOBILE SUB-BAR (SINGLE ROW, NO SCROLLBAR) -->
+    <!-- COMPACT MOBILE SUB-BAR (SINGLE ROW) -->
     <div class="lg:hidden border-t border-brand-border/60 bg-[#0a0a0a] px-2 py-1.5 flex items-center justify-between text-[11px]">
+      <a href="#teaser" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-gold/40 text-brand-gold active:text-white transition text-center flex-1 mx-0.5">Trailer</a>
       <a href="#mint" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5">Mint</a>
       <a href="#rarity" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5">Classes</a>
       <a href="#bosses" class="px-1.5 py-1 rounded bg-[#161616] border border-red-950/80 text-red-400 active:text-white transition text-center flex-1 mx-0.5">Bosses</a>
       <a href="#phase0" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5">Phase 0</a>
       <a href="#tokenomics" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5">Token</a>
-      <a href="#roadmap" class="px-1.5 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 active:text-white active:border-brand-gold transition text-center flex-1 mx-0.5">Roadmap</a>
     </div>
   </nav>
 
-  <!-- HERO SECTION WITH CINEMATIC BACKGROUND VIDEO -->
-  <header class="relative pt-32 sm:pt-40 pb-20 sm:pb-32 overflow-hidden border-b border-brand-border min-h-[580px] sm:min-h-[680px] flex items-center">
-    <!-- Background Video -->
-    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-40">
-      <source src="intro.mp4" type="video/mp4" />
-    </video>
-    <!-- Dark Vignette Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/75 to-[#050505]/85 z-0"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center w-full">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-black/60 backdrop-blur-md text-brand-gold text-xs font-semibold uppercase tracking-wider mb-6">
+  <!-- HERO SECTION (CLEAN & STATELY) -->
+  <header class="relative pt-32 sm:pt-40 pb-16 sm:pb-20 overflow-hidden border-b border-brand-border">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.08)_0,transparent_70%)]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold uppercase tracking-wider mb-6">
         <i data-lucide="shield" class="w-3.5 h-3.5"></i> A 22-Year MMORPG Legacy on BNB Chain
       </div>
-      <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight drop-shadow-2xl">
+      <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
         BATTLE, EARN & OWN: <br />
         <span class="gold-gradient-text">KARUS VS HUMAN</span> REALM
       </h1>
-      <p class="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-300 mb-8 sm:mb-10 leading-relaxed drop-shadow">
-        Tactical Web3 MMORPG. Acquire character NFTs, conquer dungeon bosses, earn tokens, and trade in our upcoming secure P2P game marketplace.
+      <p class="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-400 mb-8 sm:mb-10 leading-relaxed">
+        Iconic tactical MMORPG mechanics meet Web3. Acquire character NFTs, defeat dungeon world bosses, earn tokens, and trade in our upcoming secure P2P game market.
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto sm:max-w-none">
-        <a href="#mint" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-brand-gold text-black font-bold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">
+        <a href="#teaser" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-brand-gold text-black font-bold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">
+          <i data-lucide="play" class="w-4 h-4 fill-current"></i> Watch Cinematic Teaser
+        </a>
+        <a href="#mint" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-[#141414] border border-brand-border text-white font-medium text-sm hover:border-brand-gold transition flex items-center justify-center gap-2">
           Genesis Mint Rounds
-        </a>
-        <a href="#bosses" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-red-950/80 border border-red-800 text-red-200 font-semibold text-sm hover:bg-red-900 transition flex items-center justify-center gap-2">
-          <i data-lucide="skull" class="w-4 h-4 text-red-400"></i> Explore World Bosses
-        </a>
-        <a href="market.html" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-black/60 border border-brand-gold/40 text-brand-gold font-semibold text-sm hover:bg-brand-gold/10 transition flex items-center justify-center gap-2">
-          <i data-lucide="store" class="w-4 h-4"></i> Market (Soon)
         </a>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-brand-border/60">
-        <div class="p-3 bg-black/60 backdrop-blur-md rounded-lg border border-brand-border/60">
+        <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
           <div class="text-xl sm:text-2xl font-bold text-white">2,000 Boxes</div>
           <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Level 1 Genesis Supply</div>
         </div>
-        <div class="p-3 bg-black/60 backdrop-blur-md rounded-lg border border-brand-border/60">
+        <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
           <div class="text-xl sm:text-2xl font-bold text-brand-gold">BNB Chain</div>
           <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Low Gas (USDT Mint)</div>
         </div>
-        <div class="p-3 bg-black/60 backdrop-blur-md rounded-lg border border-brand-border/60">
+        <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
           <div class="text-xl sm:text-2xl font-bold text-white">5% Discount</div>
           <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Holder Cash & GB Store</div>
         </div>
-        <div class="p-3 bg-black/60 backdrop-blur-md rounded-lg border border-brand-border/60">
+        <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
           <div class="text-xl sm:text-2xl font-bold text-brand-gold">Max Lv 59</div>
           <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Turn-Based PvE Engine</div>
         </div>
       </div>
     </div>
   </header>
+
+  <!-- OPTION 1: DEDICATED CINEMATIC TRAILER SHOWCASE -->
+  <section id="teaser" class="py-16 sm:py-24 border-b border-brand-border bg-[#030303]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold mb-3">
+          <i data-lucide="film" class="w-3.5 h-3.5"></i> Cinematic Showcase
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white">The Throne of Destiny</h2>
+        <p class="text-xs sm:text-sm text-gray-400 mt-2">Witness the gathering of Karus and El Morad champions before the descent into the underworld.</p>
+      </div>
+
+      <!-- Framed Video Container (16:9 Clean Canvas) -->
+      <div class="relative rounded-2xl overflow-hidden border-2 border-brand-border/80 hover:border-brand-gold/50 transition video-glow bg-black max-w-4xl mx-auto">
+        <video autoplay muted loop playsinline controls class="w-full aspect-video object-cover">
+          <source src="intro.mp4" type="video/mp4" />
+        </video>
+        <div class="absolute bottom-3 left-3 hidden sm:flex items-center gap-2 px-3 py-1 rounded-md bg-black/70 backdrop-blur-md border border-brand-border text-[11px] text-gray-300">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Official Teaser Reel
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- MINT & TIERS -->
   <section id="mint" class="py-16 sm:py-24 border-b border-brand-border bg-[#080808]">
@@ -626,8 +666,44 @@
     </div>
   </footer>
 
+  <!-- JAVASCRIPT & AUDIO AUTOPLAY ENGINE -->
   <script>
     lucide.createIcons();
+
+    const audio = document.getElementById('bgMusic');
+    const audioBtn = document.getElementById('audioToggle');
+    const audioIcon = document.getElementById('audioIcon');
+    let hasInteracted = false;
+
+    // Secret autoplay on first user interaction (touch or click)
+    function playAudioOnFirstClick() {
+      if (!hasInteracted) {
+        audio.play().then(() => {
+          hasInteracted = true;
+          audioIcon.classList.add('animate-pulse-gold');
+        }).catch(err => {
+          console.log("Audio policy waiting for explicit click");
+        });
+      }
+    }
+
+    window.addEventListener('click', playAudioOnFirstClick, { once: true });
+    window.addEventListener('touchstart', playAudioOnFirstClick, { once: true });
+
+    // Floating Audio Button Manual Control
+    audioBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (audio.paused) {
+        audio.play();
+        audioIcon.setAttribute('data-lucide', 'volume-2');
+        audioIcon.classList.add('animate-pulse-gold');
+      } else {
+        audio.pause();
+        audioIcon.setAttribute('data-lucide', 'volume-x');
+        audioIcon.classList.remove('animate-pulse-gold');
+      }
+      lucide.createIcons();
+    });
   </script>
 </body>
 </html>
