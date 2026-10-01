@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KnightVerse | Web3 Play-to-Earn MMORPG</title>
+  <link rel="icon" type="image/png" href="logoko.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
@@ -51,7 +52,7 @@
     <source src="theme.mp3" type="audio/mpeg" />
   </audio>
 
-  <!-- FLOATING AUDIO CONTROLLER (BOTTOM RIGHT) -->
+  <!-- FLOATING AUDIO CONTROLLER -->
   <div class="fixed bottom-4 right-4 z-50">
     <button id="audioToggle" class="flex items-center gap-2 px-3 py-2 rounded-full bg-black/80 backdrop-blur-md border border-brand-gold/40 text-brand-gold text-xs shadow-xl hover:bg-black transition">
       <i id="audioIcon" data-lucide="volume-2" class="w-4 h-4 animate-pulse-gold"></i>
@@ -61,13 +62,13 @@
 
   <!-- TOP NAVBAR -->
   <nav class="fixed top-0 left-0 w-full z-50 bg-[#050505]/95 backdrop-blur-md border-b border-brand-border">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 h-14 sm:h-20 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="w-7 h-7 sm:w-10 sm:h-10 rounded-lg bg-brand-gold/10 border border-brand-gold flex items-center justify-center font-black text-brand-gold text-base sm:text-xl">
-          K
-        </div>
-        <span class="text-base sm:text-xl font-bold tracking-wider text-white">KNIGHT<span class="text-brand-gold">VERSE</span></span>
-      </div>
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+      
+      <!-- LOGO AREA -->
+      <a href="#" class="flex items-center gap-2.5">
+        <img src="logoko.png" alt="KnightVerse Logo" class="h-10 sm:h-12 w-auto object-contain drop-shadow-[0_0_12px_rgba(255,215,0,0.35)]" />
+        <span class="text-base sm:text-xl font-extrabold tracking-wider text-white hidden xs:inline">KNIGHT<span class="text-brand-gold">VERSE</span></span>
+      </a>
 
       <!-- DESKTOP NAV -->
       <div class="hidden lg:flex items-center gap-6 text-sm font-medium">
@@ -113,13 +114,23 @@
     </div>
   </nav>
 
-  <!-- HERO SECTION (CLEAN & STATELY) -->
+  <!-- HERO SECTION -->
   <header class="relative pt-32 sm:pt-40 pb-16 sm:pb-20 overflow-hidden border-b border-brand-border">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.08)_0,transparent_70%)]"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+      
+      <!-- HERO EMBLEM PRESENTATION -->
+      <div class="flex justify-center mb-6">
+        <div class="relative group">
+          <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 opacity-30 blur-xl group-hover:opacity-60 transition duration-1000"></div>
+          <img src="logoko.png" alt="KnightVerse Faction Shield" class="relative w-28 sm:w-40 h-auto object-contain drop-shadow-[0_0_25px_rgba(255,215,0,0.3)] mx-auto animate-pulse-gold" />
+        </div>
+      </div>
+
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold uppercase tracking-wider mb-6">
         <i data-lucide="shield" class="w-3.5 h-3.5"></i> A 22-Year MMORPG Legacy on BNB Chain
       </div>
+
       <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
         BATTLE, EARN & OWN: <br />
         <span class="gold-gradient-text">KARUS VS HUMAN</span> REALM
@@ -158,7 +169,7 @@
     </div>
   </header>
 
-  <!-- OPTION 1: DEDICATED CINEMATIC TRAILER SHOWCASE -->
+  <!-- CINEMATIC TRAILER SHOWCASE -->
   <section id="teaser" class="py-16 sm:py-24 border-b border-brand-border bg-[#030303]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-10">
@@ -169,7 +180,6 @@
         <p class="text-xs sm:text-sm text-gray-400 mt-2">Witness the gathering of Karus and El Morad champions before the descent into the underworld.</p>
       </div>
 
-      <!-- Framed Video Container (16:9 Clean Canvas) -->
       <div class="relative rounded-2xl overflow-hidden border-2 border-brand-border/80 hover:border-brand-gold/50 transition video-glow bg-black max-w-4xl mx-auto">
         <video autoplay muted loop playsinline controls class="w-full aspect-video object-cover">
           <source src="intro.mp4" type="video/mp4" />
@@ -431,7 +441,7 @@
           </div>
         </div>
 
-        <div class="bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col justify-between">
+        <div class="bg-brand-card border border-blue-900/40 rounded-xl p-6 flex flex-col justify-between">
           <div>
             <div class="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-4">
               <i data-lucide="calendar-check" class="w-5 h-5"></i>
@@ -461,7 +471,7 @@
           </div>
         </div>
 
-        <div class="bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col justify-between">
+        <div class="bg-brand-card border border-purple-900/40 rounded-xl p-6 flex flex-col justify-between">
           <div>
             <div class="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4">
               <i data-lucide="trophy" class="w-5 h-5"></i>
@@ -654,10 +664,11 @@
   <!-- FOOTER -->
   <footer class="py-10 bg-black border-t border-brand-border/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 text-center sm:text-left">
-      <div>
-        © 2026 KnightVerse. All rights reserved. Powered by BNB Chain.
+      <div class="flex items-center gap-2 justify-center sm:justify-start">
+        <img src="logoko.png" alt="KnightVerse" class="h-6 w-auto object-contain opacity-70" />
+        <span>© 2026 KnightVerse. All rights reserved. Powered by BNB Chain.</span>
       </div>
-      <div class="flex items-center gap-4 sm:gap-6">
+      <div class="flex items-center gap-4 sm:gap-6 justify-center">
         <a href="https://x.com" target="_blank" class="hover:text-brand-gold transition">X (Twitter)</a>
         <a href="https://telegram.org" target="_blank" class="hover:text-brand-gold transition">Telegram</a>
         <a href="https://discord.com" target="_blank" class="hover:text-brand-gold transition">Discord</a>
@@ -666,7 +677,7 @@
     </div>
   </footer>
 
-  <!-- JAVASCRIPT & AUDIO AUTOPLAY ENGINE -->
+  <!-- SCRIPT ENGINE -->
   <script>
     lucide.createIcons();
 
@@ -675,14 +686,13 @@
     const audioIcon = document.getElementById('audioIcon');
     let hasInteracted = false;
 
-    // Secret autoplay on first user interaction (touch or click)
     function playAudioOnFirstClick() {
       if (!hasInteracted) {
         audio.play().then(() => {
           hasInteracted = true;
           audioIcon.classList.add('animate-pulse-gold');
         }).catch(err => {
-          console.log("Audio policy waiting for explicit click");
+          console.log("Audio waiting for explicit interaction");
         });
       }
     }
@@ -690,7 +700,6 @@
     window.addEventListener('click', playAudioOnFirstClick, { once: true });
     window.addEventListener('touchstart', playAudioOnFirstClick, { once: true });
 
-    // Floating Audio Button Manual Control
     audioBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       if (audio.paused) {
