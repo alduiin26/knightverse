@@ -38,10 +38,14 @@
     }
     @keyframes pulse-gold {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.08); }
+      50% { opacity: 0.7; transform: scale(1.05); }
     }
     .animate-pulse-gold {
-      animation: pulse-gold 2s infinite ease-in-out;
+      animation: pulse-gold 2.5s infinite ease-in-out;
+    }
+    /* Siyah arka planı yok edip şimşekleri ve kalkanı kusursuz kaynaştıran stil */
+    .blend-logo {
+      mix-blend-mode: screen;
     }
   </style>
 </head>
@@ -64,10 +68,9 @@
   <nav class="fixed top-0 left-0 w-full z-50 bg-[#050505]/95 backdrop-blur-md border-b border-brand-border">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
       
-      <!-- LOGO AREA -->
-      <a href="#" class="flex items-center gap-2.5">
-        <img src="logoko.png" alt="KnightVerse Logo" class="h-10 sm:h-12 w-auto object-contain drop-shadow-[0_0_12px_rgba(255,215,0,0.35)]" />
-        <span class="text-base sm:text-xl font-extrabold tracking-wider text-white hidden xs:inline">KNIGHT<span class="text-brand-gold">VERSE</span></span>
+      <!-- LOGO AREA (BLEND SCREEN APPLIED) -->
+      <a href="#" class="flex items-center gap-2">
+        <img src="logoko.png" alt="KnightVerse Logo" class="h-11 sm:h-14 w-auto object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,215,0,0.4)]" />
       </a>
 
       <!-- DESKTOP NAV -->
@@ -115,15 +118,13 @@
   </nav>
 
   <!-- HERO SECTION -->
-  <header class="relative pt-32 sm:pt-40 pb-16 sm:pb-20 overflow-hidden border-b border-brand-border">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.08)_0,transparent_70%)]"></div>
+  <header class="relative pt-28 sm:pt-36 pb-16 sm:pb-20 overflow-hidden border-b border-brand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
       
-      <!-- HERO EMBLEM PRESENTATION -->
-      <div class="flex justify-center mb-6">
-        <div class="relative group">
-          <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 opacity-30 blur-xl group-hover:opacity-60 transition duration-1000"></div>
-          <img src="logoko.png" alt="KnightVerse Faction Shield" class="relative w-28 sm:w-40 h-auto object-contain drop-shadow-[0_0_25px_rgba(255,215,0,0.3)] mx-auto animate-pulse-gold" />
+      <!-- HERO EMBLEM PRESENTATION (BLEND SCREEN APPLIED, KARE KUTU KALDIRILDI) -->
+      <div class="flex justify-center mb-4 sm:mb-6">
+        <div class="relative">
+          <img src="logoko.png" alt="KnightVerse Faction Shield" class="w-36 sm:w-56 h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.45)] mx-auto animate-pulse-gold" />
         </div>
       </div>
 
@@ -665,7 +666,7 @@
   <footer class="py-10 bg-black border-t border-brand-border/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 text-center sm:text-left">
       <div class="flex items-center gap-2 justify-center sm:justify-start">
-        <img src="logoko.png" alt="KnightVerse" class="h-6 w-auto object-contain opacity-70" />
+        <img src="logoko.png" alt="KnightVerse" class="h-6 w-auto object-contain blend-logo opacity-70" />
         <span>© 2026 KnightVerse. All rights reserved. Powered by BNB Chain.</span>
       </div>
       <div class="flex items-center gap-4 sm:gap-6 justify-center">
