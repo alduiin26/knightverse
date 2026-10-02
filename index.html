@@ -238,7 +238,7 @@
                 Open to summon a Warrior, Rogue, Mage, or Priest. Rarities range from Common to Legendary, directly determining your turn-based win rates, leaderboard placement, and daily $KNIGHT rewards.
               </p>
 
-              <!-- DYNAMIC MINT PROGRESS BAR (INITIALIZED AT 0 / 2,000) -->
+              <!-- DYNAMIC MINT PROGRESS BAR -->
               <div class="bg-[#181818] p-4 rounded-xl border border-brand-border/60 mb-6">
                 <div class="flex justify-between text-xs mb-2">
                   <span class="text-gray-400 font-medium">Minting Phase Allocation:</span>
@@ -268,7 +268,7 @@
         </div>
       </div>
 
-      <!-- 4 MINT ROUND CARDS (WITH LOOT CHEST PLACED DIRECTLY IN THE TOP-RIGHT EMPTY SPACE) -->
+      <!-- 4 MINT ROUND CARDS -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         
         <!-- CARD 1: TEAM RESERVE -->
@@ -280,7 +280,6 @@
                 <div class="text-2xl sm:text-3xl font-black text-white">0 USDT</div>
                 <div class="text-xs text-gray-400">/ Free Allocation</div>
               </div>
-              <!-- Sandık görseli tam beyaz okun olduğu boşlukta -->
               <img src="loot.png" alt="Chest" class="w-14 h-14 sm:w-16 sm:h-16 object-contain blend-logo drop-shadow-[0_0_12px_rgba(255,255,255,0.2)]" />
             </div>
           </div>
@@ -299,7 +298,6 @@
                 <div class="text-2xl sm:text-3xl font-black text-white">3 USDT</div>
                 <div class="text-xs text-blue-400/80">Guaranteed Tier</div>
               </div>
-              <!-- Sandık görseli tam beyaz okun olduğu boşlukta -->
               <img src="loot.png" alt="Chest" class="w-14 h-14 sm:w-16 sm:h-16 object-contain blend-logo drop-shadow-[0_0_14px_rgba(59,130,246,0.35)]" />
             </div>
           </div>
@@ -319,7 +317,6 @@
                 <div class="text-2xl sm:text-3xl font-black text-white">7 USDT</div>
                 <div class="text-xs text-brand-gold/80">Standard Tier</div>
               </div>
-              <!-- Sandık görseli tam beyaz okun olduğu boşlukta -->
               <img src="loot.png" alt="Chest" class="w-14 h-14 sm:w-16 sm:h-16 object-contain blend-logo drop-shadow-[0_0_16px_rgba(255,215,0,0.5)] animate-pulse-gold" />
             </div>
           </div>
@@ -338,7 +335,6 @@
                 <div class="text-2xl sm:text-3xl font-black text-white">10 USDT</div>
                 <div class="text-xs text-purple-400/80">Public: 15 USDT</div>
               </div>
-              <!-- Sandık görseli tam beyaz okun olduğu boşlukta -->
               <img src="loot.png" alt="Chest" class="w-14 h-14 sm:w-16 sm:h-16 object-contain blend-logo drop-shadow-[0_0_14px_rgba(168,85,247,0.35)]" />
             </div>
           </div>
@@ -352,27 +348,33 @@
     </div>
   </section>
 
-  <!-- CLASSES & RARITY SHOWCASE -->
+  <!-- CLASSES & RARITY SLIDER SHOWCASE -->
   <section id="rarity" class="py-16 sm:py-24 border-b border-brand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
         <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Combat Multipliers</h2>
-        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">NFT Character Rarities</h3>
-        <p class="text-xs sm:text-sm text-gray-400 mt-2">Every box unlocks a random class. Higher rarities deliver enhanced stats, superior win chances, and increased token yields.</p>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">NFT Character Rarities & Classes</h3>
+        <p class="text-xs sm:text-sm text-gray-400 mt-2">Use the arrows on each tier to switch between Mage, Warrior, Priest, and Rogue classes.</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Common -->
-        <div class="bg-brand-card border border-stone-600 rounded-2xl p-4 hover:border-gray-400 transition flex flex-col justify-between">
+        
+        <!-- 1. COMMON TIER SLIDER -->
+        <div class="bg-brand-card border border-stone-600 rounded-2xl p-4 hover:border-gray-400 transition flex flex-col justify-between relative group">
+          <div class="absolute top-2 right-3 z-20 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-1 rounded-lg border border-stone-700 text-[11px] text-gray-300">
+            <button onclick="slideCard('common', -1)" class="hover:text-brand-gold p-0.5"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+            <span id="common-name" class="font-bold font-mono px-1">MAGE</span>
+            <button onclick="slideCard('common', 1)" class="hover:text-brand-gold p-0.5"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+          </div>
           <div>
-            <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-stone-700 bg-[#161616]">
-              <img src="common.jpg" alt="Common NFT" class="w-full h-full object-cover" />
+            <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-stone-700 bg-[#161616] relative">
+              <img id="common-img" src="common.jpg" alt="Common NFT" class="w-full h-full object-cover transition-all duration-300" />
             </div>
             <div class="flex items-center justify-between mb-1">
               <h4 class="font-bold text-white text-lg">Common</h4>
               <span class="text-xs text-stone-400 font-mono">Tier I</span>
             </div>
-            <p class="text-xs text-gray-400 mb-4">Silver framed foundational mage for early PvE encounters.</p>
+            <p id="common-desc" class="text-xs text-gray-400 mb-4">Silver framed foundational mage for early PvE encounters.</p>
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-3 text-gray-300 space-y-1 bg-[#0a0a0a]/50 p-2.5 rounded-lg">
             <div>• Base Win Rate: <span class="text-white font-semibold">5%</span></div>
@@ -380,17 +382,22 @@
           </div>
         </div>
 
-        <!-- Rare -->
-        <div class="bg-brand-card border border-blue-900/60 rounded-2xl p-4 hover:border-blue-500 transition flex flex-col justify-between">
+        <!-- 2. RARE TIER SLIDER -->
+        <div class="bg-brand-card border border-blue-900/60 rounded-2xl p-4 hover:border-blue-500 transition flex flex-col justify-between relative group">
+          <div class="absolute top-2 right-3 z-20 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-1 rounded-lg border border-blue-900 text-[11px] text-blue-300">
+            <button onclick="slideCard('rare', -1)" class="hover:text-brand-gold p-0.5"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+            <span id="rare-name" class="font-bold font-mono px-1">MAGE</span>
+            <button onclick="slideCard('rare', 1)" class="hover:text-brand-gold p-0.5"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+          </div>
           <div>
-            <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-blue-900/70 bg-[#161616]">
-              <img src="rare.jpg" alt="Rare NFT" class="w-full h-full object-cover" />
+            <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-blue-900/70 bg-[#161616] relative">
+              <img id="rare-img" src="rare.jpg" alt="Rare NFT" class="w-full h-full object-cover transition-all duration-300" />
             </div>
             <div class="flex items-center justify-between mb-1">
               <h4 class="font-bold text-blue-400 text-lg">Rare</h4>
               <span class="text-xs text-gray-400 font-mono">Tier II</span>
             </div>
-            <p class="text-xs text-gray-400 mb-4">Sapphire crested battle sorceress with boosted offensive attributes.</p>
+            <p id="rare-desc" class="text-xs text-gray-400 mb-4">Sapphire crested battle sorceress with boosted offensive attributes.</p>
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-3 text-gray-300 space-y-1 bg-[#0a0a0a]/50 p-2.5 rounded-lg">
             <div>• Base Win Rate: <span class="text-white font-semibold">15%</span></div>
@@ -398,17 +405,22 @@
           </div>
         </div>
 
-        <!-- Epic -->
-        <div class="bg-brand-card border border-purple-900/60 rounded-2xl p-4 hover:border-purple-500 transition flex flex-col justify-between">
+        <!-- 3. EPIC TIER SLIDER -->
+        <div class="bg-brand-card border border-purple-900/60 rounded-2xl p-4 hover:border-purple-500 transition flex flex-col justify-between relative group">
+          <div class="absolute top-2 right-3 z-20 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-1 rounded-lg border border-purple-900 text-[11px] text-purple-300">
+            <button onclick="slideCard('epic', -1)" class="hover:text-brand-gold p-0.5"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+            <span id="epic-name" class="font-bold font-mono px-1">MAGE</span>
+            <button onclick="slideCard('epic', 1)" class="hover:text-brand-gold p-0.5"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+          </div>
           <div>
-            <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-purple-900/70 bg-[#161616]">
-              <img src="epic.jpg" alt="Epic NFT" class="w-full h-full object-cover" />
+            <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-purple-900/70 bg-[#161616] relative">
+              <img id="epic-img" src="epic.jpg" alt="Epic NFT" class="w-full h-full object-cover transition-all duration-300" />
             </div>
             <div class="flex items-center justify-between mb-1">
               <h4 class="font-bold text-purple-400 text-lg">Epic</h4>
               <span class="text-xs text-gray-400 font-mono">Tier III</span>
             </div>
-            <p class="text-xs text-gray-400 mb-4">Amethyst infused shadow mage equipped for high-tier boss encounters.</p>
+            <p id="epic-desc" class="text-xs text-gray-400 mb-4">Amethyst infused shadow mage equipped for high-tier boss encounters.</p>
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-3 text-gray-300 space-y-1 bg-[#0a0a0a]/50 p-2.5 rounded-lg">
             <div>• Base Win Rate: <span class="text-white font-semibold">30%</span></div>
@@ -416,23 +428,29 @@
           </div>
         </div>
 
-        <!-- Legendary -->
-        <div class="bg-brand-card border border-brand-gold/50 rounded-2xl p-4 hover:border-brand-gold transition gold-glow flex flex-col justify-between">
+        <!-- 4. LEGENDARY TIER SLIDER -->
+        <div class="bg-brand-card border border-brand-gold/50 rounded-2xl p-4 hover:border-brand-gold transition gold-glow flex flex-col justify-between relative group">
+          <div class="absolute top-2 right-3 z-20 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-1 rounded-lg border border-brand-gold/40 text-[11px] text-brand-gold">
+            <button onclick="slideCard('legendary', -1)" class="hover:text-white p-0.5"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+            <span id="legendary-name" class="font-bold font-mono px-1">MAGE</span>
+            <button onclick="slideCard('legendary', 1)" class="hover:text-white p-0.5"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+          </div>
           <div>
-            <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-brand-gold/30 bg-[#161616]">
-              <img src="legendary.jpg" alt="Legendary NFT" class="w-full h-full object-cover" />
+            <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-brand-gold/30 bg-[#161616] relative">
+              <img id="legendary-img" src="legendary.jpg" alt="Legendary NFT" class="w-full h-full object-cover transition-all duration-300" />
             </div>
             <div class="flex items-center justify-between mb-1">
               <h4 class="font-bold text-brand-gold text-lg">Legendary</h4>
               <span class="text-xs text-brand-gold font-mono">Tier IV</span>
             </div>
-            <p class="text-xs text-gray-400 mb-4">Apex solar sorceress delivering maximum battle frequency and token earnings.</p>
+            <p id="legendary-desc" class="text-xs text-gray-400 mb-4">Apex solar sorceress delivering maximum battle frequency and token earnings.</p>
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-3 text-gray-300 space-y-1 bg-[#0a0a0a]/50 p-2.5 rounded-lg">
             <div>• Base Win Rate: <span class="text-white font-semibold">50%</span></div>
             <div>• Reward Multiplier: <span class="text-brand-gold font-semibold">10 $KNIGHT</span></div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -635,7 +653,7 @@
               <circle cx="50" cy="50" r="40" fill="transparent" stroke="#f97316" stroke-width="12" stroke-dasharray="25.1 251.3" stroke-dashoffset="-163.4"></circle>
               <circle cx="50" cy="50" r="40" fill="transparent" stroke="#ef4444" stroke-width="12" stroke-dasharray="25.1 251.3" stroke-dashoffset="-188.5"></circle>
               <circle cx="50" cy="50" r="40" fill="transparent" stroke="#10b981" stroke-width="12" stroke-dasharray="25.1 251.3" stroke-dashoffset="-213.6"></circle>
-              <circle cx="50" cy="6b7280" r="40" fill="transparent" stroke="#6b7280" stroke-width="12" stroke-dasharray="12.6 251.3" stroke-dashoffset="-238.7"></circle>
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#6b7280" stroke-width="12" stroke-dasharray="12.6 251.3" stroke-dashoffset="-238.7"></circle>
             </svg>
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
               <span class="text-2xl sm:text-3xl font-black text-white">100M</span>
@@ -793,7 +811,6 @@
     lucide.createIcons();
 
     // DYNAMIC MINT PROGRESS CONTROLLER
-    // İleride kutular mintlendikçe bu sayıyı güncellemen yeterlidir (Örn: 250)
     let currentMinted = 0; 
     const maxSupply = 2000;
 
@@ -808,8 +825,47 @@
       if (percentElem) percentElem.innerText = `${percentage}% Claimed`;
     }
 
-    // Sayfa açıldığında 0 / 2,000 olarak başlat
     updateMintUI(currentMinted);
+
+    // CLASSES & RARITY SLIDER DATA
+    const classData = {
+      common: [
+        { name: "MAGE", img: "common.jpg", desc: "Silver framed foundational mage for early PvE encounters." },
+        { name: "WARRIOR", img: "commonw.jpg", desc: "Heavy plate vanguard trained for front-line melee combat." },
+        { name: "PRIEST", img: "commonp.jpg", desc: "Devoted acolyte providing basic tactical buffs and healing." },
+        { name: "ROGUE", img: "commonr.jpg", desc: "Nimble scout equipped with light dual daggers." }
+      ],
+      rare: [
+        { name: "MAGE", img: "rare.jpg", desc: "Sapphire crested battle sorceress with boosted offensive attributes." },
+        { name: "WARRIOR", img: "rarew.jpg", desc: "Armored vanguard wielding enhanced strike power." },
+        { name: "PRIEST", img: "rarep.jpg", desc: "Consecrated cleric offering balanced divine shielding." },
+        { name: "ROGUE", img: "rarer.jpg", desc: "Shadow assassin specializing in swift stealth strikes." }
+      ],
+      epic: [
+        { name: "MAGE", img: "epic.jpg", desc: "Amethyst infused shadow mage equipped for high-tier boss encounters." },
+        { name: "WARRIOR", img: "epicw.jpg", desc: "Veteran berserker commander with devastating cleave attacks." },
+        { name: "PRIEST", img: "epicp.jpg", desc: "Battle-hardened holy templar wielding divine judgment." },
+        { name: "ROGUE", img: "epicr.jpg", desc: "Elite shadow master dealing critical venom damage." }
+      ],
+      legendary: [
+        { name: "MAGE", img: "legendary.jpg", desc: "Apex solar sorceress delivering maximum battle frequency and token earnings." },
+        { name: "WARRIOR", img: "legendaryw.jpg", desc: "Immortal titan champion possessing supreme attack and defense multipliers." },
+        { name: "PRIEST", img: "legendaryp.jpg", desc: "Supreme divine avatar providing absolute party immunity and sanctuary." },
+        { name: "ROGUE", img: "legendaryr.jpg", desc: "Legendary master assassin executing flawless critical takedowns." }
+      ]
+    };
+
+    let currentIndexes = { common: 0, rare: 0, epic: 0, legendary: 0 };
+
+    function slideCard(tier, direction) {
+      const list = classData[tier];
+      currentIndexes[tier] = (currentIndexes[tier] + direction + list.length) % list.length;
+      const item = list[currentIndexes[tier]];
+
+      document.getElementById(`${tier}-name`).innerText = item.name;
+      document.getElementById(`${tier}-img`).src = item.img;
+      document.getElementById(`${tier}-desc`).innerText = item.desc;
+    }
 
     // BACKGROUND AUDIO AUTOPLAY ENGINE
     const audio = document.getElementById('bgMusic');
