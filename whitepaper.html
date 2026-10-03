@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KnightVerse | Official Whitepaper</title>
+    <link rel="icon" type="image/png" href="logoko.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            gold: '#FFD700',
+                            goldHover: '#e6c200',
+                            dark: '#0a0a0a',
+                            card: '#121212',
+                            border: '#262626'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFD700 0%, #FFF275 50%, #B8860B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-glow { box-shadow: 0 0 25px rgba(255, 215, 0, 0.15); }
+        .glass-panel { background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(38, 38, 38, 0.8); }
+        
+        /* Tokenomics Bar Animations */
+        @keyframes fillBar { from { width: 0; } }
+        .animate-fill { animation: fillBar 1.5s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black">
+
+    <!-- TOP NAV -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass-panel">
+        <div class="max-w-7xl mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 text-gray-400 hover:text-brand-gold transition text-sm font-semibold">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+            </a>
+            <div class="flex items-center gap-2">
+                <img src="logoko.png" alt="KnightVerse" class="h-8 sm:h-10 w-auto object-contain mix-blend-screen opacity-90" />
+                <span class="text-brand-gold font-bold text-lg hidden sm:block tracking-widest uppercase">Whitepaper v1.0</span>
+            </div>
+            <a href="infofi.html" class="px-4 py-2 rounded-lg bg-brand-gold/10 border border-brand-gold/40 text-brand-gold text-xs font-bold hover:bg-brand-gold hover:text-black transition flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-3 h-3"></i> InfoFi Event
+            </a>
+        </div>
+    </nav>
+
+    <!-- HEADER / HERO -->
+    <header class="pt-32 pb-12 border-b border-brand-border bg-[url('bg-pattern.png')] bg-cover bg-center relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#050505]/80 to-[#050505]"></div>
+        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold tracking-wider mb-6">
+                <i data-lucide="scroll-text" class="w-3.5 h-3.5"></i> Protocol Documentation
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6">
+                <span class="gold-gradient-text">KNIGHTVERSE</span> MANIFESTO
+            </h1>
+            <p class="text-gray-400 text-sm sm:text-lg leading-relaxed">
+                The comprehensive architectural, economic, and technical overview of the next-generation MMORPG ecosystem built on the Binance Smart Chain. <sup>[span_4](start_span)[span_4](end_span)</sup>
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT LAYOUT -->
+    <div class="max-w-7xl mx-auto px-4 py-12 flex flex-col lg:flex-row gap-10">
+        
+        <!-- SIDEBAR NAVIGATION (Desktop) -->
+        <aside class="hidden lg:block w-64 shrink-0 relative">
+            <div class="sticky top-28 flex flex-col gap-2 border-l-2 border-brand-border pl-4">
+                <a href="#intro" class="text-sm font-medium text-gray-400 hover:text-brand-gold transition py-1">1. Introduction & Vision</a>
+                <a href="#gameplay" class="text-sm font-medium text-gray-400 hover:text-brand-gold transition py-1">2. Gameplay & Mechanics</a>
+                <a href="#combat" class="text-sm font-medium text-gray-400 hover:text-brand-gold transition py-1">3. Combat Modes</a>
+                <a href="#nfts" class="text-sm font-medium text-gray-400 hover:text-brand-gold transition py-1">4. NFT Rarity & Progression</a>
+                <a href="#treasury" class="text-sm font-medium text-gray-400 hover:text-brand-gold transition py-1">5. Taxation & Treasury</a>
+                <a href="#yield" class="text-sm font-medium text-gray-400 hover:text-brand-gold transition py-1">6. Real Yield (E-Pins)</a>
+                <a href="#economy" class="text-sm font-medium text-gray-400 hover:text-brand-gold transition py-1">7. Macro-Economy</a>
+                <a href="#access" class="text-sm font-medium text-gray-400 hover:text-brand-gold transition py-1">8. Web2 Onboarding</a>
+                <a href="#security" class="text-sm font-medium text-gray-400 hover:text-brand-gold transition py-1">9. Security & Anti-Bot</a>
+                <a href="#mint" class="text-sm font-medium text-gray-400 hover:text-brand-gold transition py-1">10. Genesis Mint</a>
+                <a href="#tokenomics" class="text-sm font-bold text-brand-gold transition py-1 mt-4">11. Tokenomics & Vesting</a>
+            </div>
+        </aside>
+
+        <!-- DOCUMENT CONTENT -->
+        <main class="flex-grow max-w-4xl space-y-16">
+
+            <!-- Sec 1 -->
+            <section id="intro" class="scroll-mt-32">
+                <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                    <span class="text-brand-gold font-mono">01.</span> Introduction & Vision
+                </h2>
+                <div class="bg-brand-card border border-brand-border rounded-xl p-6 text-sm text-gray-300 leading-relaxed space-y-4 shadow-lg">
+                    <p>KnightVerse is a next-generation, 2D turn-based Play-to-Earn (P2E) RPG built on the Binance Smart Chain (BNB). <sup>[span_5](start_span)[span_5](end_span)</sup></p>
+                    <p>Merging a two-decade legacy of MMORPG faction mechanics (Karus vs. Human) with a sustainable Web3 economy, KnightVerse eliminates the fatal flaws of traditional P2E models. By integrating Real Yield mechanics through a B2B E-Pin marketplace and establishing robust deflationary token sinks, KnightVerse delivers a truly scalable, player-centric ecosystem. <sup>[span_6](start_span)[span_6](end_span)</sup></p>
+                </div>
+            </section>
+
+            <!-- Sec 2 -->
+            <section id="gameplay" class="scroll-mt-32">
+                <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                    <span class="text-brand-gold font-mono">02.</span> Core Gameplay & Energy
+                </h2>
+                <div class="bg-brand-card border border-brand-border rounded-xl p-6 text-sm text-gray-300 shadow-lg">
+                    <p class="mb-4">The ecosystem is designed to respect the player's time while strictly controlling token emission. <sup>[span_7](start_span)[span_7](end_span)</sup></p>
+                    <ul class="space-y-4">
+                        <li class="flex gap-3"><i data-lucide="battery-charging" class="w-5 h-5 text-amber-500 shrink-0"></i> <div><strong class="text-white">Daily Stamina:</strong> To prevent endless grinding and bot-driven inflation, each NFT character is limited to 3 battles per day. <sup>[span_8](start_span)[span_8](end_span)</sup></div></li>
+                        <li class="flex gap-3"><i data-lucide="shield-check" class="w-5 h-5 text-emerald-500 shrink-0"></i> <div><strong class="text-white">Zero-Penalty Loss:</strong> Fostering a healthy growth environment, losing a battle does not destroy items or deduct tokens. <sup>[span_9](start_span)[span_9](end_span)</sup> The player simply consumes 1 stamina and receives reduced Experience Points (XP). <sup>[span_10](start_span)[span_10](end_span)</sup></div></li>
+                        <li class="flex gap-3"><i data-lucide="trending-up" class="w-5 h-5 text-purple-500 shrink-0"></i> <div><strong class="text-white">Logarithmic Progression:</strong> Characters can reach a maximum of Level 59. <sup>[span_11](start_span)[span_11](end_span)</sup> Leveling up strictly requires burning $KNIGHT tokens. <sup>[span_12](start_span)[span_12](end_span)</sup> Level-up cost scales logarithmically (e.g., Level 1 requires 100 $KNIGHT; Level 40 requires 2,500 $KNIGHT). <sup>[span_13](start_span)[span_13](end_span)</sup> All costs are fixed in $KNIGHT (No-Oracle Policy). <sup>[span_14](start_span)[span_14](end_span)</sup></div></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Sec 3 & 4 Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <section id="combat" class="scroll-mt-32">
+                    <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><span class="text-brand-gold font-mono">03.</span> Combat Modes</h2>
+                    <div class="bg-brand-card border border-brand-border rounded-xl p-6 text-sm text-gray-300 h-full shadow-lg space-y-3">
+                        <p><strong class="text-white">Solo Arena (1v1):</strong> Entry-level PvE combat. <sup>[span_15](start_span)[span_15](end_span)</sup></p>
+                        <p><strong class="text-white">Tactical Squad (3v3):</strong> Players deploy 3 characters of the exact same rarity. Grants a +30% Synergy Bonus to the baseline reward pool. <sup>[span_16](start_span)[span_16](end_span)</sup></p>
+                        <p><strong class="text-white text-red-400">World Raids:</strong> Elite characters (Level 25, 40, 55 thresholds) challenge World Bosses in 1v1 combat, offering a 2x reward multiplier. <sup>[span_17](start_span)[span_17](end_span)</sup></p>
+                        <p><strong class="text-white">Anti-P2W:</strong> Algorithmic matchmaking pairs players strictly based on NFT rarity and power levels, protecting low-budget players. <sup>[span_18](start_span)[span_18](end_span)</sup></p>
+                    </div>
+                </section>
+                
+                <section id="nfts" class="scroll-mt-32">
+                    <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><span class="text-brand-gold font-mono">04.</span> NFT Rarity</h2>
+                    <div class="bg-brand-card border border-brand-border rounded-xl p-6 text-sm text-gray-300 h-full shadow-lg space-y-3">
+                        <p>Characters are categorized into 4 tiers: Common, Rare, Epic, and Legendary. <sup>[span_19](start_span)[span_19](end_span)</sup></p>
+                        <p><strong class="text-white">Value Retention:</strong> When a leveled character is traded on a secondary market (e.g., OpenSea), it retains its exact Level and XP, exponentially increasing floor prices. <sup>[span_20](start_span)[span_20](end_span)</sup></p>
+                        <p><strong class="text-white">Un-socketing Economy:</strong> NFT weapons and armors can be detached and sold independently, requiring a $KNIGHT token fee that acts as an additional deflationary sink. <sup>[span_21](start_span)[span_21](end_span)</sup></p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sec 5, 6, 7 -->
+            <section id="economy" class="scroll-mt-32 space-y-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3"><span class="text-brand-gold font-mono">05.</span> Taxation & The Rolling Time-Lock</h2>
+                    <div class="bg-brand-card border border-brand-border rounded-xl p-6 text-sm text-gray-300 shadow-lg">
+                        <p class="mb-3">KnightVerse utilizes a zero-burn, cyclic Treasury system governed by smart contracts: <sup>[span_22](start_span)[span_22](end_span)</sup></p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                            <div class="p-3 bg-[#181818] rounded-lg border border-brand-border flex justify-between items-center"><span class="font-bold">Withdrawal Tax</span> <span class="text-red-400 font-mono">5%</span></div>
+                            <div class="p-3 bg-[#181818] rounded-lg border border-brand-border flex justify-between items-center"><span class="font-bold">DEX Swap Tax</span> <span class="text-orange-400 font-mono">2%</span></div>
+                        </div>
+                        <p>Taxes and in-game sinks are deposited into the Protocol Treasury and mathematically locked for 3 months, then strategically deployed for buybacks or subsidies. <sup>[span_23](start_span)[span_23](end_span)</sup></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div id="yield">
+                        <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><span class="text-brand-gold font-mono">06.</span> Real Yield & E-Pins</h2>
+                        <div class="bg-brand-card border border-brand-border rounded-xl p-6 text-sm text-gray-300 h-full shadow-lg">
+                            <p>Bridges Web3 liquidity with the Web2 traditional gaming market through a proprietary secondary marketplace. <sup>[span_24](start_span)[span_24](end_span)</sup></p>
+                            <p class="mt-3"><strong class="text-white">Stake-to-Discount:</strong> Staking $KNIGHT grants access to purchase Real-World E-Pins at a discounted rate (e.g., 5%). <sup>[span_25](start_span)[span_25](end_span)</sup> Secures E-Pins at wholesale rates via direct CEO-level partnerships, operating at zero profit margin. <sup>[span_26](start_span)[span_26](end_span)</sup></p>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><span class="text-brand-gold font-mono">07.</span> Death Spiral Solution</h2>
+                        <div class="bg-brand-card border border-brand-border rounded-xl p-6 text-sm text-gray-300 h-full shadow-lg">
+                            <p><strong class="text-white text-brand-gold">PvP Wager Rake Mechanism:</strong> In competitive PvP, matched players wager equal amounts of $KNIGHT. <sup>[span_27](start_span)[span_27](end_span)</sup></p>
+                            <p class="mt-3">The protocol automatically deducts a 10% Rake Fee from the total pool before distributing the rest to the victor, removing millions of tokens from circulation daily. <sup>[span_28](start_span)[span_28](end_span)</sup></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sec 8, 9, 10 -->
+            <section id="security" class="scroll-mt-32">
+                <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-3"><span class="text-brand-gold font-mono">08 - 10.</span> Security, Access & Minting</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-[#111] p-5 rounded-xl border border-brand-border shadow-lg">
+                        <i data-lucide="smartphone" class="w-6 h-6 text-blue-400 mb-3"></i>
+                        <h4 class="font-bold text-white mb-2">Web2 Onboarding</h4>
+                        <p class="text-xs text-gray-400">One-Time Account Linking: Players register via Twitter (X) and sign a one-time gas-free signature. <sup>[span_29](start_span)[span_29](end_span)</sup> Play directly from any mobile browser via Twitter login. <sup>[span_30](start_span)[span_30](end_span)</sup></p>
+                    </div>
+                    <div class="bg-[#111] p-5 rounded-xl border border-brand-border shadow-lg">
+                        <i data-lucide="shield-alert" class="w-6 h-6 text-red-400 mb-3"></i>
+                        <h4 class="font-bold text-white mb-2">Anti-Bot & Whales</h4>
+                        <p class="text-xs text-gray-400">Entry requires a Genesis NFT (1-5 USDT), creating an insurmountable cost barrier for bot farms. <sup>[span_31](start_span)[span_31](end_span)</sup> No Scholarship Program. <sup>[span_32](start_span)[span_32](end_span)</sup> Permanent LP Lock prior to Mainnet TGE. <sup>[span_33](start_span)[span_33](end_span)</sup></p>
+                    </div>
+                    <div class="bg-[#111] p-5 rounded-xl border border-brand-border shadow-lg">
+                        <i data-lucide="box" class="w-6 h-6 text-brand-gold mb-3"></i>
+                        <h4 class="font-bold text-white mb-2">Genesis Mint</h4>
+                        <p class="text-xs text-gray-400">Genesis NFT purchases feature a 3-day reveal period. <sup>[span_34](start_span)[span_34](end_span)</sup> Airdrop rewards unlock 40% at TGE, with the remaining 60% distributed linearly over 12 months. <sup>[span_35](start_span)[span_35](end_span)</sup></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sec 11 TOKENOMICS (VISUAL FEAST) -->
+            <section id="tokenomics" class="scroll-mt-32 pb-20">
+                <div class="text-center mb-10">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold tracking-wider mb-3">
+                        Section 11
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Tokenomics & Distribution</h2>
+                    <p class="text-gray-400 text-sm">Meticulously designed for long-term sustainability, ensuring a strictly controlled circulating supply. <sup>[span_36](start_span)[span_36](end_span)</sup></p>
+                </div>
+
+                <div class="bg-brand-card border border-brand-gold/30 rounded-2xl p-6 sm:p-10 shadow-2xl gold-glow relative overflow-hidden mb-10">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <!-- Chart Data -->
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-6 border-b border-brand-border pb-2">Network: BNB / BEP-20 <sup>[span_37](start_span)[span_37](end_span)</sup></h3>
+                            <div class="text-sm text-gray-400 mb-6">Maximum Total Supply: <strong class="text-brand-gold text-lg ml-2">100,000,000 $KNIGHT</strong> <sup>[span_38](start_span)[span_38](end_span)</sup></div>
+                            
+                            <div class="space-y-4">
+                                <!-- Bar 1 -->
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1 font-semibold"><span class="text-brand-gold">P2E & Staking</span><span class="text-white">40%</span></div>
+                                    <div class="w-full bg-[#181818] rounded-full h-2.5"><div class="bg-brand-gold h-2.5 rounded-full w-[40%] animate-fill"></div></div>
+                                </div>
+                                <!-- Bar 2 -->
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1 font-semibold"><span class="text-blue-500">Protocol Treasury</span><span class="text-white">20%</span></div>
+                                    <div class="w-full bg-[#181818] rounded-full h-2.5"><div class="bg-blue-500 h-2.5 rounded-full w-[20%] animate-fill" style="animation-delay: 0.2s"></div></div>
+                                </div>
+                                <!-- Bar 3 -->
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1 font-semibold"><span class="text-purple-500">Genesis Presale</span><span class="text-white">15%</span></div>
+                                    <div class="w-full bg-[#181818] rounded-full h-2.5"><div class="bg-purple-500 h-2.5 rounded-full w-[15%] animate-fill" style="animation-delay: 0.4s"></div></div>
+                                </div>
+                                <!-- Bar 4 -->
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1 font-semibold"><span class="text-orange-500">DEX Liquidity</span><span class="text-white">10%</span></div>
+                                    <div class="w-full bg-[#181818] rounded-full h-2.5"><div class="bg-orange-500 h-2.5 rounded-full w-[10%] animate-fill" style="animation-delay: 0.6s"></div></div>
+                                </div>
+                                <!-- Bar 5 -->
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1 font-semibold"><span class="text-red-500">Team & Advisors</span><span class="text-white">10%</span></div>
+                                    <div class="w-full bg-[#181818] rounded-full h-2.5"><div class="bg-red-500 h-2.5 rounded-full w-[10%] animate-fill" style="animation-delay: 0.8s"></div></div>
+                                </div>
+                                <!-- Bar 6 -->
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1 font-semibold"><span class="text-emerald-500">Airdrop & InfoFi</span><span class="text-white">5%</span></div>
+                                    <div class="w-full bg-[#181818] rounded-full h-2.5"><div class="bg-emerald-500 h-2.5 rounded-full w-[5%] animate-fill" style="animation-delay: 1.0s"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Deflationary Info -->
+                        <div class="bg-[#111] p-6 rounded-xl border border-brand-border">
+                            <h4 class="font-bold text-white mb-3 text-lg flex items-center gap-2"><i data-lucide="flame" class="w-5 h-5 text-red-500"></i> The Deflationary Loop</h4>
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Taxes (5% Withdrawal, 2% Swap), level-up token burns, and the 10% PvP Wager Rake continually remove $KNIGHT from active circulation, guaranteeing that the 100M supply remains deflationary over time. <sup>[span_39](start_span)[span_39](end_span)</sup>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comprehensive Vesting Table -->
+                <h3 class="text-xl font-bold text-white mb-6">Comprehensive Vesting Schedule</h3>
+                <div class="overflow-x-auto w-full rounded-xl border border-brand-border bg-brand-card shadow-lg">
+                    <table class="w-full text-left text-sm whitespace-nowrap">
+                        <thead>
+                            <tr class="bg-[#181818] border-b border-brand-border text-gray-300">
+                                <th class="p-4 font-bold">Allocation Category</th>
+                                <th class="p-4 font-bold">Amount</th>
+                                <th class="p-4 font-bold text-brand-gold">TGE Unlock</th>
+                                <th class="p-4 font-bold">Vesting & Lock Terms</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-brand-border/60 text-gray-400">
+                            <tr class="hover:bg-[#151515] transition">
+                                <td class="p-4 font-bold text-white">P2E & Staking</td>
+                                <td class="p-4">40M (40%)</td>
+                                <td class="p-4 text-brand-gold font-bold">0%</td>
+                                <td class="p-4 text-xs">Emitted based on active gameplay and staking mechanisms. <sup>[span_40](start_span)[span_40](end_span)</sup></td>
+                            </tr>
+                            <tr class="hover:bg-[#151515] transition">
+                                <td class="p-4 font-bold text-white">Protocol Treasury</td>
+                                <td class="p-4">20M (20%)</td>
+                                <td class="p-4 text-brand-gold font-bold">5%</td>
+                                <td class="p-4 text-xs">3-Month Cliff, followed by 24-month linear vesting. <sup>[span_41](start_span)[span_41](end_span)</sup></td>
+                            </tr>
+                            <tr class="hover:bg-[#151515] transition">
+                                <td class="p-4 font-bold text-white">Presale & Public</td>
+                                <td class="p-4">15M (15%)</td>
+                                <td class="p-4 text-brand-gold font-bold">20%</td>
+                                <td class="p-4 text-xs">20% at TGE, followed by 4-month linear vesting. <sup>[span_42](start_span)[span_42](end_span)</sup></td>
+                            </tr>
+                            <tr class="hover:bg-[#151515] transition">
+                                <td class="p-4 font-bold text-white">DEX Liquidity</td>
+                                <td class="p-4">10M (10%)</td>
+                                <td class="p-4 text-brand-gold font-bold">100%</td>
+                                <td class="p-4 text-xs text-orange-400 font-semibold">Permanently Locked (Lifetime). Anti-rug protection. <sup>[span_43](start_span)[span_43](end_span)</sup></td>
+                            </tr>
+                            <tr class="hover:bg-[#151515] transition">
+                                <td class="p-4 font-bold text-white">Team & Advisors</td>
+                                <td class="p-4">10M (10%)</td>
+                                <td class="p-4 text-brand-gold font-bold">0%</td>
+                                <td class="p-4 text-xs text-red-400 font-semibold">12-Month Hard Cliff, then 24-month linear vesting. <sup>[span_44](start_span)[span_44](end_span)</sup></td>
+                            </tr>
+                            <tr class="hover:bg-[#151515] transition">
+                                <td class="p-4 font-bold text-white">Airdrop & InfoFi</td>
+                                <td class="p-4">5M (5%)</td>
+                                <td class="p-4 text-brand-gold font-bold">40%</td>
+                                <td class="p-4 text-xs">40% at TGE for testnet users; 60% vests over 12 months. <sup>[span_45](start_span)[span_45](end_span)</sup></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="py-8 bg-black border-t border-brand-border text-center text-xs text-gray-500">
+        <img src="logoko.png" alt="KnightVerse" class="h-8 w-auto mx-auto mb-4 opacity-50 mix-blend-screen" />
+        <p>© 2026 KnightVerse Protocol. Smart contracts are pending comprehensive security audits.</p>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
