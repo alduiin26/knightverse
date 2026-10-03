@@ -25,34 +25,14 @@
     }
   </script>
   <style>
-    .gold-gradient-text {
-      background: linear-gradient(135deg, #FFD700 0%, #FFF275 50%, #B8860B 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .gold-glow {
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
-    }
-    .video-glow {
-      box-shadow: 0 0 35px rgba(255, 215, 0, 0.15);
-    }
-    @keyframes pulse-gold {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.7; transform: scale(1.05); }
-    }
-    .animate-pulse-gold {
-      animation: pulse-gold 2.5s infinite ease-in-out;
-    }
-    .blend-logo {
-      mix-blend-mode: screen;
-    }
-    @keyframes float-box {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-    .animate-float {
-      animation: float-box 4s ease-in-out infinite;
-    }
+    .gold-gradient-text { background: linear-gradient(135deg, #FFD700 0%, #FFF275 50%, #B8860B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .gold-glow { box-shadow: 0 0 25px rgba(255, 215, 0, 0.25); }
+    .video-glow { box-shadow: 0 0 35px rgba(255, 215, 0, 0.15); }
+    @keyframes pulse-gold { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.05); } }
+    .animate-pulse-gold { animation: pulse-gold 2.5s infinite ease-in-out; }
+    .blend-logo { mix-blend-mode: screen; }
+    @keyframes float-box { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+    .animate-float { animation: float-box 4s ease-in-out infinite; }
   </style>
 </head>
 <body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black">
@@ -79,7 +59,7 @@
         <img src="logoko.png" alt="KnightVerse Logo" class="h-11 sm:h-14 w-auto object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,215,0,0.4)]" />
       </a>
 
-      <!-- DESKTOP NAV -->
+      <!-- DESKTOP NAV LINKS -->
       <div class="hidden lg:flex items-center gap-6 text-sm font-medium">
         <a href="#teaser" class="hover:text-brand-gold transition text-amber-300 flex items-center gap-1">
           <i data-lucide="play-circle" class="w-4 h-4"></i> Trailer
@@ -87,55 +67,62 @@
         <a href="#mint" class="hover:text-brand-gold transition text-brand-gold flex items-center gap-1">
           <i data-lucide="box" class="w-4 h-4"></i> Genesis Mint
         </a>
-        <a href="#rarity" class="hover:text-brand-gold transition">Classes & Rarity</a>
+        <a href="#rarity" class="hover:text-brand-gold transition">Classes</a>
         <a href="#bosses" class="hover:text-brand-gold transition text-red-400 flex items-center gap-1.5">
-          <i data-lucide="skull" class="w-4 h-4"></i> World Bosses
+          <i data-lucide="skull" class="w-4 h-4"></i> Bosses
         </a>
-        
         <!-- INFOFI EVENT BUTONU -->
         <a href="infofi.html" class="px-3 py-1.5 rounded-lg bg-purple-900/30 border border-purple-500/50 text-purple-300 hover:bg-purple-500/20 hover:text-white transition flex items-center gap-1.5 animate-pulse">
-          <i data-lucide="sparkles" class="w-4 h-4"></i> InfoFi Event
+          <i data-lucide="sparkles" class="w-4 h-4"></i> Event
         </a>
-        
-        <a href="#tokenomics" class="hover:text-brand-gold transition">Tokenomics</a>
-        <a href="#roadmap" class="hover:text-brand-gold transition">Roadmap</a>
-        
-        <!-- YENİ EKLENEN WHITEPAPER BUTONU (MASAÜSTÜ) -->
-        <a href="whitepaper.html" target="_blank" class="hover:text-brand-gold transition text-gray-300 flex items-center gap-1.5">
+        <a href="whitepaper.html" class="hover:text-brand-gold transition text-gray-300 flex items-center gap-1.5">
           <i data-lucide="file-text" class="w-4 h-4"></i> Whitepaper
         </a>
       </div>
 
-      <!-- ACTIONS -->
-      <div class="flex items-center gap-1.5 sm:gap-2">
-        <a href="market.html" class="px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg bg-[#141414] border border-brand-gold/40 text-brand-gold font-semibold text-[11px] sm:text-xs hover:bg-brand-gold/10 transition flex items-center gap-1">
-          <i data-lucide="store" class="w-3 h-3"></i>
-          <span>Market</span>
+      <!-- NAVBAR ACTIONS (Desktop & Tablet) -->
+      <div class="flex items-center gap-2">
+        
+        <!-- Sadece Desktop'ta görünen Aksiyonlar (Dil, Store, Play) -->
+        <div class="hidden sm:flex items-center gap-3">
+            <!-- DİL SEÇENEKLERİ -->
+            <div class="flex items-center gap-2 text-xs font-extrabold text-gray-500 border-r border-brand-border pr-3">
+                <a href="#" class="text-brand-gold cursor-default">EN</a>
+                <a href="#" class="hover:text-white transition">TR</a>
+                <a href="#" class="hover:text-white transition">CN</a>
+                <a href="#" class="hover:text-white transition">KR</a>
+            </div>
+            
+            <!-- STORE BUTONU -->
+            <a href="store.html" class="px-3 py-2 rounded-lg bg-[#141414] border border-brand-gold/40 text-brand-gold font-semibold text-xs hover:bg-brand-gold/10 transition flex items-center gap-1.5">
+                <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> Store
+            </a>
+            
+            <!-- PLAY BUTONU -->
+            <a href="play.html" class="px-3 py-2 rounded-lg bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-semibold text-xs hover:bg-emerald-500/20 transition flex items-center gap-1.5 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+                <i data-lucide="gamepad-2" class="w-3.5 h-3.5"></i> Play
+            </a>
+        </div>
+        
+        <!-- Her iki ekranda da görünen OpenSea -->
+        <a href="https://opensea.io" target="_blank" class="px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-lg bg-brand-gold text-black font-semibold text-xs sm:text-sm hover:bg-brand-goldHover transition flex items-center gap-1.5 ml-1">
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">OpenSea</span><span class="sm:hidden">Mint</span>
         </a>
-        <a href="https://opensea.io" target="_blank" class="px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-lg bg-brand-gold text-black font-semibold text-[11px] sm:text-sm hover:bg-brand-goldHover transition flex items-center gap-1">
-          <i data-lucide="external-link" class="w-3 h-3"></i>
-          <span>OpenSea Mint</span>
-        </a>
-              <!-- DİL SEÇENEKLERİ -->
-      <div class="hidden lg:flex items-center gap-3 text-[11px] font-extrabold text-gray-500 border-l border-brand-border pl-4 ml-2">
-        <a href="#" class="text-brand-gold cursor-default">EN</a>
-        <a href="#" class="hover:text-white transition cursor-pointer">TR</a>
-        <a href="#" class="hover:text-white transition cursor-pointer">CN</a>
-        <a href="#" class="hover:text-white transition cursor-pointer">KR</a>
-        <a href="#" class="hover:text-white transition cursor-pointer">JP</a>
-      </div>
       </div>
     </div>
 
-    <!-- COMPACT MOBILE SUB-BAR -->
-    <div class="lg:hidden border-t border-brand-border/60 bg-[#0a0a0a] px-2 py-1.5 flex items-center justify-between text-[11px] overflow-x-auto">
-      <a href="#mint" class="px-2 py-1 rounded bg-[#161616] border border-brand-border text-brand-gold transition mx-0.5 whitespace-nowrap">Mint</a>
-      <a href="infofi.html" class="px-2 py-1 rounded bg-purple-900/30 border border-purple-500/50 text-purple-300 transition mx-0.5 whitespace-nowrap font-bold">Event</a>
-      <a href="#rarity" class="px-2 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 transition mx-0.5 whitespace-nowrap">Classes</a>
-      <a href="#bosses" class="px-2 py-1 rounded bg-[#161616] border border-red-950/80 text-red-400 transition mx-0.5 whitespace-nowrap">Bosses</a>
-      <a href="#tokenomics" class="px-2 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 transition mx-0.5 whitespace-nowrap">Token</a>
-      <!-- YENİ EKLENEN WHITEPAPER BUTONU (MOBİL) -->
-      <a href="whitepaper.html" target="_blank" class="px-2 py-1 rounded bg-[#161616] border border-brand-gold/40 text-brand-gold transition mx-0.5 whitespace-nowrap">Whitepaper</a>
+    <!-- COMPACT MOBILE SUB-BAR (Sadece Mobilde Görünür) -->
+    <div class="sm:hidden border-t border-brand-border/60 bg-[#0a0a0a] px-2 py-2 flex items-center justify-between text-[11px] overflow-x-auto gap-2">
+        <!-- Mobil Dil Seçeneği -->
+        <div class="flex items-center gap-1.5 border-r border-brand-border pr-2 shrink-0">
+            <a href="#" class="text-brand-gold font-bold">EN</a>
+            <a href="#" class="text-gray-500 hover:text-white">TR</a>
+        </div>
+        <!-- Mobil Yönlendirme Butonları -->
+        <a href="play.html" class="px-2.5 py-1.5 rounded bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-bold whitespace-nowrap shadow-[0_0_8px_rgba(16,185,129,0.2)]">Play Game</a>
+        <a href="store.html" class="px-2.5 py-1.5 rounded bg-[#161616] border border-brand-gold/40 text-brand-gold font-bold whitespace-nowrap">Store</a>
+        <a href="infofi.html" class="px-2.5 py-1.5 rounded bg-purple-900/30 border border-purple-500/50 text-purple-300 font-bold whitespace-nowrap">Event</a>
+        <a href="whitepaper.html" class="px-2.5 py-1.5 rounded bg-[#161616] border border-brand-border text-gray-300 whitespace-nowrap">WP</a>
     </div>
   </nav>
 
@@ -165,8 +152,8 @@
         <a href="#teaser" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-brand-gold text-black font-bold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">
           <i data-lucide="play" class="w-4 h-4 fill-current"></i> Watch Cinematic Teaser
         </a>
-        <a href="#mint" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-[#141414] border border-brand-border text-white font-medium text-sm hover:border-brand-gold transition flex items-center justify-center gap-2">
-          Genesis Mint Rounds
+        <a href="play.html" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-emerald-900/20 border border-emerald-500/50 text-emerald-400 font-bold text-sm hover:bg-emerald-900/40 transition flex items-center justify-center gap-2">
+          <i data-lucide="gamepad-2" class="w-4 h-4"></i> Enter Game Client
         </a>
       </div>
 
@@ -180,8 +167,8 @@
           <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Low Gas (USDT Mint)</div>
         </div>
         <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
-          <div class="text-xl sm:text-2xl font-bold text-white">5% Discount</div>
-          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Holder Cash & GB Store</div>
+          <div class="text-xl sm:text-2xl font-bold text-white">Up to 8%</div>
+          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">E-Pin Store Discount</div>
         </div>
         <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
           <div class="text-xl sm:text-2xl font-bold text-brand-gold">Max Lv 59</div>
@@ -278,10 +265,9 @@
         </div>
       </div>
 
-      <!-- 5 MINT ROUND CARDS WITH IMAGES -->
+      <!-- 5 MINT ROUND CARDS -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 mt-8">
         
-        <!-- 1. TEAM -->
         <div class="bg-brand-card border border-stone-700 rounded-xl p-4 flex flex-col justify-between hover:border-stone-500 transition">
           <div>
             <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Team Reserve</div>
@@ -296,7 +282,6 @@
           </div>
         </div>
 
-        <!-- 2. GTD WL -->
         <div class="bg-brand-card border border-blue-900/50 rounded-xl p-4 flex flex-col justify-between hover:border-blue-500/70 transition">
           <div>
             <div class="text-[10px] font-bold text-blue-400 uppercase tracking-wider mb-1">GTD Whitelist</div>
@@ -311,7 +296,6 @@
           </div>
         </div>
 
-        <!-- 3. INFOFI (EVENT) -->
         <div class="bg-purple-900/10 border border-purple-500/50 rounded-xl p-4 flex flex-col justify-between relative shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:border-purple-400 transition cursor-pointer" onclick="window.location.href='infofi.html'">
           <div class="absolute -top-2 right-3 bg-purple-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase">Top 500</div>
           <div>
@@ -327,7 +311,6 @@
           </div>
         </div>
 
-        <!-- 4. STANDARD WL -->
         <div class="bg-brand-card border border-brand-gold/50 rounded-xl p-4 flex flex-col justify-between gold-glow relative">
           <div>
             <div class="text-[10px] font-bold text-brand-gold uppercase tracking-wider mb-1">Standard WL</div>
@@ -342,7 +325,6 @@
           </div>
         </div>
 
-        <!-- 5. PUBLIC FCFS -->
         <div class="bg-brand-card border border-emerald-900/50 rounded-xl p-4 flex flex-col justify-between hover:border-emerald-500/70 transition">
           <div>
             <div class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-1">Public FCFS</div>
@@ -558,97 +540,6 @@
     </div>
   </section>
 
-  <!-- PHASE 0: INFOFI CAMPAIGN & ALPHA TESTNET -->
-  <section id="phase0" class="py-16 sm:py-24 border-b border-brand-border">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-semibold mb-3">
-          <i data-lucide="flame" class="w-3.5 h-3.5"></i> Early Access & Community Events
-        </div>
-        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Phase 0: Closed Alpha & InfoFi</h3>
-        <p class="text-xs sm:text-sm text-gray-400 mt-2">Discover early-bird events, closed test server mechanics, and upcoming box reward pools.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col justify-between">
-          <div>
-            <div class="w-10 h-10 rounded-lg bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold mb-4">
-              <i data-lucide="key" class="w-5 h-5"></i>
-            </div>
-            <h4 class="text-lg font-bold text-white mb-2">Closed Alpha Access</h4>
-            <p class="text-xs text-gray-400 leading-relaxed mb-4">
-              Access to the early 2D browser battle server is exclusively reserved for Genesis NFT Box holders. Test PvP/PvE parameters before public deployment.
-            </p>
-          </div>
-          <div class="p-3.5 bg-[#171717] rounded-lg border border-brand-border/60 text-xs space-y-1">
-            <div class="text-brand-gold font-bold">Top 1,000 Leaderboard:</div>
-            <div class="text-gray-400">Guaranteed Character/Item Box allocations based on closed test win rates.</div>
-          </div>
-        </div>
-
-        <div class="bg-brand-card border border-blue-900/40 rounded-xl p-6 flex flex-col justify-between">
-          <div>
-            <div class="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-4">
-              <i data-lucide="calendar-check" class="w-5 h-5"></i>
-            </div>
-            <h4 class="text-lg font-bold text-white mb-2">Daily Quests</h4>
-            <p class="text-xs text-gray-400 leading-relaxed mb-4">
-              Daily social activity across our channels helps secure priority standings:
-            </p>
-            <ul class="text-xs text-gray-300 space-y-2 mb-4">
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400 shrink-0"></i>
-                <span>Daily tweet/thread mentioning @KnightVerse</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400 shrink-0"></i>
-                <span>Ethos Rep upvote & vouch activity</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400 shrink-0"></i>
-                <span>Active discussions on Telegram & Discord</span>
-              </li>
-            </ul>
-          </div>
-          <div class="p-3.5 bg-[#171717] rounded-lg border border-brand-border/60 text-xs space-y-1">
-            <div class="text-blue-400 font-bold">Top 500 Daily Contributors:</div>
-            <div class="text-gray-400">Direct whitelist perks and supplementary Genesis Box drops.</div>
-          </div>
-        </div>
-
-        <div class="bg-brand-card border border-purple-900/40 rounded-xl p-6 flex flex-col justify-between">
-          <div>
-            <div class="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4">
-              <i data-lucide="trophy" class="w-5 h-5"></i>
-            </div>
-            <h4 class="text-lg font-bold text-white mb-2">Core Milestones</h4>
-            <p class="text-xs text-gray-400 leading-relaxed mb-4">
-              Permanent foundational quests required for all participants:
-            </p>
-            <ul class="text-xs text-gray-300 space-y-2 mb-4">
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400 shrink-0"></i>
-                <span>Follow official X (Twitter) profile</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400 shrink-0"></i>
-                <span>Join official Telegram Announcement Hub</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400 shrink-0"></i>
-                <span>Attain community contributor badges on Discord</span>
-              </li>
-            </ul>
-          </div>
-          <div class="p-3.5 bg-[#171717] rounded-lg border border-brand-border/60 text-xs space-y-1">
-            <div class="text-purple-400 font-bold">Verification:</div>
-            <div class="text-gray-400">Tracking will be finalized via community discord bot sync.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- TOKENOMICS SECTION -->
   <section id="tokenomics" class="py-16 sm:py-24 border-b border-brand-border bg-[#080808]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
@@ -721,25 +612,7 @@
                 <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-orange-500 shrink-0"></span>Marketing & CEX</td>
                 <td class="py-3">10M (10%)</td>
                 <td class="py-3 text-orange-400 font-semibold">20%</td>
-                <td class="py-3 text-gray-400">Listing fees, KOL promotion & CEX airdrop campaigns (10 months linear)</td>
-              </tr>
-              <tr>
-                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>Team & Core</td>
-                <td class="py-3">10M (10%)</td>
-                <td class="py-3 text-red-400 font-semibold">0%</td>
-                <td class="py-3 text-gray-400">3-month cliff, followed by 9 months linear release</td>
-              </tr>
-              <tr>
-                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>Airdrop & Quests</td>
-                <td class="py-3">10M (10%)</td>
-                <td class="py-3 text-emerald-400 font-semibold">40%</td>
-                <td class="py-3 text-gray-400">Remaining 60% distributed linearly across 12 months</td>
-              </tr>
-              <tr>
-                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-gray-500 shrink-0"></span>Treasury & Ops</td>
-                <td class="py-3">5M (5%)</td>
-                <td class="py-3 text-gray-400 font-semibold">0%</td>
-                <td class="py-3 text-gray-400">6-month lock, utilized for market discount subsidies</td>
+                <td class="py-3 text-gray-400">Listing fees, KOL promotion & CEX airdrop campaigns</td>
               </tr>
             </tbody>
           </table>
@@ -748,49 +621,7 @@
     </div>
   </section>
 
-  <!-- ROADMAP -->
-  <section id="roadmap" class="py-16 sm:py-24 border-b border-brand-border">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-        <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Project Execution</h2>
-        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Strategic Roadmap</h3>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-        <div class="bg-brand-card border border-brand-gold/30 rounded-xl p-5 sm:p-6 relative">
-          <div class="text-xs font-bold text-brand-gold uppercase tracking-wider mb-2">Phase 0 (Current)</div>
-          <h4 class="text-base sm:text-lg font-bold text-white mb-3">Genesis Mint & Testnet</h4>
-          <ul class="text-xs text-gray-400 space-y-2">
-            <li>• 3,000 Level 1 Character Box offering on OpenSea (BNB Chain)</li>
-            <li>• Closed Alpha test server launch for verified NFT owners</li>
-            <li>• First 1,000 ranking players rewarded with Genesis equipment</li>
-            <li>• InfoFi community campaign & top 500 reward pool</li>
-          </ul>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border rounded-xl p-5 sm:p-6">
-          <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Phase 1</div>
-          <h4 class="text-base sm:text-lg font-bold text-white mb-3">TGE & PvE Engine</h4>
-          <ul class="text-xs text-gray-400 space-y-2">
-            <li>• KNIGHT Token Generation Event on BNB Chain (BEP-20)</li>
-            <li>• 2D browser battle PvE engine launch</li>
-            <li>• Daily 3-battle mechanics with EXP progression</li>
-            <li>• 5% discounted automated E-Pin and Goldbar store</li>
-          </ul>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border rounded-xl p-5 sm:p-6">
-          <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Phase 2</div>
-          <h4 class="text-base sm:text-lg font-bold text-white mb-3">PvP Arena & Armory</h4>
-          <ul class="text-xs text-gray-400 space-y-2">
-            <li>• Karus vs Human 1v1 wagered PvP Arena matches</li>
-            <li>• Weapon and unique tier equipment box releases</li>
-            <li>• Community DAO governance and voting implementation</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- PARTNERS & AUDITS -->
   <div class="border-t border-brand-border bg-[#030303] py-6">
     <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center items-center gap-6 sm:gap-12 opacity-50 grayscale hover:grayscale-0 transition duration-500">
       <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i> Audited by CertiK (Pending)</span>
