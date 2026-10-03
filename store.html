@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KnightVerse | Real Yield Store & Vault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { gold: '#FFD700', border: '#262626', card: '#121212' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#050505] text-gray-300 font-sans min-h-screen flex flex-col">
+
+    <!-- ÜST MENÜ VE BAKİYE PANELİ -->
+    <nav class="w-full bg-[#050505]/95 border-b border-brand-border sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 text-gray-400 hover:text-brand-gold transition text-sm font-bold">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Ana Sayfa
+            </a>
+            
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex flex-col text-right">
+                    <span class="text-[10px] text-gray-500 uppercase font-bold">Site Bakiyesi</span>
+                    <span class="text-sm font-black text-emerald-400">0.00 TL <span class="text-gray-500 font-medium ml-1">($0.00)</span></span>
+                </div>
+                <button class="bg-brand-gold/10 border border-brand-gold/40 text-brand-gold px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-brand-gold hover:text-black transition flex items-center gap-2">
+                    <i data-lucide="wallet" class="w-3 h-3"></i> Cüzdan Bağla
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 py-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+            <!-- 1. BÖLÜM: Bakiye Yükleme (TL/USD) -->
+            <div class="bg-brand-card border border-brand-border rounded-xl p-5 shadow-lg flex flex-col justify-between">
+                <div>
+                    <h3 class="text-white font-bold mb-1 flex items-center gap-2"><i data-lucide="credit-card" class="w-5 h-5 text-blue-400"></i> Bakiye Yükle</h3>
+                    <p class="text-[11px] text-gray-400 mb-4">Kredi kartı veya havale ile doğrudan site bakiyesi (TL/USD) satın alın.</p>
+                </div>
+                <button class="w-full bg-blue-600/20 border border-blue-500/50 text-blue-400 py-2.5 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition">TL / USD Yükle</button>
+            </div>
+
+            <!-- 2. BÖLÜM: $KNIGHT -> TL Çevirici -->
+            <div class="bg-brand-card border border-brand-gold/30 rounded-xl p-5 shadow-lg flex flex-col justify-between" style="box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);">
+                <div>
+                    <h3 class="text-white font-bold mb-1 flex items-center gap-2"><i data-lucide="refresh-cw" class="w-5 h-5 text-brand-gold"></i> $KNIGHT Çevirici</h3>
+                    <p class="text-[11px] text-gray-400 mb-3">Cüzdanınızdaki tokenları anlık kurdan site bakiyesine çevirin.</p>
+                    <div class="flex gap-2 items-center mb-3">
+                        <input type="number" id="convertInput" placeholder="Miktar" class="w-1/2 bg-[#0a0a0a] border border-[#333] rounded px-3 py-1.5 text-sm text-white focus:outline-none focus:border-brand-gold" oninput="calculateSwap()">
+                        <span class="text-brand-gold text-xs font-bold">$KNIGHT</span>
+                    </div>
+                    <div class="text-xs text-emerald-400 font-mono mb-2" id="convertResult">= 0.00 TL ($0.00)</div>
+                </div>
+                <button class="w-full bg-brand-gold hover:bg-[#e6c200] text-black py-2.5 rounded-lg text-xs font-bold transition">Bakiyeye Çevir</button>
+            </div>
+
+            <!-- 3. BÖLÜM: Staking & İndirim Paneli -->
+            <div class="bg-brand-card border border-purple-500/40 rounded-xl p-5 shadow-lg flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-purple-600 text-white text-[9px] font-bold px-2 py-1 rounded-bl-lg">MAĞAZA İNDİRİMİ</div>
+                <div>
+                    <h3 class="text-white font-bold mb-1 flex items-center gap-2"><i data-lucide="lock" class="w-5 h-5 text-purple-400"></i> Staking Vault</h3>
+                    <p class="text-[11px] text-gray-400 mb-3">Stake miktarınıza göre mağazada %8'e varan indirim kazanın.</p>
+                    <div class="flex gap-2 items-center mb-3">
+                        <input type="number" id="stakeInput" placeholder="Stake Edilen Miktar" class="w-full bg-[#0a0a0a] border border-[#333] rounded px-3 py-1.5 text-sm text-white focus:outline-none focus:border-purple-500" value="0" oninput="updateDiscount()">
+                    </div>
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-gray-400">Aktif İndiriminiz:</span>
+                        <span id="discountBadge" class="bg-gray-800 text-gray-300 px-2 py-0.5 rounded font-bold">%0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAĞAZA VİTRİNİ (NPOINTS & PREMIUMS) -->
+        <div class="mb-6 flex justify-between items-end border-b border-brand-border pb-3">
+            <div>
+                <h2 class="text-2xl font-extrabold text-white">KnightVerse E-Pin Mağazası</h2>
+                <p class="text-xs text-gray-500">Resmi Knight Online Cash (NPoint) ve Premium kodları.</p>
+            </div>
+            <div class="text-[11px] font-mono text-brand-gold bg-brand-gold/10 px-3 py-1 rounded border border-brand-gold/30 hidden sm:block">
+                Tedarikçi: Yükleniyor...
+            </div>
+        </div>
+
+        <!-- Ürünler Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="storeGrid">
+            <!-- JS ile dinamik doldurulacak -->
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-6 bg-black border-t border-brand-border/60 text-center text-xs text-gray-600">
+        © 2026 KnightVerse. E-Pin'ler anında teslim edilir. İndirim oranları stake süresine göre sıfırlanabilir.
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Ürün Veritabanı (Senin Verdiğin Fiyatlar)
+        const products = [
+            { id: 1, type: 'NPoint', name: '400 NPoint', usd: 5, tl: 234, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=400+NP' },
+            { id: 2, type: 'NPoint', name: '800 NPoint', usd: 10, tl: 468, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=800+NP' },
+            { id: 3, type: 'NPoint', name: '1200 NPoint', usd: 15, tl: 702, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=1200+NP' },
+            { id: 4, type: 'NPoint', name: '1600 NPoint', usd: 20, tl: 936, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=1600+NP' },
+            { id: 5, type: 'NPoint', name: '2000 NPoint', usd: 25, tl: 1170, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=2000+NP' },
+            { id: 6, type: 'NPoint', name: '2400 NPoint', usd: 30, tl: 1404, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=2400+NP' },
+            { id: 7, type: 'NPoint', name: '2800 NPoint', usd: 35, tl: 1638, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=2800+NP' },
+            { id: 8, type: 'NPoint', name: '3200 NPoint', usd: 40, tl: 1872, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=3200+NP' },
+            { id: 9, type: 'Premium', name: 'Bronze Premium', usd: 9, tl: 420, img: 'https://via.placeholder.com/200x150/3e2723/e0a96d?text=Bronze' },
+            { id: 10, type: 'Premium', name: 'Gold Premium', usd: 25, tl: 1170, img: 'https://via.placeholder.com/200x150/3e2723/FFD700?text=Gold' },
+            { id: 11, type: 'Premium', name: 'Platinum Premium', usd: 30, tl: 1404, img: 'https://via.placeholder.com/200x150/3e2723/a3c1ad?text=Platinum' }
+        ];
+
+        let currentDiscount = 0; // Yüzdelik indirim (0, 3, 4, 5, 8)
+
+        // Staking Hesaplama ve İndirim Belirleme
+        function updateDiscount() {
+            const stakeAmt = parseInt(document.getElementById('stakeInput').value) || 0;
+            const badge = document.getElementById('discountBadge');
+            
+            if (stakeAmt >= 3000000) { currentDiscount = 8; }
+            else if (stakeAmt >= 2000000) { currentDiscount = 5; }
+            else if (stakeAmt >= 1000000) { currentDiscount = 4; }
+            else if (stakeAmt >= 500000) { currentDiscount = 3; }
+            else { currentDiscount = 0; }
+
+            // Rozet Rengini Güncelle
+            badge.innerText = `%${currentDiscount} İndirim`;
+            if(currentDiscount === 0) { badge.className = "bg-gray-800 text-gray-300 px-2 py-0.5 rounded font-bold"; }
+            else if(currentDiscount === 8) { badge.className = "bg-brand-gold text-black px-2 py-0.5 rounded font-black animate-pulse"; }
+            else { badge.className = "bg-purple-600 text-white px-2 py-0.5 rounded font-bold"; }
+
+            renderStore(); // Fiyatları yeni indirime göre ekrana bas
+        }
+
+        // Çevirici Hesaplama (Örnek Kur: 1 KNIGHT = 0.05$ / 2.34 TL)
+        function calculateSwap() {
+            const amt = parseInt(document.getElementById('convertInput').value) || 0;
+            const tlRate = 2.34;
+            const usdRate = 0.05;
+            document.getElementById('convertResult').innerText = `= ${(amt * tlRate).toFixed(2)} TL ($${(amt * usdRate).toFixed(2)})`;
+        }
+
+        // Mağazayı Ekrana Basma
+        function renderStore() {
+            const grid = document.getElementById('storeGrid');
+            grid.innerHTML = "";
+
+            products.forEach(p => {
+                // İndirimli fiyat hesaplama
+                const discountMulti = (100 - currentDiscount) / 100;
+                const finalUsd = (p.usd * discountMulti).toFixed(2);
+                const finalTl = (p.tl * discountMulti).toFixed(2);
+                
+                // Eğer indirim varsa eski fiyatın üstünü çiz
+                const isDiscounted = currentDiscount > 0;
+                const priceHTML = isDiscounted 
+                    ? `<div class="text-[10px] text-gray-500 line-through mb-0.5">${p.tl} TL / $${p.usd}</div>
+                       <div class="text-sm font-black text-brand-gold">${finalTl} TL <span class="text-xs text-gray-400 font-medium">($${finalUsd})</span></div>`
+                    : `<div class="text-[10px] text-transparent mb-0.5">-</div>
+                       <div class="text-sm font-bold text-white">${p.tl} TL <span class="text-xs text-gray-500 font-medium">($${p.usd})</span></div>`;
+
+                // Kart Tasarımı
+                const card = `
+                <div class="bg-brand-card border border-[#222] hover:border-brand-gold/40 rounded-xl p-3 flex flex-col items-center text-center transition group">
+                    <div class="w-full relative overflow-hidden rounded-lg mb-3 border border-[#333]">
+                        <img src="${p.img}" alt="${p.name}" class="w-full h-auto object-cover group-hover:scale-105 transition duration-500">
+                        ${isDiscounted ? `<div class="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded shadow-lg">-%${currentDiscount}</div>` : ''}
+                    </div>
+                    <h4 class="font-bold text-gray-200 text-sm mb-1">${p.name}</h4>
+                    
+                    <div class="mt-2 w-full bg-[#0a0a0a] py-2 px-2 rounded border border-[#222]">
+                        ${priceHTML}
+                    </div>
+                    
+                    <button class="w-full mt-3 bg-transparent border border-brand-border text-gray-400 group-hover:bg-brand-gold/10 group-hover:border-brand-gold/50 group-hover:text-brand-gold py-1.5 rounded text-xs font-bold transition">
+                        Sepete Ekle
+                    </button>
+                </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        // Sayfa açıldığında mağazayı yükle
+        renderStore();
+    </script>
+</body>
+</html>
