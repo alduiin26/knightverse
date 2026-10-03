@@ -91,11 +91,12 @@
         <a href="#bosses" class="hover:text-brand-gold transition text-red-400 flex items-center gap-1.5">
           <i data-lucide="skull" class="w-4 h-4"></i> World Bosses
         </a>
-        <a href="market.html" class="hover:text-brand-gold transition flex items-center gap-1.5 text-gray-300">
-          <i data-lucide="store" class="w-4 h-4"></i> Store
-          <span class="text-[10px] bg-brand-gold/20 text-brand-gold border border-brand-gold/40 px-1.5 py-0.2 rounded font-mono">Coming Soon</span>
+        
+        <!-- YENİ INFOFI EVENT BUTONU -->
+        <a href="infofi.html" class="px-3 py-1.5 rounded-lg bg-purple-900/30 border border-purple-500/50 text-purple-300 hover:bg-purple-500/20 hover:text-white transition flex items-center gap-1.5 animate-pulse">
+          <i data-lucide="sparkles" class="w-4 h-4"></i> InfoFi Event
         </a>
-        <a href="#phase0" class="hover:text-brand-gold transition">Phase 0</a>
+        
         <a href="#tokenomics" class="hover:text-brand-gold transition">Tokenomics</a>
         <a href="#roadmap" class="hover:text-brand-gold transition">Roadmap</a>
       </div>
@@ -111,6 +112,15 @@
           <span>OpenSea Mint</span>
         </a>
       </div>
+    </div>
+
+    <!-- COMPACT MOBILE SUB-BAR -->
+    <div class="lg:hidden border-t border-brand-border/60 bg-[#0a0a0a] px-2 py-1.5 flex items-center justify-between text-[11px] overflow-x-auto">
+      <a href="#mint" class="px-2 py-1 rounded bg-[#161616] border border-brand-border text-brand-gold transition mx-0.5 whitespace-nowrap">Mint</a>
+      <a href="infofi.html" class="px-2 py-1 rounded bg-purple-900/30 border border-purple-500/50 text-purple-300 transition mx-0.5 whitespace-nowrap font-bold">Event</a>
+      <a href="#rarity" class="px-2 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 transition mx-0.5 whitespace-nowrap">Classes</a>
+      <a href="#bosses" class="px-2 py-1 rounded bg-[#161616] border border-red-950/80 text-red-400 transition mx-0.5 whitespace-nowrap">Bosses</a>
+      <a href="#tokenomics" class="px-2 py-1 rounded bg-[#161616] border border-brand-border text-gray-300 transition mx-0.5 whitespace-nowrap">Token</a>
     </div>
   </nav>
 
@@ -147,7 +157,7 @@
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-brand-border/60">
         <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
-          <div class="text-xl sm:text-2xl font-bold text-white">2,000 Boxes</div>
+          <div class="text-xl sm:text-2xl font-bold text-white">3,000 Boxes</div>
           <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Level 1 Genesis Supply</div>
         </div>
         <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
@@ -228,7 +238,7 @@
               <div class="bg-[#181818] p-4 rounded-xl border border-brand-border/60 mb-6">
                 <div class="flex justify-between text-xs mb-2">
                   <span class="text-gray-400 font-medium">Minting Phase Allocation:</span>
-                  <span id="mintCountText" class="text-brand-gold font-bold font-mono">0 / 2,000 Minted</span>
+                  <span id="mintCountText" class="text-brand-gold font-bold font-mono">0 / 3,000 Minted</span>
                 </div>
                 <div class="w-full bg-stone-900 rounded-full h-2.5 overflow-hidden border border-stone-800">
                   <div id="mintProgressBar" class="bg-gradient-to-r from-amber-500 to-brand-gold h-2.5 rounded-full transition-all duration-700" style="width: 0%"></div>
@@ -253,75 +263,67 @@
         </div>
       </div>
 
-      <!-- 4 MINT ROUND CARDS WITH LARGE CHESTS -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <!-- 5 MINT ROUND CARDS -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 mt-8">
         
-        <div class="bg-brand-card border border-brand-border rounded-xl p-5 flex flex-col justify-between hover:border-stone-700 transition">
+        <!-- 1. TEAM -->
+        <div class="bg-brand-card border border-stone-700 rounded-xl p-4 flex flex-col justify-between hover:border-stone-500 transition">
           <div>
-            <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Team Reserve</div>
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-2xl sm:text-3xl font-black text-white">0 USDT</div>
-                <div class="text-xs text-gray-400">/ Free Allocation</div>
-              </div>
-              <img src="loot.png" alt="Chest" class="w-24 h-24 sm:w-28 sm:h-28 object-contain blend-logo drop-shadow-[0_0_18px_rgba(255,255,255,0.25)] -mr-2" />
-            </div>
+            <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Team Reserve</div>
+            <div class="text-2xl font-black text-white">0 USDT</div>
           </div>
-          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5">
-            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">10 Boxes</span></div>
-            <div class="flex justify-between"><span class="text-gray-400">Utility:</span> <span class="text-gray-300">Testing & Operations</span></div>
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs">
+            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">10</span></div>
+            <div class="flex justify-between mt-1"><span class="text-gray-400">Access:</span> <span class="text-gray-300">Free</span></div>
           </div>
         </div>
 
-        <div class="bg-brand-card border border-blue-900/50 rounded-xl p-5 flex flex-col justify-between hover:border-blue-500/70 transition">
+        <!-- 2. GTD WL -->
+        <div class="bg-brand-card border border-blue-900/50 rounded-xl p-4 flex flex-col justify-between hover:border-blue-500/70 transition">
           <div>
-            <div class="text-xs font-semibold text-blue-400 uppercase tracking-wider mb-1">GTD Whitelist</div>
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-2xl sm:text-3xl font-black text-white">3 USDT</div>
-                <div class="text-xs text-blue-400/80">Guaranteed Tier</div>
-              </div>
-              <img src="loot.png" alt="Chest" class="w-24 h-24 sm:w-28 sm:h-28 object-contain blend-logo drop-shadow-[0_0_20px_rgba(59,130,246,0.4)] -mr-2" />
-            </div>
+            <div class="text-[10px] font-bold text-blue-400 uppercase tracking-wider mb-1">GTD Whitelist</div>
+            <div class="text-2xl font-black text-white">1 USDT</div>
           </div>
-          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5">
-            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">290 Boxes</span></div>
-            <div class="flex justify-between"><span class="text-gray-400">Allocation:</span> <span class="text-gray-300">PR & Community Raffles</span></div>
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs">
+            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">290</span></div>
+            <div class="flex justify-between mt-1"><span class="text-gray-400">Access:</span> <span class="text-blue-300">Raffles</span></div>
           </div>
         </div>
 
-        <div class="bg-brand-card border border-brand-gold/60 rounded-xl p-5 flex flex-col justify-between gold-glow relative">
-          <div class="absolute -top-3 right-4 bg-brand-gold text-black text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Priority</div>
+        <!-- 3. INFOFI (EVENT) -->
+        <div class="bg-purple-900/10 border border-purple-500/50 rounded-xl p-4 flex flex-col justify-between relative shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:border-purple-400 transition cursor-pointer" onclick="window.location.href='infofi.html'">
+          <div class="absolute -top-2 right-3 bg-purple-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase">Top 500</div>
           <div>
-            <div class="text-xs font-semibold text-brand-gold uppercase tracking-wider mb-1">Standard Whitelist</div>
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-2xl sm:text-3xl font-black text-white">7 USDT</div>
-                <div class="text-xs text-brand-gold/80">Standard Tier</div>
-              </div>
-              <img src="loot.png" alt="Chest" class="w-24 h-24 sm:w-28 sm:h-28 object-contain blend-logo drop-shadow-[0_0_22px_rgba(255,215,0,0.6)] animate-pulse-gold -mr-2" />
-            </div>
+            <div class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-1">InfoFi Event</div>
+            <div class="text-2xl font-black text-white">2 USDT</div>
           </div>
-          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5">
-            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">700 Boxes</span></div>
-            <div class="flex justify-between"><span class="text-gray-400">Access:</span> <span class="text-gray-300">Active Community Roles</span></div>
+          <div class="mt-4 pt-3 border-t border-purple-900/50 text-xs">
+            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">1,000</span></div>
+            <a href="infofi.html" class="flex justify-between mt-1 text-purple-400 hover:text-white transition font-semibold">Join Event &rarr;</a>
           </div>
         </div>
 
-        <div class="bg-brand-card border border-purple-900/50 rounded-xl p-5 flex flex-col justify-between hover:border-purple-500/70 transition">
+        <!-- 4. STANDARD WL -->
+        <div class="bg-brand-card border border-brand-gold/50 rounded-xl p-4 flex flex-col justify-between gold-glow relative">
           <div>
-            <div class="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-1">FCFS Whitelist</div>
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="text-2xl sm:text-3xl font-black text-white">10 USDT</div>
-                <div class="text-xs text-purple-400/80">Public: 15 USDT</div>
-              </div>
-              <img src="loot.png" alt="Chest" class="w-24 h-24 sm:w-28 sm:h-28 object-contain blend-logo drop-shadow-[0_0_20px_rgba(168,85,247,0.4)] -mr-2" />
-            </div>
+            <div class="text-[10px] font-bold text-brand-gold uppercase tracking-wider mb-1">Standard WL</div>
+            <div class="text-2xl font-black text-white">3 USDT</div>
           </div>
-          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5">
-            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">1,000 Boxes</span></div>
-            <div class="flex justify-between"><span class="text-gray-400">Public:</span> <span class="text-gray-300">Unminted at 15 USDT</span></div>
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs">
+            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">700</span></div>
+            <div class="flex justify-between mt-1"><span class="text-gray-400">Access:</span> <span class="text-brand-gold">Discord</span></div>
+          </div>
+        </div>
+
+        <!-- 5. PUBLIC FCFS -->
+        <div class="bg-brand-card border border-emerald-900/50 rounded-xl p-4 flex flex-col justify-between hover:border-emerald-500/70 transition">
+          <div>
+            <div class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-1">Public FCFS</div>
+            <div class="text-2xl font-black text-white">5 USDT</div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs">
+            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">1,000</span></div>
+            <div class="flex justify-between mt-1"><span class="text-gray-400">Access:</span> <span class="text-emerald-300">Open</span></div>
           </div>
         </div>
 
@@ -526,97 +528,6 @@
     </div>
   </section>
 
-  <!-- PHASE 0: INFOFI CAMPAIGN & ALPHA TESTNET -->
-  <section id="phase0" class="py-16 sm:py-24 border-b border-brand-border">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-semibold mb-3">
-          <i data-lucide="flame" class="w-3.5 h-3.5"></i> Early Access & Community Events
-        </div>
-        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Phase 0: Closed Alpha & InfoFi</h3>
-        <p class="text-xs sm:text-sm text-gray-400 mt-2">Discover early-bird events, closed test server mechanics, and upcoming box reward pools.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col justify-between">
-          <div>
-            <div class="w-10 h-10 rounded-lg bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold mb-4">
-              <i data-lucide="key" class="w-5 h-5"></i>
-            </div>
-            <h4 class="text-lg font-bold text-white mb-2">Closed Alpha Access</h4>
-            <p class="text-xs text-gray-400 leading-relaxed mb-4">
-              Access to the early 2D browser battle server is exclusively reserved for Genesis NFT Box holders. Test PvP/PvE parameters before public deployment.
-            </p>
-          </div>
-          <div class="p-3.5 bg-[#171717] rounded-lg border border-brand-border/60 text-xs space-y-1">
-            <div class="text-brand-gold font-bold">Top 1,000 Leaderboard:</div>
-            <div class="text-gray-400">Guaranteed Character/Item Box allocations based on closed test win rates.</div>
-          </div>
-        </div>
-
-        <div class="bg-brand-card border border-blue-900/40 rounded-xl p-6 flex flex-col justify-between">
-          <div>
-            <div class="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-4">
-              <i data-lucide="calendar-check" class="w-5 h-5"></i>
-            </div>
-            <h4 class="text-lg font-bold text-white mb-2">Daily Quests</h4>
-            <p class="text-xs text-gray-400 leading-relaxed mb-4">
-              Daily social activity across our channels helps secure priority standings:
-            </p>
-            <ul class="text-xs text-gray-300 space-y-2 mb-4">
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400 shrink-0"></i>
-                <span>Daily tweet/thread mentioning @KnightVerse</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400 shrink-0"></i>
-                <span>Ethos Rep upvote & vouch activity</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400 shrink-0"></i>
-                <span>Active discussions on Telegram & Discord</span>
-              </li>
-            </ul>
-          </div>
-          <div class="p-3.5 bg-[#171717] rounded-lg border border-brand-border/60 text-xs space-y-1">
-            <div class="text-blue-400 font-bold">Top 500 Daily Contributors:</div>
-            <div class="text-gray-400">Direct whitelist perks and supplementary Genesis Box drops.</div>
-          </div>
-        </div>
-
-        <div class="bg-brand-card border border-purple-900/40 rounded-xl p-6 flex flex-col justify-between">
-          <div>
-            <div class="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4">
-              <i data-lucide="trophy" class="w-5 h-5"></i>
-            </div>
-            <h4 class="text-lg font-bold text-white mb-2">Core Milestones</h4>
-            <p class="text-xs text-gray-400 leading-relaxed mb-4">
-              Permanent foundational quests required for all participants:
-            </p>
-            <ul class="text-xs text-gray-300 space-y-2 mb-4">
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400 shrink-0"></i>
-                <span>Follow official X (Twitter) profile</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400 shrink-0"></i>
-                <span>Join official Telegram Announcement Hub</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400 shrink-0"></i>
-                <span>Attain community contributor badges on Discord</span>
-              </li>
-            </ul>
-          </div>
-          <div class="p-3.5 bg-[#171717] rounded-lg border border-brand-border/60 text-xs space-y-1">
-            <div class="text-purple-400 font-bold">Verification:</div>
-            <div class="text-gray-400">Tracking will be finalized via community discord bot sync.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- TOKENOMICS SECTION -->
   <section id="tokenomics" class="py-16 sm:py-24 border-b border-brand-border bg-[#080808]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
@@ -729,10 +640,10 @@
           <div class="text-xs font-bold text-brand-gold uppercase tracking-wider mb-2">Phase 0 (Current)</div>
           <h4 class="text-base sm:text-lg font-bold text-white mb-3">Genesis Mint & Testnet</h4>
           <ul class="text-xs text-gray-400 space-y-2">
-            <li>• 2,000 Level 1 Character Box offering on OpenSea (BNB Chain)</li>
+            <li>• 3,000 Level 1 Character Box offering on OpenSea (BNB Chain)</li>
             <li>• Closed Alpha test server launch for verified NFT owners</li>
             <li>• First 1,000 ranking players rewarded with Genesis equipment</li>
-            <li>• InfoFi community campaign & 500-user reward pool</li>
+            <li>• InfoFi community campaign & top 500 reward pool</li>
           </ul>
         </div>
 
@@ -779,7 +690,7 @@
 
     // DYNAMIC MINT PROGRESS CONTROLLER
     let currentMinted = 0; 
-    const maxSupply = 2000;
+    const maxSupply = 3000;
 
     function updateMintUI(count) {
       const percentage = ((count / maxSupply) * 100).toFixed(1);
