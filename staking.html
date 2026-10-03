@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KnightVerse | Staking & E-Pin Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { brand: { gold: '#FFD700', border: '#262626', card: '#121212' } } } } }
+    </script>
+</head>
+<body class="bg-[#050505] text-gray-300 font-sans min-h-screen flex flex-col">
+
+    <nav class="w-full bg-[#050505]/95 border-b border-brand-border sticky top-0 z-50 p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 text-gray-400 hover:text-brand-gold font-bold text-sm">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Home
+            </a>
+            <div class="text-brand-gold font-black uppercase tracking-widest">Vault & Store</div>
+            <button class="bg-brand-gold text-black px-4 py-1.5 rounded-lg text-xs font-bold flex items-center gap-2">
+                <i data-lucide="wallet" class="w-3 h-3"></i> Connect Wallet
+            </button>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-6xl mx-auto w-full px-4 py-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- STAKING BÖLÜMÜ -->
+        <div class="space-y-6">
+            <h2 class="text-2xl font-extrabold text-white border-b border-brand-border pb-2">Staking Vault</h2>
+            
+            <!-- Esnek Staking (İndirim İçin) -->
+            <div class="bg-brand-card border border-brand-border rounded-xl p-5 relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">FLEXIBLE</div>
+                <h3 class="text-white font-bold mb-1">E-Pin Discount Staking</h3>
+                <p class="text-xs text-gray-400 mb-4">Stake between 500K - 1M $KNIGHT for 30 days to activate a flat 5% discount in the store. Unstaking resets the 30-day timer.</p>
+                
+                <div class="bg-[#0a0a0a] rounded-lg p-4 border border-[#222]">
+                    <div class="flex justify-between text-xs mb-2">
+                        <span class="text-gray-400">Lock Progress</span>
+                        <span class="text-brand-gold font-mono">Day 12 / 30</span>
+                    </div>
+                    <div class="w-full bg-gray-800 rounded-full h-2 mb-4">
+                        <div class="bg-brand-gold h-2 rounded-full" style="width: 40%"></div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="text-sm font-bold text-white">650,000 <span class="text-brand-gold text-xs">$KNIGHT</span></div>
+                        <button class="bg-[#111] border border-red-900 text-red-500 px-3 py-1 text-xs rounded hover:bg-red-900 hover:text-white transition">Unstake (Reset)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kilitli Staking (Havuz Payı) -->
+            <div class="bg-brand-card border border-brand-border rounded-xl p-5 relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-purple-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">LOCKED</div>
+                <h3 class="text-white font-bold mb-1">Treasury Pool Staking</h3>
+                <p class="text-xs text-gray-400 mb-4">Lock tokens to earn a dynamic APY share from the PvP Wager Rake treasury.</p>
+                
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="bg-[#0a0a0a] border border-brand-gold/50 rounded-lg p-3 text-center cursor-pointer">
+                        <div class="text-brand-gold font-black text-lg">3 Months</div>
+                        <div class="text-xs text-gray-400">Est. 5% Pool Share</div>
+                    </div>
+                    <div class="bg-[#0a0a0a] border border-brand-border hover:border-brand-gold/50 transition rounded-lg p-3 text-center cursor-pointer">
+                        <div class="text-white font-black text-lg">6 Months</div>
+                        <div class="text-xs text-gray-400">Est. 8% Pool Share</div>
+                    </div>
+                </div>
+                <button class="w-full bg-[#222] text-gray-400 py-2 rounded-lg text-sm font-bold border border-[#333] cursor-not-allowed">Approve Contract</button>
+            </div>
+        </div>
+
+        <!-- E-PIN MAĞAZASI (Sadece Knight Online) -->
+        <div class="space-y-6">
+            <h2 class="text-2xl font-extrabold text-white border-b border-brand-border pb-2">Real Yield Store</h2>
+            <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg p-3 text-xs text-blue-300 flex items-start gap-2">
+                <i data-lucide="info" class="w-4 h-4 mt-0.5 shrink-0"></i>
+                <span>Your 30-Day Flexible Stake is not yet complete. Prices below are shown at standard market rate. Check back on Day 31 for your 5% $KNIGHT discount.</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Ürün 1 -->
+                <div class="bg-brand-card border border-brand-border rounded-xl p-4 hover:border-brand-gold/50 transition flex flex-col items-center text-center">
+                    <img src="https://via.placeholder.com/100x100/1a1a1a/FFD700?text=400+NP" alt="400 NPoints" class="rounded-lg mb-3 shadow-lg border border-[#333]">
+                    <h4 class="font-bold text-white mb-1">400 NPoints</h4>
+                    <span class="text-[10px] text-gray-500 uppercase">Knight Online (Global)</span>
+                    <div class="mt-3 w-full bg-[#0a0a0a] py-2 rounded border border-[#222]">
+                        <div class="text-gray-400 text-xs line-through">$5.00</div>
+                        <div class="text-brand-gold font-bold">~ 2,500 $KNIGHT</div>
+                    </div>
+                    <button class="w-full mt-3 bg-brand-gold/10 text-brand-gold border border-brand-gold/30 py-1.5 rounded text-xs font-bold hover:bg-brand-gold hover:text-black transition">Purchase</button>
+                </div>
+                
+                <!-- Ürün 2 -->
+                <div class="bg-brand-card border border-brand-border rounded-xl p-4 hover:border-brand-gold/50 transition flex flex-col items-center text-center">
+                    <img src="https://via.placeholder.com/100x100/1a1a1a/FFD700?text=Premium" alt="Gold Premium" class="rounded-lg mb-3 shadow-lg border border-[#333]">
+                    <h4 class="font-bold text-white mb-1">Gold Premium</h4>
+                    <span class="text-[10px] text-gray-500 uppercase">Knight Online (Global)</span>
+                    <div class="mt-3 w-full bg-[#0a0a0a] py-2 rounded border border-[#222]">
+                        <div class="text-gray-400 text-xs line-through">$25.00</div>
+                        <div class="text-brand-gold font-bold">~ 12,500 $KNIGHT</div>
+                    </div>
+                    <button class="w-full mt-3 bg-brand-gold/10 text-brand-gold border border-brand-gold/30 py-1.5 rounded text-xs font-bold hover:bg-brand-gold hover:text-black transition">Purchase</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
