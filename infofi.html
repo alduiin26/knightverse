@@ -30,125 +30,124 @@
 </head>
 <body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black min-h-screen flex flex-col">
 
-    <!-- ÜST MENÜ (Basit) -->
+    <!-- TOP NAV (Simple) -->
     <nav class="w-full bg-[#050505]/95 backdrop-blur-md border-b border-brand-border sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-2 text-gray-400 hover:text-brand-gold transition text-sm font-semibold">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Ana Sayfaya Dön
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
             </a>
             <img src="logoko.png" alt="KnightVerse" class="h-8 w-auto object-contain mix-blend-screen opacity-80" />
         </div>
     </nav>
 
-    <!-- ANA İÇERİK -->
+    <!-- MAIN CONTENT -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full">
         
-        <!-- BAŞLIK -->
+        <!-- HEADER -->
         <div class="text-center mb-8">
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-2">InfoFi <span class="text-brand-gold">Airdrop & Görev</span> Ağı</h1>
-            <p class="text-xs sm:text-sm text-gray-400">Görevleri tamamlayın, puanları toplayın ve Top 500'e girerek Genesis Kutu WL hakkı kazanın.</p>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-2">InfoFi <span class="text-brand-gold">Airdrop & Quest</span> Network</h1>
+            <p class="text-xs sm:text-sm text-gray-400">Complete quests, accumulate points, and rank in the Top 500 to secure your Genesis Box WL.</p>
         </div>
 
-        <!-- ÜST BİLGİ PANELİ (Mobil uyumlu Grid) -->
+        <!-- STATUS PANEL -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <!-- 1. Kutu: Bağlantı -->
+            <!-- 1. Connect Box -->
             <div class="bg-brand-card border border-brand-border rounded-xl p-4 flex flex-col justify-center items-center text-center">
                 <button class="bg-[#1DA1F2] hover:bg-[#1a91da] text-white font-bold py-2.5 px-6 rounded-lg w-full sm:w-auto flex items-center justify-center gap-2 transition shadow-lg">
-                    <i data-lucide="twitter" class="w-4 h-4"></i> Twitter ile Bağlan
+                    <i data-lucide="twitter" class="w-4 h-4"></i> Connect with X (Twitter)
                 </button>
-                <span class="text-[10px] text-gray-500 mt-2">*Bağlandıktan sonra görev onayları otomatik yapılır.</span>
+                <span class="text-[10px] text-gray-500 mt-2">*Quest verifications are automated after connection.</span>
             </div>
             
-            <!-- 2. Kutu: Skor -->
+            <!-- 2. Score Box -->
             <div class="bg-brand-card border border-brand-gold/30 rounded-xl p-4 flex flex-col justify-center items-center text-center gold-glow">
-                <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">Mevcut Durumunuz</div>
+                <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">Your Status</div>
                 <div class="flex items-center gap-4">
                     <div class="text-center">
-                        <div class="text-sm text-gray-500">Sıralama</div>
+                        <div class="text-sm text-gray-500">Rank</div>
                         <div class="text-xl font-black text-white" id="userRank">#---</div>
                     </div>
                     <div class="w-px h-8 bg-brand-border"></div>
                     <div class="text-center">
-                        <div class="text-sm text-gray-500">Puan</div>
+                        <div class="text-sm text-gray-500">Points</div>
                         <div class="text-xl font-black text-brand-gold" id="userPoints">0</div>
                     </div>
                 </div>
             </div>
 
-            <!-- 3. Kutu: Saat -->
+            <!-- 3. Clock Box -->
             <div class="bg-brand-card border border-brand-border rounded-xl p-4 flex flex-col justify-center items-center text-center">
-                <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">Sunucu Saati</div>
+                <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">Server Time</div>
                 <div class="text-xl font-mono font-bold text-emerald-400 flex items-center gap-2">
                     <i data-lucide="clock" class="w-5 h-5"></i>
-                    <span id="clock">Yükleniyor...</span>
+                    <span id="clock">Loading...</span>
                 </div>
             </div>
         </div>
 
-        <!-- GÖREV KARTLARI -->
+        <!-- QUEST CARDS -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
             
-            <!-- Ana Görevler -->
+            <!-- Main Quests (One-time) -->
             <div class="bg-brand-card border border-brand-border rounded-xl p-5 flex flex-col">
                 <h3 class="text-lg font-bold text-white mb-1 border-b border-brand-border pb-3 flex items-center gap-2">
-                    <i data-lucide="shield-check" class="w-5 h-5 text-brand-gold"></i> Ana Görevler
+                    <i data-lucide="shield-check" class="w-5 h-5 text-brand-gold"></i> Main Quests
                 </h3>
-                <p class="text-[11px] text-gray-400 my-3">Sadece bir kez yapılabilir. Butona tıklayıp işlemi gerçekleştirin, sistem yetki ile otomatik onaylar.</p>
+                <p class="text-[11px] text-gray-400 my-3">One-time tasks. Click the button to perform the action; the system will verify automatically.</p>
                 <ul class="space-y-3 mt-auto">
                     <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">@knightverse Takip Et</span>
-                        <!-- LİNK BURAYA EKLENECEK -->
-                        <a href="https://twitter.com/knightverse" target="_blank" class="bg-brand-gold/10 hover:bg-brand-gold text-brand-gold hover:text-black border border-brand-gold/40 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+500 Puan</a>
+                        <span class="text-sm font-medium text-gray-200">Follow @PowerCryptoGirl</span>
+                        <a href="https://x.com/intent/follow?screen_name=PowerCryptoGirl" target="_blank" class="bg-brand-gold/10 hover:bg-brand-gold text-brand-gold hover:text-black border border-brand-gold/40 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+500 Pts</a>
                     </li>
                     <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">Sabit Postu Beğen</span>
-                        <a href="#" target="_blank" class="bg-brand-gold/10 hover:bg-brand-gold text-brand-gold hover:text-black border border-brand-gold/40 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+100 Puan</a>
+                        <span class="text-sm font-medium text-gray-200">Like Pinned Post</span>
+                        <a href="https://x.com/intent/like?tweet_id=2102165950854234169" target="_blank" class="bg-brand-gold/10 hover:bg-brand-gold text-brand-gold hover:text-black border border-brand-gold/40 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+100 Pts</a>
                     </li>
                     <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">Sabit Postu RT Yap</span>
-                        <a href="#" target="_blank" class="bg-brand-gold/10 hover:bg-brand-gold text-brand-gold hover:text-black border border-brand-gold/40 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+200 Puan</a>
+                        <span class="text-sm font-medium text-gray-200">Retweet Pinned Post</span>
+                        <a href="https://x.com/intent/retweet?tweet_id=2102165950854234169" target="_blank" class="bg-brand-gold/10 hover:bg-brand-gold text-brand-gold hover:text-black border border-brand-gold/40 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+200 Pts</a>
                     </li>
                     <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">Sabit Posta Yorum Yap</span>
-                        <a href="#" target="_blank" class="bg-brand-gold/10 hover:bg-brand-gold text-brand-gold hover:text-black border border-brand-gold/40 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+100 Puan</a>
+                        <span class="text-sm font-medium text-gray-200">Reply to Pinned Post</span>
+                        <a href="https://x.com/intent/tweet?in_reply_to=2102165950854234169" target="_blank" class="bg-brand-gold/10 hover:bg-brand-gold text-brand-gold hover:text-black border border-brand-gold/40 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+100 Pts</a>
                     </li>
                 </ul>
             </div>
 
-            <!-- Günlük İçerik Üretimi -->
+            <!-- Daily Content Creation -->
             <div class="bg-brand-card border border-brand-border rounded-xl p-5 flex flex-col">
                 <h3 class="text-lg font-bold text-white mb-1 border-b border-brand-border pb-3 flex items-center gap-2">
-                    <i data-lucide="pen-tool" class="w-5 h-5 text-blue-400"></i> Günlük İçerik
+                    <i data-lucide="pen-tool" class="w-5 h-5 text-blue-400"></i> Daily Content
                 </h3>
-                <p class="text-[11px] text-gray-400 my-3">@knightverse etiketiyle kaliteli bir içerik üretin. Linki buraya yapıştırın. Ekip kalitesine göre (100-500) puan verecektir.</p>
+                <p class="text-[11px] text-gray-400 my-3">Publish a high-quality post mentioning @PowerCryptoGirl. Submit the link for manual review. (100-500 Points).</p>
                 <div class="mt-auto">
                     <div class="flex gap-2">
-                        <input type="text" id="tweetUrl" placeholder="https://x.com/hesap/status/..." class="w-full bg-[#181818] border border-brand-border rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-brand-gold transition">
-                        <button onclick="submitTweet()" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold px-4 py-2 rounded-lg transition whitespace-nowrap">Gönder</button>
+                        <input type="text" id="tweetUrl" placeholder="https://x.com/user/status/..." class="w-full bg-[#181818] border border-brand-border rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition">
+                        <button onclick="submitTweet()" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold px-4 py-2 rounded-lg transition whitespace-nowrap">Submit</button>
                     </div>
-                    <span class="text-[10px] text-red-400 mt-2 block">*Aynı link ertesi gün tekrar kullanılamaz. Manuel onay gerektirir.</span>
+                    <span class="text-[10px] text-red-400 mt-2 block">*Duplicate links are rejected. Requires manual team approval.</span>
                     <div id="submitMsg" class="mt-2 text-xs font-semibold"></div>
                 </div>
             </div>
 
-            <!-- Günlük Etkileşim -->
+            <!-- Daily Engagement -->
             <div class="bg-brand-card border border-brand-border rounded-xl p-5 flex flex-col">
                 <h3 class="text-lg font-bold text-white mb-1 border-b border-brand-border pb-3 flex items-center gap-2">
-                    <i data-lucide="repeat" class="w-5 h-5 text-purple-400"></i> Günlük Etkileşim
+                    <i data-lucide="repeat" class="w-5 h-5 text-purple-400"></i> Daily Engagement
                 </h3>
-                <p class="text-[11px] text-gray-400 my-3">Günün aktif gönderilerine etkileşim vererek ekstra puan kazanın. Her gün sıfırlanır.</p>
+                <p class="text-[11px] text-gray-400 my-3">Interact with our latest updates to earn extra points. These tasks reset every 24 hours.</p>
                 <ul class="space-y-3 mt-auto">
                     <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">Son Gönderiyi Beğen</span>
-                        <a href="#" target="_blank" class="bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/50 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+50 Puan</a>
+                        <span class="text-sm font-medium text-gray-200">Like Latest Post</span>
+                        <a href="https://x.com/intent/like?tweet_id=2102165950854234169" target="_blank" class="bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/50 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+50 Pts</a>
                     </li>
                     <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">Son Gönderiyi RT Yap</span>
-                        <a href="#" target="_blank" class="bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/50 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+50 Puan</a>
+                        <span class="text-sm font-medium text-gray-200">Retweet Latest Post</span>
+                        <a href="https://x.com/intent/retweet?tweet_id=2102165950854234169" target="_blank" class="bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/50 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+50 Pts</a>
                     </li>
                     <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">Son Gönderiye Yorum</span>
-                        <a href="#" target="_blank" class="bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/50 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+50 Puan</a>
+                        <span class="text-sm font-medium text-gray-200">Reply to Latest Post</span>
+                        <a href="https://x.com/intent/tweet?in_reply_to=2102165950854234169" target="_blank" class="bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/50 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+50 Pts</a>
                     </li>
                 </ul>
             </div>
@@ -157,33 +156,33 @@
         <!-- LEADERBOARD -->
         <div class="bg-brand-card border border-brand-border rounded-xl p-4 sm:p-6 overflow-hidden">
             <h3 class="text-lg font-bold text-brand-gold mb-4 flex items-center gap-2">
-                <i data-lucide="trophy" class="w-5 h-5"></i> Top 500 Liderlik Tablosu
+                <i data-lucide="trophy" class="w-5 h-5"></i> Top 500 Leaderboard
             </h3>
             
             <div class="overflow-x-auto w-full">
                 <table class="w-full text-left text-xs sm:text-sm whitespace-nowrap">
                     <thead>
                         <tr class="border-b border-brand-border text-gray-400">
-                            <th class="pb-3 font-semibold px-4">Sıra</th>
-                            <th class="pb-3 font-semibold px-4">Twitter Hesabı</th>
-                            <th class="pb-3 font-semibold px-4">Cüzdan Adresi</th>
-                            <th class="pb-3 font-semibold px-4 text-right">Toplam Puan</th>
+                            <th class="pb-3 font-semibold px-4">Rank</th>
+                            <th class="pb-3 font-semibold px-4">X (Twitter) Account</th>
+                            <th class="pb-3 font-semibold px-4">Wallet Address</th>
+                            <th class="pb-3 font-semibold px-4 text-right">Total Points</th>
                         </tr>
                     </thead>
                     <tbody id="leaderboardBody" class="divide-y divide-brand-border/60 text-gray-300">
-                        <!-- JS ile Doldurulacak -->
+                        <!-- Filled by JS -->
                     </tbody>
                 </table>
             </div>
 
-            <!-- SAYFALANDIRMA -->
+            <!-- PAGINATION -->
             <div class="flex items-center justify-between mt-6 pt-4 border-t border-brand-border">
                 <button onclick="prevPage()" class="px-4 py-2 bg-[#181818] border border-brand-border rounded-lg text-sm hover:bg-[#262626] transition flex items-center gap-2">
-                    <i data-lucide="chevron-left" class="w-4 h-4"></i> Önceki
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i> Prev
                 </button>
-                <span id="pageInfo" class="text-xs text-gray-400 font-mono">Sayfa 1 / 50</span>
+                <span id="pageInfo" class="text-xs text-gray-400 font-mono">Page 1 / 50</span>
                 <button onclick="nextPage()" class="px-4 py-2 bg-[#181818] border border-brand-border rounded-lg text-sm hover:bg-[#262626] transition flex items-center gap-2">
-                    Sonraki <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    Next <i data-lucide="chevron-right" class="w-4 h-4"></i>
                 </button>
             </div>
         </div>
@@ -192,14 +191,14 @@
 
     <!-- FOOTER -->
     <footer class="py-6 bg-black border-t border-brand-border/60 text-center text-xs text-gray-600">
-        © 2026 KnightVerse. Etkinlik puanları testnet erişimi ve airdrop için kullanılacaktır.
+        © 2026 KnightVerse. Event points will be utilized for Alpha testnet access and subsequent airdrop allocations.
     </footer>
 
     <script>
-        // İkonları Yükle
+        // Init Icons
         lucide.createIcons();
 
-        // 1. GMT SAAT
+        // 1. GMT CLOCK
         function updateClock() {
             const now = new Date();
             const options = { timeZone: 'GMT', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
@@ -208,40 +207,40 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // 2. LİNK KONTROL (Sahte Backend Simülasyonu)
+        // 2. LINK CHECKER (Anti-Spam Simulation)
         let submittedUrls = new Set();
         function submitTweet() {
-            const urlInput = document.getElementById('tweetUrl').value;
+            const urlInput = document.getElementById('tweetUrl').value.trim();
             const msgBox = document.getElementById('submitMsg');
             
             if(urlInput === "") {
                 msgBox.style.color = "#ef4444"; // red-500
-                msgBox.innerText = "Lütfen geçerli bir link girin!";
+                msgBox.innerText = "Please enter a valid URL!";
                 return;
             }
             if(submittedUrls.has(urlInput)) {
                 msgBox.style.color = "#ef4444";
-                msgBox.innerText = "Hata: Bu link daha önce gönderilmiş!";
+                msgBox.innerText = "Error: This link has already been submitted!";
             } else {
                 submittedUrls.add(urlInput);
                 msgBox.style.color = "#10b981"; // emerald-500
-                msgBox.innerText = "Başarılı! Link manuel onay için sıraya alındı.";
+                msgBox.innerText = "Success! Link queued for manual team review.";
                 document.getElementById('tweetUrl').value = "";
             }
         }
 
-        // 3. TABLO SAYFALANDIRMA (Pagination)
+        // 3. TABLE PAGINATION
         const totalUsers = 500;
         const usersPerPage = 10;
         let currentPage = 1;
         const totalPages = Math.ceil(totalUsers / usersPerPage);
         
-        // Örnek Veri Üretimi
+        // Generate Dummy Data
         let leaderboardData = [];
         for(let i=1; i<=totalUsers; i++) {
             leaderboardData.push({
                 rank: i,
-                twitter: "@karus_oyuncu" + i,
+                twitter: "@web3_player" + i,
                 wallet: "0x" + Math.floor(1000 + Math.random()*9000) + "...abcd",
                 points: 15000 - (i * 25)
             });
@@ -259,7 +258,7 @@
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-[#121212] transition";
                 
-                // İlk 3 kişiye altın, gümüş, bronz renk verelim
+                // Color top 3 ranks
                 let rankStyle = "text-gray-300";
                 if(user.rank === 1) rankStyle = "text-brand-gold font-black text-base";
                 if(user.rank === 2) rankStyle = "text-gray-300 font-bold";
@@ -274,7 +273,7 @@
                 tbody.appendChild(tr);
             });
             
-            document.getElementById('pageInfo').innerText = `Sayfa ${currentPage} / ${totalPages}`;
+            document.getElementById('pageInfo').innerText = `Page ${currentPage} / ${totalPages}`;
         }
 
         function prevPage() {
@@ -291,7 +290,7 @@
             }
         }
 
-        // İlk Yükleme
+        // Initial Load
         renderTable();
     </script>
 </body>
