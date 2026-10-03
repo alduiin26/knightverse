@@ -57,10 +57,12 @@
 </head>
 <body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black">
 
+  <!-- BACKGROUND AUDIO ELEMENT -->
   <audio id="bgMusic" loop preload="auto">
     <source src="theme.mp3" type="audio/mpeg" />
   </audio>
 
+  <!-- FLOATING AUDIO CONTROLLER -->
   <div class="fixed bottom-4 right-4 z-50">
     <button id="audioToggle" class="flex items-center gap-2 px-3 py-2 rounded-full bg-black/80 backdrop-blur-md border border-brand-gold/40 text-brand-gold text-xs shadow-xl hover:bg-black transition">
       <i id="audioIcon" data-lucide="volume-2" class="w-4 h-4 animate-pulse-gold"></i>
@@ -71,15 +73,24 @@
   <!-- TOP NAVBAR -->
   <nav class="fixed top-0 left-0 w-full z-50 bg-[#050505]/95 backdrop-blur-md border-b border-brand-border">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+      
+      <!-- LOGO AREA -->
       <a href="#" class="flex items-center gap-2">
         <img src="logoko.png" alt="KnightVerse Logo" class="h-11 sm:h-14 w-auto object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,215,0,0.4)]" />
       </a>
 
+      <!-- DESKTOP NAV -->
       <div class="hidden lg:flex items-center gap-6 text-sm font-medium">
-        <a href="#teaser" class="hover:text-brand-gold transition text-amber-300 flex items-center gap-1"><i data-lucide="play-circle" class="w-4 h-4"></i> Trailer</a>
-        <a href="#mint" class="hover:text-brand-gold transition text-brand-gold flex items-center gap-1"><i data-lucide="box" class="w-4 h-4"></i> Genesis Mint</a>
+        <a href="#teaser" class="hover:text-brand-gold transition text-amber-300 flex items-center gap-1">
+          <i data-lucide="play-circle" class="w-4 h-4"></i> Trailer
+        </a>
+        <a href="#mint" class="hover:text-brand-gold transition text-brand-gold flex items-center gap-1">
+          <i data-lucide="box" class="w-4 h-4"></i> Genesis Mint
+        </a>
         <a href="#rarity" class="hover:text-brand-gold transition">Classes & Rarity</a>
-        <a href="#bosses" class="hover:text-brand-gold transition text-red-400 flex items-center gap-1.5"><i data-lucide="skull" class="w-4 h-4"></i> World Bosses</a>
+        <a href="#bosses" class="hover:text-brand-gold transition text-red-400 flex items-center gap-1.5">
+          <i data-lucide="skull" class="w-4 h-4"></i> World Bosses
+        </a>
         <a href="market.html" class="hover:text-brand-gold transition flex items-center gap-1.5 text-gray-300">
           <i data-lucide="store" class="w-4 h-4"></i> Store
           <span class="text-[10px] bg-brand-gold/20 text-brand-gold border border-brand-gold/40 px-1.5 py-0.2 rounded font-mono">Coming Soon</span>
@@ -89,12 +100,15 @@
         <a href="#roadmap" class="hover:text-brand-gold transition">Roadmap</a>
       </div>
 
+      <!-- ACTIONS -->
       <div class="flex items-center gap-1.5 sm:gap-2">
         <a href="market.html" class="px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg bg-[#141414] border border-brand-gold/40 text-brand-gold font-semibold text-[11px] sm:text-xs hover:bg-brand-gold/10 transition flex items-center gap-1">
-          <i data-lucide="store" class="w-3 h-3"></i> <span>Market</span>
+          <i data-lucide="store" class="w-3 h-3"></i>
+          <span>Market</span>
         </a>
         <a href="https://opensea.io" target="_blank" class="px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-lg bg-brand-gold text-black font-semibold text-[11px] sm:text-sm hover:bg-brand-goldHover transition flex items-center gap-1">
-          <i data-lucide="external-link" class="w-3 h-3"></i> <span>OpenSea Mint</span>
+          <i data-lucide="external-link" class="w-3 h-3"></i>
+          <span>OpenSea Mint</span>
         </a>
       </div>
     </div>
@@ -103,12 +117,17 @@
   <!-- HERO SECTION -->
   <header class="relative pt-28 sm:pt-36 pb-16 sm:pb-20 overflow-hidden border-b border-brand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+      
       <div class="flex justify-center mb-4 sm:mb-6">
-        <img src="logoko.png" alt="KnightVerse" class="w-36 sm:w-56 h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.45)] animate-pulse-gold" />
+        <div class="relative">
+          <img src="logoko.png" alt="KnightVerse Faction Shield" class="w-36 sm:w-56 h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.45)] mx-auto animate-pulse-gold" />
+        </div>
       </div>
+
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold uppercase tracking-wider mb-6">
         <i data-lucide="shield" class="w-3.5 h-3.5"></i> A 22-Year MMORPG Legacy on BNB Chain
       </div>
+
       <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
         BATTLE, EARN & OWN: <br />
         <span class="gold-gradient-text">KARUS VS HUMAN</span> REALM
@@ -116,34 +135,96 @@
       <p class="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-400 mb-8 sm:mb-10 leading-relaxed">
         Iconic tactical MMORPG mechanics meet Web3. Acquire character NFTs, defeat dungeon world bosses, earn tokens, and trade in our upcoming secure P2P game market.
       </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto sm:max-w-none">
+        <a href="#teaser" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-brand-gold text-black font-bold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">
+          <i data-lucide="play" class="w-4 h-4 fill-current"></i> Watch Cinematic Teaser
+        </a>
+        <a href="#mint" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-[#141414] border border-brand-border text-white font-medium text-sm hover:border-brand-gold transition flex items-center justify-center gap-2">
+          Genesis Mint Rounds
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-brand-border/60">
+        <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
+          <div class="text-xl sm:text-2xl font-bold text-white">2,000 Boxes</div>
+          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Level 1 Genesis Supply</div>
+        </div>
+        <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
+          <div class="text-xl sm:text-2xl font-bold text-brand-gold">BNB Chain</div>
+          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Low Gas (USDT Mint)</div>
+        </div>
+        <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
+          <div class="text-xl sm:text-2xl font-bold text-white">5% Discount</div>
+          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Holder Cash & GB Store</div>
+        </div>
+        <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
+          <div class="text-xl sm:text-2xl font-bold text-brand-gold">Max Lv 59</div>
+          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Turn-Based PvE Engine</div>
+        </div>
+      </div>
     </div>
   </header>
+
+  <!-- CINEMATIC TRAILER SHOWCASE -->
+  <section id="teaser" class="py-16 sm:py-24 border-b border-brand-border bg-[#030303]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold mb-3">
+          <i data-lucide="film" class="w-3.5 h-3.5"></i> Cinematic Showcase
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white">The Throne of Destiny</h2>
+        <p class="text-xs sm:text-sm text-gray-400 mt-2">Witness the gathering of Karus and El Morad champions before the descent into the underworld.</p>
+      </div>
+
+      <div class="relative rounded-2xl overflow-hidden border-2 border-brand-border/80 hover:border-brand-gold/50 transition video-glow bg-black max-w-4xl mx-auto">
+        <video autoplay muted loop playsinline controls class="w-full aspect-video object-cover">
+          <source src="intro.mp4" type="video/mp4" />
+        </video>
+        <div class="absolute bottom-3 left-3 hidden sm:flex items-center gap-2 px-3 py-1 rounded-md bg-black/70 backdrop-blur-md border border-brand-border text-[11px] text-gray-300">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Official Teaser Reel
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- GENESIS MINT SECTION -->
   <section id="mint" class="py-16 sm:py-24 border-b border-brand-border bg-[#070707] relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      
       <div class="text-center max-w-2xl mx-auto mb-12">
         <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Tokenized Launch Offering</h2>
         <h3 class="text-2xl sm:text-4xl font-extrabold text-white">Genesis Level 1 Box Mint</h3>
+        <p class="text-xs sm:text-sm text-gray-400 mt-2">Each Genesis Box contains 1 randomized Level 1 playable NFT character with native multiplier perks.</p>
       </div>
 
+      <!-- MAIN LOOT CHEST SHOWCASE PANEL -->
       <div class="bg-brand-card/90 border border-brand-gold/30 rounded-2xl p-6 sm:p-10 mb-12 gold-glow backdrop-blur-sm">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
           <div class="lg:col-span-5 flex flex-col items-center justify-center text-center relative">
             <div class="relative w-64 sm:w-80 h-auto">
               <div class="absolute inset-0 bg-gradient-to-t from-amber-500/20 via-purple-600/10 to-transparent blur-2xl rounded-full"></div>
               <img src="loot.png" alt="Genesis Loot Chest" class="relative w-full h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.4)] animate-float mx-auto" />
             </div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/80 border border-brand-gold/40 text-brand-gold text-xs font-mono mt-3">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Verified Contract Asset
+            </div>
           </div>
+
           <div class="lg:col-span-7 flex flex-col justify-between">
             <div>
               <div class="flex flex-wrap items-center gap-2 mb-3">
                 <span class="px-2.5 py-0.5 rounded bg-brand-gold/20 text-brand-gold border border-brand-gold/40 text-xs font-bold uppercase tracking-wider">BNB Chain (BEP-721)</span>
+                <span class="px-2.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800 text-xs font-medium">Standard USDT Mint</span>
               </div>
+              
               <h4 class="text-xl sm:text-2xl font-bold text-white mb-3">Ancient Genesis Character Chest</h4>
-              <p class="text-xs sm:text-sm text-gray-300 mb-6">Open to summon a Warrior, Rogue, Mage, or Priest. Rarities range from Common to Legendary, directly determining your turn-based win rates.</p>
+              <p class="text-xs sm:text-sm text-gray-300 leading-relaxed mb-6">
+                Open to summon a Warrior, Rogue, Mage, or Priest. Rarities range from Common to Legendary, directly determining your turn-based win rates, leaderboard placement, and daily $KNIGHT rewards.
+              </p>
 
-              <!-- MINT PROGRESS -->
+              <!-- DYNAMIC MINT PROGRESS BAR -->
               <div class="bg-[#181818] p-4 rounded-xl border border-brand-border/60 mb-6">
                 <div class="flex justify-between text-xs mb-2">
                   <span class="text-gray-400 font-medium">Minting Phase Allocation:</span>
@@ -158,48 +239,92 @@
                 </div>
               </div>
             </div>
+
+            <div class="flex flex-col sm:flex-row items-center gap-3">
+              <a href="https://opensea.io" target="_blank" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-brand-gold text-black font-extrabold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">
+                <i data-lucide="sparkles" class="w-4 h-4"></i> Mint on OpenSea
+              </a>
+              <a href="#rarity" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#161616] border border-brand-border text-gray-300 text-sm hover:border-brand-gold hover:text-white transition flex items-center justify-center gap-2">
+                Inspect Character Rarities
+              </a>
+            </div>
+
           </div>
         </div>
       </div>
 
-      <!-- MINT CARDS -->
+      <!-- 4 MINT ROUND CARDS WITH LARGE CHESTS -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        
         <div class="bg-brand-card border border-brand-border rounded-xl p-5 flex flex-col justify-between hover:border-stone-700 transition">
           <div>
             <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Team Reserve</div>
             <div class="flex items-center justify-between">
-              <div><div class="text-2xl sm:text-3xl font-black text-white">0 USDT</div></div>
+              <div>
+                <div class="text-2xl sm:text-3xl font-black text-white">0 USDT</div>
+                <div class="text-xs text-gray-400">/ Free Allocation</div>
+              </div>
               <img src="loot.png" alt="Chest" class="w-24 h-24 sm:w-28 sm:h-28 object-contain blend-logo drop-shadow-[0_0_18px_rgba(255,255,255,0.25)] -mr-2" />
             </div>
           </div>
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5">
+            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">10 Boxes</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Utility:</span> <span class="text-gray-300">Testing & Operations</span></div>
+          </div>
         </div>
+
         <div class="bg-brand-card border border-blue-900/50 rounded-xl p-5 flex flex-col justify-between hover:border-blue-500/70 transition">
           <div>
             <div class="text-xs font-semibold text-blue-400 uppercase tracking-wider mb-1">GTD Whitelist</div>
             <div class="flex items-center justify-between">
-              <div><div class="text-2xl sm:text-3xl font-black text-white">3 USDT</div></div>
+              <div>
+                <div class="text-2xl sm:text-3xl font-black text-white">3 USDT</div>
+                <div class="text-xs text-blue-400/80">Guaranteed Tier</div>
+              </div>
               <img src="loot.png" alt="Chest" class="w-24 h-24 sm:w-28 sm:h-28 object-contain blend-logo drop-shadow-[0_0_20px_rgba(59,130,246,0.4)] -mr-2" />
             </div>
           </div>
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5">
+            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">290 Boxes</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Allocation:</span> <span class="text-gray-300">PR & Community Raffles</span></div>
+          </div>
         </div>
+
         <div class="bg-brand-card border border-brand-gold/60 rounded-xl p-5 flex flex-col justify-between gold-glow relative">
+          <div class="absolute -top-3 right-4 bg-brand-gold text-black text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Priority</div>
           <div>
             <div class="text-xs font-semibold text-brand-gold uppercase tracking-wider mb-1">Standard Whitelist</div>
             <div class="flex items-center justify-between">
-              <div><div class="text-2xl sm:text-3xl font-black text-white">7 USDT</div></div>
+              <div>
+                <div class="text-2xl sm:text-3xl font-black text-white">7 USDT</div>
+                <div class="text-xs text-brand-gold/80">Standard Tier</div>
+              </div>
               <img src="loot.png" alt="Chest" class="w-24 h-24 sm:w-28 sm:h-28 object-contain blend-logo drop-shadow-[0_0_22px_rgba(255,215,0,0.6)] animate-pulse-gold -mr-2" />
             </div>
           </div>
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5">
+            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">700 Boxes</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Access:</span> <span class="text-gray-300">Active Community Roles</span></div>
+          </div>
         </div>
+
         <div class="bg-brand-card border border-purple-900/50 rounded-xl p-5 flex flex-col justify-between hover:border-purple-500/70 transition">
           <div>
             <div class="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-1">FCFS Whitelist</div>
             <div class="flex items-center justify-between">
-              <div><div class="text-2xl sm:text-3xl font-black text-white">10 USDT</div></div>
+              <div>
+                <div class="text-2xl sm:text-3xl font-black text-white">10 USDT</div>
+                <div class="text-xs text-purple-400/80">Public: 15 USDT</div>
+              </div>
               <img src="loot.png" alt="Chest" class="w-24 h-24 sm:w-28 sm:h-28 object-contain blend-logo drop-shadow-[0_0_20px_rgba(168,85,247,0.4)] -mr-2" />
             </div>
           </div>
+          <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs space-y-1.5">
+            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">1,000 Boxes</span></div>
+            <div class="flex justify-between"><span class="text-gray-400">Public:</span> <span class="text-gray-300">Unminted at 15 USDT</span></div>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -215,7 +340,7 @@
         <!-- FACTION TOGGLE SWITCH -->
         <div class="inline-flex bg-[#121212] p-1.5 rounded-xl border border-brand-border">
           <button id="btn-human" onclick="setFaction('human')" class="px-6 py-2 rounded-lg bg-blue-900/40 text-blue-400 font-extrabold text-xs sm:text-sm border border-blue-500/50 transition">EL MORAD</button>
-          <button id="btn-karus" onclick="setFaction('karus')" class="px-6 py-2 rounded-lg text-gray-500 font-extrabold text-xs sm:text-sm hover:text-white transition">KARUS</button>
+          <button id="btn-karus" onclick="setFaction('karus')" class="px-6 py-2 rounded-lg text-gray-500 font-extrabold text-xs sm:text-sm hover:text-white transition border border-transparent">KARUS</button>
         </div>
         <p class="text-xs sm:text-sm text-gray-400 mt-6">Use the arrows on each tier to switch between Mage, Warrior, Priest, and Rogue classes for the selected faction.</p>
       </div>
@@ -239,6 +364,10 @@
             </div>
             <p id="common-desc" class="text-xs text-gray-400 mb-4 h-10">Silver framed foundational mage for early PvE encounters.</p>
           </div>
+          <div class="text-xs border-t border-brand-border/60 pt-3 text-gray-300 space-y-1 bg-[#0a0a0a]/50 p-2.5 rounded-lg">
+            <div>• Base Win Rate: <span class="text-white font-semibold">5%</span></div>
+            <div>• Reward Multiplier: <span class="text-brand-gold font-semibold">1 $KNIGHT</span></div>
+          </div>
         </div>
 
         <!-- 2. RARE TIER SLIDER -->
@@ -257,6 +386,10 @@
               <span class="text-xs text-gray-400 font-mono">Tier II</span>
             </div>
             <p id="rare-desc" class="text-xs text-gray-400 mb-4 h-10">Sapphire crested battle sorceress with boosted offensive attributes.</p>
+          </div>
+          <div class="text-xs border-t border-brand-border/60 pt-3 text-gray-300 space-y-1 bg-[#0a0a0a]/50 p-2.5 rounded-lg">
+            <div>• Base Win Rate: <span class="text-white font-semibold">15%</span></div>
+            <div>• Reward Multiplier: <span class="text-brand-gold font-semibold">2 $KNIGHT</span></div>
           </div>
         </div>
 
@@ -277,6 +410,10 @@
             </div>
             <p id="epic-desc" class="text-xs text-gray-400 mb-4 h-10">Amethyst infused shadow mage equipped for high-tier boss encounters.</p>
           </div>
+          <div class="text-xs border-t border-brand-border/60 pt-3 text-gray-300 space-y-1 bg-[#0a0a0a]/50 p-2.5 rounded-lg">
+            <div>• Base Win Rate: <span class="text-white font-semibold">30%</span></div>
+            <div>• Reward Multiplier: <span class="text-brand-gold font-semibold">5 $KNIGHT</span></div>
+          </div>
         </div>
 
         <!-- 4. LEGENDARY TIER SLIDER -->
@@ -296,8 +433,329 @@
             </div>
             <p id="legendary-desc" class="text-xs text-gray-400 mb-4 h-10">Apex solar sorceress delivering maximum battle frequency and token earnings.</p>
           </div>
+          <div class="text-xs border-t border-brand-border/60 pt-3 text-gray-300 space-y-1 bg-[#0a0a0a]/50 p-2.5 rounded-lg">
+            <div>• Base Win Rate: <span class="text-white font-semibold">50%</span></div>
+            <div>• Reward Multiplier: <span class="text-brand-gold font-semibold">10 $KNIGHT</span></div>
+          </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- WORLD BOSSES & DUNGEON RAIDS SECTION -->
+  <section id="bosses" class="py-16 sm:py-24 border-b border-brand-border bg-[#070707]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 text-xs font-semibold mb-3">
+          <i data-lucide="flame" class="w-3.5 h-3.5"></i> PvE Raid Encounters
+        </div>
+        <h3 class="text-2xl sm:text-4xl font-extrabold text-white">Conquer the World Bosses</h3>
+        <p class="text-xs sm:text-sm text-gray-400 mt-2">Team up with fellow Karus and El Morad warriors. Defeat ancient subterranean monsters to secure rare armory boxes and token pools.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-amber-600 transition flex flex-col justify-between">
+          <div>
+            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
+              <img src="boss-orc.png" alt="Orc Chieftain" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-amber-500 text-base sm:text-lg">Orc Chieftain</h4>
+              <span class="text-[11px] text-gray-400 font-mono">Dungeon Lv 25</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-3">Brutal fortress gatekeeper armed with spiked war clubs.</p>
+          </div>
+          <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
+            <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-amber-300 font-semibold">Fire Magic</span></div>
+            <div class="flex justify-between items-center"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold flex items-center gap-1"><img src="loot.png" class="w-3.5 h-3.5 object-contain blend-logo inline" /> Warrior Relics</span></div>
+          </div>
+        </div>
+
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-emerald-600 transition flex flex-col justify-between">
+          <div>
+            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
+              <img src="boss-spider.png" alt="Venom Queen" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-emerald-400 text-base sm:text-lg">Venom Queen</h4>
+              <span class="text-[11px] text-gray-400 font-mono">Abyss Lv 40</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-3">Deep cave arachnid radiating acidic venom waves.</p>
+          </div>
+          <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
+            <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-emerald-300 font-semibold">Light Spells</span></div>
+            <div class="flex justify-between items-center"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold flex items-center gap-1"><img src="loot.png" class="w-3.5 h-3.5 object-contain blend-logo inline" /> Rogue Daggers</span></div>
+          </div>
+        </div>
+
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-purple-600 transition flex flex-col justify-between">
+          <div>
+            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
+              <img src="boss-void.png" alt="Void Behemoth" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-purple-400 text-base sm:text-lg">Void Behemoth</h4>
+              <span class="text-[11px] text-gray-400 font-mono">Nether Lv 55</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-3">Shadow-armored dark titan infused with abyssal flames.</p>
+          </div>
+          <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
+            <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-purple-300 font-semibold">Holy Priest</span></div>
+            <div class="flex justify-between items-center"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold flex items-center gap-1"><img src="loot.png" class="w-3.5 h-3.5 object-contain blend-logo inline" /> Epic Shards</span></div>
+          </div>
+        </div>
+
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-red-600 transition flex flex-col justify-between">
+          <div>
+            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
+              <img src="boss-dragon.png" alt="Ignis the Ancient" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-red-500 text-base sm:text-lg">Ignis Ancient</h4>
+              <span class="text-[11px] text-red-400 font-mono">World Raid Lv 59</span>
+            </div>
+            <p class="text-xs text-gray-400 mb-3">Ancient magma lord guarding the subterranean treasury.</p>
+          </div>
+          <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
+            <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-cyan-300 font-semibold">Glacier Spells</span></div>
+            <div class="flex justify-between items-center"><span class="text-gray-400">Loot Drop:</span> <span class="text-brand-gold font-semibold flex items-center gap-1"><img src="loot.png" class="w-3.5 h-3.5 object-contain blend-logo inline" /> 1,000 $KNIGHT</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 0: INFOFI CAMPAIGN & ALPHA TESTNET -->
+  <section id="phase0" class="py-16 sm:py-24 border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-semibold mb-3">
+          <i data-lucide="flame" class="w-3.5 h-3.5"></i> Early Access & Community Events
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Phase 0: Closed Alpha & InfoFi</h3>
+        <p class="text-xs sm:text-sm text-gray-400 mt-2">Discover early-bird events, closed test server mechanics, and upcoming box reward pools.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-brand-card border border-brand-border rounded-xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold mb-4">
+              <i data-lucide="key" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">Closed Alpha Access</h4>
+            <p class="text-xs text-gray-400 leading-relaxed mb-4">
+              Access to the early 2D browser battle server is exclusively reserved for Genesis NFT Box holders. Test PvP/PvE parameters before public deployment.
+            </p>
+          </div>
+          <div class="p-3.5 bg-[#171717] rounded-lg border border-brand-border/60 text-xs space-y-1">
+            <div class="text-brand-gold font-bold">Top 1,000 Leaderboard:</div>
+            <div class="text-gray-400">Guaranteed Character/Item Box allocations based on closed test win rates.</div>
+          </div>
+        </div>
+
+        <div class="bg-brand-card border border-blue-900/40 rounded-xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-4">
+              <i data-lucide="calendar-check" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">Daily Quests</h4>
+            <p class="text-xs text-gray-400 leading-relaxed mb-4">
+              Daily social activity across our channels helps secure priority standings:
+            </p>
+            <ul class="text-xs text-gray-300 space-y-2 mb-4">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400 shrink-0"></i>
+                <span>Daily tweet/thread mentioning @KnightVerse</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400 shrink-0"></i>
+                <span>Ethos Rep upvote & vouch activity</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-blue-400 shrink-0"></i>
+                <span>Active discussions on Telegram & Discord</span>
+              </li>
+            </ul>
+          </div>
+          <div class="p-3.5 bg-[#171717] rounded-lg border border-brand-border/60 text-xs space-y-1">
+            <div class="text-blue-400 font-bold">Top 500 Daily Contributors:</div>
+            <div class="text-gray-400">Direct whitelist perks and supplementary Genesis Box drops.</div>
+          </div>
+        </div>
+
+        <div class="bg-brand-card border border-purple-900/40 rounded-xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4">
+              <i data-lucide="trophy" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">Core Milestones</h4>
+            <p class="text-xs text-gray-400 leading-relaxed mb-4">
+              Permanent foundational quests required for all participants:
+            </p>
+            <ul class="text-xs text-gray-300 space-y-2 mb-4">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400 shrink-0"></i>
+                <span>Follow official X (Twitter) profile</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400 shrink-0"></i>
+                <span>Join official Telegram Announcement Hub</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-purple-400 shrink-0"></i>
+                <span>Attain community contributor badges on Discord</span>
+              </li>
+            </ul>
+          </div>
+          <div class="p-3.5 bg-[#171717] rounded-lg border border-brand-border/60 text-xs space-y-1">
+            <div class="text-purple-400 font-bold">Verification:</div>
+            <div class="text-gray-400">Tracking will be finalized via community discord bot sync.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOKENOMICS SECTION -->
+  <section id="tokenomics" class="py-16 sm:py-24 border-b border-brand-border bg-[#080808]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+        <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Sustainable Economy</h2>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Tokenomics & Vesting Schedule</h3>
+        <p class="text-xs sm:text-sm text-gray-400 mt-2">Fixed supply of 100,000,000 $KNIGHT deployed on BNB Chain with built-in deflationary mechanics.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-5 bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8 flex flex-col items-center">
+          <div class="relative w-56 h-56 sm:w-64 sm:h-64 mb-6">
+            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#1c1c1c" stroke-width="12"></circle>
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#FFD700" stroke-width="12" stroke-dasharray="88 251.3" stroke-dashoffset="0"></circle>
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#3b82f6" stroke-width="12" stroke-dasharray="37.7 251.3" stroke-dashoffset="-88"></circle>
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#a855f7" stroke-width="12" stroke-dasharray="37.7 251.3" stroke-dashoffset="-125.7"></circle>
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#f97316" stroke-width="12" stroke-dasharray="25.1 251.3" stroke-dashoffset="-163.4"></circle>
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#ef4444" stroke-width="12" stroke-dasharray="25.1 251.3" stroke-dashoffset="-188.5"></circle>
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#10b981" stroke-width="12" stroke-dasharray="25.1 251.3" stroke-dashoffset="-213.6"></circle>
+              <circle cx="50" cy="50" r="40" fill="transparent" stroke="#6b7280" stroke-width="12" stroke-dasharray="12.6 251.3" stroke-dashoffset="-238.7"></circle>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span class="text-2xl sm:text-3xl font-black text-white">100M</span>
+              <span class="text-[10px] sm:text-xs text-brand-gold font-bold uppercase tracking-widest">$KNIGHT</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-xs w-full">
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#FFD700] shrink-0"></span><span class="text-gray-300">P2E Rewards (35%)</span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#3b82f6] shrink-0"></span><span class="text-gray-300">Liquidity (15%)</span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#a855f7] shrink-0"></span><span class="text-gray-300">Presale (15%)</span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#f97316] shrink-0"></span><span class="text-gray-300">Marketing & CEX (10%)</span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#ef4444] shrink-0"></span><span class="text-gray-300">Team (10%)</span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#10b981] shrink-0"></span><span class="text-gray-300">Airdrop (10%)</span></div>
+            <div class="flex items-center gap-2 col-span-2"><span class="w-3 h-3 rounded-full bg-[#6b7280] shrink-0"></span><span class="text-gray-300">Treasury Reserve (5%)</span></div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-brand-card border border-brand-border rounded-2xl p-5 sm:p-6 overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b border-brand-border text-gray-400 uppercase text-[11px] pb-3">
+                <th class="pb-3 font-semibold">Allocation</th>
+                <th class="pb-3 font-semibold">Amount</th>
+                <th class="pb-3 font-semibold">TGE Unlock</th>
+                <th class="pb-3 font-semibold">Vesting Terms</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-brand-border/60 text-gray-300">
+              <tr>
+                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-brand-gold shrink-0"></span>P2E Rewards</td>
+                <td class="py-3">35M (35%)</td>
+                <td class="py-3 text-brand-gold font-semibold">0%</td>
+                <td class="py-3 text-gray-400">Claimable instantly via in-game PvE/PvP battle victories</td>
+              </tr>
+              <tr>
+                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-500 shrink-0"></span>Liquidity Pool</td>
+                <td class="py-3">15M (15%)</td>
+                <td class="py-3 text-blue-400 font-semibold">100%</td>
+                <td class="py-3 text-gray-400">DEX LP locked permanently; CEX maker allocations allocated upon listing</td>
+              </tr>
+              <tr>
+                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-500 shrink-0"></span>Presale</td>
+                <td class="py-3">15M (15%)</td>
+                <td class="py-3 text-purple-400 font-semibold">40%</td>
+                <td class="py-3 text-gray-400">Remaining 60% unlocks linearly over 3 months</td>
+              </tr>
+              <tr>
+                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-orange-500 shrink-0"></span>Marketing & CEX</td>
+                <td class="py-3">10M (10%)</td>
+                <td class="py-3 text-orange-400 font-semibold">20%</td>
+                <td class="py-3 text-gray-400">Listing fees, KOL promotion & CEX airdrop campaigns (10 months linear)</td>
+              </tr>
+              <tr>
+                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>Team & Core</td>
+                <td class="py-3">10M (10%)</td>
+                <td class="py-3 text-red-400 font-semibold">0%</td>
+                <td class="py-3 text-gray-400">3-month cliff, followed by 9 months linear release</td>
+              </tr>
+              <tr>
+                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>Airdrop & Quests</td>
+                <td class="py-3">10M (10%)</td>
+                <td class="py-3 text-emerald-400 font-semibold">40%</td>
+                <td class="py-3 text-gray-400">Remaining 60% distributed linearly across 12 months</td>
+              </tr>
+              <tr>
+                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-gray-500 shrink-0"></span>Treasury & Ops</td>
+                <td class="py-3">5M (5%)</td>
+                <td class="py-3 text-gray-400 font-semibold">0%</td>
+                <td class="py-3 text-gray-400">6-month lock, utilized for market discount subsidies</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap" class="py-16 sm:py-24 border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+        <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Project Execution</h2>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Strategic Roadmap</h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <div class="bg-brand-card border border-brand-gold/30 rounded-xl p-5 sm:p-6 relative">
+          <div class="text-xs font-bold text-brand-gold uppercase tracking-wider mb-2">Phase 0 (Current)</div>
+          <h4 class="text-base sm:text-lg font-bold text-white mb-3">Genesis Mint & Testnet</h4>
+          <ul class="text-xs text-gray-400 space-y-2">
+            <li>• 2,000 Level 1 Character Box offering on OpenSea (BNB Chain)</li>
+            <li>• Closed Alpha test server launch for verified NFT owners</li>
+            <li>• First 1,000 ranking players rewarded with Genesis equipment</li>
+            <li>• InfoFi community campaign & 500-user reward pool</li>
+          </ul>
+        </div>
+
+        <div class="bg-brand-card border border-brand-border rounded-xl p-5 sm:p-6">
+          <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Phase 1</div>
+          <h4 class="text-base sm:text-lg font-bold text-white mb-3">TGE & PvE Engine</h4>
+          <ul class="text-xs text-gray-400 space-y-2">
+            <li>• KNIGHT Token Generation Event on BNB Chain (BEP-20)</li>
+            <li>• 2D browser battle PvE engine launch</li>
+            <li>• Daily 3-battle mechanics with EXP progression</li>
+            <li>• 5% discounted automated E-Pin and Goldbar store</li>
+          </ul>
+        </div>
+
+        <div class="bg-brand-card border border-brand-border rounded-xl p-5 sm:p-6">
+          <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Phase 2</div>
+          <h4 class="text-base sm:text-lg font-bold text-white mb-3">PvP Arena & Armory</h4>
+          <ul class="text-xs text-gray-400 space-y-2">
+            <li>• Karus vs Human 1v1 wagered PvP Arena matches</li>
+            <li>• Weapon and unique tier equipment box releases</li>
+            <li>• Community DAO governance and voting implementation</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -407,7 +865,6 @@
         btnHuman.className = "px-6 py-2 rounded-lg text-gray-500 font-extrabold text-xs sm:text-sm hover:text-white transition border border-transparent";
       }
 
-      // ırk değişince slider'ları sıfırla ve ekrana bas
       currentIndexes = { common: 0, rare: 0, epic: 0, legendary: 0 };
       updateCardUI('common');
       updateCardUI('rare');
@@ -429,9 +886,41 @@
       document.getElementById(`${tier}-desc`).innerText = item.desc;
     }
 
-    // İlk açılışta kartları ayarla
     setFaction('human');
 
+    // BACKGROUND AUDIO AUTOPLAY ENGINE
+    const audio = document.getElementById('bgMusic');
+    const audioBtn = document.getElementById('audioToggle');
+    const audioIcon = document.getElementById('audioIcon');
+    let hasInteracted = false;
+
+    function playAudioOnFirstClick() {
+      if (!hasInteracted) {
+        audio.play().then(() => {
+          hasInteracted = true;
+          audioIcon.classList.add('animate-pulse-gold');
+        }).catch(err => {
+          console.log("Audio waiting for explicit interaction");
+        });
+      }
+    }
+
+    window.addEventListener('click', playAudioOnFirstClick, { once: true });
+    window.addEventListener('touchstart', playAudioOnFirstClick, { once: true });
+
+    audioBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (audio.paused) {
+        audio.play();
+        audioIcon.setAttribute('data-lucide', 'volume-2');
+        audioIcon.classList.add('animate-pulse-gold');
+      } else {
+        audio.pause();
+        audioIcon.setAttribute('data-lucide', 'volume-x');
+        audioIcon.classList.remove('animate-pulse-gold');
+      }
+      lucide.createIcons();
+    });
   </script>
 </body>
 </html>
