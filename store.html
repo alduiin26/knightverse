@@ -108,19 +108,18 @@
     <script>
         lucide.createIcons();
 
-        // Ürün Veritabanı (Senin Verdiğin Fiyatlar)
+        // Ürün Veritabanı
         const products = [
-            { id: 1, type: 'NPoint', name: '400 NPoint', usd: 5, tl: 234, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=400+NP' },
-            { id: 2, type: 'NPoint', name: '800 NPoint', usd: 10, tl: 468, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=800+NP' },
-            { id: 3, type: 'NPoint', name: '1200 NPoint', usd: 15, tl: 702, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=1200+NP' },
-            { id: 4, type: 'NPoint', name: '1600 NPoint', usd: 20, tl: 936, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=1600+NP' },
-            { id: 5, type: 'NPoint', name: '2000 NPoint', usd: 25, tl: 1170, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=2000+NP' },
-            { id: 6, type: 'NPoint', name: '2400 NPoint', usd: 30, tl: 1404, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=2400+NP' },
-            { id: 7, type: 'NPoint', name: '2800 NPoint', usd: 35, tl: 1638, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=2800+NP' },
-            { id: 8, type: 'NPoint', name: '3200 NPoint', usd: 40, tl: 1872, img: 'https://via.placeholder.com/200x150/1a1a1a/FFD700?text=3200+NP' },
-            { id: 9, type: 'Premium', name: 'Bronze Premium', usd: 9, tl: 420, img: 'https://via.placeholder.com/200x150/3e2723/e0a96d?text=Bronze' },
-            { id: 10, type: 'Premium', name: 'Gold Premium', usd: 25, tl: 1170, img: 'https://via.placeholder.com/200x150/3e2723/FFD700?text=Gold' },
-            { id: 11, type: 'Premium', name: 'Platinum Premium', usd: 30, tl: 1404, img: 'https://via.placeholder.com/200x150/3e2723/a3c1ad?text=Platinum' }
+            { id: 1, type: 'NPoint', name: '400 NPoint', usd: 5, tl: 234, img: '400kc.jpeg' },
+            { id: 2, type: 'NPoint', name: '800 NPoint', usd: 10, tl: 468, img: '800kc.jpeg' },
+            { id: 3, type: 'NPoint', name: '1200 NPoint', usd: 15, tl: 702, img: '1200kc.jpeg' },
+            { id: 4, type: 'NPoint', name: '1600 NPoint', usd: 20, tl: 936, img: '1600kc.jpeg' },
+            { id: 5, type: 'NPoint', name: '2000 NPoint', usd: 25, tl: 1170, img: '2000kc.jpeg' },
+            { id: 6, type: 'NPoint', name: '2400 NPoint', usd: 30, tl: 1404, img: '2400kc.jpeg' },
+            { id: 7, type: 'NPoint', name: '3200 NPoint', usd: 40, tl: 1872, img: '3200kc.jpeg' },
+            { id: 8, type: 'Premium', name: 'Bronze Premium', usd: 9, tl: 420, img: 'bronz.jpeg' },
+            { id: 9, type: 'Premium', name: 'Gold Premium', usd: 25, tl: 1170, img: 'gold.jpeg' },
+            { id: 10, type: 'Premium', name: 'Platinum Premium', usd: 30, tl: 1404, img: 'plat.jpeg' }
         ];
 
         let currentDiscount = 0; // Yüzdelik indirim (0, 3, 4, 5, 8)
