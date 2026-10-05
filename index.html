@@ -7,6 +7,10 @@
   <link rel="icon" type="image/png" href="logoko.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- AOS ANIMATION KÜTÜPHANESİ CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
   <script>
     tailwind.config = {
       theme: {
@@ -31,11 +35,23 @@
     @keyframes pulse-gold { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.05); } }
     .animate-pulse-gold { animation: pulse-gold 2.5s infinite ease-in-out; }
     .blend-logo { mix-blend-mode: screen; }
+    
+    /* YÜZEN NFT ANİMASYONLARI (PARALLAX HİSSİ) */
+    @keyframes float-1 { 0%, 100% { transform: translateY(0px) rotate(-5deg); } 50% { transform: translateY(-20px) rotate(2deg); } }
+    @keyframes float-2 { 0%, 100% { transform: translateY(0px) rotate(5deg) scale(1); } 50% { transform: translateY(-25px) rotate(-3deg) scale(1.05); } }
+    @keyframes float-3 { 0%, 100% { transform: translateY(0px) rotate(-10deg); } 50% { transform: translateY(15px) rotate(5deg); } }
+    @keyframes float-4 { 0%, 100% { transform: translateY(0px) rotate(10deg); } 50% { transform: translateY(-15px) rotate(-5deg); } }
+    
+    .nft-float-1 { animation: float-1 7s ease-in-out infinite; }
+    .nft-float-2 { animation: float-2 8s ease-in-out infinite; }
+    .nft-float-3 { animation: float-3 9s ease-in-out infinite; }
+    .nft-float-4 { animation: float-4 10s ease-in-out infinite; }
+    
     @keyframes float-box { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
     .animate-float { animation: float-box 4s ease-in-out infinite; }
   </style>
 </head>
-<body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black">
+<body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black overflow-x-hidden">
 
   <!-- BACKGROUND AUDIO ELEMENT -->
   <audio id="bgMusic" loop preload="auto">
@@ -61,29 +77,16 @@
 
       <!-- DESKTOP NAV LINKS -->
       <div class="hidden lg:flex items-center gap-6 text-sm font-medium">
-        <a href="#teaser" class="hover:text-brand-gold transition text-amber-300 flex items-center gap-1">
-          <i data-lucide="play-circle" class="w-4 h-4"></i> Trailer
-        </a>
-        <a href="#mint" class="hover:text-brand-gold transition text-brand-gold flex items-center gap-1">
-          <i data-lucide="box" class="w-4 h-4"></i> Genesis Mint
-        </a>
+        <a href="#teaser" class="hover:text-brand-gold transition text-amber-300 flex items-center gap-1"><i data-lucide="play-circle" class="w-4 h-4"></i> Trailer</a>
+        <a href="#mint" class="hover:text-brand-gold transition text-brand-gold flex items-center gap-1"><i data-lucide="box" class="w-4 h-4"></i> Genesis Mint</a>
         <a href="#rarity" class="hover:text-brand-gold transition">Classes</a>
-        <a href="#bosses" class="hover:text-brand-gold transition text-red-400 flex items-center gap-1.5">
-          <i data-lucide="skull" class="w-4 h-4"></i> Bosses
-        </a>
-        <!-- INFOFI EVENT BUTONU -->
-        <a href="infofi.html" class="px-3 py-1.5 rounded-lg bg-purple-900/30 border border-purple-500/50 text-purple-300 hover:bg-purple-500/20 hover:text-white transition flex items-center gap-1.5 animate-pulse">
-          <i data-lucide="sparkles" class="w-4 h-4"></i> Event
-        </a>
-        <a href="whitepaper.html" class="hover:text-brand-gold transition text-gray-300 flex items-center gap-1.5">
-          <i data-lucide="file-text" class="w-4 h-4"></i> Whitepaper
-        </a>
+        <a href="#bosses" class="hover:text-brand-gold transition text-red-400 flex items-center gap-1.5"><i data-lucide="skull" class="w-4 h-4"></i> Bosses</a>
+        <a href="infofi.html" class="px-3 py-1.5 rounded-lg bg-purple-900/30 border border-purple-500/50 text-purple-300 hover:bg-purple-500/20 hover:text-white transition flex items-center gap-1.5 animate-pulse"><i data-lucide="sparkles" class="w-4 h-4"></i> Event</a>
+        <a href="whitepaper.html" class="hover:text-brand-gold transition text-gray-300 flex items-center gap-1.5"><i data-lucide="file-text" class="w-4 h-4"></i> Whitepaper</a>
       </div>
 
       <!-- NAVBAR ACTIONS (Desktop & Tablet) -->
       <div class="flex items-center gap-2">
-        
-        <!-- Sadece Desktop'ta görünen Aksiyonlar (Dil, Store, Play) -->
         <div class="hidden sm:flex items-center gap-3">
             <!-- DİL SEÇENEKLERİ -->
             <div class="flex items-center gap-2 text-xs font-extrabold text-gray-500 border-r border-brand-border pr-3">
@@ -93,32 +96,26 @@
                 <a href="#" class="hover:text-white transition">KR</a>
             </div>
             
-            <!-- STORE BUTONU -->
+            <!-- STORE & PLAY -->
             <a href="store.html" class="px-3 py-2 rounded-lg bg-[#141414] border border-brand-gold/40 text-brand-gold font-semibold text-xs hover:bg-brand-gold/10 transition flex items-center gap-1.5">
                 <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> Store
             </a>
-            
-            <!-- PLAY BUTONU -->
             <a href="play.html" class="px-3 py-2 rounded-lg bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-semibold text-xs hover:bg-emerald-500/20 transition flex items-center gap-1.5 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
                 <i data-lucide="gamepad-2" class="w-3.5 h-3.5"></i> Play
             </a>
         </div>
-        
-        <!-- Her iki ekranda da görünen OpenSea -->
         <a href="https://opensea.io" target="_blank" class="px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-lg bg-brand-gold text-black font-semibold text-xs sm:text-sm hover:bg-brand-goldHover transition flex items-center gap-1.5 ml-1">
             <i data-lucide="external-link" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">OpenSea</span><span class="sm:hidden">Mint</span>
         </a>
       </div>
     </div>
 
-    <!-- COMPACT MOBILE SUB-BAR (Sadece Mobilde Görünür) -->
+    <!-- COMPACT MOBILE SUB-BAR -->
     <div class="sm:hidden border-t border-brand-border/60 bg-[#0a0a0a] px-2 py-2 flex items-center justify-between text-[11px] overflow-x-auto gap-2">
-        <!-- Mobil Dil Seçeneği -->
         <div class="flex items-center gap-1.5 border-r border-brand-border pr-2 shrink-0">
             <a href="#" class="text-brand-gold font-bold">EN</a>
             <a href="#" class="text-gray-500 hover:text-white">TR</a>
         </div>
-        <!-- Mobil Yönlendirme Butonları -->
         <a href="play.html" class="px-2.5 py-1.5 rounded bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-bold whitespace-nowrap shadow-[0_0_8px_rgba(16,185,129,0.2)]">Play Game</a>
         <a href="store.html" class="px-2.5 py-1.5 rounded bg-[#161616] border border-brand-gold/40 text-brand-gold font-bold whitespace-nowrap">Store</a>
         <a href="infofi.html" class="px-2.5 py-1.5 rounded bg-purple-900/30 border border-purple-500/50 text-purple-300 font-bold whitespace-nowrap">Event</a>
@@ -126,29 +123,42 @@
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
-  <header class="relative pt-28 sm:pt-36 pb-16 sm:pb-20 overflow-hidden border-b border-brand-border">
+  <!-- HERO SECTION WITH FLOATING NFT BACKGROUND -->
+  <header class="relative pt-28 sm:pt-36 pb-16 sm:pb-20 overflow-hidden border-b border-brand-border bg-black">
+    
+    <!-- YÜZEN NFT'LER ARKAPLANI -->
+    <div class="absolute inset-0 z-0 pointer-events-none opacity-20 hidden md:block">
+      <img src="epic.jpg" class="absolute top-32 left-10 w-24 h-36 object-cover rounded-xl nft-float-1 border border-purple-500/30" />
+      <img src="legendary.jpg" class="absolute bottom-20 left-1/4 w-32 h-48 object-cover rounded-xl nft-float-2 border border-brand-gold/40 shadow-[0_0_20px_rgba(255,215,0,0.2)]" />
+      <img src="rare.jpg" class="absolute top-20 right-1/4 w-20 h-32 object-cover rounded-xl nft-float-3 border border-blue-500/30" />
+      <img src="common.jpg" class="absolute bottom-32 right-10 w-28 h-40 object-cover rounded-xl nft-float-4 border border-gray-500/30" />
+    </div>
+
+    <!-- ARKA PLAN IŞIK EFEKTİ -->
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-900/10 via-black to-black z-0"></div>
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
       
-      <div class="flex justify-center mb-4 sm:mb-6">
+      <div class="flex justify-center mb-4 sm:mb-6" data-aos="zoom-in" data-aos-duration="1000">
         <div class="relative">
           <img src="logoko.png" alt="KnightVerse Faction Shield" class="w-36 sm:w-56 h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.45)] mx-auto animate-pulse-gold" />
         </div>
       </div>
 
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold uppercase tracking-wider mb-6">
+      <div data-aos="fade-up" data-aos-delay="200" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold uppercase tracking-wider mb-6">
         <i data-lucide="shield" class="w-3.5 h-3.5"></i> A 22-Year MMORPG Legacy on BNB Chain
       </div>
 
-      <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+      <h1 data-aos="fade-up" data-aos-delay="400" class="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
         BATTLE, EARN & OWN: <br />
         <span class="gold-gradient-text">KARUS VS HUMAN</span> REALM
       </h1>
-      <p class="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-400 mb-8 sm:mb-10 leading-relaxed">
+      
+      <p data-aos="fade-up" data-aos-delay="500" class="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-400 mb-8 sm:mb-10 leading-relaxed">
         Iconic tactical MMORPG mechanics meet Web3. Acquire character NFTs, defeat dungeon world bosses, earn tokens, and trade in our upcoming secure P2P game market.
       </p>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto sm:max-w-none">
+      <div data-aos="zoom-in" data-aos-delay="600" class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto sm:max-w-none">
         <a href="#teaser" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-brand-gold text-black font-bold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">
           <i data-lucide="play" class="w-4 h-4 fill-current"></i> Watch Cinematic Teaser
         </a>
@@ -157,7 +167,7 @@
         </a>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-brand-border/60">
+      <div data-aos="fade-up" data-aos-delay="800" class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-brand-border/60 backdrop-blur-sm bg-black/40 rounded-xl">
         <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
           <div class="text-xl sm:text-2xl font-bold text-white">3,000 Boxes</div>
           <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Level 1 Genesis Supply</div>
@@ -181,7 +191,7 @@
   <!-- CINEMATIC TRAILER SHOWCASE -->
   <section id="teaser" class="py-16 sm:py-24 border-b border-brand-border bg-[#030303]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-10">
+      <div class="text-center max-w-2xl mx-auto mb-10" data-aos="fade-up">
         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold mb-3">
           <i data-lucide="film" class="w-3.5 h-3.5"></i> Cinematic Showcase
         </div>
@@ -189,7 +199,7 @@
         <p class="text-xs sm:text-sm text-gray-400 mt-2">Witness the gathering of Karus and El Morad champions before the descent into the underworld.</p>
       </div>
 
-      <div class="relative rounded-2xl overflow-hidden border-2 border-brand-border/80 hover:border-brand-gold/50 transition video-glow bg-black max-w-4xl mx-auto">
+      <div data-aos="zoom-in" data-aos-duration="1200" class="relative rounded-2xl overflow-hidden border-2 border-brand-border/80 hover:border-brand-gold/50 transition video-glow bg-black max-w-4xl mx-auto">
         <video autoplay muted loop playsinline controls class="w-full aspect-video object-cover">
           <source src="intro.mp4" type="video/mp4" />
         </video>
@@ -204,17 +214,16 @@
   <section id="mint" class="py-16 sm:py-24 border-b border-brand-border bg-[#070707] relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
       
-      <div class="text-center max-w-2xl mx-auto mb-12">
+      <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
         <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Tokenized Launch Offering</h2>
         <h3 class="text-2xl sm:text-4xl font-extrabold text-white">Genesis Level 1 Box Mint</h3>
         <p class="text-xs sm:text-sm text-gray-400 mt-2">Each Genesis Box contains 1 randomized Level 1 playable NFT character with native multiplier perks.</p>
       </div>
 
-      <!-- MAIN LOOT CHEST SHOWCASE PANEL -->
-      <div class="bg-brand-card/90 border border-brand-gold/30 rounded-2xl p-6 sm:p-10 mb-12 gold-glow backdrop-blur-sm">
+      <div class="bg-brand-card/90 border border-brand-gold/30 rounded-2xl p-6 sm:p-10 mb-12 gold-glow backdrop-blur-sm" data-aos="fade-up" data-aos-duration="1000">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
-          <div class="lg:col-span-5 flex flex-col items-center justify-center text-center relative">
+          <div class="lg:col-span-5 flex flex-col items-center justify-center text-center relative" data-aos="zoom-in-up" data-aos-delay="200">
             <div class="relative w-64 sm:w-80 h-auto">
               <div class="absolute inset-0 bg-gradient-to-t from-amber-500/20 via-purple-600/10 to-transparent blur-2xl rounded-full"></div>
               <img src="loot.png" alt="Genesis Loot Chest" class="relative w-full h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.4)] animate-float mx-auto" />
@@ -224,7 +233,7 @@
             </div>
           </div>
 
-          <div class="lg:col-span-7 flex flex-col justify-between">
+          <div class="lg:col-span-7 flex flex-col justify-between" data-aos="fade-left" data-aos-delay="300">
             <div>
               <div class="flex flex-wrap items-center gap-2 mb-3">
                 <span class="px-2.5 py-0.5 rounded bg-brand-gold/20 text-brand-gold border border-brand-gold/40 text-xs font-bold uppercase tracking-wider">BNB Chain (BEP-721)</span>
@@ -236,7 +245,6 @@
                 Open to summon a Warrior, Rogue, Mage, or Priest. Rarities range from Common to Legendary, directly determining your turn-based win rates, leaderboard placement, and daily $KNIGHT rewards.
               </p>
 
-              <!-- DYNAMIC MINT PROGRESS BAR -->
               <div class="bg-[#181818] p-4 rounded-xl border border-brand-border/60 mb-6">
                 <div class="flex justify-between text-xs mb-2">
                   <span class="text-gray-400 font-medium">Minting Phase Allocation:</span>
@@ -260,15 +268,13 @@
                 Inspect Character Rarities
               </a>
             </div>
-
           </div>
         </div>
       </div>
 
-      <!-- 5 MINT ROUND CARDS -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 mt-8">
         
-        <div class="bg-brand-card border border-stone-700 rounded-xl p-4 flex flex-col justify-between hover:border-stone-500 transition">
+        <div class="bg-brand-card border border-stone-700 rounded-xl p-4 flex flex-col justify-between hover:border-stone-500 transition" data-aos="fade-up" data-aos-delay="100">
           <div>
             <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Team Reserve</div>
             <div class="flex items-center justify-between">
@@ -282,7 +288,7 @@
           </div>
         </div>
 
-        <div class="bg-brand-card border border-blue-900/50 rounded-xl p-4 flex flex-col justify-between hover:border-blue-500/70 transition">
+        <div class="bg-brand-card border border-blue-900/50 rounded-xl p-4 flex flex-col justify-between hover:border-blue-500/70 transition" data-aos="fade-up" data-aos-delay="200">
           <div>
             <div class="text-[10px] font-bold text-blue-400 uppercase tracking-wider mb-1">GTD Whitelist</div>
             <div class="flex items-center justify-between">
@@ -296,7 +302,7 @@
           </div>
         </div>
 
-        <div class="bg-purple-900/10 border border-purple-500/50 rounded-xl p-4 flex flex-col justify-between relative shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:border-purple-400 transition cursor-pointer" onclick="window.location.href='infofi.html'">
+        <div class="bg-purple-900/10 border border-purple-500/50 rounded-xl p-4 flex flex-col justify-between relative shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:border-purple-400 transition cursor-pointer" onclick="window.location.href='infofi.html'" data-aos="fade-up" data-aos-delay="300">
           <div class="absolute -top-2 right-3 bg-purple-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase">Top 500</div>
           <div>
             <div class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-1">InfoFi Event</div>
@@ -311,7 +317,7 @@
           </div>
         </div>
 
-        <div class="bg-brand-card border border-brand-gold/50 rounded-xl p-4 flex flex-col justify-between gold-glow relative">
+        <div class="bg-brand-card border border-brand-gold/50 rounded-xl p-4 flex flex-col justify-between gold-glow relative" data-aos="fade-up" data-aos-delay="400">
           <div>
             <div class="text-[10px] font-bold text-brand-gold uppercase tracking-wider mb-1">Standard WL</div>
             <div class="flex items-center justify-between">
@@ -325,7 +331,7 @@
           </div>
         </div>
 
-        <div class="bg-brand-card border border-emerald-900/50 rounded-xl p-4 flex flex-col justify-between hover:border-emerald-500/70 transition">
+        <div class="bg-brand-card border border-emerald-900/50 rounded-xl p-4 flex flex-col justify-between hover:border-emerald-500/70 transition" data-aos="fade-up" data-aos-delay="500">
           <div>
             <div class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-1">Public FCFS</div>
             <div class="flex items-center justify-between">
@@ -347,11 +353,10 @@
   <section id="rarity" class="py-16 sm:py-24 border-b border-brand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       
-      <div class="text-center max-w-2xl mx-auto mb-8">
+      <div class="text-center max-w-2xl mx-auto mb-8" data-aos="fade-up">
         <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Combat Multipliers</h2>
         <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-6">NFT Character Rarities & Classes</h3>
         
-        <!-- FACTION TOGGLE SWITCH -->
         <div class="inline-flex bg-[#121212] p-1.5 rounded-xl border border-brand-border">
           <button id="btn-human" onclick="setFaction('human')" class="px-6 py-2 rounded-lg bg-blue-900/40 text-blue-400 font-extrabold text-xs sm:text-sm border border-blue-500/50 transition">EL MORAD</button>
           <button id="btn-karus" onclick="setFaction('karus')" class="px-6 py-2 rounded-lg text-gray-500 font-extrabold text-xs sm:text-sm hover:text-white transition border border-transparent">KARUS</button>
@@ -362,7 +367,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- 1. COMMON TIER SLIDER -->
-        <div class="bg-brand-card border border-stone-600 rounded-2xl p-4 hover:border-gray-400 transition flex flex-col justify-between relative group">
+        <div class="bg-brand-card border border-stone-600 rounded-2xl p-4 hover:border-gray-400 transition flex flex-col justify-between relative group" data-aos="fade-up" data-aos-delay="100">
           <div class="absolute top-2 right-3 z-20 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-1 rounded-lg border border-stone-700 text-[11px] text-gray-300">
             <button onclick="slideCard('common', -1)" class="hover:text-brand-gold p-0.5"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
             <span id="common-name" class="font-bold font-mono px-1">MAGE</span>
@@ -385,7 +390,7 @@
         </div>
 
         <!-- 2. RARE TIER SLIDER -->
-        <div class="bg-brand-card border border-blue-900/60 rounded-2xl p-4 hover:border-blue-500 transition flex flex-col justify-between relative group">
+        <div class="bg-brand-card border border-blue-900/60 rounded-2xl p-4 hover:border-blue-500 transition flex flex-col justify-between relative group" data-aos="fade-up" data-aos-delay="200">
           <div class="absolute top-2 right-3 z-20 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-1 rounded-lg border border-blue-900 text-[11px] text-blue-300">
             <button onclick="slideCard('rare', -1)" class="hover:text-brand-gold p-0.5"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
             <span id="rare-name" class="font-bold font-mono px-1">MAGE</span>
@@ -408,7 +413,7 @@
         </div>
 
         <!-- 3. EPIC TIER SLIDER -->
-        <div class="bg-brand-card border border-purple-900/60 rounded-2xl p-4 hover:border-purple-500 transition flex flex-col justify-between relative group">
+        <div class="bg-brand-card border border-purple-900/60 rounded-2xl p-4 hover:border-purple-500 transition flex flex-col justify-between relative group" data-aos="fade-up" data-aos-delay="300">
           <div class="absolute top-2 right-3 z-20 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-1 rounded-lg border border-purple-900 text-[11px] text-purple-300">
             <button onclick="slideCard('epic', -1)" class="hover:text-brand-gold p-0.5"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
             <span id="epic-name" class="font-bold font-mono px-1">MAGE</span>
@@ -431,7 +436,7 @@
         </div>
 
         <!-- 4. LEGENDARY TIER SLIDER -->
-        <div class="bg-brand-card border border-brand-gold/50 rounded-2xl p-4 hover:border-brand-gold transition gold-glow flex flex-col justify-between relative group">
+        <div class="bg-brand-card border border-brand-gold/50 rounded-2xl p-4 hover:border-brand-gold transition gold-glow flex flex-col justify-between relative group" data-aos="fade-up" data-aos-delay="400">
           <div class="absolute top-2 right-3 z-20 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-1 rounded-lg border border-brand-gold/40 text-[11px] text-brand-gold">
             <button onclick="slideCard('legendary', -1)" class="hover:text-white p-0.5"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
             <span id="legendary-name" class="font-bold font-mono px-1">MAGE</span>
@@ -460,7 +465,7 @@
   <!-- WORLD BOSSES & DUNGEON RAIDS SECTION -->
   <section id="bosses" class="py-16 sm:py-24 border-b border-brand-border bg-[#070707]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16" data-aos="fade-up">
         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 text-xs font-semibold mb-3">
           <i data-lucide="flame" class="w-3.5 h-3.5"></i> PvE Raid Encounters
         </div>
@@ -469,7 +474,7 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-amber-600 transition flex flex-col justify-between">
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-amber-600 transition flex flex-col justify-between" data-aos="flip-left" data-aos-delay="100">
           <div>
             <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
               <img src="boss-orc.png" alt="Orc Chieftain" class="w-full h-full object-cover" />
@@ -486,7 +491,7 @@
           </div>
         </div>
 
-        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-emerald-600 transition flex flex-col justify-between">
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-emerald-600 transition flex flex-col justify-between" data-aos="flip-left" data-aos-delay="200">
           <div>
             <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
               <img src="boss-spider.png" alt="Venom Queen" class="w-full h-full object-cover" />
@@ -503,7 +508,7 @@
           </div>
         </div>
 
-        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-purple-600 transition flex flex-col justify-between">
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-purple-600 transition flex flex-col justify-between" data-aos="flip-left" data-aos-delay="300">
           <div>
             <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
               <img src="boss-void.png" alt="Void Behemoth" class="w-full h-full object-cover" />
@@ -520,7 +525,7 @@
           </div>
         </div>
 
-        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-red-600 transition flex flex-col justify-between">
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-red-600 transition flex flex-col justify-between" data-aos="flip-left" data-aos-delay="400">
           <div>
             <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
               <img src="boss-dragon.png" alt="Ignis the Ancient" class="w-full h-full object-cover" />
@@ -543,14 +548,14 @@
   <!-- TOKENOMICS SECTION -->
   <section id="tokenomics" class="py-16 sm:py-24 border-b border-brand-border bg-[#080808]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16" data-aos="fade-up">
         <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Sustainable Economy</h2>
         <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Tokenomics & Vesting Schedule</h3>
         <p class="text-xs sm:text-sm text-gray-400 mt-2">Fixed supply of 100,000,000 $KNIGHT deployed on BNB Chain with built-in deflationary mechanics.</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-5 bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8 flex flex-col items-center">
+        <div class="lg:col-span-5 bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8 flex flex-col items-center" data-aos="fade-right">
           <div class="relative w-56 h-56 sm:w-64 sm:h-64 mb-6">
             <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
               <circle cx="50" cy="50" r="40" fill="transparent" stroke="#1c1c1c" stroke-width="12"></circle>
@@ -579,7 +584,7 @@
           </div>
         </div>
 
-        <div class="lg:col-span-7 bg-brand-card border border-brand-border rounded-2xl p-5 sm:p-6 overflow-x-auto">
+        <div class="lg:col-span-7 bg-brand-card border border-brand-border rounded-2xl p-5 sm:p-6 overflow-x-auto" data-aos="fade-left">
           <table class="w-full text-left text-xs sm:text-sm">
             <thead>
               <tr class="border-b border-brand-border text-gray-400 uppercase text-[11px] pb-3">
@@ -622,7 +627,7 @@
   </section>
 
   <!-- PARTNERS & AUDITS -->
-  <div class="border-t border-brand-border bg-[#030303] py-6">
+  <div class="border-t border-brand-border bg-[#030303] py-6" data-aos="fade-in">
     <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center items-center gap-6 sm:gap-12 opacity-50 grayscale hover:grayscale-0 transition duration-500">
       <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i> Audited by CertiK (Pending)</span>
       <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2"><i data-lucide="layers" class="w-4 h-4 text-brand-gold"></i> Powered by BNB Chain</span>
@@ -644,7 +649,15 @@
     </div>
   </footer>
 
+  <!-- SCRIPT BÖLÜMÜ -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    // AOS ANİMASYON BAŞLATMA
+    AOS.init({
+      duration: 800, // Animasyon hızı
+      once: true,    // Bir kere oynasın
+      offset: 100    // Ekranda ne kadar görününce tetiklensin
+    });
     lucide.createIcons();
 
     // DYNAMIC MINT PROGRESS CONTROLLER
