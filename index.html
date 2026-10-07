@@ -81,26 +81,26 @@
         <a href="#mint" class="hover:text-brand-gold transition text-brand-gold flex items-center gap-1"><i data-lucide="box" class="w-4 h-4"></i> Genesis Mint</a>
         <a href="#rarity" class="hover:text-brand-gold transition">Classes</a>
         <a href="#bosses" class="hover:text-brand-gold transition text-red-400 flex items-center gap-1.5"><i data-lucide="skull" class="w-4 h-4"></i> Bosses</a>
-        <a href="infofi.html" class="px-3 py-1.5 rounded-lg bg-purple-900/30 border border-purple-500/50 text-purple-300 hover:bg-purple-500/20 hover:text-white transition flex items-center gap-1.5 animate-pulse"><i data-lucide="sparkles" class="w-4 h-4"></i> Event</a>
-        <a href="whitepaper.html" class="hover:text-brand-gold transition text-gray-300 flex items-center gap-1.5"><i data-lucide="file-text" class="w-4 h-4"></i> Whitepaper</a>
+        <a href="infofi.html" data-i18n="nav_event" class="px-3 py-1.5 rounded-lg bg-purple-900/30 border border-purple-500/50 text-purple-300 hover:bg-purple-500/20 hover:text-white transition flex items-center gap-1.5 animate-pulse"><i data-lucide="sparkles" class="w-4 h-4"></i> Event</a>
+        <a href="whitepaper.html" data-i18n="nav_wp" class="hover:text-brand-gold transition text-gray-300 flex items-center gap-1.5"><i data-lucide="file-text" class="w-4 h-4"></i> Whitepaper</a>
       </div>
 
       <!-- NAVBAR ACTIONS (Desktop & Tablet) -->
       <div class="flex items-center gap-2">
         <div class="hidden sm:flex items-center gap-3">
-            <!-- DİL SEÇENEKLERİ -->
-            <div class="flex items-center gap-2 text-xs font-extrabold text-gray-500 border-r border-brand-border pr-3">
-                <a href="#" class="text-brand-gold cursor-default">EN</a>
-                <a href="#" class="hover:text-white transition">TR</a>
-                <a href="#" class="hover:text-white transition">CN</a>
-                <a href="#" class="hover:text-white transition">KR</a>
+            <!-- DİL SEÇENEKLERİ (İşlevsel) -->
+            <div class="flex items-center gap-2 text-xs border-r border-brand-border pr-3">
+                <a onclick="setLanguage('en')" class="lang-btn text-brand-gold cursor-default font-extrabold">EN</a>
+                <a onclick="setLanguage('tr')" class="lang-btn text-gray-500 hover:text-white transition cursor-pointer font-extrabold">TR</a>
+                <a onclick="setLanguage('cn')" class="lang-btn text-gray-500 hover:text-white transition cursor-pointer font-extrabold">CN</a>
+                <a onclick="setLanguage('kr')" class="lang-btn text-gray-500 hover:text-white transition cursor-pointer font-extrabold">KR</a>
             </div>
             
             <!-- STORE & PLAY -->
-            <a href="store.html" class="px-3 py-2 rounded-lg bg-[#141414] border border-brand-gold/40 text-brand-gold font-semibold text-xs hover:bg-brand-gold/10 transition flex items-center gap-1.5">
+            <a href="store.html" data-i18n="nav_store" class="px-3 py-2 rounded-lg bg-[#141414] border border-brand-gold/40 text-brand-gold font-semibold text-xs hover:bg-brand-gold/10 transition flex items-center gap-1.5">
                 <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> Store
             </a>
-            <a href="play.html" class="px-3 py-2 rounded-lg bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-semibold text-xs hover:bg-emerald-500/20 transition flex items-center gap-1.5 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+            <a href="play.html" data-i18n="nav_play" class="px-3 py-2 rounded-lg bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-semibold text-xs hover:bg-emerald-500/20 transition flex items-center gap-1.5 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
                 <i data-lucide="gamepad-2" class="w-3.5 h-3.5"></i> Play
             </a>
         </div>
@@ -113,13 +113,14 @@
     <!-- COMPACT MOBILE SUB-BAR -->
     <div class="sm:hidden border-t border-brand-border/60 bg-[#0a0a0a] px-2 py-2 flex items-center justify-between text-[11px] overflow-x-auto gap-2">
         <div class="flex items-center gap-1.5 border-r border-brand-border pr-2 shrink-0">
-            <a href="#" class="text-brand-gold font-bold">EN</a>
-            <a href="#" class="text-gray-500 hover:text-white">TR</a>
+            <a onclick="setLanguage('en')" class="lang-btn text-brand-gold font-bold">EN</a>
+            <a onclick="setLanguage('tr')" class="lang-btn text-gray-500 hover:text-white">TR</a>
+            <a onclick="setLanguage('cn')" class="lang-btn text-gray-500 hover:text-white">CN</a>
+            <a onclick="setLanguage('kr')" class="lang-btn text-gray-500 hover:text-white">KR</a>
         </div>
-        <a href="play.html" class="px-2.5 py-1.5 rounded bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-bold whitespace-nowrap shadow-[0_0_8px_rgba(16,185,129,0.2)]">Play Game</a>
-        <a href="store.html" class="px-2.5 py-1.5 rounded bg-[#161616] border border-brand-gold/40 text-brand-gold font-bold whitespace-nowrap">Store</a>
-        <a href="infofi.html" class="px-2.5 py-1.5 rounded bg-purple-900/30 border border-purple-500/50 text-purple-300 font-bold whitespace-nowrap">Event</a>
-        <a href="whitepaper.html" class="px-2.5 py-1.5 rounded bg-[#161616] border border-brand-border text-gray-300 whitespace-nowrap">WP</a>
+        <a href="play.html" data-i18n="nav_play" class="px-2.5 py-1.5 rounded bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-bold whitespace-nowrap shadow-[0_0_8px_rgba(16,185,129,0.2)]">Play</a>
+        <a href="store.html" data-i18n="nav_store" class="px-2.5 py-1.5 rounded bg-[#161616] border border-brand-gold/40 text-brand-gold font-bold whitespace-nowrap">Store</a>
+        <a href="infofi.html" data-i18n="nav_event" class="px-2.5 py-1.5 rounded bg-purple-900/30 border border-purple-500/50 text-purple-300 font-bold whitespace-nowrap">Event</a>
     </div>
   </nav>
 
@@ -145,24 +146,24 @@
         </div>
       </div>
 
-      <div data-aos="fade-up" data-aos-delay="200" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold uppercase tracking-wider mb-6">
+      <div data-aos="fade-up" data-aos-delay="200" data-i18n="hero_badge" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold uppercase tracking-wider mb-6">
         <i data-lucide="shield" class="w-3.5 h-3.5"></i> A 22-Year MMORPG Legacy on BNB Chain
       </div>
 
-      <h1 data-aos="fade-up" data-aos-delay="400" class="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+      <h1 data-aos="fade-up" data-aos-delay="400" data-i18n="hero_title" class="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
         BATTLE, EARN & OWN: <br />
         <span class="gold-gradient-text">KARUS VS HUMAN</span> REALM
       </h1>
       
-      <p data-aos="fade-up" data-aos-delay="500" class="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-400 mb-8 sm:mb-10 leading-relaxed">
+      <p data-aos="fade-up" data-aos-delay="500" data-i18n="hero_desc" class="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-400 mb-8 sm:mb-10 leading-relaxed">
         Iconic tactical MMORPG mechanics meet Web3. Acquire character NFTs, defeat dungeon world bosses, earn tokens, and trade in our upcoming secure P2P game market.
       </p>
 
       <div data-aos="zoom-in" data-aos-delay="600" class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto sm:max-w-none">
-        <a href="#teaser" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-brand-gold text-black font-bold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">
-          <i data-lucide="play" class="w-4 h-4 fill-current"></i> Watch Cinematic Teaser
+        <a href="#teaser" data-i18n="btn_watch" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-brand-gold text-black font-bold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">
+          <i data-lucide="play" class="w-4 h-4 fill-current"></i> Watch Cinematic
         </a>
-        <a href="play.html" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-emerald-900/20 border border-emerald-500/50 text-emerald-400 font-bold text-sm hover:bg-emerald-900/40 transition flex items-center justify-center gap-2">
+        <a href="play.html" data-i18n="btn_enter" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-emerald-900/20 border border-emerald-500/50 text-emerald-400 font-bold text-sm hover:bg-emerald-900/40 transition flex items-center justify-center gap-2">
           <i data-lucide="gamepad-2" class="w-4 h-4"></i> Enter Game Client
         </a>
       </div>
@@ -649,18 +650,90 @@
     </div>
   </footer>
 
-  <!-- SCRIPT BÖLÜMÜ -->
+  <!-- SCRIPT BÖLÜMÜ (AOS, JS ve Çeviri Motoru) -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // AOS ANİMASYON BAŞLATMA
+    // 1. ÇEVİRİ SÖZLÜĞÜ (i18n)
+    const translations = {
+      en: {
+        "nav_store": "<i data-lucide='shopping-cart' class='w-3.5 h-3.5'></i> Store",
+        "nav_play": "<i data-lucide='gamepad-2' class='w-3.5 h-3.5'></i> Play",
+        "nav_event": "<i data-lucide='sparkles' class='w-4 h-4'></i> Event",
+        "nav_wp": "<i data-lucide='file-text' class='w-4 h-4'></i> Whitepaper",
+        "hero_badge": "<i data-lucide='shield' class='w-3.5 h-3.5'></i> A 22-Year MMORPG Legacy on BNB Chain",
+        "hero_title": "BATTLE, EARN & OWN: <br /><span class='gold-gradient-text'>KARUS VS HUMAN</span> REALM",
+        "hero_desc": "Iconic tactical MMORPG mechanics meet Web3. Acquire character NFTs, defeat dungeon world bosses, earn tokens, and trade in our upcoming secure P2P game market.",
+        "btn_watch": "<i data-lucide='play' class='w-4 h-4 fill-current'></i> Watch Cinematic",
+        "btn_enter": "<i data-lucide='gamepad-2' class='w-4 h-4'></i> Enter Game Client"
+      },
+      tr: {
+        "nav_store": "<i data-lucide='shopping-cart' class='w-3.5 h-3.5'></i> Mağaza",
+        "nav_play": "<i data-lucide='gamepad-2' class='w-3.5 h-3.5'></i> Oyna",
+        "nav_event": "<i data-lucide='sparkles' class='w-4 h-4'></i> Etkinlik",
+        "nav_wp": "<i data-lucide='file-text' class='w-4 h-4'></i> Teknik Belge",
+        "hero_badge": "<i data-lucide='shield' class='w-3.5 h-3.5'></i> BNB Chain Üzerinde 22 Yıllık MMORPG Mirası",
+        "hero_title": "SAVAŞ, KAZAN VE SAHİP OL: <br /><span class='gold-gradient-text'>KARUS VS İNSAN</span> IRKI",
+        "hero_desc": "Efsanevi taktiksel MMORPG mekanikleri Web3 ile buluşuyor. Karakter NFT'leri topla, zindan bosslarını mağlup et, token kazan ve P2P pazarımızda ticaret yap.",
+        "btn_watch": "<i data-lucide='play' class='w-4 h-4 fill-current'></i> Sinematiği İzle",
+        "btn_enter": "<i data-lucide='gamepad-2' class='w-4 h-4'></i> Oyuna Giriş Yap"
+      },
+      cn: {
+        "nav_store": "<i data-lucide='shopping-cart' class='w-3.5 h-3.5'></i> 商店",
+        "nav_play": "<i data-lucide='gamepad-2' class='w-3.5 h-3.5'></i> 开始游戏",
+        "nav_event": "<i data-lucide='sparkles' class='w-4 h-4'></i> 活动",
+        "nav_wp": "<i data-lucide='file-text' class='w-4 h-4'></i> 白皮书",
+        "hero_badge": "<i data-lucide='shield' class='w-3.5 h-3.5'></i> BNB Chain 上的 22 年 MMORPG 传奇",
+        "hero_title": "战斗、赚钱并拥有：<br /><span class='gold-gradient-text'>卡鲁斯 VS 人类</span> 领域",
+        "hero_desc": "标志性的战术 MMORPG 机制与 Web3 的结合。获取角色 NFT，击败地牢世界首领，赚取代币。",
+        "btn_watch": "<i data-lucide='play' class='w-4 h-4 fill-current'></i> 观看预告片",
+        "btn_enter": "<i data-lucide='gamepad-2' class='w-4 h-4'></i> 进入游戏客户端"
+      },
+      kr: {
+        "nav_store": "<i data-lucide='shopping-cart' class='w-3.5 h-3.5'></i> 상점",
+        "nav_play": "<i data-lucide='gamepad-2' class='w-3.5 h-3.5'></i> 게임 플레이",
+        "nav_event": "<i data-lucide='sparkles' class='w-4 h-4'></i> 이벤트",
+        "nav_wp": "<i data-lucide='file-text' class='w-4 h-4'></i> 백서",
+        "hero_badge": "<i data-lucide='shield' class='w-3.5 h-3.5'></i> BNB 체인의 22년 MMORPG 레거시",
+        "hero_title": "전투, 수익 창출 및 소유: <br /><span class='gold-gradient-text'>카루스 VS 인간</span> 왕국",
+        "hero_desc": "상징적인 전술 MMORPG 역학이 Web3를 만납니다. 캐릭터 NFT를 획득하고, 던전 보스를 물리치고, 토큰을 얻으세요.",
+        "btn_watch": "<i data-lucide='play' class='w-4 h-4 fill-current'></i> 시네마틱 보기",
+        "btn_enter": "<i data-lucide='gamepad-2' class='w-4 h-4'></i> 게임 클라이언트 입장"
+      }
+    };
+
+    // DİL DEĞİŞTİRME FONKSİYONU
+    function setLanguage(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.getAttribute('onclick').includes(`('${lang}')`)) {
+          btn.className = "lang-btn text-brand-gold cursor-default font-extrabold";
+        } else {
+          btn.className = "lang-btn text-gray-500 hover:text-white transition cursor-pointer font-extrabold";
+        }
+      });
+      
+      // İkonların yeni dilde de render edilmesi için yeniden çalıştır
+      lucide.createIcons();
+    }
+
+    // Başlangıç dili
+    setLanguage('en');
+
+    // 2. AOS ANİMASYON BAŞLATMA
     AOS.init({
-      duration: 800, // Animasyon hızı
-      once: true,    // Bir kere oynasın
-      offset: 100    // Ekranda ne kadar görününce tetiklensin
+      duration: 800,
+      once: true,
+      offset: 100
     });
     lucide.createIcons();
 
-    // DYNAMIC MINT PROGRESS CONTROLLER
+    // 3. DYNAMIC MINT PROGRESS CONTROLLER
     let currentMinted = 0; 
     const maxSupply = 3000;
 
@@ -676,7 +749,7 @@
     }
     updateMintUI(currentMinted);
 
-    // DUAL FACTION CLASSES & RARITY SLIDER DATA
+    // 4. DUAL FACTION CLASSES & RARITY SLIDER DATA
     const classData = {
       human: {
         common: [
@@ -719,7 +792,7 @@
         ],
         epic: [
           { name: "KARUS MAGE", img: "mage.jpg", desc: "Master of the dark arcane arts, capable of massive AoE damage." },
-          { name: "KARUS WARRIOR", img: "ware.jpg", desc: "Elite orc warlord crushing defenses with overwhelming force." },
+          { name: "KARUS WARRIOR", img: "ware.jpg", desc: "Elite orc warlord crushing defenses 기 defenses with overwhelming force." },
           { name: "KARUS PRIEST", img: "prie.jpg", desc: "High dark cleric providing critical mass healing and curses." },
           { name: "KARUS ROGUE", img: "roge.jpg", desc: "Ghostly Karus assassin striking from the deep shadows." }
         ],
@@ -771,7 +844,7 @@
 
     setFaction('human');
 
-    // BACKGROUND AUDIO AUTOPLAY ENGINE
+    // 5. BACKGROUND AUDIO AUTOPLAY ENGINE
     const audio = document.getElementById('bgMusic');
     const audioBtn = document.getElementById('audioToggle');
     const audioIcon = document.getElementById('audioIcon');
