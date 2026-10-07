@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KnightVerse | Web3 Play-to-Earn MMORPG</title>
   <link rel="icon" type="image/png" href="logoko.png" />
+  
+  <!-- Kütüphaneler -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  
-  <!-- AOS ANIMATION KÜTÜPHANESİ CSS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+  
+  <!-- Tailwind Ayarları -->
   <script>
     tailwind.config = {
       theme: {
@@ -28,12 +29,16 @@
       }
     }
   </script>
+  
+  <!-- Özel Stiller ve Animasyonlar -->
   <style>
     .gold-gradient-text { background: linear-gradient(135deg, #FFD700 0%, #FFF275 50%, #B8860B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .gold-glow { box-shadow: 0 0 25px rgba(255, 215, 0, 0.25); }
     .video-glow { box-shadow: 0 0 35px rgba(255, 215, 0, 0.15); }
+    
     @keyframes pulse-gold { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.05); } }
     .animate-pulse-gold { animation: pulse-gold 2.5s infinite ease-in-out; }
+    
     .blend-logo { mix-blend-mode: screen; }
     
     /* YÜZEN NFT ANİMASYONLARI (PARALLAX HİSSİ) */
@@ -53,42 +58,42 @@
 </head>
 <body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black overflow-x-hidden">
 
-  <!-- BACKGROUND AUDIO ELEMENT -->
+  <!-- Arkaplan Müziği -->
   <audio id="bgMusic" loop preload="auto">
     <source src="theme.mp3" type="audio/mpeg" />
   </audio>
 
-  <!-- FLOATING AUDIO CONTROLLER -->
+  <!-- Müzik Kontrol Butonu -->
   <div class="fixed bottom-4 right-4 z-50">
     <button id="audioToggle" class="flex items-center gap-2 px-3 py-2 rounded-full bg-black/80 backdrop-blur-md border border-brand-gold/40 text-brand-gold text-xs shadow-xl hover:bg-black transition">
       <i id="audioIcon" data-lucide="volume-2" class="w-4 h-4 animate-pulse-gold"></i>
-      <span id="audioText" class="font-medium text-[11px] hidden sm:inline">Theme Audio</span>
+      <span id="audioText" class="font-medium text-[11px] hidden sm:inline" data-i18n="audio_theme">Theme Audio</span>
     </button>
   </div>
 
-  <!-- TOP NAVBAR -->
+  <!-- ÜST MENÜ (NAVBAR) -->
   <nav class="fixed top-0 left-0 w-full z-50 bg-[#050505]/95 backdrop-blur-md border-b border-brand-border">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
       
-      <!-- LOGO AREA -->
+      <!-- Logo -->
       <a href="#" class="flex items-center gap-2">
         <img src="logoko.png" alt="KnightVerse Logo" class="h-11 sm:h-14 w-auto object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,215,0,0.4)]" />
       </a>
 
-      <!-- DESKTOP NAV LINKS -->
+      <!-- Desktop Linkler -->
       <div class="hidden lg:flex items-center gap-6 text-sm font-medium">
-        <a href="#teaser" class="hover:text-brand-gold transition text-amber-300 flex items-center gap-1"><i data-lucide="play-circle" class="w-4 h-4"></i> Trailer</a>
-        <a href="#mint" class="hover:text-brand-gold transition text-brand-gold flex items-center gap-1"><i data-lucide="box" class="w-4 h-4"></i> Genesis Mint</a>
-        <a href="#rarity" class="hover:text-brand-gold transition">Classes</a>
-        <a href="#bosses" class="hover:text-brand-gold transition text-red-400 flex items-center gap-1.5"><i data-lucide="skull" class="w-4 h-4"></i> Bosses</a>
-        <a href="infofi.html" data-i18n="nav_event" class="px-3 py-1.5 rounded-lg bg-purple-900/30 border border-purple-500/50 text-purple-300 hover:bg-purple-500/20 hover:text-white transition flex items-center gap-1.5 animate-pulse"><i data-lucide="sparkles" class="w-4 h-4"></i> Event</a>
-        <a href="whitepaper.html" data-i18n="nav_wp" class="hover:text-brand-gold transition text-gray-300 flex items-center gap-1.5"><i data-lucide="file-text" class="w-4 h-4"></i> Whitepaper</a>
+        <a href="#teaser" data-i18n="nav_trailer" class="hover:text-brand-gold transition text-amber-300 flex items-center gap-1">Trailer</a>
+        <a href="#mint" data-i18n="nav_mint" class="hover:text-brand-gold transition text-brand-gold flex items-center gap-1">Genesis Mint</a>
+        <a href="#rarity" data-i18n="nav_classes" class="hover:text-brand-gold transition">Classes</a>
+        <a href="#bosses" data-i18n="nav_bosses" class="hover:text-brand-gold transition text-red-400 flex items-center gap-1.5">Bosses</a>
+        <a href="infofi.html" data-i18n="nav_event" class="px-3 py-1.5 rounded-lg bg-purple-900/30 border border-purple-500/50 text-purple-300 hover:bg-purple-500/20 hover:text-white transition flex items-center gap-1.5 animate-pulse">Event</a>
+        <a href="whitepaper.html" data-i18n="nav_wp" class="hover:text-brand-gold transition text-gray-300 flex items-center gap-1.5">Whitepaper</a>
       </div>
 
-      <!-- NAVBAR ACTIONS (Desktop & Tablet) -->
+      <!-- Sağ Aksiyonlar -->
       <div class="flex items-center gap-2">
         <div class="hidden sm:flex items-center gap-3">
-            <!-- DİL SEÇENEKLERİ (İşlevsel) -->
+            <!-- Dil Seçenekleri -->
             <div class="flex items-center gap-2 text-xs border-r border-brand-border pr-3">
                 <a onclick="setLanguage('en')" class="lang-btn text-brand-gold cursor-default font-extrabold">EN</a>
                 <a onclick="setLanguage('tr')" class="lang-btn text-gray-500 hover:text-white transition cursor-pointer font-extrabold">TR</a>
@@ -96,21 +101,14 @@
                 <a onclick="setLanguage('kr')" class="lang-btn text-gray-500 hover:text-white transition cursor-pointer font-extrabold">KR</a>
             </div>
             
-            <!-- STORE & PLAY -->
-            <a href="store.html" data-i18n="nav_store" class="px-3 py-2 rounded-lg bg-[#141414] border border-brand-gold/40 text-brand-gold font-semibold text-xs hover:bg-brand-gold/10 transition flex items-center gap-1.5">
-                <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> Store
-            </a>
-            <a href="play.html" data-i18n="nav_play" class="px-3 py-2 rounded-lg bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-semibold text-xs hover:bg-emerald-500/20 transition flex items-center gap-1.5 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
-                <i data-lucide="gamepad-2" class="w-3.5 h-3.5"></i> Play
-            </a>
+            <a href="store.html" data-i18n="nav_store" class="px-3 py-2 rounded-lg bg-[#141414] border border-brand-gold/40 text-brand-gold font-semibold text-xs hover:bg-brand-gold/10 transition flex items-center gap-1.5">Store</a>
+            <a href="play.html" data-i18n="nav_play" class="px-3 py-2 rounded-lg bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-semibold text-xs hover:bg-emerald-500/20 transition flex items-center gap-1.5 shadow-[0_0_10px_rgba(16,185,129,0.2)]">Play</a>
         </div>
-        <a href="https://opensea.io" target="_blank" class="px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-lg bg-brand-gold text-black font-semibold text-xs sm:text-sm hover:bg-brand-goldHover transition flex items-center gap-1.5 ml-1">
-            <i data-lucide="external-link" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">OpenSea</span><span class="sm:hidden">Mint</span>
-        </a>
+        <a href="https://opensea.io" target="_blank" data-i18n="nav_opensea" class="px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-lg bg-brand-gold text-black font-semibold text-xs sm:text-sm hover:bg-brand-goldHover transition flex items-center gap-1.5 ml-1">OpenSea</a>
       </div>
     </div>
 
-    <!-- COMPACT MOBILE SUB-BAR -->
+    <!-- Mobil Alt Menü -->
     <div class="sm:hidden border-t border-brand-border/60 bg-[#0a0a0a] px-2 py-2 flex items-center justify-between text-[11px] overflow-x-auto gap-2">
         <div class="flex items-center gap-1.5 border-r border-brand-border pr-2 shrink-0">
             <a onclick="setLanguage('en')" class="lang-btn text-brand-gold font-bold">EN</a>
@@ -120,14 +118,13 @@
         </div>
         <a href="play.html" data-i18n="nav_play" class="px-2.5 py-1.5 rounded bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-bold whitespace-nowrap shadow-[0_0_8px_rgba(16,185,129,0.2)]">Play</a>
         <a href="store.html" data-i18n="nav_store" class="px-2.5 py-1.5 rounded bg-[#161616] border border-brand-gold/40 text-brand-gold font-bold whitespace-nowrap">Store</a>
-        <a href="infofi.html" data-i18n="nav_event" class="px-2.5 py-1.5 rounded bg-purple-900/30 border border-purple-500/50 text-purple-300 font-bold whitespace-nowrap">Event</a>
     </div>
   </nav>
 
-  <!-- HERO SECTION WITH FLOATING NFT BACKGROUND -->
+  <!-- HERO BÖLÜMÜ (Ana Ekran) -->
   <header class="relative pt-28 sm:pt-36 pb-16 sm:pb-20 overflow-hidden border-b border-brand-border bg-black">
     
-    <!-- YÜZEN NFT'LER ARKAPLANI -->
+    <!-- Yüzen NFT'ler (Sadece masaüstünde) -->
     <div class="absolute inset-0 z-0 pointer-events-none opacity-20 hidden md:block">
       <img src="epic.jpg" class="absolute top-32 left-10 w-24 h-36 object-cover rounded-xl nft-float-1 border border-purple-500/30" />
       <img src="legendary.jpg" class="absolute bottom-20 left-1/4 w-32 h-48 object-cover rounded-xl nft-float-2 border border-brand-gold/40 shadow-[0_0_20px_rgba(255,215,0,0.2)]" />
@@ -135,120 +132,100 @@
       <img src="common.jpg" class="absolute bottom-32 right-10 w-28 h-40 object-cover rounded-xl nft-float-4 border border-gray-500/30" />
     </div>
 
-    <!-- ARKA PLAN IŞIK EFEKTİ -->
+    <!-- Işık Efekti -->
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-900/10 via-black to-black z-0"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
       
       <div class="flex justify-center mb-4 sm:mb-6" data-aos="zoom-in" data-aos-duration="1000">
-        <div class="relative">
-          <img src="logoko.png" alt="KnightVerse Faction Shield" class="w-36 sm:w-56 h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.45)] mx-auto animate-pulse-gold" />
-        </div>
+        <img src="logoko.png" alt="KnightVerse" class="w-36 sm:w-56 h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.45)] mx-auto animate-pulse-gold" />
       </div>
 
-      <div data-aos="fade-up" data-aos-delay="200" data-i18n="hero_badge" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold uppercase tracking-wider mb-6">
-        <i data-lucide="shield" class="w-3.5 h-3.5"></i> A 22-Year MMORPG Legacy on BNB Chain
-      </div>
-
-      <h1 data-aos="fade-up" data-aos-delay="400" data-i18n="hero_title" class="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-        BATTLE, EARN & OWN: <br />
-        <span class="gold-gradient-text">KARUS VS HUMAN</span> REALM
-      </h1>
+      <div data-aos="fade-up" data-aos-delay="200" data-i18n="hero_badge" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold uppercase tracking-wider mb-6"></div>
       
-      <p data-aos="fade-up" data-aos-delay="500" data-i18n="hero_desc" class="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-400 mb-8 sm:mb-10 leading-relaxed">
-        Iconic tactical MMORPG mechanics meet Web3. Acquire character NFTs, defeat dungeon world bosses, earn tokens, and trade in our upcoming secure P2P game market.
-      </p>
-
+      <h1 data-aos="fade-up" data-aos-delay="400" data-i18n="hero_title" class="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight"></h1>
+      
+      <p data-aos="fade-up" data-aos-delay="500" data-i18n="hero_desc" class="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-gray-400 mb-8 sm:mb-10 leading-relaxed"></p>
+      
       <div data-aos="zoom-in" data-aos-delay="600" class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto sm:max-w-none">
-        <a href="#teaser" data-i18n="btn_watch" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-brand-gold text-black font-bold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">
-          <i data-lucide="play" class="w-4 h-4 fill-current"></i> Watch Cinematic
-        </a>
-        <a href="play.html" data-i18n="btn_enter" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-emerald-900/20 border border-emerald-500/50 text-emerald-400 font-bold text-sm hover:bg-emerald-900/40 transition flex items-center justify-center gap-2">
-          <i data-lucide="gamepad-2" class="w-4 h-4"></i> Enter Game Client
-        </a>
+        <a href="#teaser" data-i18n="btn_watch" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-brand-gold text-black font-bold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20"></a>
+        <a href="play.html" data-i18n="btn_enter" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-emerald-900/20 border border-emerald-500/50 text-emerald-400 font-bold text-sm hover:bg-emerald-900/40 transition flex items-center justify-center gap-2"></a>
       </div>
 
+      <!-- İstatistik Kartları -->
       <div data-aos="fade-up" data-aos-delay="800" class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-brand-border/60 backdrop-blur-sm bg-black/40 rounded-xl">
         <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
-          <div class="text-xl sm:text-2xl font-bold text-white">3,000 Boxes</div>
-          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Level 1 Genesis Supply</div>
+          <div class="text-xl sm:text-2xl font-bold text-white" data-i18n="stat1_val"></div>
+          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1" data-i18n="stat1_lbl"></div>
         </div>
         <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
-          <div class="text-xl sm:text-2xl font-bold text-brand-gold">BNB Chain</div>
-          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Low Gas (USDT Mint)</div>
+          <div class="text-xl sm:text-2xl font-bold text-brand-gold" data-i18n="stat2_val"></div>
+          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1" data-i18n="stat2_lbl"></div>
         </div>
         <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
-          <div class="text-xl sm:text-2xl font-bold text-white">Up to 8%</div>
-          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">E-Pin Store Discount</div>
+          <div class="text-xl sm:text-2xl font-bold text-white" data-i18n="stat3_val"></div>
+          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1" data-i18n="stat3_lbl"></div>
         </div>
         <div class="p-3 bg-brand-card/50 rounded-lg border border-brand-border/40">
-          <div class="text-xl sm:text-2xl font-bold text-brand-gold">Max Lv 59</div>
-          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1">Turn-Based PvE Engine</div>
+          <div class="text-xl sm:text-2xl font-bold text-brand-gold" data-i18n="stat4_val"></div>
+          <div class="text-[11px] sm:text-xs text-gray-400 uppercase tracking-wider mt-1" data-i18n="stat4_lbl"></div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- CINEMATIC TRAILER SHOWCASE -->
+  <!-- FRAGMAN (Teaser) -->
   <section id="teaser" class="py-16 sm:py-24 border-b border-brand-border bg-[#030303]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-10" data-aos="fade-up">
-        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold mb-3">
-          <i data-lucide="film" class="w-3.5 h-3.5"></i> Cinematic Showcase
-        </div>
-        <h2 class="text-2xl sm:text-4xl font-extrabold text-white">The Throne of Destiny</h2>
-        <p class="text-xs sm:text-sm text-gray-400 mt-2">Witness the gathering of Karus and El Morad champions before the descent into the underworld.</p>
+        <div data-i18n="teaser_badge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold mb-3"></div>
+        <h2 data-i18n="teaser_title" class="text-2xl sm:text-4xl font-extrabold text-white"></h2>
+        <p data-i18n="teaser_desc" class="text-xs sm:text-sm text-gray-400 mt-2"></p>
       </div>
-
       <div data-aos="zoom-in" data-aos-duration="1200" class="relative rounded-2xl overflow-hidden border-2 border-brand-border/80 hover:border-brand-gold/50 transition video-glow bg-black max-w-4xl mx-auto">
         <video autoplay muted loop playsinline controls class="w-full aspect-video object-cover">
           <source src="intro.mp4" type="video/mp4" />
         </video>
-        <div class="absolute bottom-3 left-3 hidden sm:flex items-center gap-2 px-3 py-1 rounded-md bg-black/70 backdrop-blur-md border border-brand-border text-[11px] text-gray-300">
-          <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Official Teaser Reel
-        </div>
+        <div data-i18n="teaser_tag" class="absolute bottom-3 left-3 hidden sm:flex items-center gap-2 px-3 py-1 rounded-md bg-black/70 backdrop-blur-md border border-brand-border text-[11px] text-gray-300"></div>
       </div>
     </div>
   </section>
 
-  <!-- GENESIS MINT SECTION -->
+  <!-- GENESIS MINT BÖLÜMÜ -->
   <section id="mint" class="py-16 sm:py-24 border-b border-brand-border bg-[#070707] relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
       
       <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
-        <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Tokenized Launch Offering</h2>
-        <h3 class="text-2xl sm:text-4xl font-extrabold text-white">Genesis Level 1 Box Mint</h3>
-        <p class="text-xs sm:text-sm text-gray-400 mt-2">Each Genesis Box contains 1 randomized Level 1 playable NFT character with native multiplier perks.</p>
+        <h2 data-i18n="mint_badge" class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2"></h2>
+        <h3 data-i18n="mint_title" class="text-2xl sm:text-4xl font-extrabold text-white"></h3>
+        <p data-i18n="mint_desc" class="text-xs sm:text-sm text-gray-400 mt-2"></p>
       </div>
 
+      <!-- Sandık Kartı -->
       <div class="bg-brand-card/90 border border-brand-gold/30 rounded-2xl p-6 sm:p-10 mb-12 gold-glow backdrop-blur-sm" data-aos="fade-up" data-aos-duration="1000">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           <div class="lg:col-span-5 flex flex-col items-center justify-center text-center relative" data-aos="zoom-in-up" data-aos-delay="200">
             <div class="relative w-64 sm:w-80 h-auto">
               <div class="absolute inset-0 bg-gradient-to-t from-amber-500/20 via-purple-600/10 to-transparent blur-2xl rounded-full"></div>
-              <img src="loot.png" alt="Genesis Loot Chest" class="relative w-full h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.4)] animate-float mx-auto" />
+              <img src="loot.png" alt="Chest" class="relative w-full h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.4)] animate-float mx-auto" />
             </div>
-            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/80 border border-brand-gold/40 text-brand-gold text-xs font-mono mt-3">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Verified Contract Asset
-            </div>
+            <div data-i18n="mint_asset" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/80 border border-brand-gold/40 text-brand-gold text-xs font-mono mt-3"></div>
           </div>
 
           <div class="lg:col-span-7 flex flex-col justify-between" data-aos="fade-left" data-aos-delay="300">
             <div>
               <div class="flex flex-wrap items-center gap-2 mb-3">
                 <span class="px-2.5 py-0.5 rounded bg-brand-gold/20 text-brand-gold border border-brand-gold/40 text-xs font-bold uppercase tracking-wider">BNB Chain (BEP-721)</span>
-                <span class="px-2.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800 text-xs font-medium">Standard USDT Mint</span>
+                <span data-i18n="mint_usdt" class="px-2.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800 text-xs font-medium"></span>
               </div>
+              <h4 data-i18n="mint_chest_title" class="text-xl sm:text-2xl font-bold text-white mb-3"></h4>
+              <p data-i18n="mint_chest_desc" class="text-xs sm:text-sm text-gray-300 leading-relaxed mb-6"></p>
               
-              <h4 class="text-xl sm:text-2xl font-bold text-white mb-3">Ancient Genesis Character Chest</h4>
-              <p class="text-xs sm:text-sm text-gray-300 leading-relaxed mb-6">
-                Open to summon a Warrior, Rogue, Mage, or Priest. Rarities range from Common to Legendary, directly determining your turn-based win rates, leaderboard placement, and daily $KNIGHT rewards.
-              </p>
-
+              <!-- İlerleme Çubuğu -->
               <div class="bg-[#181818] p-4 rounded-xl border border-brand-border/60 mb-6">
                 <div class="flex justify-between text-xs mb-2">
-                  <span class="text-gray-400 font-medium">Minting Phase Allocation:</span>
+                  <span data-i18n="mint_prog_lbl" class="text-gray-400 font-medium"></span>
                   <span id="mintCountText" class="text-brand-gold font-bold font-mono">0 / 3,000 Minted</span>
                 </div>
                 <div class="w-full bg-stone-900 rounded-full h-2.5 overflow-hidden border border-stone-800">
@@ -256,119 +233,116 @@
                 </div>
                 <div class="flex justify-between text-[11px] text-gray-500 mt-2 font-mono">
                   <span id="mintPercentText">0.0% Claimed</span>
-                  <span class="text-brand-gold/90 font-semibold">Team Allocation Round</span>
+                  <span data-i18n="mint_alloc_lbl" class="text-brand-gold/90 font-semibold"></span>
                 </div>
               </div>
             </div>
-
+            
             <div class="flex flex-col sm:flex-row items-center gap-3">
-              <a href="https://opensea.io" target="_blank" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-brand-gold text-black font-extrabold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20">
-                <i data-lucide="sparkles" class="w-4 h-4"></i> Mint on OpenSea
-              </a>
-              <a href="#rarity" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#161616] border border-brand-border text-gray-300 text-sm hover:border-brand-gold hover:text-white transition flex items-center justify-center gap-2">
-                Inspect Character Rarities
-              </a>
+              <a href="https://opensea.io" target="_blank" data-i18n="btn_mint" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-brand-gold text-black font-extrabold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20"></a>
+              <a href="#rarity" data-i18n="btn_inspect" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#161616] border border-brand-border text-gray-300 text-sm hover:border-brand-gold hover:text-white transition flex items-center justify-center gap-2"></a>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Satış Turları Kartları -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 mt-8">
-        
         <div class="bg-brand-card border border-stone-700 rounded-xl p-4 flex flex-col justify-between hover:border-stone-500 transition" data-aos="fade-up" data-aos-delay="100">
           <div>
-            <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Team Reserve</div>
-            <div class="flex items-center justify-between">
+            <div data-i18n="c1_title" class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"></div>
+            <div class="flex justify-between">
               <div class="text-2xl font-black text-white">0 USDT</div>
-              <img src="loot.png" alt="Chest" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] -mr-2" />
+              <img src="loot.png" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] -mr-2" />
             </div>
           </div>
           <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs">
-            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">10</span></div>
-            <div class="flex justify-between mt-1"><span class="text-gray-400">Access:</span> <span class="text-gray-300">Free</span></div>
+            <div class="flex justify-between"><span data-i18n="lbl_supply" class="text-gray-400"></span> <span class="font-bold text-white font-mono">10</span></div>
+            <div class="flex justify-between mt-1"><span data-i18n="lbl_access" class="text-gray-400"></span> <span data-i18n="c1_acc" class="text-gray-300"></span></div>
           </div>
         </div>
-
+        
         <div class="bg-brand-card border border-blue-900/50 rounded-xl p-4 flex flex-col justify-between hover:border-blue-500/70 transition" data-aos="fade-up" data-aos-delay="200">
           <div>
-            <div class="text-[10px] font-bold text-blue-400 uppercase tracking-wider mb-1">GTD Whitelist</div>
-            <div class="flex items-center justify-between">
+            <div data-i18n="c2_title" class="text-[10px] font-bold text-blue-400 uppercase tracking-wider mb-1"></div>
+            <div class="flex justify-between">
               <div class="text-2xl font-black text-white">1 USDT</div>
-              <img src="loot.png" alt="Chest" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(59,130,246,0.3)] -mr-2" />
+              <img src="loot.png" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(59,130,246,0.3)] -mr-2" />
             </div>
           </div>
           <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs">
-            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">290</span></div>
-            <div class="flex justify-between mt-1"><span class="text-gray-400">Access:</span> <span class="text-blue-300">Raffles</span></div>
+            <div class="flex justify-between"><span data-i18n="lbl_supply" class="text-gray-400"></span> <span class="font-bold text-white font-mono">290</span></div>
+            <div class="flex justify-between mt-1"><span data-i18n="lbl_access" class="text-gray-400"></span> <span data-i18n="c2_acc" class="text-blue-300"></span></div>
           </div>
         </div>
 
         <div class="bg-purple-900/10 border border-purple-500/50 rounded-xl p-4 flex flex-col justify-between relative shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:border-purple-400 transition cursor-pointer" onclick="window.location.href='infofi.html'" data-aos="fade-up" data-aos-delay="300">
           <div class="absolute -top-2 right-3 bg-purple-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase">Top 500</div>
           <div>
-            <div class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-1">InfoFi Event</div>
-            <div class="flex items-center justify-between">
+            <div data-i18n="c3_title" class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-1"></div>
+            <div class="flex justify-between">
               <div class="text-2xl font-black text-white">2 USDT</div>
-              <img src="loot.png" alt="Chest" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(168,85,247,0.3)] -mr-2" />
+              <img src="loot.png" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(168,85,247,0.3)] -mr-2" />
             </div>
           </div>
           <div class="mt-4 pt-3 border-t border-purple-900/50 text-xs">
-            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">1,000</span></div>
-            <a href="infofi.html" class="flex justify-between mt-1 text-purple-400 hover:text-white transition font-semibold">Join Event &rarr;</a>
+            <div class="flex justify-between"><span data-i18n="lbl_supply" class="text-gray-400"></span> <span class="font-bold text-white font-mono">1,000</span></div>
+            <a href="infofi.html" data-i18n="c3_acc" class="flex justify-between mt-1 text-purple-400 hover:text-white transition font-semibold"></a>
           </div>
         </div>
 
         <div class="bg-brand-card border border-brand-gold/50 rounded-xl p-4 flex flex-col justify-between gold-glow relative" data-aos="fade-up" data-aos-delay="400">
           <div>
-            <div class="text-[10px] font-bold text-brand-gold uppercase tracking-wider mb-1">Standard WL</div>
-            <div class="flex items-center justify-between">
+            <div data-i18n="c4_title" class="text-[10px] font-bold text-brand-gold uppercase tracking-wider mb-1"></div>
+            <div class="flex justify-between">
               <div class="text-2xl font-black text-white">3 USDT</div>
-              <img src="loot.png" alt="Chest" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,215,0,0.5)] animate-pulse-gold -mr-2" />
+              <img src="loot.png" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,215,0,0.5)] animate-pulse-gold -mr-2" />
             </div>
           </div>
           <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs">
-            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">700</span></div>
-            <div class="flex justify-between mt-1"><span class="text-gray-400">Access:</span> <span class="text-brand-gold">Discord</span></div>
+            <div class="flex justify-between"><span data-i18n="lbl_supply" class="text-gray-400"></span> <span class="font-bold text-white font-mono">700</span></div>
+            <div class="flex justify-between mt-1"><span data-i18n="lbl_access" class="text-gray-400"></span> <span data-i18n="c4_acc" class="text-brand-gold"></span></div>
           </div>
         </div>
 
         <div class="bg-brand-card border border-emerald-900/50 rounded-xl p-4 flex flex-col justify-between hover:border-emerald-500/70 transition" data-aos="fade-up" data-aos-delay="500">
           <div>
-            <div class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-1">Public FCFS</div>
-            <div class="flex items-center justify-between">
+            <div data-i18n="c5_title" class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-1"></div>
+            <div class="flex justify-between">
               <div class="text-2xl font-black text-white">5 USDT</div>
-              <img src="loot.png" alt="Chest" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(16,185,129,0.3)] -mr-2" />
+              <img src="loot.png" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(16,185,129,0.3)] -mr-2" />
             </div>
           </div>
           <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs">
-            <div class="flex justify-between"><span class="text-gray-400">Supply:</span> <span class="font-bold text-white font-mono">1,000</span></div>
-            <div class="flex justify-between mt-1"><span class="text-gray-400">Access:</span> <span class="text-emerald-300">Open</span></div>
+            <div class="flex justify-between"><span data-i18n="lbl_supply" class="text-gray-400"></span> <span class="font-bold text-white font-mono">1,000</span></div>
+            <div class="flex justify-between mt-1"><span data-i18n="lbl_access" class="text-gray-400"></span> <span data-i18n="c5_acc" class="text-emerald-300"></span></div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- CLASSES & RARITY SLIDER SHOWCASE (WITH FACTION TOGGLE) -->
+  <!-- SINIFLAR VE NADİRLİK BÖLÜMÜ (Rarity Slider) -->
   <section id="rarity" class="py-16 sm:py-24 border-b border-brand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       
       <div class="text-center max-w-2xl mx-auto mb-8" data-aos="fade-up">
-        <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Combat Multipliers</h2>
-        <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-6">NFT Character Rarities & Classes</h3>
+        <h2 data-i18n="rarity_badge" class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2"></h2>
+        <h3 data-i18n="rarity_title" class="text-2xl sm:text-3xl font-extrabold text-white mb-6"></h3>
         
+        <!-- Irk Değiştirme Butonları -->
         <div class="inline-flex bg-[#121212] p-1.5 rounded-xl border border-brand-border">
-          <button id="btn-human" onclick="setFaction('human')" class="px-6 py-2 rounded-lg bg-blue-900/40 text-blue-400 font-extrabold text-xs sm:text-sm border border-blue-500/50 transition">EL MORAD</button>
-          <button id="btn-karus" onclick="setFaction('karus')" class="px-6 py-2 rounded-lg text-gray-500 font-extrabold text-xs sm:text-sm hover:text-white transition border border-transparent">KARUS</button>
+          <button id="btn-human" onclick="setFaction('human')" data-i18n="rarity_elmorad" class="px-6 py-2 rounded-lg bg-blue-900/40 text-blue-400 font-extrabold text-xs sm:text-sm border border-blue-500/50 transition"></button>
+          <button id="btn-karus" onclick="setFaction('karus')" data-i18n="rarity_karus" class="px-6 py-2 rounded-lg text-gray-500 font-extrabold text-xs sm:text-sm hover:text-white transition border border-transparent"></button>
         </div>
-        <p class="text-xs sm:text-sm text-gray-400 mt-6">Use the arrows on each tier to switch between Mage, Warrior, Priest, and Rogue classes for the selected faction.</p>
+        
+        <p data-i18n="rarity_desc" class="text-xs sm:text-sm text-gray-400 mt-6"></p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <!-- 1. COMMON TIER SLIDER -->
-        <div class="bg-brand-card border border-stone-600 rounded-2xl p-4 hover:border-gray-400 transition flex flex-col justify-between relative group" data-aos="fade-up" data-aos-delay="100">
+        <!-- TIER 1 -->
+        <div class="bg-brand-card border border-stone-600 rounded-2xl p-4 transition flex flex-col justify-between relative group" data-aos="fade-up" data-aos-delay="100">
           <div class="absolute top-2 right-3 z-20 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-1 rounded-lg border border-stone-700 text-[11px] text-gray-300">
             <button onclick="slideCard('common', -1)" class="hover:text-brand-gold p-0.5"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
             <span id="common-name" class="font-bold font-mono px-1">MAGE</span>
@@ -376,22 +350,22 @@
           </div>
           <div>
             <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-stone-700 bg-[#161616] relative">
-              <img id="common-img" src="common.jpg" alt="Common NFT" class="w-full h-full object-cover transition-all duration-300" />
+              <img id="common-img" src="common.jpg" class="w-full h-full object-cover transition-all duration-300" />
             </div>
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-bold text-white text-lg">Common</h4>
-              <span class="text-xs text-stone-400 font-mono">Tier I</span>
+              <h4 data-i18n="t1_name" class="font-bold text-white text-lg"></h4>
+              <span data-i18n="t1_lvl" class="text-xs text-stone-400 font-mono"></span>
             </div>
-            <p id="common-desc" class="text-xs text-gray-400 mb-4 h-10">Silver framed foundational mage for early PvE encounters.</p>
+            <p id="common-desc" class="text-xs text-gray-400 mb-4 h-10"></p>
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-3 text-gray-300 space-y-1 bg-[#0a0a0a]/50 p-2.5 rounded-lg">
-            <div>• Base Win Rate: <span class="text-white font-semibold">5%</span></div>
-            <div>• Reward Multiplier: <span class="text-brand-gold font-semibold">1 $KNIGHT</span></div>
+            <div>• <span data-i18n="lbl_winrate"></span> <span class="text-white font-semibold">5%</span></div>
+            <div>• <span data-i18n="lbl_reward"></span> <span class="text-brand-gold font-semibold">1 $KNIGHT</span></div>
           </div>
         </div>
-
-        <!-- 2. RARE TIER SLIDER -->
-        <div class="bg-brand-card border border-blue-900/60 rounded-2xl p-4 hover:border-blue-500 transition flex flex-col justify-between relative group" data-aos="fade-up" data-aos-delay="200">
+        
+        <!-- TIER 2 -->
+        <div class="bg-brand-card border border-blue-900/60 rounded-2xl p-4 transition flex flex-col justify-between relative group" data-aos="fade-up" data-aos-delay="200">
           <div class="absolute top-2 right-3 z-20 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-1 rounded-lg border border-blue-900 text-[11px] text-blue-300">
             <button onclick="slideCard('rare', -1)" class="hover:text-brand-gold p-0.5"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
             <span id="rare-name" class="font-bold font-mono px-1">MAGE</span>
@@ -399,22 +373,22 @@
           </div>
           <div>
             <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-blue-900/70 bg-[#161616] relative">
-              <img id="rare-img" src="rare.jpg" alt="Rare NFT" class="w-full h-full object-cover transition-all duration-300" />
+              <img id="rare-img" src="rare.jpg" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-bold text-blue-400 text-lg">Rare</h4>
-              <span class="text-xs text-gray-400 font-mono">Tier II</span>
+              <h4 data-i18n="t2_name" class="font-bold text-blue-400 text-lg"></h4>
+              <span data-i18n="t2_lvl" class="text-xs text-gray-400 font-mono"></span>
             </div>
-            <p id="rare-desc" class="text-xs text-gray-400 mb-4 h-10">Sapphire crested battle sorceress with boosted offensive attributes.</p>
+            <p id="rare-desc" class="text-xs text-gray-400 mb-4 h-10"></p>
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-3 text-gray-300 space-y-1 bg-[#0a0a0a]/50 p-2.5 rounded-lg">
-            <div>• Base Win Rate: <span class="text-white font-semibold">15%</span></div>
-            <div>• Reward Multiplier: <span class="text-brand-gold font-semibold">2 $KNIGHT</span></div>
+            <div>• <span data-i18n="lbl_winrate"></span> <span class="text-white font-semibold">15%</span></div>
+            <div>• <span data-i18n="lbl_reward"></span> <span class="text-brand-gold font-semibold">2 $KNIGHT</span></div>
           </div>
         </div>
 
-        <!-- 3. EPIC TIER SLIDER -->
-        <div class="bg-brand-card border border-purple-900/60 rounded-2xl p-4 hover:border-purple-500 transition flex flex-col justify-between relative group" data-aos="fade-up" data-aos-delay="300">
+        <!-- TIER 3 -->
+        <div class="bg-brand-card border border-purple-900/60 rounded-2xl p-4 transition flex flex-col justify-between relative group" data-aos="fade-up" data-aos-delay="300">
           <div class="absolute top-2 right-3 z-20 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-1 rounded-lg border border-purple-900 text-[11px] text-purple-300">
             <button onclick="slideCard('epic', -1)" class="hover:text-brand-gold p-0.5"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
             <span id="epic-name" class="font-bold font-mono px-1">MAGE</span>
@@ -422,22 +396,22 @@
           </div>
           <div>
             <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-purple-900/70 bg-[#161616] relative">
-              <img id="epic-img" src="epic.jpg" alt="Epic NFT" class="w-full h-full object-cover transition-all duration-300" />
+              <img id="epic-img" src="epic.jpg" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-bold text-purple-400 text-lg">Epic</h4>
-              <span class="text-xs text-gray-400 font-mono">Tier III</span>
+              <h4 data-i18n="t3_name" class="font-bold text-purple-400 text-lg"></h4>
+              <span data-i18n="t3_lvl" class="text-xs text-gray-400 font-mono"></span>
             </div>
-            <p id="epic-desc" class="text-xs text-gray-400 mb-4 h-10">Amethyst infused shadow mage equipped for high-tier boss encounters.</p>
+            <p id="epic-desc" class="text-xs text-gray-400 mb-4 h-10"></p>
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-3 text-gray-300 space-y-1 bg-[#0a0a0a]/50 p-2.5 rounded-lg">
-            <div>• Base Win Rate: <span class="text-white font-semibold">30%</span></div>
-            <div>• Reward Multiplier: <span class="text-brand-gold font-semibold">5 $KNIGHT</span></div>
+            <div>• <span data-i18n="lbl_winrate"></span> <span class="text-white font-semibold">30%</span></div>
+            <div>• <span data-i18n="lbl_reward"></span> <span class="text-brand-gold font-semibold">5 $KNIGHT</span></div>
           </div>
         </div>
 
-        <!-- 4. LEGENDARY TIER SLIDER -->
-        <div class="bg-brand-card border border-brand-gold/50 rounded-2xl p-4 hover:border-brand-gold transition gold-glow flex flex-col justify-between relative group" data-aos="fade-up" data-aos-delay="400">
+        <!-- TIER 4 -->
+        <div class="bg-brand-card border border-brand-gold/50 rounded-2xl p-4 gold-glow transition flex flex-col justify-between relative group" data-aos="fade-up" data-aos-delay="400">
           <div class="absolute top-2 right-3 z-20 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-1 rounded-lg border border-brand-gold/40 text-[11px] text-brand-gold">
             <button onclick="slideCard('legendary', -1)" class="hover:text-white p-0.5"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
             <span id="legendary-name" class="font-bold font-mono px-1">MAGE</span>
@@ -445,17 +419,17 @@
           </div>
           <div>
             <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-brand-gold/30 bg-[#161616] relative">
-              <img id="legendary-img" src="legendary.jpg" alt="Legendary NFT" class="w-full h-full object-cover transition-all duration-300" />
+              <img id="legendary-img" src="legendary.jpg" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-bold text-brand-gold text-lg">Legendary</h4>
-              <span class="text-xs text-brand-gold font-mono">Tier IV</span>
+              <h4 data-i18n="t4_name" class="font-bold text-brand-gold text-lg"></h4>
+              <span data-i18n="t4_lvl" class="text-xs text-brand-gold font-mono"></span>
             </div>
-            <p id="legendary-desc" class="text-xs text-gray-400 mb-4 h-10">Apex solar sorceress delivering maximum battle frequency and token earnings.</p>
+            <p id="legendary-desc" class="text-xs text-gray-400 mb-4 h-10"></p>
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-3 text-gray-300 space-y-1 bg-[#0a0a0a]/50 p-2.5 rounded-lg">
-            <div>• Base Win Rate: <span class="text-white font-semibold">50%</span></div>
-            <div>• Reward Multiplier: <span class="text-brand-gold font-semibold">10 $KNIGHT</span></div>
+            <div>• <span data-i18n="lbl_winrate"></span> <span class="text-white font-semibold">50%</span></div>
+            <div>• <span data-i18n="lbl_reward"></span> <span class="text-brand-gold font-semibold">10 $KNIGHT</span></div>
           </div>
         </div>
 
@@ -463,99 +437,104 @@
     </div>
   </section>
 
-  <!-- WORLD BOSSES & DUNGEON RAIDS SECTION -->
+  <!-- BOSSLAR BÖLÜMÜ -->
   <section id="bosses" class="py-16 sm:py-24 border-b border-brand-border bg-[#070707]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16" data-aos="fade-up">
-        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 text-xs font-semibold mb-3">
-          <i data-lucide="flame" class="w-3.5 h-3.5"></i> PvE Raid Encounters
-        </div>
-        <h3 class="text-2xl sm:text-4xl font-extrabold text-white">Conquer the World Bosses</h3>
-        <p class="text-xs sm:text-sm text-gray-400 mt-2">Team up with fellow Karus and El Morad warriors. Defeat ancient subterranean monsters to secure rare armory boxes and token pools.</p>
+        <div data-i18n="boss_badge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 text-xs font-semibold mb-3"></div>
+        <h3 data-i18n="boss_title" class="text-2xl sm:text-4xl font-extrabold text-white"></h3>
+        <p data-i18n="boss_desc" class="text-xs sm:text-sm text-gray-400 mt-2"></p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-amber-600 transition flex flex-col justify-between" data-aos="flip-left" data-aos-delay="100">
+        
+        <!-- Boss 1 -->
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-amber-600 transition" data-aos="flip-left" data-aos-delay="100">
           <div>
-            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
-              <img src="boss-orc.png" alt="Orc Chieftain" class="w-full h-full object-cover" />
+            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800">
+              <img src="boss-orc.png" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-bold text-amber-500 text-base sm:text-lg">Orc Chieftain</h4>
-              <span class="text-[11px] text-gray-400 font-mono">Dungeon Lv 25</span>
+              <h4 data-i18n="b1_name" class="font-bold text-amber-500 sm:text-lg"></h4>
+              <span data-i18n="b1_lvl" class="text-[11px] text-gray-400 font-mono"></span>
             </div>
-            <p class="text-xs text-gray-400 mb-3">Brutal fortress gatekeeper armed with spiked war clubs.</p>
+            <p data-i18n="b1_desc" class="text-xs text-gray-400 mb-3"></p>
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
-            <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-amber-300 font-semibold">Fire Magic</span></div>
-            <div class="flex justify-between items-center"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold flex items-center gap-1"><img src="loot.png" class="w-3.5 h-3.5 object-contain blend-logo inline" /> Warrior Relics</span></div>
+            <div class="flex justify-between"><span data-i18n="lbl_vuln" class="text-gray-400"></span> <span data-i18n="b1_v" class="text-amber-300 font-semibold"></span></div>
+            <div class="flex justify-between items-center"><span data-i18n="lbl_loot" class="text-gray-400"></span> <span data-i18n="b1_l" class="text-white font-semibold flex items-center gap-1"></span></div>
           </div>
         </div>
 
-        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-emerald-600 transition flex flex-col justify-between" data-aos="flip-left" data-aos-delay="200">
+        <!-- Boss 2 -->
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-emerald-600 transition" data-aos="flip-left" data-aos-delay="200">
           <div>
-            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
-              <img src="boss-spider.png" alt="Venom Queen" class="w-full h-full object-cover" />
+            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800">
+              <img src="boss-spider.png" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-bold text-emerald-400 text-base sm:text-lg">Venom Queen</h4>
-              <span class="text-[11px] text-gray-400 font-mono">Abyss Lv 40</span>
+              <h4 data-i18n="b2_name" class="font-bold text-emerald-400 sm:text-lg"></h4>
+              <span data-i18n="b2_lvl" class="text-[11px] text-gray-400 font-mono"></span>
             </div>
-            <p class="text-xs text-gray-400 mb-3">Deep cave arachnid radiating acidic venom waves.</p>
+            <p data-i18n="b2_desc" class="text-xs text-gray-400 mb-3"></p>
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
-            <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-emerald-300 font-semibold">Light Spells</span></div>
-            <div class="flex justify-between items-center"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold flex items-center gap-1"><img src="loot.png" class="w-3.5 h-3.5 object-contain blend-logo inline" /> Rogue Daggers</span></div>
+            <div class="flex justify-between"><span data-i18n="lbl_vuln" class="text-gray-400"></span> <span data-i18n="b2_v" class="text-emerald-300 font-semibold"></span></div>
+            <div class="flex justify-between items-center"><span data-i18n="lbl_loot" class="text-gray-400"></span> <span data-i18n="b2_l" class="text-white font-semibold flex items-center gap-1"></span></div>
           </div>
         </div>
 
-        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-purple-600 transition flex flex-col justify-between" data-aos="flip-left" data-aos-delay="300">
+        <!-- Boss 3 -->
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-purple-600 transition" data-aos="flip-left" data-aos-delay="300">
           <div>
-            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
-              <img src="boss-void.png" alt="Void Behemoth" class="w-full h-full object-cover" />
+            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800">
+              <img src="boss-void.png" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-bold text-purple-400 text-base sm:text-lg">Void Behemoth</h4>
-              <span class="text-[11px] text-gray-400 font-mono">Nether Lv 55</span>
+              <h4 data-i18n="b3_name" class="font-bold text-purple-400 sm:text-lg"></h4>
+              <span data-i18n="b3_lvl" class="text-[11px] text-gray-400 font-mono"></span>
             </div>
-            <p class="text-xs text-gray-400 mb-3">Shadow-armored dark titan infused with abyssal flames.</p>
+            <p data-i18n="b3_desc" class="text-xs text-gray-400 mb-3"></p>
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
-            <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-purple-300 font-semibold">Holy Priest</span></div>
-            <div class="flex justify-between items-center"><span class="text-gray-400">Loot Drop:</span> <span class="text-white font-semibold flex items-center gap-1"><img src="loot.png" class="w-3.5 h-3.5 object-contain blend-logo inline" /> Epic Shards</span></div>
+            <div class="flex justify-between"><span data-i18n="lbl_vuln" class="text-gray-400"></span> <span data-i18n="b3_v" class="text-purple-300 font-semibold"></span></div>
+            <div class="flex justify-between items-center"><span data-i18n="lbl_loot" class="text-gray-400"></span> <span data-i18n="b3_l" class="text-white font-semibold flex items-center gap-1"></span></div>
           </div>
         </div>
 
-        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-red-600 transition flex flex-col justify-between" data-aos="flip-left" data-aos-delay="400">
+        <!-- Boss 4 -->
+        <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-red-600 transition" data-aos="flip-left" data-aos-delay="400">
           <div>
-            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800 bg-[#161616]">
-              <img src="boss-dragon.png" alt="Ignis the Ancient" class="w-full h-full object-cover" />
+            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800">
+              <img src="boss-dragon.png" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
-              <h4 class="font-bold text-red-500 text-base sm:text-lg">Ignis Ancient</h4>
-              <span class="text-[11px] text-red-400 font-mono">World Raid Lv 59</span>
+              <h4 data-i18n="b4_name" class="font-bold text-red-500 sm:text-lg"></h4>
+              <span data-i18n="b4_lvl" class="text-[11px] text-red-400 font-mono"></span>
             </div>
-            <p class="text-xs text-gray-400 mb-3">Ancient magma lord guarding the subterranean treasury.</p>
+            <p data-i18n="b4_desc" class="text-xs text-gray-400 mb-3"></p>
           </div>
           <div class="text-xs border-t border-brand-border/60 pt-2.5 text-gray-300 space-y-1 bg-[#0a0a0a]/60 p-2.5 rounded-lg">
-            <div class="flex justify-between"><span class="text-gray-400">Vulnerability:</span> <span class="text-cyan-300 font-semibold">Glacier Spells</span></div>
-            <div class="flex justify-between items-center"><span class="text-gray-400">Loot Drop:</span> <span class="text-brand-gold font-semibold flex items-center gap-1"><img src="loot.png" class="w-3.5 h-3.5 object-contain blend-logo inline" /> 1,000 $KNIGHT</span></div>
+            <div class="flex justify-between"><span data-i18n="lbl_vuln" class="text-gray-400"></span> <span data-i18n="b4_v" class="text-cyan-300 font-semibold"></span></div>
+            <div class="flex justify-between items-center"><span data-i18n="lbl_loot" class="text-gray-400"></span> <span data-i18n="b4_l" class="text-brand-gold font-semibold flex items-center gap-1"></span></div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- TOKENOMICS SECTION -->
+  <!-- TOKENOMICS BÖLÜMÜ -->
   <section id="tokenomics" class="py-16 sm:py-24 border-b border-brand-border bg-[#080808]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16" data-aos="fade-up">
-        <h2 class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2">Sustainable Economy</h2>
-        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Tokenomics & Vesting Schedule</h3>
-        <p class="text-xs sm:text-sm text-gray-400 mt-2">Fixed supply of 100,000,000 $KNIGHT deployed on BNB Chain with built-in deflationary mechanics.</p>
+        <h2 data-i18n="tok_badge" class="text-xs font-bold text-brand-gold tracking-widest uppercase mb-2"></h2>
+        <h3 data-i18n="tok_title" class="text-2xl sm:text-3xl font-extrabold text-white"></h3>
+        <p data-i18n="tok_desc" class="text-xs sm:text-sm text-gray-400 mt-2"></p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Grafik -->
         <div class="lg:col-span-5 bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8 flex flex-col items-center" data-aos="fade-right">
           <div class="relative w-56 h-56 sm:w-64 sm:h-64 mb-6">
             <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
@@ -573,52 +552,52 @@
               <span class="text-[10px] sm:text-xs text-brand-gold font-bold uppercase tracking-widest">$KNIGHT</span>
             </div>
           </div>
-
           <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-xs w-full">
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#FFD700] shrink-0"></span><span class="text-gray-300">P2E Rewards (35%)</span></div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#3b82f6] shrink-0"></span><span class="text-gray-300">Liquidity (15%)</span></div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#a855f7] shrink-0"></span><span class="text-gray-300">Presale (15%)</span></div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#f97316] shrink-0"></span><span class="text-gray-300">Marketing & CEX (10%)</span></div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#ef4444] shrink-0"></span><span class="text-gray-300">Team (10%)</span></div>
-            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#10b981] shrink-0"></span><span class="text-gray-300">Airdrop (10%)</span></div>
-            <div class="flex items-center gap-2 col-span-2"><span class="w-3 h-3 rounded-full bg-[#6b7280] shrink-0"></span><span class="text-gray-300">Treasury Reserve (5%)</span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#FFD700] shrink-0"></span><span data-i18n="t_pie1" class="text-gray-300"></span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#3b82f6] shrink-0"></span><span data-i18n="t_pie2" class="text-gray-300"></span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#a855f7] shrink-0"></span><span data-i18n="t_pie3" class="text-gray-300"></span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#f97316] shrink-0"></span><span data-i18n="t_pie4" class="text-gray-300"></span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#ef4444] shrink-0"></span><span data-i18n="t_pie5" class="text-gray-300"></span></div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#10b981] shrink-0"></span><span data-i18n="t_pie6" class="text-gray-300"></span></div>
+            <div class="flex items-center gap-2 col-span-2"><span class="w-3 h-3 rounded-full bg-[#6b7280] shrink-0"></span><span data-i18n="t_pie7" class="text-gray-300"></span></div>
           </div>
         </div>
 
+        <!-- Tablo -->
         <div class="lg:col-span-7 bg-brand-card border border-brand-border rounded-2xl p-5 sm:p-6 overflow-x-auto" data-aos="fade-left">
           <table class="w-full text-left text-xs sm:text-sm">
             <thead>
               <tr class="border-b border-brand-border text-gray-400 uppercase text-[11px] pb-3">
-                <th class="pb-3 font-semibold">Allocation</th>
-                <th class="pb-3 font-semibold">Amount</th>
-                <th class="pb-3 font-semibold">TGE Unlock</th>
-                <th class="pb-3 font-semibold">Vesting Terms</th>
+                <th data-i18n="th_1" class="pb-3 font-semibold"></th>
+                <th data-i18n="th_2" class="pb-3 font-semibold"></th>
+                <th data-i18n="th_3" class="pb-3 font-semibold"></th>
+                <th data-i18n="th_4" class="pb-3 font-semibold"></th>
               </tr>
             </thead>
             <tbody class="divide-y divide-brand-border/60 text-gray-300">
               <tr>
-                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-brand-gold shrink-0"></span>P2E Rewards</td>
+                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-brand-gold shrink-0"></span><span data-i18n="tb_1a"></span></td>
                 <td class="py-3">35M (35%)</td>
                 <td class="py-3 text-brand-gold font-semibold">0%</td>
-                <td class="py-3 text-gray-400">Claimable instantly via in-game PvE/PvP battle victories</td>
+                <td data-i18n="tb_1d" class="py-3 text-gray-400"></td>
               </tr>
               <tr>
-                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-500 shrink-0"></span>Liquidity Pool</td>
+                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-500 shrink-0"></span><span data-i18n="tb_2a"></span></td>
                 <td class="py-3">15M (15%)</td>
                 <td class="py-3 text-blue-400 font-semibold">100%</td>
-                <td class="py-3 text-gray-400">DEX LP locked permanently; CEX maker allocations allocated upon listing</td>
+                <td data-i18n="tb_2d" class="py-3 text-gray-400"></td>
               </tr>
               <tr>
-                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-500 shrink-0"></span>Presale</td>
+                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-purple-500 shrink-0"></span><span data-i18n="tb_3a"></span></td>
                 <td class="py-3">15M (15%)</td>
                 <td class="py-3 text-purple-400 font-semibold">40%</td>
-                <td class="py-3 text-gray-400">Remaining 60% unlocks linearly over 3 months</td>
+                <td data-i18n="tb_3d" class="py-3 text-gray-400"></td>
               </tr>
               <tr>
-                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-orange-500 shrink-0"></span>Marketing & CEX</td>
+                <td class="py-3 font-bold text-white flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-orange-500 shrink-0"></span><span data-i18n="tb_4a"></span></td>
                 <td class="py-3">10M (10%)</td>
                 <td class="py-3 text-orange-400 font-semibold">20%</td>
-                <td class="py-3 text-gray-400">Listing fees, KOL promotion & CEX airdrop campaigns</td>
+                <td data-i18n="tb_4d" class="py-3 text-gray-400"></td>
               </tr>
             </tbody>
           </table>
@@ -627,21 +606,26 @@
     </div>
   </section>
 
-  <!-- PARTNERS & AUDITS -->
+  <!-- ALT BİLGİ VE PARTNERLER -->
   <div class="border-t border-brand-border bg-[#030303] py-6" data-aos="fade-in">
     <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center items-center gap-6 sm:gap-12 opacity-50 grayscale hover:grayscale-0 transition duration-500">
-      <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i> Audited by CertiK (Pending)</span>
-      <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2"><i data-lucide="layers" class="w-4 h-4 text-brand-gold"></i> Powered by BNB Chain</span>
-      <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2"><i data-lucide="cpu" class="w-4 h-4 text-blue-500"></i> Anti-Cheat Enabled</span>
+      <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i> <span data-i18n="ft_audit"></span>
+      </span>
+      <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+        <i data-lucide="layers" class="w-4 h-4 text-brand-gold"></i> <span data-i18n="ft_chain"></span>
+      </span>
+      <span class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+        <i data-lucide="cpu" class="w-4 h-4 text-blue-500"></i> <span data-i18n="ft_ac"></span>
+      </span>
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer class="py-10 bg-black border-t border-brand-border/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 text-center sm:text-left">
       <div class="flex items-center gap-2 justify-center sm:justify-start">
         <img src="logoko.png" alt="KnightVerse" class="h-6 w-auto object-contain blend-logo opacity-70" />
-        <span>© 2026 KnightVerse. All rights reserved. Powered by BNB Chain.</span>
+        <span data-i18n="ft_copy"></span>
       </div>
       <div class="flex items-center gap-4 sm:gap-6 justify-center">
         <a href="https://x.com" target="_blank" class="hover:text-brand-gold transition">X (Twitter)</a>
@@ -650,59 +634,595 @@
     </div>
   </footer>
 
-  <!-- SCRIPT BÖLÜMÜ (AOS, JS ve Çeviri Motoru) -->
+  <!-- SCRIPT BÖLÜMÜ -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // 1. ÇEVİRİ SÖZLÜĞÜ (i18n)
+    
+    // ==========================================
+    // 1. DEV ÇEVİRİ SÖZLÜĞÜ (HER ŞEY DAHİL)
+    // ==========================================
     const translations = {
+      
       en: {
-        "nav_store": "<i data-lucide='shopping-cart' class='w-3.5 h-3.5'></i> Store",
-        "nav_play": "<i data-lucide='gamepad-2' class='w-3.5 h-3.5'></i> Play",
-        "nav_event": "<i data-lucide='sparkles' class='w-4 h-4'></i> Event",
-        "nav_wp": "<i data-lucide='file-text' class='w-4 h-4'></i> Whitepaper",
-        "hero_badge": "<i data-lucide='shield' class='w-3.5 h-3.5'></i> A 22-Year MMORPG Legacy on BNB Chain",
-        "hero_title": "BATTLE, EARN & OWN: <br /><span class='gold-gradient-text'>KARUS VS HUMAN</span> REALM",
-        "hero_desc": "Iconic tactical MMORPG mechanics meet Web3. Acquire character NFTs, defeat dungeon world bosses, earn tokens, and trade in our upcoming secure P2P game market.",
-        "btn_watch": "<i data-lucide='play' class='w-4 h-4 fill-current'></i> Watch Cinematic",
-        "btn_enter": "<i data-lucide='gamepad-2' class='w-4 h-4'></i> Enter Game Client"
+        // Navigasyon
+        nav_trailer: "Trailer", 
+        nav_mint: "Genesis Mint", 
+        nav_classes: "Classes", 
+        nav_bosses: "Bosses", 
+        nav_event: "Event", 
+        nav_wp: "Whitepaper", 
+        nav_store: "Store", 
+        nav_play: "Play", 
+        nav_opensea: "OpenSea", 
+        audio_theme: "Theme Audio",
+        
+        // Hero Bölümü
+        hero_badge: "<i data-lucide='shield' class='w-3.5 h-3.5'></i> A 22-Year MMORPG Legacy on BNB Chain",
+        hero_title: "BATTLE, EARN & OWN: <br /><span class='gold-gradient-text'>KARUS VS HUMAN</span> REALM",
+        hero_desc: "Iconic tactical MMORPG mechanics meet Web3. Acquire character NFTs, defeat dungeon world bosses, earn tokens, and trade in our upcoming secure P2P game market.",
+        btn_watch: "<i data-lucide='play' class='w-4 h-4 fill-current'></i> Watch Cinematic",
+        btn_enter: "<i data-lucide='gamepad-2' class='w-4 h-4'></i> Enter Game Client",
+        
+        // İstatistikler
+        stat1_val: "3,000 Boxes", stat1_lbl: "Genesis Supply", 
+        stat2_val: "BNB Chain", stat2_lbl: "Low Gas Mint", 
+        stat3_val: "Up to 8%", stat3_lbl: "Store Discount", 
+        stat4_val: "Max Lv 59", stat4_lbl: "PvE Engine",
+        
+        // Fragman
+        teaser_badge: "<i data-lucide='film' class='w-3.5 h-3.5'></i> Cinematic Showcase", 
+        teaser_title: "The Throne of Destiny", 
+        teaser_desc: "Witness the gathering of Karus and El Morad champions before the descent into the underworld.", 
+        teaser_tag: "<span class='w-2 h-2 rounded-full bg-red-500 animate-pulse'></span> Official Teaser Reel",
+        
+        // Mint Bölümü
+        mint_badge: "Tokenized Launch Offering", 
+        mint_title: "Genesis Level 1 Box Mint", 
+        mint_desc: "Each Genesis Box contains 1 randomized playable NFT character with native multiplier perks.",
+        mint_asset: "<span class='w-2 h-2 rounded-full bg-emerald-400 animate-pulse'></span> Verified Contract Asset", 
+        mint_usdt: "Standard USDT Mint",
+        mint_chest_title: "Ancient Genesis Character Chest", 
+        mint_chest_desc: "Open to summon a Warrior, Rogue, Mage, or Priest. Rarities range from Common to Legendary, directly determining your turn-based win rates and daily $KNIGHT rewards.",
+        mint_prog_lbl: "Minting Phase Allocation:", 
+        mint_alloc_lbl: "Team Allocation Round",
+        btn_mint: "<i data-lucide='sparkles' class='w-4 h-4'></i> Mint on OpenSea", 
+        btn_inspect: "Inspect Character Rarities",
+        
+        // Mint Kartları
+        c1_title: "Team Reserve", c2_title: "GTD Whitelist", c3_title: "InfoFi Event", c4_title: "Standard WL", c5_title: "Public FCFS",
+        lbl_supply: "Supply:", lbl_access: "Access:", 
+        c1_acc: "Free", c2_acc: "Raffles", c3_acc: "Join Event &rarr;", c4_acc: "Discord", c5_acc: "Open",
+        
+        // Sınıflar & Nadirlik
+        rarity_badge: "Combat Multipliers", 
+        rarity_title: "NFT Character Rarities & Classes", 
+        rarity_elmorad: "EL MORAD", 
+        rarity_karus: "KARUS", 
+        rarity_desc: "Use the arrows on each tier to switch between Mage, Warrior, Priest, and Rogue classes for the selected faction.",
+        t1_name: "Common", t1_lvl: "Tier I", 
+        t2_name: "Rare", t2_lvl: "Tier II", 
+        t3_name: "Epic", t3_lvl: "Tier III", 
+        t4_name: "Legendary", t4_lvl: "Tier IV",
+        lbl_winrate: "Base Win Rate:", 
+        lbl_reward: "Reward Multiplier:",
+        
+        // Bosslar
+        boss_badge: "<i data-lucide='flame' class='w-3.5 h-3.5'></i> PvE Raid Encounters", 
+        boss_title: "Conquer the World Bosses", 
+        boss_desc: "Team up with fellow Karus and El Morad warriors. Defeat ancient subterranean monsters to secure rare armory boxes and token pools.",
+        b1_name: "Orc Chieftain", b1_lvl: "Dungeon Lv 25", b1_desc: "Brutal fortress gatekeeper armed with spiked war clubs.", b1_v: "Fire Magic", b1_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Warrior Relics",
+        b2_name: "Venom Queen", b2_lvl: "Abyss Lv 40", b2_desc: "Deep cave arachnid radiating acidic venom waves.", b2_v: "Light Spells", b2_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Rogue Daggers",
+        b3_name: "Void Behemoth", b3_lvl: "Nether Lv 55", b3_desc: "Shadow-armored dark titan infused with abyssal flames.", b3_v: "Holy Priest", b3_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Epic Shards",
+        b4_name: "Ignis Ancient", b4_lvl: "World Raid Lv 59", b4_desc: "Ancient magma lord guarding the subterranean treasury.", b4_v: "Glacier Spells", b4_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 1,000 $KNIGHT",
+        lbl_vuln: "Vulnerability:", 
+        lbl_loot: "Loot Drop:",
+        
+        // Tokenomics
+        tok_badge: "Sustainable Economy", 
+        tok_title: "Tokenomics & Vesting Schedule", 
+        tok_desc: "Fixed supply of 100,000,000 $KNIGHT deployed on BNB Chain with built-in deflationary mechanics.",
+        t_pie1: "P2E Rewards (35%)", t_pie2: "Liquidity (15%)", t_pie3: "Presale (15%)", t_pie4: "Marketing (10%)", t_pie5: "Team (10%)", t_pie6: "Airdrop (10%)", t_pie7: "Treasury (5%)",
+        th_1: "Allocation", th_2: "Amount", th_3: "TGE Unlock", th_4: "Vesting Terms",
+        tb_1a: "P2E Rewards", tb_1d: "Claimable instantly via in-game PvE/PvP battle victories", 
+        tb_2a: "Liquidity Pool", tb_2d: "DEX LP locked permanently; CEX maker allocations allocated upon listing", 
+        tb_3a: "Presale", tb_3d: "Remaining 60% unlocks linearly over 3 months", 
+        tb_4a: "Marketing & CEX", tb_4d: "Listing fees, KOL promotion & CEX airdrop campaigns",
+        
+        // Footer
+        ft_audit: "Audited by CertiK (Pending)", 
+        ft_chain: "Powered by BNB Chain", 
+        ft_ac: "Anti-Cheat Enabled", 
+        ft_copy: "© 2026 KnightVerse. All rights reserved. Powered by BNB Chain."
       },
+      
       tr: {
-        "nav_store": "<i data-lucide='shopping-cart' class='w-3.5 h-3.5'></i> Mağaza",
-        "nav_play": "<i data-lucide='gamepad-2' class='w-3.5 h-3.5'></i> Oyna",
-        "nav_event": "<i data-lucide='sparkles' class='w-4 h-4'></i> Etkinlik",
-        "nav_wp": "<i data-lucide='file-text' class='w-4 h-4'></i> Teknik Belge",
-        "hero_badge": "<i data-lucide='shield' class='w-3.5 h-3.5'></i> BNB Chain Üzerinde 22 Yıllık MMORPG Mirası",
-        "hero_title": "SAVAŞ, KAZAN VE SAHİP OL: <br /><span class='gold-gradient-text'>KARUS VS İNSAN</span> IRKI",
-        "hero_desc": "Efsanevi taktiksel MMORPG mekanikleri Web3 ile buluşuyor. Karakter NFT'leri topla, zindan bosslarını mağlup et, token kazan ve P2P pazarımızda ticaret yap.",
-        "btn_watch": "<i data-lucide='play' class='w-4 h-4 fill-current'></i> Sinematiği İzle",
-        "btn_enter": "<i data-lucide='gamepad-2' class='w-4 h-4'></i> Oyuna Giriş Yap"
+        nav_trailer: "Fragman", 
+        nav_mint: "Genesis Mint", 
+        nav_classes: "Sınıflar", 
+        nav_bosses: "Bosslar", 
+        nav_event: "Etkinlik", 
+        nav_wp: "Teknik Belge", 
+        nav_store: "Mağaza", 
+        nav_play: "Oyna", 
+        nav_opensea: "OpenSea", 
+        audio_theme: "Müziği Aç",
+        
+        hero_badge: "<i data-lucide='shield' class='w-3.5 h-3.5'></i> BNB Chain Üzerinde 22 Yıllık MMORPG Mirası",
+        hero_title: "SAVAŞ, KAZAN VE SAHİP OL: <br /><span class='gold-gradient-text'>KARUS VS İNSAN</span> IRKI",
+        hero_desc: "Efsanevi taktiksel MMORPG mekanikleri Web3 ile buluşuyor. Karakter NFT'leri topla, zindan bosslarını mağlup et, token kazan ve P2P pazarımızda ticaret yap.",
+        btn_watch: "<i data-lucide='play' class='w-4 h-4 fill-current'></i> Sinematiği İzle",
+        btn_enter: "<i data-lucide='gamepad-2' class='w-4 h-4'></i> Oyuna Giriş Yap",
+        
+        stat1_val: "3.000 Kutu", stat1_lbl: "Genesis Arzı", 
+        stat2_val: "BNB Chain", stat2_lbl: "Düşük Ağ Ücreti", 
+        stat3_val: "%8'e Kadar", stat3_lbl: "Mağaza İndirimi", 
+        stat4_val: "Maks Sv 59", stat4_lbl: "PvE Motoru",
+        
+        teaser_badge: "<i data-lucide='film' class='w-3.5 h-3.5'></i> Sinematik Gösterim", 
+        teaser_title: "Kader Tahtı", 
+        teaser_desc: "Yeraltı dünyasına inmeden önce Karus ve El Morad şampiyonlarının toplanışına tanık ol.", 
+        teaser_tag: "<span class='w-2 h-2 rounded-full bg-red-500 animate-pulse'></span> Resmi Fragman",
+        
+        mint_badge: "Tokenize Lansman Arzı", 
+        mint_title: "Genesis Seviye 1 Kutu Satışı", 
+        mint_desc: "Her Genesis Kutusu, çarpan avantajlarına sahip rastgele 1 adet oynanabilir karakter NFT'si içerir.",
+        mint_asset: "<span class='w-2 h-2 rounded-full bg-emerald-400 animate-pulse'></span> Onaylı Akıllı Sözleşme", 
+        mint_usdt: "Standart USDT Satışı",
+        mint_chest_title: "Kadim Genesis Karakter Sandığı", 
+        mint_chest_desc: "Warrior, Rogue, Mage veya Priest çağırmak için aç. Yaygın'dan Efsanevi'ye uzanan nadirlikler, kazanma oranlarını ve günlük $KNIGHT ödüllerini belirler.",
+        mint_prog_lbl: "Tahsis İlerlemesi:", 
+        mint_alloc_lbl: "Takım Tahsis Turu",
+        btn_mint: "<i data-lucide='sparkles' class='w-4 h-4'></i> OpenSea'de Al", 
+        btn_inspect: "Nadirlikleri İncele",
+        
+        c1_title: "Takım Rezervi", c2_title: "Garantili Liste", c3_title: "InfoFi Etkinliği", c4_title: "Standart Liste", c5_title: "Herkese Açık",
+        lbl_supply: "Arz:", lbl_access: "Erişim:", 
+        c1_acc: "Ücretsiz", c2_acc: "Çekiliş", c3_acc: "Etkinliğe Katıl &rarr;", c4_acc: "Discord", c5_acc: "Açık",
+        
+        rarity_badge: "Savaş Çarpanları", 
+        rarity_title: "NFT Nadirlikleri ve Sınıflar", 
+        rarity_elmorad: "EL MORAD", 
+        rarity_karus: "KARUS", 
+        rarity_desc: "Seçili ırkın sınıfları (Mage, Warrior, Priest, Rogue) arasında geçiş yapmak için oklara tıkla.",
+        t1_name: "Yaygın", t1_lvl: "Aşama I", 
+        t2_name: "Nadir", t2_lvl: "Aşama II", 
+        t3_name: "Destansı", t3_lvl: "Aşama III", 
+        t4_name: "Efsanevi", t4_lvl: "Aşama IV",
+        lbl_winrate: "Kazanma Oranı:", 
+        lbl_reward: "Ödül Çarpanı:",
+        
+        boss_badge: "<i data-lucide='flame' class='w-3.5 h-3.5'></i> PvE Baskınları", 
+        boss_title: "Dünya Bosslarını Fethet", 
+        boss_desc: "Karus ve El Morad savaşçılarıyla takım ol. Kadim yaratıkları mağlup ederek nadir eşya kutuları ve token ödülleri kazan.",
+        b1_name: "Ork Şefi", b1_lvl: "Zindan Sv 25", b1_desc: "Dikenli savaş sopalarıyla silahlanmış acımasız kale bekçisi.", b1_v: "Ateş Büyüsü", b1_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Savaşçı Yadigarı",
+        b2_name: "Zehir Kraliçesi", b2_lvl: "Uçurum Sv 40", b2_desc: "Asidik zehir dalgaları yayan derin mağara örümceği.", b2_v: "Işık Büyüsü", b2_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Suikastçi Hançeri",
+        b3_name: "Hiçlik Devi", b3_lvl: "Cehennem Sv 55", b3_desc: "Cehennem alevleriyle aşılanmış karanlık zırhlı titan.", b3_v: "Kutsal Rahip", b3_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Destansı Parçalar",
+        b4_name: "Kadim Ignis", b4_lvl: "Baskın Sv 59", b4_desc: "Yeraltı hazinesini koruyan antik magma efendisi.", b4_v: "Buz Büyüsü", b4_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 1.000 $KNIGHT",
+        lbl_vuln: "Zayıflık:", 
+        lbl_loot: "Ganimet:",
+        
+        tok_badge: "Sürdürülebilir Ekonomi", 
+        tok_title: "Tokenomics ve Kilit Açılımı", 
+        tok_desc: "Deflasyonist mekaniklere sahip BNB Chain üzerinde 100.000.000 $KNIGHT sabit arzı.",
+        t_pie1: "Oyna-Kazan (35%)", t_pie2: "Likidite (15%)", t_pie3: "Ön Satış (15%)", t_pie4: "Pazarlama (10%)", t_pie5: "Takım (10%)", t_pie6: "Airdrop (10%)", t_pie7: "Hazine (5%)",
+        th_1: "Tahsis", th_2: "Miktar", th_3: "TGE Açılış", th_4: "Kilit Şartları",
+        tb_1a: "Oyna-Kazan", tb_1d: "Oyun içi PvE/PvP zaferleriyle anında talep edilebilir", 
+        tb_2a: "Likidite Havuzu", tb_2d: "DEX LP kalıcı olarak kilitli; CEX payı listeleme ile dağıtılır", 
+        tb_3a: "Ön Satış", tb_3d: "Kalan %60, 3 ay boyunca doğrusal olarak açılır", 
+        tb_4a: "Pazarlama", tb_4d: "Listeleme ücretleri, KOL tanıtımları ve CEX kampanyaları",
+        
+        ft_audit: "CertiK Tarafından Denetlendi", 
+        ft_chain: "BNB Chain Altyapısı", 
+        ft_ac: "Anti-Hile Aktif", 
+        ft_copy: "© 2026 KnightVerse. Tüm hakları saklıdır."
       },
+      
       cn: {
-        "nav_store": "<i data-lucide='shopping-cart' class='w-3.5 h-3.5'></i> 商店",
-        "nav_play": "<i data-lucide='gamepad-2' class='w-3.5 h-3.5'></i> 开始游戏",
-        "nav_event": "<i data-lucide='sparkles' class='w-4 h-4'></i> 活动",
-        "nav_wp": "<i data-lucide='file-text' class='w-4 h-4'></i> 白皮书",
-        "hero_badge": "<i data-lucide='shield' class='w-3.5 h-3.5'></i> BNB Chain 上的 22 年 MMORPG 传奇",
-        "hero_title": "战斗、赚钱并拥有：<br /><span class='gold-gradient-text'>卡鲁斯 VS 人类</span> 领域",
-        "hero_desc": "标志性的战术 MMORPG 机制与 Web3 的结合。获取角色 NFT，击败地牢世界首领，赚取代币。",
-        "btn_watch": "<i data-lucide='play' class='w-4 h-4 fill-current'></i> 观看预告片",
-        "btn_enter": "<i data-lucide='gamepad-2' class='w-4 h-4'></i> 进入游戏客户端"
+        nav_trailer: "预告片", 
+        nav_mint: "创世铸造", 
+        nav_classes: "职业", 
+        nav_bosses: "老板", 
+        nav_event: "活动", 
+        nav_wp: "白皮书", 
+        nav_store: "商店", 
+        nav_play: "开始游戏", 
+        nav_opensea: "OpenSea", 
+        audio_theme: "音乐",
+        
+        hero_badge: "<i data-lucide='shield' class='w-3.5 h-3.5'></i> BNB Chain 上的 22 年 MMORPG 传奇",
+        hero_title: "战斗、赚钱并拥有：<br /><span class='gold-gradient-text'>卡鲁斯 VS 人类</span> 领域",
+        hero_desc: "标志性的战术 MMORPG 机制与 Web3 的结合。获取角色 NFT，击败地牢世界首领，赚取代币，并在我们即将推出的安全 P2P 游戏市场中进行交易。",
+        btn_watch: "<i data-lucide='play' class='w-4 h-4 fill-current'></i> 观看预告片",
+        btn_enter: "<i data-lucide='gamepad-2' class='w-4 h-4'></i> 进入游戏",
+        
+        stat1_val: "3,000 个盒子", stat1_lbl: "创世供应", 
+        stat2_val: "BNB Chain", stat2_lbl: "低 Gas", 
+        stat3_val: "高达 8%", stat3_lbl: "商店折扣", 
+        stat4_val: "最高等级 59", stat4_lbl: "PvE 引擎",
+        
+        teaser_badge: "<i data-lucide='film' class='w-3.5 h-3.5'></i> 电影展示", 
+        teaser_title: "命运的王座", 
+        teaser_desc: "见证卡鲁斯和埃尔莫拉德冠军在进入黑社会之前的聚会。", 
+        teaser_tag: "<span class='w-2 h-2 rounded-full bg-red-500 animate-pulse'></span> 官方预告片",
+        
+        mint_badge: "代币化发行", 
+        mint_title: "创世 1 级盒子铸造", 
+        mint_desc: "每个盒子包含 1 个随机可玩的 NFT 角色。",
+        mint_asset: "<span class='w-2 h-2 rounded-full bg-emerald-400 animate-pulse'></span> 验证合约资产", 
+        mint_usdt: "标准 USDT",
+        mint_chest_title: "古代创世角色宝箱", 
+        mint_chest_desc: "开启以召唤战士、盗贼、法师或牧师。稀有度从普通到传奇。",
+        mint_prog_lbl: "铸造阶段分配:", 
+        mint_alloc_lbl: "团队分配回合",
+        btn_mint: "<i data-lucide='sparkles' class='w-4 h-4'></i> 在 OpenSea 上铸造", 
+        btn_inspect: "检查角色稀有度",
+        
+        c1_title: "团队储备", c2_title: "保证白名单", c3_title: "InfoFi 活动", c4_title: "标准白名单", c5_title: "公开销售",
+        lbl_supply: "供应:", lbl_access: "访问:", 
+        c1_acc: "自由的", c2_acc: "抽奖", c3_acc: "参加活动 &rarr;", c4_acc: "Discord", c5_acc: "打开",
+        
+        rarity_badge: "战斗乘数", 
+        rarity_title: "NFT 角色稀有度与职业", 
+        rarity_elmorad: "埃尔莫拉德 (人类)", 
+        rarity_karus: "卡鲁斯 (兽人)", 
+        rarity_desc: "使用每个层级上的箭头在职业之间切换。",
+        t1_name: "普通", t1_lvl: "第一层", 
+        t2_name: "稀有", t2_lvl: "第二层", 
+        t3_name: "史诗", t3_lvl: "第三层", 
+        t4_name: "传奇", t4_lvl: "第四层",
+        lbl_winrate: "基本胜率:", 
+        lbl_reward: "奖励乘数:",
+        
+        boss_badge: "<i data-lucide='flame' class='w-3.5 h-3.5'></i> PvE 突袭", 
+        boss_title: "征服世界首领", 
+        boss_desc: "与卡鲁斯和埃尔莫拉德的勇士组队，击败远古怪物。",
+        b1_name: "兽人酋长", b1_lvl: "地牢 25级", b1_desc: "残忍的堡垒守门人。", b1_v: "火魔法", b1_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 战士遗物",
+        b2_name: "毒液女王", b2_lvl: "深渊 40级", b2_desc: "深洞蜘蛛辐射酸性毒液波。", b2_v: "光魔法", b2_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 盗贼匕首",
+        b3_name: "虚空巨兽", b3_lvl: "下界 55级", b3_desc: "充满深渊火焰的暗影盔甲黑暗泰坦。", b3_v: "神圣牧师", b3_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 史诗碎片",
+        b4_name: "古代伊格尼斯", b4_lvl: "世界突袭 59级", b4_desc: "守卫地下宝库的远古岩浆领主。", b4_v: "冰川魔法", b4_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 1,000 $KNIGHT",
+        lbl_vuln: "弱点:", 
+        lbl_loot: "战利品:",
+        
+        tok_badge: "可持续经济", 
+        tok_title: "代币经济学", 
+        tok_desc: "固定供应量为 100,000,000 $KNIGHT。",
+        t_pie1: "P2E 奖励 (35%)", t_pie2: "流动性 (15%)", t_pie3: "预售 (15%)", t_pie4: "营销 (10%)", t_pie5: "团队 (10%)", t_pie6: "空投 (10%)", t_pie7: "宝库 (5%)",
+        th_1: "分配", th_2: "数量", th_3: "TGE 解锁", th_4: "归属条款",
+        tb_1a: "P2E 奖励", tb_1d: "通过游戏内 PvE/PvP 胜利立即可领取", 
+        tb_2a: "流动性池", tb_2d: "DEX LP 永久锁定", 
+        tb_3a: "预售", tb_3d: "剩余 60% 在 3 个月内线性解锁", 
+        tb_4a: "营销", tb_4d: "上市费用、KOL 推广",
+        
+        ft_audit: "CertiK 审核", 
+        ft_chain: "BNB Chain 提供支持", 
+        ft_ac: "防作弊系统", 
+        ft_copy: "© 2026 KnightVerse. 版权所有."
       },
+      
       kr: {
-        "nav_store": "<i data-lucide='shopping-cart' class='w-3.5 h-3.5'></i> 상점",
-        "nav_play": "<i data-lucide='gamepad-2' class='w-3.5 h-3.5'></i> 게임 플레이",
-        "nav_event": "<i data-lucide='sparkles' class='w-4 h-4'></i> 이벤트",
-        "nav_wp": "<i data-lucide='file-text' class='w-4 h-4'></i> 백서",
-        "hero_badge": "<i data-lucide='shield' class='w-3.5 h-3.5'></i> BNB 체인의 22년 MMORPG 레거시",
-        "hero_title": "전투, 수익 창출 및 소유: <br /><span class='gold-gradient-text'>카루스 VS 인간</span> 왕국",
-        "hero_desc": "상징적인 전술 MMORPG 역학이 Web3를 만납니다. 캐릭터 NFT를 획득하고, 던전 보스를 물리치고, 토큰을 얻으세요.",
-        "btn_watch": "<i data-lucide='play' class='w-4 h-4 fill-current'></i> 시네마틱 보기",
-        "btn_enter": "<i data-lucide='gamepad-2' class='w-4 h-4'></i> 게임 클라이언트 입장"
+        nav_trailer: "트레일러", 
+        nav_mint: "창세기 민트", 
+        nav_classes: "클래스", 
+        nav_bosses: "보스", 
+        nav_event: "이벤트", 
+        nav_wp: "백서", 
+        nav_store: "상점", 
+        nav_play: "게임 플레이", 
+        nav_opensea: "OpenSea", 
+        audio_theme: "오디오",
+        
+        hero_badge: "<i data-lucide='shield' class='w-3.5 h-3.5'></i> BNB 체인의 22년 MMORPG 레거시",
+        hero_title: "전투, 수익 창출 및 소유: <br /><span class='gold-gradient-text'>카루스 VS 인간</span> 왕국",
+        hero_desc: "상징적인 전술 MMORPG 역학이 Web3를 만납니다. 캐릭터 NFT를 획득하고, 던전 보스를 물리치고, 토큰을 얻으세요.",
+        btn_watch: "<i data-lucide='play' class='w-4 h-4 fill-current'></i> 시네마틱 보기",
+        btn_enter: "<i data-lucide='gamepad-2' class='w-4 h-4'></i> 게임 입장",
+        
+        stat1_val: "3,000 박스", stat1_lbl: "창세기 공급", 
+        stat2_val: "BNB 체인", stat2_lbl: "낮은 가스 요금", 
+        stat3_val: "최대 8%", stat3_lbl: "상점 할인", 
+        stat4_val: "최대 레벨 59", stat4_lbl: "PvE 엔진",
+        
+        teaser_badge: "<i data-lucide='film' class='w-3.5 h-3.5'></i> 시네마틱 쇼케이스", 
+        teaser_title: "운명의 왕좌", 
+        teaser_desc: "지하 세계로 내려가기 전 챔피언들의 모임을 목격하세요.", 
+        teaser_tag: "<span class='w-2 h-2 rounded-full bg-red-500 animate-pulse'></span> 공식 트레일러",
+        
+        mint_badge: "토큰화된 런칭", 
+        mint_title: "제네시스 레벨 1 박스 민트", 
+        mint_desc: "각 제네시스 박스에는 무작위 플레이 가능한 NFT 캐릭터가 1개 들어 있습니다.",
+        mint_asset: "<span class='w-2 h-2 rounded-full bg-emerald-400 animate-pulse'></span> 검증된 계약", 
+        mint_usdt: "표준 USDT",
+        mint_chest_title: "고대 창세기 캐릭터 상자", 
+        mint_chest_desc: "전사, 도적, 마법사 또는 사제를 소환하십시오.",
+        mint_prog_lbl: "민팅 할당:", 
+        mint_alloc_lbl: "팀 할당",
+        btn_mint: "<i data-lucide='sparkles' class='w-4 h-4'></i> OpenSea에서 민트", 
+        btn_inspect: "캐릭터 희귀도 검사",
+        
+        c1_title: "팀 리저브", c2_title: "화이트리스트", c3_title: "InfoFi 이벤트", c4_title: "표준 WL", c5_title: "공개 판매",
+        lbl_supply: "공급:", lbl_access: "액세스:", 
+        c1_acc: "무료", c2_acc: "추첨", c3_acc: "이벤트 참여 &rarr;", c4_acc: "Discord", c5_acc: "열린",
+        
+        rarity_badge: "전투 승수", 
+        rarity_title: "NFT 캐릭터 희귀도 및 클래스", 
+        rarity_elmorad: "엘 모라드 (인간)", 
+        rarity_karus: "카루스 (오크)", 
+        rarity_desc: "화살표를 사용하여 클래스 간에 전환합니다.",
+        t1_name: "일반", t1_lvl: "티어 I", 
+        t2_name: "희귀", t2_lvl: "티어 II", 
+        t3_name: "에픽", t3_lvl: "티어 III", 
+        t4_name: "전설", t4_lvl: "티어 IV",
+        lbl_winrate: "기본 승률:", 
+        lbl_reward: "보상 승수:",
+        
+        boss_badge: "<i data-lucide='flame' class='w-3.5 h-3.5'></i> PvE 레이드", 
+        boss_title: "월드 보스 정복", 
+        boss_desc: "전사들과 팀을 이뤄 고대 몬스터를 물리치세요.",
+        b1_name: "오크 족장", b1_lvl: "던전 레벨 25", b1_desc: "잔인한 요새 문지기.", b1_v: "불 마법", b1_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 전사의 유물",
+        b2_name: "베놈 퀸", b2_lvl: "심연 레벨 40", b2_desc: "산성 독파를 방출하는 깊은 동굴 거미.", b2_v: "빛 마법", b2_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 도적의 단검",
+        b3_name: "공허의 베히모스", b3_lvl: "네더 레벨 55", b3_desc: "심연의 불꽃이 주입된 암흑 타이탄.", b3_v: "신성한 사제", b3_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 에픽 파편",
+        b4_name: "고대 이그니스", b4_lvl: "레이드 레벨 59", b4_desc: "지하 금고를 지키는 고대 마그마 군주.", b4_v: "빙하 마법", b4_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 1,000 $KNIGHT",
+        lbl_vuln: "약점:", 
+        lbl_loot: "전리품:",
+        
+        tok_badge: "지속 가능한 경제", 
+        tok_title: "토크노믹스", 
+        tok_desc: "총 공급량은 100,000,000 $KNIGHT 입니다.",
+        t_pie1: "P2E 보상 (35%)", t_pie2: "유동성 (15%)", t_pie3: "프리세일 (15%)", t_pie4: "마케팅 (10%)", t_pie5: "팀 (10%)", t_pie6: "에어드롭 (10%)", t_pie7: "금고 (5%)",
+        th_1: "할당", th_2: "수량", th_3: "TGE 잠금 해제", th_4: "가득 조건",
+        tb_1a: "P2E 보상", tb_1d: "게임 내 PvE/PvP 승리를 통해 즉시 청구 가능", 
+        tb_2a: "유동성 풀", tb_2d: "DEX LP 영구 잠금", 
+        tb_3a: "프리세일", tb_3d: "나머지 60%는 3개월에 걸쳐 잠금 해제됩니다", 
+        tb_4a: "마케팅", tb_4d: "상장 수수료, KOL 프로모션",
+        
+        ft_audit: "CertiK 감사", 
+        ft_chain: "BNB 체인 제공", 
+        ft_ac: "안티 치트 활성화", 
+        ft_copy: "© 2026 KnightVerse. 판권 소유."
       }
     };
 
-    // DİL DEĞİŞTİRME FONKSİYONU
+
+    // ==========================================
+    // 2. DİNAMİK SINIF KARTLARI VERİSİ (Slider)
+    // ==========================================
+    const classData = {
+      
+      en: {
+        human: {
+          common: [
+            { name: "HUMAN MAGE", img: "common.jpg", desc: "Silver framed foundational human mage for early PvE encounters." }, 
+            { name: "HUMAN WARRIOR", img: "commonw.jpg", desc: "Heavy plate vanguard trained for front-line melee combat." }, 
+            { name: "HUMAN PRIEST", img: "commonp.jpg", desc: "Devoted acolyte providing basic tactical buffs and healing." }, 
+            { name: "HUMAN ROGUE", img: "commonr.jpg", desc: "Nimble human scout equipped with light dual daggers." }
+          ],
+          rare: [
+            { name: "HUMAN MAGE", img: "rare.jpg", desc: "Sapphire crested battle sorceress with boosted offensive attributes." }, 
+            { name: "HUMAN WARRIOR", img: "rarew.jpg", desc: "Armored human vanguard wielding enhanced strike power." }, 
+            { name: "HUMAN PRIEST", img: "rarep.jpg", desc: "Consecrated cleric offering balanced divine shielding." }, 
+            { name: "HUMAN ROGUE", img: "rarer.jpg", desc: "Shadow assassin specializing in swift stealth strikes." }
+          ],
+          epic: [
+            { name: "HUMAN MAGE", img: "epic.jpg", desc: "Amethyst infused shadow mage equipped for high-tier boss encounters." }, 
+            { name: "HUMAN WARRIOR", img: "epicw.jpg", desc: "Veteran berserker commander with devastating cleave attacks." }, 
+            { name: "HUMAN PRIEST", img: "epicp.jpg", desc: "Battle-hardened holy templar wielding divine judgment." }, 
+            { name: "HUMAN ROGUE", img: "epicr.jpg", desc: "Elite human shadow master dealing critical venom damage." }
+          ],
+          legendary: [
+            { name: "HUMAN MAGE", img: "legendary.jpg", desc: "Apex solar sorceress delivering maximum battle frequency and token earnings." }, 
+            { name: "HUMAN WARRIOR", img: "legendaryw.jpg", desc: "Immortal titan champion possessing supreme attack and defense multipliers." }, 
+            { name: "HUMAN PRIEST", img: "legendaryp.jpg", desc: "Supreme divine avatar providing absolute party immunity and sanctuary." }, 
+            { name: "HUMAN ROGUE", img: "legendaryr.jpg", desc: "Legendary master assassin executing flawless critical takedowns." }
+          ]
+        },
+        karus: {
+          common: [
+            { name: "KARUS MAGE", img: "magc.jpg", desc: "Gothic orc sorcerer wielding primal fire and ice spells." }, 
+            { name: "KARUS WARRIOR", img: "warc.jpg", desc: "Brutal orc warrior wrapped in dark steel and leather." }, 
+            { name: "KARUS PRIEST", img: "pric.jpg", desc: "Defensive orc cleric casting dark warding spells." }, 
+            { name: "KARUS ROGUE", img: "rogc.jpg", desc: "Agile orc assassin ready for deadly stealth encounters." }
+          ],
+          rare: [
+            { name: "KARUS MAGE", img: "magr.jpg", desc: "Dark occultist channeling intense magical destruction." }, 
+            { name: "KARUS WARRIOR", img: "warr.jpg", desc: "Fierce Karus gladiator armed with spiked heavy weaponry." }, 
+            { name: "KARUS PRIEST", img: "prir.jpg", desc: "Tribal shadow priest bolstering allies with dark blessings." }, 
+            { name: "KARUS ROGUE", img: "rogr.jpg", desc: "Lethal Karus shadow tracker excelling in critical hits." }
+          ],
+          epic: [
+            { name: "KARUS MAGE", img: "mage.jpg", desc: "Master of the dark arcane arts, capable of massive AoE damage." }, 
+            { name: "KARUS WARRIOR", img: "ware.jpg", desc: "Elite orc warlord crushing defenses with overwhelming force." }, 
+            { name: "KARUS PRIEST", img: "prie.jpg", desc: "High dark cleric providing critical mass healing and curses." }, 
+            { name: "KARUS ROGUE", img: "roge.jpg", desc: "Ghostly Karus assassin striking from the deep shadows." }
+          ],
+          legendary: [
+            { name: "KARUS MAGE", img: "magl.jpg", desc: "Legendary elemental overlord of the Karus realm." }, 
+            { name: "KARUS WARRIOR", img: "warl.jpg", desc: "Unstoppable Karus juggernaut with god-tier physical power." }, 
+            { name: "KARUS PRIEST", img: "pril.jpg", desc: "Demonic sanctuary keeper holding the line against any raid." }, 
+            { name: "KARUS ROGUE", img: "rogl.jpg", desc: "Apex predator of the night, dealing devastating poison damage." }
+          ]
+        }
+      },
+      
+      tr: {
+        human: {
+          common: [
+            { name: "İNSAN MAGE", img: "common.jpg", desc: "Erken PvE savaşları için gümüş çerçeveli temel insan büyücüsü." }, 
+            { name: "İNSAN WARRIOR", img: "commonw.jpg", desc: "Ön saf yakın dövüşü için eğitilmiş ağır zırhlı öncü." }, 
+            { name: "İNSAN PRIEST", img: "commonp.jpg", desc: "Temel taktiksel güçlendirmeler ve iyileştirme sağlayan adanmış rahip." }, 
+            { name: "İNSAN ROGUE", img: "commonr.jpg", desc: "Hafif çift hançerlerle donatılmış çevik insan izcisi." }
+          ],
+          rare: [
+            { name: "İNSAN MAGE", img: "rare.jpg", desc: "Artırılmış saldırı özelliklerine sahip safir tepeli savaş büyücüsü." }, 
+            { name: "İNSAN WARRIOR", img: "rarew.jpg", desc: "Gelişmiş vuruş gücüne sahip zırhlı insan öncüsü." }, 
+            { name: "İNSAN PRIEST", img: "rarep.jpg", desc: "Dengeli ilahi kalkanlar sunan kutsanmış din adamı." }, 
+            { name: "İNSAN ROGUE", img: "rarer.jpg", desc: "Hızlı gizlilik saldırılarında uzmanlaşmış gölge suikastçısı." }
+          ],
+          epic: [
+            { name: "İNSAN MAGE", img: "epic.jpg", desc: "Yüksek seviye boss savaşları için donatılmış ametist aşılanmış gölge büyücüsü." }, 
+            { name: "İNSAN WARRIOR", img: "epicw.jpg", desc: "Yıkıcı yarma saldırılarına sahip usta berserker komutanı." }, 
+            { name: "İNSAN PRIEST", img: "epicp.jpg", desc: "Savaşta sertleşmiş, ilahi yargı dağıtan kutsal tapınak şövalyesi." }, 
+            { name: "İNSAN ROGUE", img: "epicr.jpg", desc: "Kritik zehir hasarı veren elit insan gölge efendisi." }
+          ],
+          legendary: [
+            { name: "İNSAN MAGE", img: "legendary.jpg", desc: "Maksimum savaş frekansı ve token kazancı sağlayan apex güneş büyücüsü." }, 
+            { name: "İNSAN WARRIOR", img: "legendaryw.jpg", desc: "Üstün saldırı ve savunma çarpanlarına sahip ölümsüz titan şampiyonu." }, 
+            { name: "İNSAN PRIEST", img: "legendaryp.jpg", desc: "Mutlak parti dokunulmazlığı sağlayan yüce ilahi avatar." }, 
+            { name: "İNSAN ROGUE", img: "legendaryr.jpg", desc: "Kusursuz kritik alt etmeler gerçekleştiren efsanevi usta suikastçı." }
+          ]
+        },
+        karus: {
+          common: [
+            { name: "KARUS MAGE", img: "magc.jpg", desc: "İlkel ateş ve buz büyüleri yapan gotik ork büyücüsü." }, 
+            { name: "KARUS WARRIOR", img: "warc.jpg", desc: "Karanlık çelik ve deriye sarılmış acımasız ork savaşçısı." }, 
+            { name: "KARUS PRIEST", img: "pric.jpg", desc: "Karanlık koruma büyüleri yapan savunmacı ork din adamı." }, 
+            { name: "KARUS ROGUE", img: "rogc.jpg", desc: "Ölümcül gizlilik karşılaşmalarına hazır çevik ork suikastçısı." }
+          ],
+          rare: [
+            { name: "KARUS MAGE", img: "magr.jpg", desc: "Yoğun büyü yıkımını yönlendiren karanlık okültist." }, 
+            { name: "KARUS WARRIOR", img: "warr.jpg", desc: "Çivili ağır silahlarla donanmış vahşi Karus gladyatörü." }, 
+            { name: "KARUS PRIEST", img: "prir.jpg", desc: "Müttefiklerini karanlık kutsamalarla destekleyen kabile gölge rahibi." }, 
+            { name: "KARUS ROGUE", img: "rogr.jpg", desc: "Kritik vuruşlarda mükemmel olan ölümcül Karus gölge izleyicisi." }
+          ],
+          epic: [
+            { name: "KARUS MAGE", img: "mage.jpg", desc: "Büyük AoE hasarı verebilen karanlık mistik sanatların ustası." }, 
+            { name: "KARUS WARRIOR", img: "ware.jpg", desc: "Ezip geçen gücüyle savunmaları kıran elit ork savaş beyi." }, 
+            { name: "KARUS PRIEST", img: "prie.jpg", desc: "Kritik kitle iyileştirmesi ve lanetler sağlayan yüksek karanlık din adamı." }, 
+            { name: "KARUS ROGUE", img: "roge.jpg", desc: "Derin gölgelerden saldıran hayaletimsi Karus suikastçısı." }
+          ],
+          legendary: [
+            { name: "KARUS MAGE", img: "magl.jpg", desc: "Karus diyarının efsanevi elemental efendisi." }, 
+            { name: "KARUS WARRIOR", img: "warl.jpg", desc: "Tanrısal fiziksel güce sahip durdurulamaz Karus gücü." }, 
+            { name: "KARUS PRIEST", img: "pril.jpg", desc: "Herhangi bir baskına karşı hattı tutan şeytani sığınak bekçisi." }, 
+            { name: "KARUS ROGUE", img: "rogl.jpg", desc: "Yıkıcı zehir hasarı veren gecenin apex yırtıcısı." }
+          ]
+        }
+      },
+      
+      cn: { 
+        human: { 
+          common: [
+            { name: "人类法师", img: "common.jpg", desc: "早期 PvE 的基础法师。" },
+            { name: "人类战士", img: "commonw.jpg", desc: "前线近战先锋。" },
+            { name: "人类牧师", img: "commonp.jpg", desc: "提供战术增益和治疗。" },
+            { name: "人类盗贼", img: "commonr.jpg", desc: "装备轻型双匕首的侦察兵。" }
+          ], 
+          rare: [
+            { name: "人类法师", img: "rare.jpg", desc: "拥有强大攻击属性的战斗法师。" },
+            { name: "人类战士", img: "rarew.jpg", desc: "强大的装甲先锋。" },
+            { name: "人类牧师", img: "rarep.jpg", desc: "提供神圣护盾的牧师。" },
+            { name: "人类盗贼", img: "rarer.jpg", desc: "擅长快速隐身打击的刺客。" }
+          ], 
+          epic: [
+            { name: "人类法师", img: "epic.jpg", desc: "为高级首领战配备的暗影法师。" },
+            { name: "人类战士", img: "epicw.jpg", desc: "拥有毁灭性顺劈斩的狂战士指挥官。" },
+            { name: "人类牧师", img: "epicp.jpg", desc: "挥舞神圣审判的圣殿骑士。" },
+            { name: "人类盗贼", img: "epicr.jpg", desc: "造成致命毒伤的精英暗影大师。" }
+          ], 
+          legendary: [
+            { name: "人类法师", img: "legendary.jpg", desc: "提供最大战斗频率和代币收益的太阳法师。" },
+            { name: "人类战士", img: "legendaryw.jpg", desc: "拥有最高攻防乘数的不朽泰坦。" },
+            { name: "人类牧师", img: "legendaryp.jpg", desc: "提供绝对团队免疫的最高神圣化身。" },
+            { name: "人类盗贼", img: "legendaryr.jpg", desc: "执行完美暴击击杀的传奇刺客大师。" }
+          ] 
+        }, 
+        karus: { 
+          common: [
+            { name: "兽人法师", img: "magc.jpg", desc: "挥舞原始冰火法术的兽人法师。" },
+            { name: "兽人战士", img: "warc.jpg", desc: "身披黑钢的残忍兽人战士。" },
+            { name: "兽人牧师", img: "pric.jpg", desc: "施展黑暗结界的防御牧师。" },
+            { name: "兽人盗贼", img: "rogc.jpg", desc: "准备进行致命隐身遭遇战的敏捷刺客。" }
+          ], 
+          rare: [
+            { name: "兽人法师", img: "magr.jpg", desc: "引导强烈魔法破坏的黑暗术士。" },
+            { name: "兽人战士", img: "warr.jpg", desc: "装备重型武器的凶猛角斗士。" },
+            { name: "兽人牧师", img: "prir.jpg", desc: "用黑暗祝福支援盟友的部落暗影牧师。" },
+            { name: "兽人盗贼", img: "rogr.jpg", desc: "擅长暴击的致命暗影追踪者。" }
+          ], 
+          epic: [
+            { name: "兽人法师", img: "mage.jpg", desc: "黑暗秘术大师，能造成大量 AoE 伤害。" },
+            { name: "兽人战士", img: "ware.jpg", desc: "以压倒性力量摧毁防御的精英兽人督军。" },
+            { name: "兽人牧师", img: "prie.jpg", desc: "提供群体治疗和诅咒的高级黑暗牧师。" },
+            { name: "兽人盗贼", img: "roge.jpg", desc: "从深影中出击的幽灵刺客。" }
+          ], 
+          legendary: [
+            { name: "兽人法师", img: "magl.jpg", desc: "卡鲁斯领域的传奇元素领主。" },
+            { name: "兽人战士", img: "warl.jpg", desc: "拥有神级物理力量的不可阻挡的剑圣。" },
+            { name: "兽人牧师", img: "pril.jpg", desc: "对抗任何突袭的恶魔圣所守护者。" },
+            { name: "兽人盗贼", img: "rogl.jpg", desc: "造成毁灭性毒伤的暗夜顶级掠食者。" }
+          ] 
+        } 
+      },
+      
+      kr: { 
+        human: { 
+          common: [
+            { name: "인간 마법사", img: "common.jpg", desc: "초기 PvE 조우를 위한 기본 인간 마법사." },
+            { name: "인간 전사", img: "commonw.jpg", desc: "최전선 근접 전투 뱅가드." },
+            { name: "인간 사제", img: "commonp.jpg", desc: "기본 버프와 치유를 제공하는 사제." },
+            { name: "인간 도적", img: "commonr.jpg", desc: "가벼운 쌍단검을 장착한 민첩한 정찰병." }
+          ], 
+          rare: [
+            { name: "인간 마법사", img: "rare.jpg", desc: "강력한 공격 속성을 지닌 전투 마법사." },
+            { name: "인간 전사", img: "rarew.jpg", desc: "향상된 타격력을 지닌 장갑 전사." },
+            { name: "인간 사제", img: "rarep.jpg", desc: "균형 잡힌 신성한 방패를 제공하는 사제." },
+            { name: "인간 도적", img: "rarer.jpg", desc: "빠른 은신 공격에 특화된 암살자." }
+          ], 
+          epic: [
+            { name: "인간 마법사", img: "epic.jpg", desc: "고위급 보스전에 장비된 암흑 마법사." },
+            { name: "인간 전사", img: "epicw.jpg", desc: "파괴적인 쪼개기 공격을 하는 광전사 사령관." },
+            { name: "인간 사제", img: "epicp.jpg", desc: "신성한 심판을 휘두르는 성전사." },
+            { name: "인간 도적", img: "epicr.jpg", desc: "치명적인 독 피해를 입히는 엘리트 암흑 마스터." }
+          ], 
+          legendary: [
+            { name: "인간 마법사", img: "legendary.jpg", desc: "최고의 전투 빈도와 토큰 수익을 제공하는 태양 마법사." },
+            { name: "인간 전사", img: "legendaryw.jpg", desc: "최고의 공격 및 방어 배율을 지닌 불멸의 타이탄." },
+            { name: "인간 사제", img: "legendaryp.jpg", desc: "절대적인 파티 면역을 제공하는 최고 신성한 아바타." },
+            { name: "인간 도적", img: "legendaryr.jpg", desc: "완벽한 치명타 테이크다운을 실행하는 전설적인 암살자 마스터." }
+          ] 
+        }, 
+        karus: { 
+          common: [
+            { name: "오크 마법사", img: "magc.jpg", desc: "원시 불과 얼음 마법을 휘두르는 고딕 오크 마법사." },
+            { name: "오크 전사", img: "warc.jpg", desc: "검은 강철로 둘러싸인 잔인한 오크 전사." },
+            { name: "오크 사제", img: "pric.jpg", desc: "어둠의 보호 마법을 시전하는 방어 사제." },
+            { name: "오크 도적", img: "rogc.jpg", desc: "치명적인 은신 전투를 준비하는 민첩한 암살자." }
+          ], 
+          rare: [
+            { name: "오크 마법사", img: "magr.jpg", desc: "강렬한 마법 파괴를 집중시키는 어둠의 주술사." },
+            { name: "오크 전사", img: "warr.jpg", desc: "스파이크가 달린 중무기를 장착한 사나운 검투사." },
+            { name: "오크 사제", img: "prir.jpg", desc: "어둠의 축복으로 아군을 지원하는 부족 암흑 사제." },
+            { name: "오크 도적", img: "rogr.jpg", desc: "치명타가 뛰어난 치명적인 암흑 추적자." }
+          ], 
+          epic: [
+            { name: "오크 마법사", img: "mage.jpg", desc: "막대한 광역 피해를 입히는 어둠의 비전 예술의 대가." },
+            { name: "오크 전사", img: "ware.jpg", desc: "압도적인 힘으로 방어를 부수는 엘리트 오크 장군." },
+            { name: "오크 사제", img: "prie.jpg", desc: "대규모 치유와 저주를 제공하는 고위 암흑 사제." },
+            { name: "오크 도적", img: "roge.jpg", desc: "깊은 그림자 속에서 공격하는 유령 암살자." }
+          ], 
+          legendary: [
+            { name: "오크 마법사", img: "magl.jpg", desc: "카루스 왕국의 전설적인 정령 군주." },
+            { name: "오크 전사", img: "warl.jpg", desc: "신급 물리력을 지닌 멈출 수 없는 저거너트." },
+            { name: "오크 사제", img: "pril.jpg", desc: "모든 레이드에 맞서 선을 유지하는 악마 성소 수호자." },
+            { name: "오크 도적", img: "rogl.jpg", desc: "파괴적인 독 피해를 입히는 밤의 최상위 포식자." }
+          ] 
+        } 
+      }
+    };
+
+
+    // ==========================================
+    // 3. FONKSİYONLAR VE KONTROLLER
+    // ==========================================
+    
+    let currentLang = 'en';
+    let currentFaction = 'human';
+    let currentIndexes = { common: 0, rare: 0, epic: 0, legendary: 0 };
+
+    // Dil Değiştirme Sistemi
     function setLanguage(lang) {
+      currentLang = lang;
+      
+      // Sabit Metinleri Çevir
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
@@ -710,6 +1230,7 @@
         }
       });
 
+      // Menü Buton Stillerini Ayarla
       document.querySelectorAll('.lang-btn').forEach(btn => {
         if (btn.getAttribute('onclick').includes(`('${lang}')`)) {
           btn.className = "lang-btn text-brand-gold cursor-default font-extrabold";
@@ -718,96 +1239,17 @@
         }
       });
       
-      // İkonların yeni dilde de render edilmesi için yeniden çalıştır
+      // Sınıf (Slider) Metinlerini Güncelle
+      updateCardUI('common'); 
+      updateCardUI('rare'); 
+      updateCardUI('epic'); 
+      updateCardUI('legendary');
+
+      // İkonları yeniden oluştur
       lucide.createIcons();
     }
 
-    // Başlangıç dili
-    setLanguage('en');
-
-    // 2. AOS ANİMASYON BAŞLATMA
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 100
-    });
-    lucide.createIcons();
-
-    // 3. DYNAMIC MINT PROGRESS CONTROLLER
-    let currentMinted = 0; 
-    const maxSupply = 3000;
-
-    function updateMintUI(count) {
-      const percentage = ((count / maxSupply) * 100).toFixed(1);
-      const textElem = document.getElementById('mintCountText');
-      const barElem = document.getElementById('mintProgressBar');
-      const percentElem = document.getElementById('mintPercentText');
-
-      if (textElem) textElem.innerText = `${count.toLocaleString()} / ${maxSupply.toLocaleString()} Minted`;
-      if (barElem) barElem.style.width = `${percentage}%`;
-      if (percentElem) percentElem.innerText = `${percentage}% Claimed`;
-    }
-    updateMintUI(currentMinted);
-
-    // 4. DUAL FACTION CLASSES & RARITY SLIDER DATA
-    const classData = {
-      human: {
-        common: [
-          { name: "HUMAN MAGE", img: "common.jpg", desc: "Silver framed foundational human mage for early PvE encounters." },
-          { name: "HUMAN WARRIOR", img: "commonw.jpg", desc: "Heavy plate vanguard trained for front-line melee combat." },
-          { name: "HUMAN PRIEST", img: "commonp.jpg", desc: "Devoted acolyte providing basic tactical buffs and healing." },
-          { name: "HUMAN ROGUE", img: "commonr.jpg", desc: "Nimble human scout equipped with light dual daggers." }
-        ],
-        rare: [
-          { name: "HUMAN MAGE", img: "rare.jpg", desc: "Sapphire crested battle sorceress with boosted offensive attributes." },
-          { name: "HUMAN WARRIOR", img: "rarew.jpg", desc: "Armored human vanguard wielding enhanced strike power." },
-          { name: "HUMAN PRIEST", img: "rarep.jpg", desc: "Consecrated cleric offering balanced divine shielding." },
-          { name: "HUMAN ROGUE", img: "rarer.jpg", desc: "Shadow assassin specializing in swift stealth strikes." }
-        ],
-        epic: [
-          { name: "HUMAN MAGE", img: "epic.jpg", desc: "Amethyst infused shadow mage equipped for high-tier boss encounters." },
-          { name: "HUMAN WARRIOR", img: "epicw.jpg", desc: "Veteran berserker commander with devastating cleave attacks." },
-          { name: "HUMAN PRIEST", img: "epicp.jpg", desc: "Battle-hardened holy templar wielding divine judgment." },
-          { name: "HUMAN ROGUE", img: "epicr.jpg", desc: "Elite human shadow master dealing critical venom damage." }
-        ],
-        legendary: [
-          { name: "HUMAN MAGE", img: "legendary.jpg", desc: "Apex solar sorceress delivering maximum battle frequency and token earnings." },
-          { name: "HUMAN WARRIOR", img: "legendaryw.jpg", desc: "Immortal titan champion possessing supreme attack and defense multipliers." },
-          { name: "HUMAN PRIEST", img: "legendaryp.jpg", desc: "Supreme divine avatar providing absolute party immunity and sanctuary." },
-          { name: "HUMAN ROGUE", img: "legendaryr.jpg", desc: "Legendary master assassin executing flawless critical takedowns." }
-        ]
-      },
-      karus: {
-        common: [
-          { name: "KARUS MAGE", img: "magc.jpg", desc: "Gothic orc sorcerer wielding primal fire and ice spells." },
-          { name: "KARUS WARRIOR", img: "warc.jpg", desc: "Brutal orc warrior wrapped in dark steel and leather." },
-          { name: "KARUS PRIEST", img: "pric.jpg", desc: "Defensive orc cleric casting dark warding spells." },
-          { name: "KARUS ROGUE", img: "rogc.jpg", desc: "Agile orc assassin ready for deadly stealth encounters." }
-        ],
-        rare: [
-          { name: "KARUS MAGE", img: "magr.jpg", desc: "Dark occultist channeling intense magical destruction." },
-          { name: "KARUS WARRIOR", img: "warr.jpg", desc: "Fierce Karus gladiator armed with spiked heavy weaponry." },
-          { name: "KARUS PRIEST", img: "prir.jpg", desc: "Tribal shadow priest bolstering allies with dark blessings." },
-          { name: "KARUS ROGUE", img: "rogr.jpg", desc: "Lethal Karus shadow tracker excelling in critical hits." }
-        ],
-        epic: [
-          { name: "KARUS MAGE", img: "mage.jpg", desc: "Master of the dark arcane arts, capable of massive AoE damage." },
-          { name: "KARUS WARRIOR", img: "ware.jpg", desc: "Elite orc warlord crushing defenses 기 defenses with overwhelming force." },
-          { name: "KARUS PRIEST", img: "prie.jpg", desc: "High dark cleric providing critical mass healing and curses." },
-          { name: "KARUS ROGUE", img: "roge.jpg", desc: "Ghostly Karus assassin striking from the deep shadows." }
-        ],
-        legendary: [
-          { name: "KARUS MAGE", img: "magl.jpg", desc: "Legendary elemental overlord of the Karus realm." },
-          { name: "KARUS WARRIOR", img: "warl.jpg", desc: "Unstoppable Karus juggernaut with god-tier physical power." },
-          { name: "KARUS PRIEST", img: "pril.jpg", desc: "Demonic sanctuary keeper holding the line against any raid." },
-          { name: "KARUS ROGUE", img: "rogl.jpg", desc: "Apex predator of the night, dealing devastating poison damage." }
-        ]
-      }
-    };
-
-    let currentFaction = 'human';
-    let currentIndexes = { common: 0, rare: 0, epic: 0, legendary: 0 };
-
+    // Irk Değiştirme Sistemi (Human / Karus)
     function setFaction(faction) {
       currentFaction = faction;
       const btnHuman = document.getElementById('btn-human');
@@ -822,29 +1264,52 @@
       }
 
       currentIndexes = { common: 0, rare: 0, epic: 0, legendary: 0 };
-      updateCardUI('common');
-      updateCardUI('rare');
-      updateCardUI('epic');
+      
+      updateCardUI('common'); 
+      updateCardUI('rare'); 
+      updateCardUI('epic'); 
       updateCardUI('legendary');
     }
 
+    // Slider Sağ/Sol Okları
     function slideCard(tier, direction) {
-      const list = classData[currentFaction][tier];
+      const list = classData[currentLang][currentFaction][tier];
       currentIndexes[tier] = (currentIndexes[tier] + direction + list.length) % list.length;
       updateCardUI(tier);
     }
 
+    // Arayüzdeki Sınıf Kartlarını Güncelle
     function updateCardUI(tier) {
-      const list = classData[currentFaction][tier];
+      const list = classData[currentLang][currentFaction][tier];
       const item = list[currentIndexes[tier]];
       document.getElementById(`${tier}-name`).innerText = item.name;
       document.getElementById(`${tier}-img`).src = item.img;
       document.getElementById(`${tier}-desc`).innerText = item.desc;
     }
 
+    // ==========================================
+    // 4. BAŞLATMA (İnit) İŞLEMLERİ
+    // ==========================================
+    
+    // Varsayılan dil ve ırk
+    setLanguage('en');
     setFaction('human');
 
-    // 5. BACKGROUND AUDIO AUTOPLAY ENGINE
+    // Kaydırma Animasyonlarını (AOS) Başlat
+    AOS.init({ duration: 800, once: true, offset: 100 });
+    
+    // Sandık Mint İlerleme Çubuğu
+    let currentMinted = 0; 
+    const maxSupply = 3000;
+    function updateMintUI(count) {
+      const percentage = ((count / maxSupply) * 100).toFixed(1);
+      document.getElementById('mintCountText').innerText = `${count.toLocaleString()} / ${maxSupply.toLocaleString()} Minted`;
+      document.getElementById('mintProgressBar').style.width = `${percentage}%`;
+      document.getElementById('mintPercentText').innerText = `${percentage}% Claimed`;
+    }
+    updateMintUI(currentMinted);
+
+    // Arkaplan Müziği Sistemi
     const audio = document.getElementById('bgMusic');
     const audioBtn = document.getElementById('audioToggle');
     const audioIcon = document.getElementById('audioIcon');
@@ -852,31 +1317,30 @@
 
     function playAudioOnFirstClick() {
       if (!hasInteracted) {
-        audio.play().then(() => {
-          hasInteracted = true;
-          audioIcon.classList.add('animate-pulse-gold');
-        }).catch(err => {
-          console.log("Audio waiting for explicit interaction");
-        });
+        audio.play().then(() => { 
+          hasInteracted = true; 
+          audioIcon.classList.add('animate-pulse-gold'); 
+        }).catch(e => { console.log("Otomatik oynatma engellendi."); });
       }
     }
-
+    
     window.addEventListener('click', playAudioOnFirstClick, { once: true });
     window.addEventListener('touchstart', playAudioOnFirstClick, { once: true });
-
+    
     audioBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (audio.paused) {
-        audio.play();
-        audioIcon.setAttribute('data-lucide', 'volume-2');
-        audioIcon.classList.add('animate-pulse-gold');
-      } else {
-        audio.pause();
-        audioIcon.setAttribute('data-lucide', 'volume-x');
-        audioIcon.classList.remove('animate-pulse-gold');
+      if (audio.paused) { 
+        audio.play(); 
+        audioIcon.setAttribute('data-lucide', 'volume-2'); 
+        audioIcon.classList.add('animate-pulse-gold'); 
+      } else { 
+        audio.pause(); 
+        audioIcon.setAttribute('data-lucide', 'volume-x'); 
+        audioIcon.classList.remove('animate-pulse-gold'); 
       }
       lucide.createIcons();
     });
+
   </script>
 </body>
 </html>
