@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KnightVerse | Game - Coming Soon</title>
+  <link rel="icon" type="image/png" href="logoko.png" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              gold: '#FFD700',
+              goldHover: '#e6c200',
+              dark: '#0a0a0a',
+              card: '#121212',
+              border: '#262626'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .gold-gradient-text { background: linear-gradient(135deg, #FFD700 0%, #FFF275 50%, #B8860B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .blend-logo { mix-blend-mode: screen; }
+
+    @keyframes pulse-gold { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.05); } }
+    .animate-pulse-gold { animation: pulse-gold 2.5s infinite ease-in-out; }
+
+    /* Yanıp sönen Coming Soon */
+    @keyframes blink-gold {
+      0%, 100% { opacity: 1; text-shadow: 0 0 12px rgba(255,215,0,0.7), 0 0 35px rgba(255,215,0,0.35); }
+      50%      { opacity: 0.25; text-shadow: 0 0 4px rgba(255,215,0,0.2); }
+    }
+    .blink-gold { animation: blink-gold 1.8s infinite ease-in-out; }
+
+    /* Yüzen NFT animasyonları (ana sayfadaki ile aynı) */
+    @keyframes float-1 { 0%, 100% { transform: translateY(0px) rotate(-5deg); } 50% { transform: translateY(-20px) rotate(2deg); } }
+    @keyframes float-2 { 0%, 100% { transform: translateY(0px) rotate(5deg) scale(1); } 50% { transform: translateY(-25px) rotate(-3deg) scale(1.05); } }
+    @keyframes float-3 { 0%, 100% { transform: translateY(0px) rotate(-10deg); } 50% { transform: translateY(15px) rotate(5deg); } }
+    @keyframes float-4 { 0%, 100% { transform: translateY(0px) rotate(10deg); } 50% { transform: translateY(-15px) rotate(-5deg); } }
+    .nft-float-1 { animation: float-1 7s ease-in-out infinite; }
+    .nft-float-2 { animation: float-2 8s ease-in-out infinite; }
+    .nft-float-3 { animation: float-3 9s ease-in-out infinite; }
+    .nft-float-4 { animation: float-4 10s ease-in-out infinite; }
+  </style>
+</head>
+<body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black overflow-x-hidden">
+
+  <!-- Arkaplan Müziği -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="theme.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Müzik Kontrol Butonu -->
+  <div class="fixed bottom-4 right-4 z-50">
+    <button id="audioToggle" class="flex items-center gap-2 px-3 py-2 rounded-full bg-black/80 backdrop-blur-md border border-brand-gold/40 text-brand-gold text-xs shadow-xl hover:bg-black transition">
+      <i id="audioIcon" data-lucide="volume-2" class="w-4 h-4 animate-pulse-gold"></i>
+      <span class="font-medium text-[11px] hidden sm:inline">Theme Audio</span>
+    </button>
+  </div>
+
+  <!-- ÜST MENÜ (NAVBAR) -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-[#050505]/95 backdrop-blur-md border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+
+      <a href="index.html" class="flex items-center gap-2">
+        <img src="logoko.png" alt="KnightVerse Logo" class="h-11 sm:h-14 w-auto object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,215,0,0.4)]" />
+      </a>
+
+      <div class="hidden lg:flex items-center gap-6 text-sm font-medium">
+        <a href="index.html#teaser" class="hover:text-brand-gold transition text-amber-300">Trailer</a>
+        <a href="index.html#mint" class="hover:text-brand-gold transition text-brand-gold">Genesis Mint</a>
+        <a href="index.html#rarity" class="hover:text-brand-gold transition">Classes</a>
+        <a href="index.html#bosses" class="hover:text-brand-gold transition text-red-400">Bosses</a>
+        <a href="infofi.html" class="px-3 py-1.5 rounded-lg bg-purple-900/30 border border-purple-500/50 text-purple-300 hover:bg-purple-500/20 hover:text-white transition animate-pulse">Event</a>
+        <a href="whitepaper.html" class="hover:text-brand-gold transition text-gray-300">Whitepaper</a>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <div class="hidden sm:flex items-center gap-3">
+          <a href="store.html" class="px-3 py-2 rounded-lg bg-[#141414] border border-brand-gold/40 text-brand-gold font-semibold text-xs hover:bg-brand-gold/10 transition">Store</a>
+          <a href="play.html" class="px-3 py-2 rounded-lg bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-semibold text-xs hover:bg-emerald-500/20 transition shadow-[0_0_10px_rgba(16,185,129,0.2)]">Play</a>
+        </div>
+        <a href="https://opensea.io" target="_blank" class="px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-lg bg-brand-gold text-black font-semibold text-xs sm:text-sm hover:bg-brand-goldHover transition ml-1">OpenSea</a>
+      </div>
+    </div>
+
+    <!-- Mobil Alt Menü -->
+    <div class="sm:hidden border-t border-brand-border/60 bg-[#0a0a0a] px-2 py-2 flex items-center justify-end text-[11px] gap-2">
+      <a href="play.html" class="px-2.5 py-1.5 rounded bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-bold whitespace-nowrap">Play</a>
+      <a href="store.html" class="px-2.5 py-1.5 rounded bg-[#161616] border border-brand-gold/40 text-brand-gold font-bold whitespace-nowrap">Store</a>
+    </div>
+  </nav>
+
+  <!-- ANA ALAN -->
+  <main class="relative min-h-screen flex items-center justify-center overflow-hidden bg-black pt-28 sm:pt-20">
+
+    <!-- Yüzen NFT'ler (Sadece masaüstünde) -->
+    <div class="absolute inset-0 z-0 pointer-events-none opacity-20 hidden md:block">
+      <img src="epic.jpg" class="absolute top-32 left-10 w-24 h-36 object-cover rounded-xl nft-float-1 border border-purple-500/30" />
+      <img src="legendary.jpg" class="absolute bottom-20 left-1/4 w-32 h-48 object-cover rounded-xl nft-float-2 border border-brand-gold/40 shadow-[0_0_20px_rgba(255,215,0,0.2)]" />
+      <img src="rare.jpg" class="absolute top-20 right-1/4 w-20 h-32 object-cover rounded-xl nft-float-3 border border-blue-500/30" />
+      <img src="common.jpg" class="absolute bottom-32 right-10 w-28 h-40 object-cover rounded-xl nft-float-4 border border-gray-500/30" />
+    </div>
+
+    <!-- Işık Efekti -->
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-900/10 via-black to-black z-0"></div>
+
+    <!-- Ortadaki yazı -->
+    <div class="relative z-10 text-center px-4">
+      <h1 class="blink-gold gold-gradient-text text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-[0.2em] sm:tracking-[0.25em]">
+        Coming Soon
+      </h1>
+      <p class="mt-4 text-xs sm:text-sm text-gray-500 uppercase tracking-widest">The adventure begins soon</p>
+    </div>
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    // Arkaplan Müziği Sistemi (ana sayfadakiyle aynı)
+    const audio = document.getElementById('bgMusic');
+    const audioBtn = document.getElementById('audioToggle');
+    const audioIcon = document.getElementById('audioIcon');
+    let hasInteracted = false;
+
+    function playAudioOnFirstClick() {
+      if (!hasInteracted) {
+        audio.play().then(() => {
+          hasInteracted = true;
+          audioIcon.classList.add('animate-pulse-gold');
+        }).catch(() => { console.log("Otomatik oynatma engellendi."); });
+      }
+    }
+
+    window.addEventListener('click', playAudioOnFirstClick, { once: true });
+    window.addEventListener('touchstart', playAudioOnFirstClick, { once: true });
+
+    audioBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (audio.paused) {
+        audio.play();
+        audioIcon.setAttribute('data-lucide', 'volume-2');
+        audioIcon.classList.add('animate-pulse-gold');
+      } else {
+        audio.pause();
+        audioIcon.setAttribute('data-lucide', 'volume-x');
+        audioIcon.classList.remove('animate-pulse-gold');
+      }
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
