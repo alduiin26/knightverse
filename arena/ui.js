@@ -5,6 +5,7 @@ import { BOSSES, BOSS_ORDER } from './bosses.js';
 import { RULES } from './engine.js';
 import { esc } from './api.js';
 import { clock } from './core.js';
+import { artOf, bossArt } from './assets.js';
 
 // ---------------------------------------------------------------------------
 // icons (simple line icons, 24x24)
@@ -102,7 +103,7 @@ export class UI {
     list.innerHTML = BOSS_ORDER.map(id => {
       const b = BOSSES[id], [pw, hp, dm] = rating[id];
       return `<button class="bcard" data-id="${id}" style="--bc:#${b.color.toString(16).padStart(6, '0')}">
-        <span class="bc-img"><img src="${b.img}" alt="${esc(b.name)}" draggable="false"></span>
+        <span class="bc-img"><img src="${bossArt(b.img)}" alt="${esc(b.name)}" draggable="false"></span>
         <span class="bc-body"><b>${esc(b.name)}</b><small>${esc(b.title)}</small>
         <span class="bc-rate"><span>Power</span>${stars(pw)}<span>Health</span>${stars(hp)}<span>Damage</span>${stars(dm)}</span>
         <span class="bc-desc">${esc(b.desc)}</span>
@@ -140,7 +141,7 @@ export class UI {
         if (filterR !== 'all' && n.rarity !== filterR) continue;
         const l = left(n);
         const c = el('button', `rcard r-${n.rarity} ${l === 0 ? 'spent' : ''}`);
-        c.innerHTML = `<img src="${n.img}" alt="${n.name}" loading="lazy" draggable="false"><span class="rc-cls">${icon(n.cls)}</span><span class="rc-rar">${RLETTER[n.rarity]}</span><span class="rc-uses" title="Battles left today">${l}/${RULES.dailyUses}</span>`;
+        c.innerHTML = `<img src="${artOf(n)}" alt="${n.name}" loading="lazy" draggable="false"><span class="rc-cls">${icon(n.cls)}</span><span class="rc-rar">${RLETTER[n.rarity]}</span><span class="rc-uses" title="Battles left today">${l}/${RULES.dailyUses}</span>`;
         c.onclick = () => { if (focus === n) return; focus = n; this.audio.play('select'); refreshGrid(); renderDetail(); };
         c.ondblclick = () => toggle(n);
         grid.appendChild(c); cards.set(n, c);
@@ -153,7 +154,7 @@ export class UI {
 
     const renderDetail = () => {
       const n = focus, d = derive(n), r = RARITIES[n.rarity];
-      $('#detailImg').src = n.img;
+      $('#detailImg').src = artOf(n);
       $('#detailName').textContent = n.name;
       $('#detailTags').innerHTML = `<span class="tag" style="--c:${r.color}">${r.label}</span><span class="tag">${FACTIONS[n.faction].label}</span><span class="tag">${CLASSES[n.cls].label}</span><span class="tag uses ${left(n) ? '' : 'none'}">${left(n)}/${RULES.dailyUses} battles left</span>`;
       const main = CLASSES[n.cls].main;
@@ -179,7 +180,7 @@ export class UI {
       for (let i = 0; i < max; i++) {
         const n = team[i];
         const s = el('button', 'slot' + (n ? ` filled r-${n.rarity}` : ''));
-        s.innerHTML = n ? `<img src="${n.img}" alt=""><span>${n.name}</span>` : `<span class="slot-empty">${i < min ? 'Slot ' + (i + 1) : 'Optional'}</span>`;
+        s.innerHTML = n ? `<img src="${artOf(n)}" alt=""><span>${n.name}</span>` : `<span class="slot-empty">${i < min ? 'Slot ' + (i + 1) : 'Optional'}</span>`;
         if (n) s.onclick = () => toggle(n);
         slots.appendChild(s);
       }
@@ -227,9 +228,9 @@ export class UI {
     if (ready) { const r = await ready(); if (r && r.cancel) return r; enemy = r.enemy; rivalName = r.rival; }
     vs.classList.toggle('boss', !!boss);
     $('#vsRival').textContent = rivalName;
-    const fill = (id, list) => { $(id).innerHTML = list.map(n => `<div class="vcard r-${n.rarity}"><img src="${n.img}" alt=""><span>${n.name}</span></div>`).join(''); };
+    const fill = (id, list) => { $(id).innerHTML = list.map(n => `<div class="vcard r-${n.rarity}"><img src="${artOf(n)}" alt=""><span>${n.name}</span></div>`).join(''); };
     fill('#vsLeft', player);
-    if (boss) $('#vsRight').innerHTML = `<div class="vboss" style="--bc:#${boss.color.toString(16).padStart(6, '0')}"><img src="${boss.img}" alt=""><span>${esc(boss.title)}</span></div>`;
+    if (boss) $('#vsRight').innerHTML = `<div class="vboss" style="--bc:#${boss.color.toString(16).padStart(6, '0')}"><img src="${bossArt(boss.img)}" alt=""><span>${esc(boss.title)}</span></div>`;
     else fill('#vsRight', enemy);
     const waited = (performance.now() - t0) / 1000;
     if (waited < 1.3) await new Promise(r => setTimeout(r, (1.3 - waited) * 1000));
@@ -344,7 +345,7 @@ export class UI {
 
   updateTurnOrder(list) {
     const to = $('#turnOrder');
-    to.innerHTML = list.map((u, i) => `<div class="to-item team-${u.team} ${i === 0 ? 'now' : ''}"><img src="${u.nft.img}" alt=""></div>`).join('');
+    to.innerHTML = list.map((u, i) => `<div class="to-item team-${u.team} ${i === 0 ? 'now' : ''}"><img src="${artOf(u.nft)}" alt=""></div>`).join('');
   }
 
   // floating combat text
@@ -404,7 +405,7 @@ export class UI {
   _renderSkillbar() {
     const p = this.pending; if (!p) return;
     const u = p.unit, sb = $('#skillbar');
-    $('#sbPortrait').src = u.nft.img;
+    $('#sbPortrait').src = artOf(u.nft);
     $('#sbName').innerHTML = `${u.nft.name} <small style="color:${RARITIES[u.nft.rarity].color}">${RARITIES[u.nft.rarity].label}</small>`;
     const wrap = $('#sbSkills'); wrap.innerHTML = '';
     u.skills.forEach((s, i) => {
@@ -518,7 +519,7 @@ export class UI {
     $('#resTitle').textContent = res.win ? 'VICTORY' : 'DEFEAT';
     $('#resVs').innerHTML = `<span class="${res.win ? 'w' : 'l'}">${res.win ? 'WIN' : 'LOSE'}</span><b>You</b><i>VS</i><b>${esc(res.rival)}</b><span class="${res.win ? 'l' : 'w'}">${res.win ? 'LOSE' : 'WIN'}</span>`;
     const mvp = res.mvp;
-    $('#resMvp').innerHTML = mvp ? `<img src="${mvp.nft.img}" alt=""><div><small>MVP</small><b>${mvp.nft.name}</b><span>${mvp.dealt.toLocaleString()} damage · ${mvp.healed.toLocaleString()} healing</span></div>` : '';
+    $('#resMvp').innerHTML = mvp ? `<img src="${artOf(mvp.nft)}" alt=""><div><small>MVP</small><b>${mvp.nft.name}</b><span>${mvp.dealt.toLocaleString()} damage · ${mvp.healed.toLocaleString()} healing</span></div>` : '';
     $('#resStats').innerHTML = [
       ['Turns', res.turns], ['Damage dealt', res.dealt.toLocaleString()], ['Critical hits', res.crits], ['Heroes left', res.left],
     ].map(([k, v]) => `<div><span>${k}</span><b>${v}</b></div>`).join('');

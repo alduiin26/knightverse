@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self'; connect-src 'self' blob: https://ghnyalgjoahltifsjsqb.supabase.co http://localhost:* http://127.0.0.1:*; object-src 'none'; base-uri 'self'; form-action 'self'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>KnightVerse | Arena</title>
   <meta name="description" content="KnightVerse Arena: turn-based PvP and boss raids with your KnightVerse heroes. Earn points and climb the rankings." />
-  <link rel="icon" type="image/png" href="logoko.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/brand/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/img/brand/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -15,6 +18,12 @@
       "imports": {
         "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
         "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      },
+      "integrity": {
+        "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js": "sha384-GY5FqjttLCFRt/McQbyaVdCk2O1IQtOeX8Py6NfD89BIAsIyJFRl4UgSXrk2vXAk",
+        "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js": "sha384-Lq1Wl94so5JCKGDvezrdVMJhdeKQkwb8iwRo59QrPPd61CnrCJZLxYmFlQ8ZuOKR",
+        "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/utils/SkeletonUtils.js": "sha384-3fZU4PNurVxnDiEqbpF53fm3l2EaBsiFMngKeMCCNEfE3MrfKgcpCyvRE6O61TGr",
+        "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/utils/BufferGeometryUtils.js": "sha384-wOjwauvHlJO7K6APr7FmMGH2nupQa3Ndzas9bJZhsAMOK055efJud8ns4aYmASKv"
       }
     }
   </script>
@@ -26,7 +35,7 @@
   <!-- LOADING -->
   <div id="loading">
     <div class="load-inner">
-      <img src="logoko.png" alt="KnightVerse" class="load-logo" />
+      <img src="assets/img/brand/logo.webp" alt="KnightVerse" class="load-logo" />
       <div class="load-bar"><i></i></div>
       <span>Preparing the arena…</span>
     </div>
@@ -35,7 +44,7 @@
   <!-- LOBBY -->
   <section id="lobby" class="screen">
     <div class="lobby-inner">
-      <img src="logoko.png" class="logo" alt="KnightVerse" />
+      <img src="assets/img/brand/logo.webp" class="logo" alt="KnightVerse" />
       <div class="eyebrow">Alpha Prototype</div>
       <h1>The Arena</h1>
       <div id="account" class="acc-bar"></div>

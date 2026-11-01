@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>KnightVerse | Page not found</title>
+    <script>
+        // GitHub Pages shows this page for any missing address. Old links keep working:
+        (function () {
+            var base = location.pathname.indexOf('/knightverse/') === 0 ? '/knightverse/' : '/';
+            var moved = { 'play.html': 'arena.html', 'game.html': 'arena.html' };
+            var page = location.pathname.slice(base.length);
+            if (moved[page] && !location.search.includes('stay')) location.replace(base + moved[page]);
+            window.KV_BASE = base;
+        })();
+    </script>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; background: radial-gradient(circle at 50% 30%, #1a1408 0%, #050505 60%); color: #ddd; font-family: Inter, system-ui, -apple-system, sans-serif; text-align: center; }
+        .box { max-width: 440px; }
+        .code { font: 900 88px/1 Georgia, serif; color: #ffd36b; letter-spacing: 0.04em; text-shadow: 0 0 30px rgba(255, 211, 107, 0.35); }
+        h1 { margin: 12px 0 8px; font-size: 22px; color: #fff; }
+        p { margin: 0 0 22px; color: #8f8a80; font-size: 14px; line-height: 1.6; }
+        .row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        a { display: inline-block; padding: 11px 18px; border-radius: 10px; font-weight: 800; font-size: 14px; text-decoration: none; }
+        .gold { color: #1a1205; background: linear-gradient(180deg, #ffe9a3, #ffd04d 45%, #d9a22a); }
+        .ghost { color: #ffd36b; border: 1px solid rgba(255, 211, 107, 0.4); background: rgba(255, 211, 107, 0.06); }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="code">404</div>
+        <h1>This path leads nowhere, knight.</h1>
+        <p>The page you are looking for was moved or never existed.</p>
+        <div class="row">
+            <a class="gold" id="home" href="/knightverse/">Back to Home</a>
+            <a class="ghost" id="arena" href="/knightverse/arena.html">Enter the Arena</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById('home').href = window.KV_BASE;
+        document.getElementById('arena').href = window.KV_BASE + 'arena.html';
+    </script>
+</body>
+</html>

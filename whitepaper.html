@@ -2,28 +2,13 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self'; connect-src 'self' blob: https://ghnyalgjoahltifsjsqb.supabase.co http://localhost:* http://127.0.0.1:*; object-src 'none'; base-uri 'self'; form-action 'self'" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KnightVerse | Official Whitepaper</title>
-    <link rel="icon" type="image/png" href="logoko.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            gold: '#FFD700',
-                            goldHover: '#e6c200',
-                            dark: '#0a0a0a',
-                            card: '#121212',
-                            border: '#262626'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/brand/favicon-32.png" />
+    <link rel="apple-touch-icon" href="assets/img/brand/apple-touch-icon.png" />
+    <script src="assets/js/icons.js"></script>
     <style>
         .gold-gradient-text {
             background: linear-gradient(135deg, #FFD700 0%, #FFF275 50%, #B8860B 100%);
@@ -37,6 +22,7 @@
         @keyframes fillBar { from { width: 0; } }
         .animate-fill { animation: fillBar 1.5s ease-out forwards; }
     </style>
+    <link rel="stylesheet" href="assets/css/site.css" />
 </head>
 <body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black">
 
@@ -47,7 +33,7 @@
                 <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
             </a>
             <div class="flex items-center gap-2">
-                <img src="logoko.png" alt="KnightVerse" class="h-8 sm:h-10 w-auto object-contain mix-blend-screen opacity-90" />
+                <img src="assets/img/brand/logo.webp" alt="KnightVerse" class="h-8 sm:h-10 w-auto object-contain mix-blend-screen opacity-90" />
                 <span class="text-brand-gold font-bold text-lg hidden sm:block tracking-widest uppercase">Whitepaper v1.0</span>
             </div>
             <a href="infofi.html" class="px-4 py-2 rounded-lg bg-brand-gold/10 border border-brand-gold/40 text-brand-gold text-xs font-bold hover:bg-brand-gold hover:text-black transition flex items-center gap-2">
@@ -318,7 +304,7 @@
 
     <!-- FOOTER -->
     <footer class="py-8 bg-black border-t border-brand-border text-center text-xs text-gray-500">
-        <img src="logoko.png" alt="KnightVerse" class="h-8 w-auto mx-auto mb-4 opacity-50 mix-blend-screen" />
+        <img src="assets/img/brand/logo.webp" alt="KnightVerse" class="h-8 w-auto mx-auto mb-4 opacity-50 mix-blend-screen" />
         <p>© 2026 KnightVerse Protocol. Smart contracts are pending comprehensive security audits.</p>
     </footer>
 
