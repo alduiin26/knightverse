@@ -118,7 +118,7 @@
                         <input type="text" id="tweetUrl" placeholder="https://x.com/you/status/..." class="w-full bg-[#181818] border border-brand-border rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition">
                         <button id="submitBtn" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold px-4 py-2 rounded-lg transition whitespace-nowrap">Submit</button>
                     </div>
-                    <span class="text-[10px] text-gray-500 mt-2 block">*The post must be from the X account you linked. Duplicate links are rejected.</span>
+                    <span class="text-[10px] text-gray-500 mt-2 block">*The post must be from the X account you connected. Duplicate links are rejected.</span>
                     <div id="submitMsg" class="mt-2 text-xs font-semibold"></div>
                 </div>
             </div>
@@ -226,25 +226,45 @@
             }
             const p = me.profile;
             if (!p.x_handle) {
-                box.innerHTML = `<div class="text-xs text-gray-400 mb-2">Signed in as <b class="text-white">${esc(p.nickname)}</b> &middot; <button id="accBtn" class="underline hover:text-brand-gold">account</button></div>
-                    <div class="flex gap-2 w-full max-w-xs"><input id="xIn" placeholder="@your_x_username" class="w-full bg-[#181818] border border-brand-border rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#1DA1F2]">
-                    <button id="xBtn" class="bg-[#1DA1F2] hover:bg-[#1a91da] text-white font-bold px-3 rounded-lg text-sm whitespace-nowrap">Link X</button></div>
-                    <span class="text-[10px] text-gray-500 mt-2">Link the X account you use for the quests.</span>`;
-                $('#xBtn').onclick = linkX;
-                $('#xIn').onkeydown = e => { if (e.key === 'Enter') linkX(); };
+                box.innerHTML = `<div class="text-xs text-gray-400 mb-2">Signed in as <b class="text-white">${esc(p.nickname)}</b> &middot; <button id="accBtn" class="underline hover:text-brand-gold">recovery code</button></div>
+                    <button id="xBtn" class="bg-white hover:bg-gray-200 text-black font-extrabold py-2.5 px-6 rounded-lg w-full sm:w-auto transition shadow-lg">Connect with X</button>
+                    <span class="text-[10px] text-gray-500 mt-2 max-w-xs">You approve it on X. We only read your username; we can't post or see your DMs.</span>`;
+                $('#xBtn').onclick = connectX;
             } else {
-                box.innerHTML = `<div class="flex items-center gap-2 text-white font-bold"><i data-lucide="twitter" class="w-4 h-4 text-[#1DA1F2]"></i> @${esc(p.x_handle)}</div>
-                    <div class="text-xs text-gray-400 mt-1">Fighter: <b class="text-gray-200">${esc(p.nickname)}</b> &middot; <button id="accBtn" class="underline hover:text-brand-gold">recovery code</button></div>`;
+                box.innerHTML = `<div class="flex items-center gap-2 text-white font-bold"><i data-lucide="badge-check" class="w-4 h-4 text-emerald-400"></i> @${esc(p.x_handle)}</div>
+                    <div class="text-xs text-gray-400 mt-1">Fighter: <b class="text-gray-200">${esc(p.nickname)}</b> &middot; <button id="accBtn" class="underline hover:text-brand-gold">recovery code</button> &middot; <button id="xBtn" class="underline hover:text-brand-gold">change X</button></div>`;
+                $('#xBtn').onclick = connectX;
             }
             const acc = $('#accBtn');
             if (acc) acc.onclick = async () => { await openAccount({ startWith: 'code' }); refresh(); };
             icons();
         }
 
-        async function linkX() {
-            const v = $('#xIn').value.trim();
-            try { const r = await api('set_x', { x_handle: v }); me.profile = r.profile; renderAccount(); toast('X account linked.'); }
-            catch (e) { toast(errText(e)); }
+        // Connect with X: the server makes a one-time login link, X asks the player to approve,
+        // then sends them back here with ?code=...&state=..., which the server checks with X.
+        async function connectX() {
+            const btn = $('#xBtn'); if (btn) btn.disabled = true;
+            try { const r = await api('x_auth_start'); location.href = r.url; }
+            catch (e) { toast(errText(e)); if (btn) btn.disabled = false; }
+        }
+
+        async function finishXLogin() {
+            const qs = new URLSearchParams(location.search);
+            if (!qs.has('state') || !(qs.has('code') || qs.has('error'))) return null;
+            const code = qs.get('code'), state = qs.get('state'), err = qs.get('error');
+            for (const k of ['code', 'state', 'error', 'error_description']) qs.delete(k);
+            history.replaceState(null, '', location.pathname + (qs.toString() ? '?' + qs : '') + location.hash);
+            if (err) return err === 'access_denied' ? 'X connection cancelled.' : 'X connection failed. Please try again.';
+            try { const r = await api('x_auth_finish', { code, state }); return `X connected: @${r.profile.x_handle}`; }
+            catch (e) { return errText(e); }
+        }
+
+        function needX() {
+            toast('Connect your X account first.');
+            const box = $('#accountBox');
+            box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            box.style.transition = 'box-shadow .3s'; box.style.boxShadow = '0 0 0 2px #FFD700';
+            setTimeout(() => { box.style.boxShadow = ''; }, 1600);
         }
 
         function renderStatus() {
@@ -296,10 +316,11 @@
 
         async function openTask(task) {
             const t = taskOf(task);
+            if (!hasAccount()) { if (await ensureAccount('You need a fighter account to collect quest points.')) needX(); return; }
+            if (!me.profile.x_handle) { needX(); return; }
             // open X right away (inside the click) so the browser does not block the new tab
             const win = window.open(intent(task, t), '_blank');
             if (win) { try { win.opener = null; } catch { /* ignore */ } }
-            if (!(await ensureAccount('You need a fighter account to collect quest points.'))) return;
             try {
                 const r = await api('task_start', { task });
                 tasks = r.tasks;
@@ -328,6 +349,7 @@
 
         async function checkTask(task) {
             if (!(await ensureAccount('You need a fighter account to collect quest points.'))) return;
+            if (!me.profile.x_handle) { needX(); return; }
             const t = taskOf(task);
             if (t.state === 'todo') { toast(`Press "${ACTION[task]}" first, complete it on X, then check.`); return; }
             if (t.state === 'started') startCountdown(task, t.wait_left || 0);
@@ -353,6 +375,7 @@
             const url = $('#tweetUrl').value.trim();
             if (!url) { msg.style.color = '#ef4444'; msg.textContent = 'Please paste the link to your post.'; return; }
             if (!(await ensureAccount('You need a fighter account to submit posts.'))) return;
+            if (!me.profile.x_handle) { needX(); return; }
             try {
                 const r = await api('submit_post', { url });
                 tasks = r.tasks; $('#tweetUrl').value = '';
@@ -395,7 +418,9 @@
             catch (e) { if (!me) me = { offline: true }; }
             renderAccount(); renderStatus(); renderQuests(); icons();
         }
+        const xResult = await finishXLogin();
         await refresh();
+        if (xResult) toast(xResult);
         loadBoard();
         icons();
     </script>

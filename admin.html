@@ -23,7 +23,11 @@
         button.no { border-color: rgba(248, 113, 113, 0.5); color: #f87171; background: rgba(239, 68, 68, 0.08); }
         button:disabled { opacity: 0.4; cursor: wait; }
         .row { display: flex; gap: 8px; align-items: center; }
-        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+        .pill { display: inline-block; padding: 3px 9px; border-radius: 99px; font-size: 11px; font-weight: 800; }
+        .pill.on { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+        .pill.off { background: rgba(239, 68, 68, 0.12); color: #f87171; }
+        code { background: #1a1a1a; border: 1px solid var(--border); border-radius: 6px; padding: 2px 6px; font-size: 12px; color: #ffe08a; word-break: break-all; }
         .stat { background: #181818; border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
         .stat span { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
         .stat b { font-size: 22px; color: #fff; }
@@ -38,7 +42,7 @@
         #msg.show { opacity: 1; }
         #login { max-width: 380px; margin: 12vh auto 0; }
         #panel { display: none; }
-        @media (max-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } .task { grid-template-columns: 1fr; } .task small { grid-column: 1; } }
+        @media (max-width: 640px) { .task { grid-template-columns: 1fr; } .task small { grid-column: 1; } }
     </style>
 </head>
 <body>
@@ -58,6 +62,13 @@
         </div>
 
         <div class="card">
+            <h2>X login <span id="xState" class="pill off">Off</span></h2>
+            <p class="muted" style="margin-top:-6px">Players must connect their X account (approved on X) before doing quests. Paste the <b>Client ID</b> of your X app here. In the X app settings use this Callback URL: <code id="xRedirect"></code></p>
+            <div class="row"><input id="xClientId" placeholder="Client ID from developer.x.com" autocomplete="off"><button class="gold" id="saveX">Save</button></div>
+            <small class="muted" id="xNote"></small>
+        </div>
+
+        <div class="card">
             <h2>Daily X post links</h2>
             <p class="muted" style="margin-top:-6px">Paste today's post link. When a link changes, everyone can do that task again. You can use the same post for all three.</p>
             <div class="task"><label>Paste once</label><div class="row"><input id="allUrl" placeholder="https://x.com/_KnightVerse/status/..."><button id="fillAll">Use for all 3</button></div></div>
@@ -68,7 +79,7 @@
         <div class="card">
             <h2>Submitted posts</h2>
             <div class="tabs"><button data-s="pending" class="on">Waiting</button><button data-s="approved">Approved</button><button data-s="rejected">Rejected</button></div>
-            <p class="muted" style="margin-top:0">Open each post and check it mentions @_KnightVerse and uses #KnightVerse. Approving adds +30 InfoFi points.</p>
+            <p class="muted" style="margin-top:0">Open each post and check that it mentions @_KnightVerse, uses #KnightVerse, and that the author shown on X is the same @name listed here (X opens a post even if the name in the link is changed). Approving adds +30 InfoFi points.</p>
             <div id="posts"></div>
         </div>
 
@@ -104,8 +115,13 @@
     async function loadOverview() {
         const r = await call('admin_overview');
         const c = r.counts;
-        $('#stats').innerHTML = [['Players', c.players], ['Active today', c.active_today], ['Battles today', c.battles_today], ['Posts to review', c.pending_posts]]
+        $('#stats').innerHTML = [['Players', c.players], ['X connected', c.x_connected], ['Active today', c.active_today], ['Battles today', c.battles_today], ['Posts to review', c.pending_posts]]
             .map(([k, v]) => `<div class="stat"><span>${k}</span><b>${v}</b></div>`).join('');
+        const x = r.x || {};
+        $('#xState').textContent = x.on ? 'On' : 'Off';
+        $('#xState').className = 'pill ' + (x.on ? 'on' : 'off');
+        $('#xRedirect').textContent = x.redirect || '';
+        $('#xNote').textContent = x.on ? `Saved Client ID ends with ...${x.client_id_end}${x.from_secret ? ' (set as a server secret)' : ''}. Paste a new one to replace it.` : 'Until this is set, players see "X login is not switched on yet".';
         const done = Object.fromEntries((r.claims || []).map(x => [x.task, x.n]));
         $('#taskInputs').innerHTML = ['like', 'retweet', 'reply'].map(k => {
             const t = r.tasks.find(x => x.kind === k) || {};
@@ -127,6 +143,15 @@
             msg(changed ? `Saved. ${changed} task(s) reopened for everyone.` : 'No changes.');
             loadOverview();
         } catch (e) { msg(errText(e)); }
+        btn.disabled = false;
+    }
+
+    async function saveX() {
+        const client_id = $('#xClientId').value.trim();
+        if (!client_id) return;
+        const btn = $('#saveX'); btn.disabled = true;
+        try { await call('admin_set_x', { client_id }); $('#xClientId').value = ''; msg('X login switched on.'); loadOverview(); }
+        catch (e) { msg(errText(e)); }
         btn.disabled = false;
     }
 
@@ -161,6 +186,7 @@
     $('#logout').onclick = () => { sessionStorage.removeItem('kv_admin'); location.reload(); };
     $('#fillAll').onclick = () => { const v = $('#allUrl').value.trim(); for (const i of document.querySelectorAll('[data-kind]')) i.value = v; };
     $('#saveTasks').onclick = saveTasks;
+    $('#saveX').onclick = saveX;
     for (const b of document.querySelectorAll('.tabs button')) b.onclick = () => { postStatus = b.dataset.s; loadPosts(); };
     $('#banBtn').onclick = () => ban(true);
     $('#unbanBtn').onclick = () => ban(false);
