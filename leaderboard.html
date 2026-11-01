@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KnightVerse | Rankings</title>
+    <meta name="description" content="KnightVerse Arena and InfoFi rankings: the top 500 fighters.">
+    <link rel="icon" type="image/png" href="logoko.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        :root { --gold: #ffd36b; --line: rgba(255, 211, 107, 0.25); --card: #121212; --border: #262626; --muted: #8f8a80; }
+        * { box-sizing: border-box; }
+        body { margin: 0; min-height: 100vh; background: radial-gradient(ellipse at top, #1c1408 0%, #050505 55%); color: #ddd; font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; }
+        nav { position: sticky; top: 0; z-index: 10; background: rgba(5, 5, 5, 0.92); border-bottom: 1px solid var(--border); backdrop-filter: blur(8px); }
+        .nav-in { max-width: 1100px; margin: 0 auto; padding: 0 16px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .nav-in a { text-decoration: none; font-size: 14px; font-weight: 600; color: #aaa; }
+        .nav-in a:hover { color: var(--gold); }
+        .nav-in img { height: 32px; mix-blend-mode: screen; opacity: 0.85; }
+        main { max-width: 1100px; margin: 0 auto; padding: 28px 16px 60px; }
+        h1 { text-align: center; margin: 0 0 6px; font: 900 clamp(30px, 6vw, 52px) Cinzel, Georgia, serif; letter-spacing: 0.04em; background: linear-gradient(180deg, #fff6d6, #ffd36b 50%, #b8822a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .sub { text-align: center; color: var(--muted); font-size: 14px; margin: 0 0 24px; }
+        .tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 18px; }
+        .tabs button { cursor: pointer; border-radius: 99px; padding: 9px 20px; font: 800 13px Inter, sans-serif; color: #aaa; background: #151515; border: 1px solid var(--border); }
+        .tabs button.on { color: #1a1205; background: var(--gold); border-color: var(--gold); }
+        .me { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding: 14px 18px; border-radius: 14px; margin-bottom: 16px; background: linear-gradient(90deg, rgba(255, 211, 107, 0.08), rgba(255, 211, 107, 0.02)); border: 1px solid var(--line); }
+        .me b { color: #fff; font-size: 16px; }
+        .me .stat { display: flex; gap: 22px; }
+        .me .stat div { text-align: center; }
+        .me .stat span { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+        .me .stat strong { font-size: 20px; color: var(--gold); }
+        .me .cta { display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn { cursor: pointer; text-decoration: none; border-radius: 10px; padding: 9px 16px; font: 800 13px Inter, sans-serif; display: inline-block; }
+        .btn.gold { color: #1a1205; border: 0; background: linear-gradient(180deg, #ffe9a3, #ffd04d 45%, #d9a22a); }
+        .btn.ghost { color: var(--gold); background: rgba(255, 211, 107, 0.06); border: 1px solid rgba(255, 211, 107, 0.4); }
+        .board { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+        .board-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+        .board-head h2 { margin: 0; font: 800 18px Inter, sans-serif; color: var(--gold); }
+        .board-head input { background: #181818; border: 1px solid var(--border); border-radius: 9px; color: #fff; padding: 8px 12px; font: 600 13px Inter, sans-serif; outline: none; width: min(100%, 240px); }
+        .board-head input:focus { border-color: var(--gold); }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { text-align: left; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+        td { padding: 11px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); white-space: nowrap; }
+        td.pts { text-align: right; color: var(--gold); font-weight: 800; }
+        th.pts { text-align: right; }
+        tr.mine td { background: rgba(255, 211, 107, 0.08); }
+        .rk { font-weight: 800; color: #bbb; }
+        .rk.r1 { color: #ffd36b; font-size: 16px; } .rk.r2 { color: #e0e0e0; } .rk.r3 { color: #d08a4a; }
+        .xh { color: #7fb8ff; text-decoration: none; }
+        .muted { color: var(--muted); }
+        .wrap { overflow-x: auto; }
+        .pager { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); }
+        .pager button { cursor: pointer; border-radius: 9px; padding: 8px 14px; font: 700 13px Inter, sans-serif; color: #ddd; background: #181818; border: 1px solid var(--border); }
+        .pager button:disabled { opacity: 0.35; cursor: default; }
+        .empty { text-align: center; color: var(--muted); padding: 40px 10px; }
+        .hide-sm { }
+        @media (max-width: 640px) { .hide-sm { display: none; } td, th { padding: 9px 6px; } .me .stat { gap: 14px; } }
+    </style>
+</head>
+<body>
+    <nav><div class="nav-in">
+        <a href="index.html">&larr; Home</a>
+        <img src="logoko.png" alt="KnightVerse">
+        <a href="arena.html">Play Arena &rarr;</a>
+    </div></nav>
+    <main>
+        <h1>Rankings</h1>
+        <p class="sub">Top 500 fighters. Points update right after every battle and every completed quest.</p>
+        <div class="tabs">
+            <button data-kind="game" class="on">Arena</button>
+            <button data-kind="infofi">InfoFi</button>
+        </div>
+        <div class="me" id="me"></div>
+        <div class="board">
+            <div class="board-head">
+                <h2 id="boardTitle">Arena Top 500</h2>
+                <input id="search" placeholder="Find a fighter…" autocomplete="off">
+            </div>
+            <div class="wrap">
+                <table>
+                    <thead id="thead"></thead>
+                    <tbody id="tbody"><tr><td colspan="5" class="empty">Loading…</td></tr></tbody>
+                </table>
+            </div>
+            <div class="pager"><button id="prev">&larr; Prev</button><span id="pageInfo"></span><button id="next">Next &rarr;</button></div>
+        </div>
+    </main>
+    <script type="module">
+        import { api, loadMe, openAccount, esc, errText } from './arena/api.js';
+        const PER = 50;
+        const params = new URLSearchParams(location.search);
+        let kind = params.get('kind') === 'infofi' ? 'infofi' : 'game';
+        let rows = [], page = 1, me = null, filter = '';
+        const $ = s => document.querySelector(s);
+
+        function renderMe() {
+            const box = $('#me');
+            if (me && me.profile) {
+                const p = me.profile, r = me.ranks || {};
+                const pts = kind === 'game' ? p.game_points : p.infofi_points, rank = kind === 'game' ? r.game : r.infofi;
+                box.innerHTML = `<div><span class="muted">You are playing as</span><br><b>${esc(p.nickname)}</b>${p.x_handle ? ` <span class="muted">@${esc(p.x_handle)}</span>` : ''}</div>
+                    <div class="stat"><div><span>Rank</span><strong>${rank ? '#' + rank : '-'}</strong></div><div><span>Points</span><strong>${pts.toLocaleString()}</strong></div>${kind === 'game' ? `<div><span>Wins</span><strong>${p.wins}</strong></div>` : ''}</div>
+                    <div class="cta">${kind === 'game' ? '<a class="btn gold" href="arena.html">Play</a>' : '<a class="btn gold" href="infofi.html">Quests</a>'}</div>`;
+            } else if (me && me.offline) {
+                box.innerHTML = `<div class="muted">Could not reach the server to load your rank.</div>`;
+            } else {
+                box.innerHTML = `<div><b>Join the rankings</b><br><span class="muted">Create a fighter name, then win battles and complete quests.</span></div>
+                    <div class="cta"><button class="btn gold" id="create">Create fighter</button><button class="btn ghost" id="restore">I have a recovery code</button></div>`;
+                $('#create').onclick = async () => { await openAccount(); me = await loadMe(); renderMe(); renderTable(); };
+                $('#restore').onclick = async () => { await openAccount({ startWith: 'restore' }); me = await loadMe(); renderMe(); renderTable(); };
+            }
+        }
+
+        function renderTable() {
+            $('#boardTitle').textContent = kind === 'game' ? 'Arena Top 500' : 'InfoFi Top 500';
+            $('#thead').innerHTML = `<tr><th>Rank</th><th>Fighter</th><th class="hide-sm">X account</th>${kind === 'game' ? '<th class="hide-sm">Wins</th>' : ''}<th class="pts">Points</th></tr>`;
+            const list = filter ? rows.filter(r => r.nickname.toLowerCase().includes(filter) || (r.x_handle || '').toLowerCase().includes(filter)) : rows;
+            const pages = Math.max(1, Math.ceil(list.length / PER));
+            page = Math.min(page, pages);
+            const mine = me && me.profile ? me.profile.nickname.toLowerCase() : null;
+            const slice = list.slice((page - 1) * PER, page * PER);
+            $('#tbody').innerHTML = slice.length ? slice.map(r => `<tr class="${r.nickname.toLowerCase() === mine ? 'mine' : ''}">
+                <td class="rk ${r.rank <= 3 ? 'r' + r.rank : ''}">#${r.rank}</td>
+                <td><b>${esc(r.nickname)}</b></td>
+                <td class="hide-sm">${r.x_handle ? `<a class="xh" href="https://x.com/${esc(r.x_handle)}" target="_blank" rel="noopener nofollow">@${esc(r.x_handle)}</a>` : '<span class="muted">-</span>'}</td>
+                ${kind === 'game' ? `<td class="hide-sm">${r.wins}</td>` : ''}
+                <td class="pts">${r.points.toLocaleString()}</td></tr>`).join('')
+                : `<tr><td colspan="5" class="empty">${rows.length ? 'No fighter matches that name.' : 'No points yet. Be the first one on the board!'}</td></tr>`;
+            $('#pageInfo').textContent = `Page ${page} / ${pages}`;
+            $('#prev').disabled = page <= 1; $('#next').disabled = page >= pages;
+        }
+
+        async function load() {
+            for (const b of document.querySelectorAll('.tabs button')) b.classList.toggle('on', b.dataset.kind === kind);
+            renderMe();
+            $('#tbody').innerHTML = '<tr><td colspan="5" class="empty">Loading…</td></tr>';
+            try { rows = (await api('leaderboard', { kind })).rows; }
+            catch (e) { rows = []; $('#tbody').innerHTML = `<tr><td colspan="5" class="empty">${esc(errText(e))}</td></tr>`; return; }
+            page = 1; renderTable();
+        }
+
+        for (const b of document.querySelectorAll('.tabs button')) b.onclick = () => { kind = b.dataset.kind; history.replaceState(null, '', kind === 'infofi' ? '?kind=infofi' : location.pathname); load(); };
+        $('#prev').onclick = () => { page--; renderTable(); };
+        $('#next').onclick = () => { page++; renderTable(); };
+        $('#search').oninput = e => { filter = e.target.value.trim().toLowerCase(); page = 1; renderTable(); };
+        me = await loadMe();
+        load();
+    </script>
+</body>
+</html>

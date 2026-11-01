@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>KnightVerse | Admin</title>
+    <link rel="icon" type="image/png" href="logoko.png" />
+    <style>
+        :root { --gold: #ffd36b; --border: #2a2a2a; --card: #121212; --muted: #8f8a80; }
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #070707; color: #ddd; font-family: Inter, system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+        main { max-width: 980px; margin: 0 auto; padding: 24px 14px 60px; }
+        h1 { margin: 0 0 4px; font-size: 24px; color: var(--gold); }
+        h2 { margin: 0 0 12px; font-size: 16px; color: #fff; }
+        .muted { color: var(--muted); font-size: 13px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-top: 16px; }
+        input, select { width: 100%; background: #1a1a1a; border: 1px solid var(--border); border-radius: 8px; color: #fff; padding: 10px 12px; font: 600 14px inherit; font-family: inherit; outline: none; }
+        input:focus { border-color: var(--gold); }
+        button { cursor: pointer; border-radius: 8px; padding: 10px 14px; font: 800 13px inherit; font-family: inherit; border: 1px solid rgba(255, 211, 107, 0.4); color: var(--gold); background: rgba(255, 211, 107, 0.06); white-space: nowrap; }
+        button.gold { border: 0; color: #1a1205; background: linear-gradient(180deg, #ffe9a3, #ffd04d 45%, #d9a22a); }
+        button.ok { border-color: rgba(52, 211, 153, 0.5); color: #34d399; background: rgba(16, 185, 129, 0.1); }
+        button.no { border-color: rgba(248, 113, 113, 0.5); color: #f87171; background: rgba(239, 68, 68, 0.08); }
+        button:disabled { opacity: 0.4; cursor: wait; }
+        .row { display: flex; gap: 8px; align-items: center; }
+        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .stat { background: #181818; border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
+        .stat span { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+        .stat b { font-size: 22px; color: #fff; }
+        .task { display: grid; grid-template-columns: 90px 1fr; gap: 10px; align-items: center; margin-bottom: 10px; }
+        .task label { font-weight: 800; font-size: 13px; }
+        .task small { grid-column: 2; color: var(--muted); font-size: 11.5px; margin-top: -6px; }
+        .post { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+        .post a { color: #7fb8ff; word-break: break-all; font-size: 13px; }
+        .tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+        .tabs button.on { color: #1a1205; background: var(--gold); border-color: var(--gold); }
+        #msg { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: #1b1b1b; border: 1px solid #3a3a3a; border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 700; opacity: 0; transition: opacity .2s; pointer-events: none; max-width: 92vw; }
+        #msg.show { opacity: 1; }
+        #login { max-width: 380px; margin: 12vh auto 0; }
+        #panel { display: none; }
+        @media (max-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } .task { grid-template-columns: 1fr; } .task small { grid-column: 1; } }
+    </style>
+</head>
+<body>
+<main>
+    <div id="login" class="card">
+        <h1>KnightVerse Admin</h1>
+        <p class="muted">Enter the admin password set on the server.</p>
+        <div class="row"><input id="key" type="password" placeholder="Admin password" autocomplete="current-password"><button class="gold" id="loginBtn">Enter</button></div>
+    </div>
+
+    <div id="panel">
+        <div class="row" style="justify-content:space-between"><div><h1>KnightVerse Admin</h1><span class="muted">Quests, post reviews and players</span></div><button id="logout">Log out</button></div>
+
+        <div class="card">
+            <h2>Overview</h2>
+            <div class="grid" id="stats"></div>
+        </div>
+
+        <div class="card">
+            <h2>Daily X post links</h2>
+            <p class="muted" style="margin-top:-6px">Paste today's post link. When a link changes, everyone can do that task again. You can use the same post for all three.</p>
+            <div class="task"><label>Paste once</label><div class="row"><input id="allUrl" placeholder="https://x.com/_KnightVerse/status/..."><button id="fillAll">Use for all 3</button></div></div>
+            <div id="taskInputs"></div>
+            <div class="row" style="justify-content:flex-end"><button class="gold" id="saveTasks">Save links</button></div>
+        </div>
+
+        <div class="card">
+            <h2>Submitted posts</h2>
+            <div class="tabs"><button data-s="pending" class="on">Waiting</button><button data-s="approved">Approved</button><button data-s="rejected">Rejected</button></div>
+            <p class="muted" style="margin-top:0">Open each post and check it mentions @_KnightVerse and uses #KnightVerse. Approving adds +30 InfoFi points.</p>
+            <div id="posts"></div>
+        </div>
+
+        <div class="card">
+            <h2>Players</h2>
+            <p class="muted" style="margin-top:-6px">Suspend a cheating account (it disappears from the rankings), or restore it.</p>
+            <div class="row"><input id="banName" placeholder="Fighter name"><button class="no" id="banBtn">Suspend</button><button class="ok" id="unbanBtn">Restore</button></div>
+        </div>
+    </div>
+</main>
+<div id="msg"></div>
+<script type="module">
+    import { api, esc, errText } from './arena/api.js';
+    const $ = s => document.querySelector(s);
+    let key = sessionStorage.getItem('kv_admin') || '';
+    let postStatus = 'pending';
+    const LABEL = { like: 'Like', retweet: 'Retweet', reply: 'Reply' };
+    const POINTS = { like: 10, retweet: 15, reply: 15 };
+
+    function msg(t) { const m = $('#msg'); m.textContent = t; m.className = 'show'; clearTimeout(msg._t); msg._t = setTimeout(() => { m.className = ''; }, 3000); }
+    const call = (action, body = {}) => api(action, { ...body, admin_key: key, token: null });
+
+    async function login() {
+        key = $('#key').value.trim() || key;
+        try {
+            await loadOverview();
+            sessionStorage.setItem('kv_admin', key);
+            $('#login').style.display = 'none'; $('#panel').style.display = 'block';
+            loadPosts();
+        } catch (e) { msg(errText(e)); sessionStorage.removeItem('kv_admin'); }
+    }
+
+    async function loadOverview() {
+        const r = await call('admin_overview');
+        const c = r.counts;
+        $('#stats').innerHTML = [['Players', c.players], ['Active today', c.active_today], ['Battles today', c.battles_today], ['Posts to review', c.pending_posts]]
+            .map(([k, v]) => `<div class="stat"><span>${k}</span><b>${v}</b></div>`).join('');
+        const done = Object.fromEntries((r.claims || []).map(x => [x.task, x.n]));
+        $('#taskInputs').innerHTML = ['like', 'retweet', 'reply'].map(k => {
+            const t = r.tasks.find(x => x.kind === k) || {};
+            return `<div class="task"><label>${LABEL[k]} <span class="muted">+${t.points || POINTS[k]}</span></label><input data-kind="${k}" value="${esc(t.tweet_url || '')}" placeholder="https://x.com/_KnightVerse/status/...">
+                <small>${t.tweet_url ? `Live since ${new Date(t.updated_at).toLocaleString()} &middot; ${done[k] || 0} players completed` : 'No link yet'}</small></div>`;
+        }).join('');
+    }
+
+    async function saveTasks() {
+        const btn = $('#saveTasks'); btn.disabled = true;
+        let changed = 0;
+        try {
+            for (const inp of document.querySelectorAll('[data-kind]')) {
+                const url = inp.value.trim();
+                if (!url) continue;
+                const r = await call('admin_set_task', { kind: inp.dataset.kind, url });
+                if (r.changed) changed++;
+            }
+            msg(changed ? `Saved. ${changed} task(s) reopened for everyone.` : 'No changes.');
+            loadOverview();
+        } catch (e) { msg(errText(e)); }
+        btn.disabled = false;
+    }
+
+    async function loadPosts() {
+        for (const b of document.querySelectorAll('.tabs button')) b.classList.toggle('on', b.dataset.s === postStatus);
+        try {
+            const r = await call('admin_posts', { status: postStatus });
+            $('#posts').innerHTML = r.rows.length ? r.rows.map(p => `<div class="post">
+                <div><b>${esc(p.nickname)}</b> <span class="muted">@${esc(p.x_handle || '-')} &middot; ${new Date(p.created_at).toLocaleString()}</span><br><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.url)}</a></div>
+                ${postStatus === 'pending' ? `<div class="row"><button class="ok" data-ok="${p.id}">Approve +30</button><button class="no" data-no="${p.id}">Reject</button></div>` : ''}
+            </div>`).join('') : '<p class="muted">Nothing here.</p>';
+            for (const b of document.querySelectorAll('[data-ok]')) b.onclick = () => review(b.dataset.ok, true, b);
+            for (const b of document.querySelectorAll('[data-no]')) b.onclick = () => review(b.dataset.no, false, b);
+        } catch (e) { msg(errText(e)); }
+    }
+
+    async function review(id, approve, btn) {
+        btn.disabled = true;
+        try { await call('admin_review', { id: Number(id), approve }); msg(approve ? 'Approved, +30 points added.' : 'Rejected.'); loadPosts(); loadOverview(); }
+        catch (e) { msg(errText(e)); btn.disabled = false; }
+    }
+
+    async function ban(banned) {
+        const nickname = $('#banName').value.trim();
+        if (!nickname) return;
+        try { const r = await call('admin_ban', { nickname, banned }); msg(`${r.player.nickname} is now ${r.player.banned ? 'suspended' : 'active'}.`); }
+        catch (e) { msg(errText(e)); }
+    }
+
+    $('#loginBtn').onclick = login;
+    $('#key').onkeydown = e => { if (e.key === 'Enter') login(); };
+    $('#logout').onclick = () => { sessionStorage.removeItem('kv_admin'); location.reload(); };
+    $('#fillAll').onclick = () => { const v = $('#allUrl').value.trim(); for (const i of document.querySelectorAll('[data-kind]')) i.value = v; };
+    $('#saveTasks').onclick = saveTasks;
+    for (const b of document.querySelectorAll('.tabs button')) b.onclick = () => { postStatus = b.dataset.s; loadPosts(); };
+    $('#banBtn').onclick = () => ban(true);
+    $('#unbanBtn').onclick = () => ban(false);
+    if (key) login();
+</script>
+</body>
+</html>
