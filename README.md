@@ -1,7 +1,7 @@
 # KnightVerse
 
-Website and browser game for KnightVerse, hosted on GitHub Pages:
-https://alduiin26.github.io/knightverse/
+Website and browser game for KnightVerse: https://knightverse.online
+(our own server, see `server/README.md`; https://alduiin26.github.io/knightverse/ stays as a mirror).
 
 ## Pages
 
@@ -35,6 +35,7 @@ assets/
   docs/               whitepaper PDF
 arena/                game code (3D scene, battle rules, UI); arena/models/ for .glb models
 supabase/             server: database migrations and the "api" edge function
+server/               web server setup for knightverse.online (Caddy, firewall, auto publish)
 design/source/        original full-size artwork (not loaded by the site)
 tools/                helper scripts
 ```
