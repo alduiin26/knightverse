@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>KnightVerse | Arena</title>
-  <meta name="description" content="KnightVerse Arena: turn-based 3v3 PvP with your KnightVerse heroes." />
+  <meta name="description" content="KnightVerse Arena: turn-based PvP and boss raids with your KnightVerse heroes. Earn points and climb the rankings." />
   <link rel="icon" type="image/png" href="logoko.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,11 +36,36 @@
   <section id="lobby" class="screen">
     <div class="lobby-inner">
       <img src="logoko.png" class="logo" alt="KnightVerse" />
-      <div class="eyebrow">Alpha Prototype · PvP</div>
+      <div class="eyebrow">Alpha Prototype</div>
       <h1>The Arena</h1>
-      <p>Choose three heroes from your collection and fight a turn-based 3v3 battle. Every stat printed on your NFT card counts.</p>
-      <button id="enterBtn" class="btn-gold">Enter Arena</button>
-      <a href="index.html" class="back">&larr; Back to site</a>
+      <div id="account" class="acc-bar"></div>
+      <div class="modes">
+        <button class="mode-card" data-mode="pvp">
+          <span class="mc-ico" data-icon="sword"></span>
+          <span class="mc-txt"><b>PvP Arena</b><small>Fight with 1 to 3 heroes against a rival team.</small><em>Win +10 &middot; Lose +3 points per hero</em></span>
+        </button>
+        <button class="mode-card boss" data-mode="boss">
+          <span class="mc-ico" data-icon="skull"></span>
+          <span class="mc-txt"><b>Boss Raid</b><small>Take 5 heroes against a giant boss.</small><em>Win up to +30 &middot; Lose +3 points per hero</em></span>
+        </button>
+      </div>
+      <p class="lobby-note">Every hero can fight <b>3 battles a day</b> (resets at 00:00 UTC). Every stat printed on your NFT card counts.</p>
+      <div class="lobby-links">
+        <a href="leaderboard.html" class="btn-ghost" id="rankBtn">Rankings</a>
+        <a href="index.html" class="back">&larr; Back to site</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOSS SELECT -->
+  <section id="bosses" class="screen">
+    <div class="boss-wrap">
+      <div class="boss-head">
+        <button class="btn-ghost" id="bossBack">&larr; Back</button>
+        <h2>Choose a Boss</h2>
+        <span class="muted">5 heroes vs 1 boss</span>
+      </div>
+      <div id="bossList"></div>
     </div>
   </section>
 
@@ -48,8 +73,9 @@
   <section id="select" class="screen">
     <div class="sel-left panel">
       <div class="sel-head">
+        <button class="btn-ghost sel-back" id="selBack">&larr;</button>
         <h2>Your Heroes</h2>
-        <span class="muted">Demo collection · double-click to add</span>
+        <span class="muted" id="selMode">Demo collection · double-click to add</span>
       </div>
       <div class="chips" id="filterFaction">
         <button class="on" data-v="all">All</button><button data-v="human">Human</button><button data-v="orc">Orc</button>
@@ -87,7 +113,7 @@
 
   <!-- VS -->
   <section id="vs" class="screen">
-    <div class="vs-search"><div class="spinner"></div><span>Searching for an opponent…</span></div>
+    <div class="vs-search"><div class="spinner"></div><span id="vsSearchText">Searching for an opponent…</span></div>
     <div class="vs-main">
       <div class="vs-side left"><div class="vs-name">You</div><div id="vsLeft" class="vs-cards"></div></div>
       <div class="vs-mid">VS</div>
@@ -101,6 +127,13 @@
     <div id="floats"></div>
     <div id="turnOrder"></div>
     <div class="ptag rival"><span id="rivalName"></span><div class="avatar orc"></div></div>
+    <div id="bossBar">
+      <div class="bb-top"><b id="bbName"></b><span id="bbTitle"></span><span id="bbPhase"></span></div>
+      <div class="bb-hp"><i class="lag"></i><i class="fill"></i><span id="bbPct"></span></div>
+      <div class="bb-status" id="bbStatus"></div>
+    </div>
+    <div id="bossAlert"></div>
+    <div id="bossCard"></div>
     <div class="ptag you"><span>You</span><div class="avatar"></div></div>
     <div id="controls">
       <button id="btnSettings" title="Settings"></button>
@@ -136,15 +169,18 @@
       <div id="resVs"></div>
       <div id="resMvp"></div>
       <div id="resStats"></div>
+      <div id="resPoints"></div>
       <div class="res-btns">
-        <button id="btnRematch" class="btn-gold">Rematch</button>
+        <button id="btnRematch" class="btn-gold">Fight Again</button>
         <button id="btnTeam" class="btn-ghost">Change Team</button>
-        <a class="btn-ghost" href="index.html">Exit</a>
+        <button id="btnLobby" class="btn-ghost">Lobby</button>
+        <a class="btn-ghost" href="leaderboard.html" target="_blank" rel="noopener">Rankings</a>
       </div>
     </div>
   </section>
 
   <button id="musicBtn" title="Music on/off"></button>
+  <div id="toast"></div>
 
   <script type="module" src="arena/main.js"></script>
 </body>
