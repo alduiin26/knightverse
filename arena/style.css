@@ -300,6 +300,122 @@ body.paused #battle::after { content: 'PAUSED'; position: absolute; left: 50%; t
 body[data-screen='select'] #musicBtn { top: auto; bottom: 16px; }
 body[data-screen='battle'] #musicBtn, body[data-screen='vs'] #musicBtn { display: none; }
 
+/* ---------------------------------------------------------------- lobby: account + modes */
+.acc-bar { pointer-events: auto; display: flex; align-items: center; gap: 12px; width: min(100%, 460px); padding: 10px 12px; border-radius: 12px; background: rgba(10, 10, 12, 0.72); border: 1px solid var(--line); backdrop-filter: blur(8px); }
+.acc-ico { width: 38px; height: 38px; flex: none; border-radius: 10px; display: grid; place-items: center; color: var(--gold); background: rgba(255, 211, 107, 0.1); border: 1px solid var(--line); }
+.acc-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.acc-main b { font-size: 15px; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.acc-main small { font-size: 12px; color: var(--muted); line-height: 1.35; }
+.acc-btn { cursor: pointer; flex: none; border-radius: 9px; padding: 8px 12px; font: 800 12px var(--font); color: var(--gold); background: rgba(255, 211, 107, 0.06); border: 1px solid rgba(255, 211, 107, 0.4); }
+.acc-btn.gold { color: #1a1205; border: 0; background: linear-gradient(180deg, #ffe9a3, #ffd04d 45%, #d9a22a); }
+.modes { display: flex; flex-direction: column; gap: 10px; width: min(100%, 460px); }
+.mode-card { pointer-events: auto; cursor: pointer; display: flex; align-items: center; gap: 14px; text-align: left; padding: 14px 16px; border-radius: 14px; color: var(--text);
+  background: linear-gradient(135deg, rgba(40, 30, 14, 0.85), rgba(12, 10, 14, 0.85)); border: 1px solid rgba(255, 211, 107, 0.45); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45); transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s; }
+.mode-card:hover { transform: translateY(-2px); border-color: var(--gold); box-shadow: 0 10px 34px rgba(255, 190, 60, 0.25); }
+.mode-card.boss { background: linear-gradient(135deg, rgba(60, 14, 10, 0.88), rgba(12, 10, 14, 0.85)); border-color: rgba(255, 120, 80, 0.55); }
+.mode-card.boss:hover { border-color: #ff8a5a; box-shadow: 0 10px 34px rgba(255, 90, 40, 0.3); }
+.mc-ico { width: 48px; height: 48px; flex: none; border-radius: 12px; display: grid; place-items: center; color: #1a1205; background: linear-gradient(145deg, #ffe9a3, #d9a22a); }
+.mode-card.boss .mc-ico { background: linear-gradient(145deg, #ffb08a, #c83a1a); color: #1a0805; }
+.mc-ico .ico { width: 26px; height: 26px; }
+.mc-txt { display: flex; flex-direction: column; gap: 2px; }
+.mc-txt b { font: 800 19px var(--font-title); letter-spacing: 0.04em; color: #fff; }
+.mc-txt small { font-size: 13px; color: #c9c0ad; }
+.mc-txt em { font-style: normal; font-size: 12px; font-weight: 700; color: var(--gold); }
+.lobby-note { font-size: 13px !important; color: var(--muted) !important; margin: 0 !important; max-width: 460px; }
+.lobby-note b { color: var(--text); }
+.lobby-links { display: flex; align-items: center; gap: 18px; }
+
+/* ---------------------------------------------------------------- boss select */
+#bosses { background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.88)); }
+.boss-wrap { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 20px; gap: 16px; overflow: auto; pointer-events: auto; }
+.boss-head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.boss-head h2 { margin: 0; font: 800 28px var(--font-title); color: var(--gold); letter-spacing: 0.05em; }
+#bossList { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; flex: 1; align-content: center; max-width: 1400px; width: 100%; margin: 0 auto; }
+.bcard { cursor: pointer; text-align: left; padding: 0; border-radius: 16px; overflow: hidden; color: var(--text); display: flex; flex-direction: column; background: rgba(12, 10, 14, 0.9);
+  border: 1px solid color-mix(in srgb, var(--bc) 55%, transparent); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); transition: transform 0.18s, box-shadow 0.18s; }
+.bcard:hover { transform: translateY(-4px); box-shadow: 0 14px 44px color-mix(in srgb, var(--bc) 35%, transparent); border-color: var(--bc); }
+.bc-img { display: block; position: relative; height: 0; padding-bottom: 92%; overflow: hidden; background: #000; }
+.bc-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; pointer-events: none; transition: transform 0.4s; }
+.bcard:hover .bc-img img { transform: scale(1.05); }
+.bc-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(12, 10, 14, 0.95)); }
+.bc-body { display: flex; flex-direction: column; gap: 6px; padding: 0 14px 14px; margin-top: -26px; position: relative; z-index: 1; flex: 1; }
+.bc-body b { font: 800 20px var(--font-title); color: #fff; text-shadow: 0 2px 8px #000; }
+.bc-body > small { color: var(--bc); font-weight: 700; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+.bc-rate { display: grid; grid-template-columns: auto 1fr; gap: 3px 10px; align-items: center; font-size: 11px; color: var(--muted); margin-top: 4px; }
+.stars { display: flex; gap: 3px; }
+.stars i { width: 9px; height: 9px; transform: rotate(45deg); background: rgba(255, 255, 255, 0.12); border-radius: 2px; }
+.stars i.on { background: var(--bc); box-shadow: 0 0 6px var(--bc); }
+.bc-desc { font-size: 12.5px; color: #c9c0ad; line-height: 1.45; flex: 1; }
+.bc-foot { display: flex; flex-direction: column; gap: 2px; font-size: 11.5px; color: var(--muted); border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 8px; }
+.bc-foot em { font-style: normal; font-weight: 800; color: var(--gold); font-size: 13px; }
+
+/* ---------------------------------------------------------------- team select additions */
+.sel-back { padding: 6px 12px; font-size: 14px; }
+.sel-head { justify-content: flex-start; flex-wrap: wrap; }
+#selMode b { color: var(--gold); }
+.rc-uses { position: absolute; bottom: 4px; right: 4px; z-index: 3; padding: 1px 6px; border-radius: 99px; font: 800 10px var(--font); color: #fff; background: rgba(0, 0, 0, 0.78); border: 1px solid rgba(255, 255, 255, 0.25); }
+.rcard.spent img { filter: grayscale(1) brightness(0.45); }
+.rcard.spent .rc-uses { color: #ff9a8a; border-color: #ff6a5a; }
+.tag.uses { color: #9dffb0; border-color: rgba(120, 255, 150, 0.4); }
+.tag.uses.none { color: #ff9a8a; border-color: rgba(255, 110, 90, 0.5); }
+#teamSlots.five .slot { width: 128px; }
+
+/* ---------------------------------------------------------------- VS: boss */
+.vboss { width: clamp(150px, 20vw, 280px); border-radius: 14px; overflow: hidden; border: 2px solid var(--bc); box-shadow: 0 0 40px color-mix(in srgb, var(--bc) 55%, transparent); background: #000; text-align: center; }
+.vboss img { width: 100%; display: block; }
+.vboss span { display: block; font: 700 12px var(--font); padding: 6px; color: var(--bc); letter-spacing: 0.08em; text-transform: uppercase; }
+#vs.go.boss .right .vboss { animation: slideR 0.7s cubic-bezier(.2, 1.4, .4, 1) both; }
+#vs.boss .vs-cards .vcard { width: clamp(64px, 7.5vw, 120px); }
+#vs.go .vcard:nth-child(4) { animation-delay: 0.3s; } #vs.go .vcard:nth-child(5) { animation-delay: 0.4s; }
+
+/* ---------------------------------------------------------------- battle: boss */
+#bossBar { display: none; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: min(92vw, 640px); text-align: center; }
+#battle.raid #bossBar { display: block; }
+#battle.raid #turnOrder { top: 88px; }
+#battle.raid .ptag.rival { display: none; }
+.bb-top { display: flex; align-items: baseline; justify-content: center; gap: 10px; margin-bottom: 5px; text-shadow: 0 2px 6px #000; }
+.bb-top b { font: 800 20px var(--font-title); color: #fff; letter-spacing: 0.05em; }
+#bbTitle { font-size: 12px; color: var(--bc); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+#bbPhase { display: inline-flex; gap: 4px; margin-left: 4px; }
+#bbPhase i { width: 9px; height: 9px; transform: rotate(45deg); background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.4); }
+#bbPhase i.on { background: var(--bc); box-shadow: 0 0 8px var(--bc); }
+.bb-hp { position: relative; height: 18px; border-radius: 4px; overflow: hidden; background: #2a0f10; border: 2px solid #b8913c; box-shadow: 0 0 18px color-mix(in srgb, var(--bc) 35%, transparent), 0 3px 10px #000; }
+.bb-hp i { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; }
+.bb-hp .lag { background: #f6e8b8; transition: width 0.5s ease-out; }
+.bb-hp .fill { background: linear-gradient(#ff9a8a, #e3433a 55%, #a51f1f); transition: width 0.25s; }
+#bbPct { position: absolute; inset: 0; display: grid; place-items: center; font: 800 11px var(--font); color: #fff; text-shadow: 0 1px 2px #000; }
+.bb-status { display: flex; justify-content: center; gap: 4px; margin-top: 5px; min-height: 18px; }
+#bossAlert { position: absolute; left: 50%; top: 150px; transform: translate(-50%, -10px); max-width: min(92vw, 560px); padding: 10px 18px; border-radius: 12px; text-align: center; font: 700 14px var(--font); color: #fff;
+  background: rgba(70, 8, 8, 0.86); border: 1px solid #ff5a3a; box-shadow: 0 0 30px rgba(255, 60, 30, 0.5); opacity: 0; transition: opacity 0.3s, transform 0.3s; pointer-events: none; }
+#bossAlert.show { opacity: 1; transform: translate(-50%, 0); animation: alertPulse 1s ease-in-out infinite; }
+#bossAlert b { color: #ffd36b; }
+@keyframes alertPulse { 50% { box-shadow: 0 0 46px rgba(255, 60, 30, 0.85); } }
+#bossCard { position: absolute; left: 0; right: 0; top: 58%; text-align: center; pointer-events: none; opacity: 0; }
+#bossCard.show { animation: ult 2.4s ease-out forwards; }
+#bossCard small { display: block; font: 800 12px var(--font); letter-spacing: 0.35em; text-transform: uppercase; color: var(--bc); }
+#bossCard b { display: block; font: 900 clamp(36px, 6vw, 76px) var(--font-title); color: #fff; letter-spacing: 0.06em; text-shadow: 0 0 24px var(--bc), 0 0 50px var(--bc), 0 5px 0 #000; }
+#bossCard span { display: block; font: 700 14px var(--font); letter-spacing: 0.2em; text-transform: uppercase; color: #e8dcc0; text-shadow: 0 2px 6px #000; }
+#centerText.phase { flex-direction: column; color: #fff; text-shadow: 0 0 30px #ff5a1a, 0 6px 0 #000; font-size: clamp(40px, 7vw, 90px); }
+#centerText.phase small { display: block; font: 800 16px var(--font); letter-spacing: 0.25em; text-transform: uppercase; color: #ffb08a; text-align: center; }
+#centerText .phase-t { display: block; text-align: center; }
+
+/* ---------------------------------------------------------------- result: points */
+#resPoints { margin: -6px 0 18px; }
+.rp { display: flex; align-items: baseline; justify-content: center; gap: 8px; flex-wrap: wrap; padding: 12px; border-radius: 12px; font-size: 13px; }
+.rp.saving { color: var(--muted); align-items: center; }
+.rp.saved { background: linear-gradient(90deg, rgba(255, 211, 107, 0.05), rgba(255, 211, 107, 0.16), rgba(255, 211, 107, 0.05)); border: 1px solid rgba(255, 211, 107, 0.45); }
+.rp.saved b { font: 900 34px var(--font-title); color: #ffe08a; text-shadow: 0 0 18px rgba(255, 190, 60, 0.6); }
+.rp.saved span { font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; }
+.rp.saved small { width: 100%; color: var(--text); font-size: 13px; }
+.rp.practice { color: var(--muted); background: rgba(255, 255, 255, 0.04); border: 1px dashed rgba(255, 255, 255, 0.15); }
+.rp.error { color: #ffb3a8; background: rgba(160, 30, 20, 0.15); border: 1px solid rgba(255, 110, 90, 0.4); }
+.mini-spin { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgba(255, 211, 107, 0.25); border-top-color: var(--gold); animation: spin 0.8s linear infinite; display: inline-block; }
+
+#toast { position: fixed; z-index: 60; left: 50%; bottom: 120px; transform: translate(-50%, 20px); max-width: min(92vw, 460px); padding: 11px 18px; border-radius: 12px; font: 700 13px var(--font); color: #fff; text-align: center;
+  background: rgba(20, 16, 22, 0.95); border: 1px solid var(--line); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; }
+#toast.show { opacity: 1; transform: translate(-50%, 0); }
+body[data-screen='bosses'] #musicBtn { top: auto; bottom: 16px; }
+
 /* ---------------------------------------------------------------- responsive */
 @media (max-width: 1000px) {
   #select .sel-left { width: auto; right: 16px; bottom: 50%; }
@@ -308,6 +424,8 @@ body[data-screen='battle'] #musicBtn, body[data-screen='vs'] #musicBtn { display
   .slot { width: 110px; } .slot span { font-size: 11px; }
   .lobby-inner { left: 6vw; right: 6vw; }
   #lobby { background: linear-gradient(0deg, rgba(5, 5, 5, 0.9) 0%, rgba(5, 5, 5, 0.4) 60%, rgba(5, 5, 5, 0.2)); }
+  #bossList { grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start; }
+  .bc-img { padding-bottom: 60%; }
 }
 @media (max-width: 700px) {
   .uhud { width: 100px; transform-origin: center bottom; }
@@ -315,6 +433,7 @@ body[data-screen='battle'] #musicBtn, body[data-screen='vs'] #musicBtn { display
   .flt { font-size: 20px; } .flt.crit { font-size: 26px; }
   #skillbar { left: 8px; right: 8px; transform: translateY(140%); bottom: 72px; padding: 8px; gap: 8px; justify-content: center; flex-wrap: wrap; }
   #skillbar.show { transform: none; }
+  #skillbar:not(.show) { opacity: 0; pointer-events: none; }
   .sb-who { display: none; }
   .skill { width: 62px; height: 62px; }
   #sbHint { width: 100%; max-width: none; text-align: center; order: 3; }
@@ -330,4 +449,16 @@ body[data-screen='battle'] #musicBtn, body[data-screen='vs'] #musicBtn { display
   #detailImg { width: 96px; }
   #resStats { grid-template-columns: repeat(2, 1fr); }
   .vs-main { flex-direction: column; gap: 10px; }
+  #bossList { grid-template-columns: 1fr; }
+  .bc-img { padding-bottom: 52%; }
+  .boss-wrap { padding: 14px; }
+  .boss-head h2 { font-size: 22px; }
+  #teamSlots.five { gap: 5px; } #teamSlots.five .slot { width: 62px; height: 66px; }
+  #battle.raid #turnOrder { top: 92px; }
+  #bossBar { top: 58px; } .bb-top b { font-size: 16px; } #bbTitle { display: none; }
+  #bossAlert { top: 150px; font-size: 12.5px; }
+  .lobby-inner { gap: 10px; top: auto; bottom: 18px; transform: none; }
+  .mode-card { padding: 10px 12px; } .mc-ico { width: 40px; height: 40px; } .mc-txt b { font-size: 16px; } .mc-txt small { font-size: 12px; }
+  .lobby-inner .logo { display: none; } .lobby-inner h1 { font-size: 40px; }
+  .lobby-note { font-size: 12px !important; }
 }
