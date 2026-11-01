@@ -1,11 +1,12 @@
 // KnightVerse Arena - music + synthesized sound effects (no extra audio files needed)
+import { MUSIC } from './assets.js';
 
 export class SoundSystem {
   constructor() {
     this.ctx = null;
     this.musicOn = true;
     this.sfxOn = true;
-    this.music = new Audio('theme.mp3');
+    this.music = new Audio(MUSIC);
     this.music.loop = true;
     this.music.volume = 0.32;
     this.noiseBuf = null;

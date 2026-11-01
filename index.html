@@ -2,33 +2,18 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self'; connect-src 'self' blob: https://ghnyalgjoahltifsjsqb.supabase.co http://localhost:* http://127.0.0.1:*; object-src 'none'; base-uri 'self'; form-action 'self'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KnightVerse | Web3 Play-to-Earn MMORPG</title>
-  <link rel="icon" type="image/png" href="logoko.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/brand/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/img/brand/apple-touch-icon.png" />
   
   <!-- Kütüphaneler -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="assets/js/icons.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" integrity="sha384-/rJKQnzOkEo+daG0jMjU1IwwY9unxt1NBw3Ef2fmOJ3PW/TfAg2KXVoWwMZQZtw9" crossorigin="anonymous" />
   
   <!-- Tailwind Ayarları -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              gold: '#FFD700',
-              goldHover: '#e6c200',
-              dark: '#0a0a0a',
-              card: '#121212',
-              border: '#262626'
-            }
-          }
-        }
-      }
-    }
-  </script>
   
   <!-- Özel Stiller ve Animasyonlar -->
   <style>
@@ -55,12 +40,13 @@
     @keyframes float-box { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
     .animate-float { animation: float-box 4s ease-in-out infinite; }
   </style>
+  <link rel="stylesheet" href="assets/css/site.css" />
 </head>
 <body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black overflow-x-hidden">
 
   <!-- Arkaplan Müziği -->
-  <audio id="bgMusic" loop preload="auto">
-    <source src="theme.mp3" type="audio/mpeg" />
+  <audio id="bgMusic" loop preload="none">
+    <source src="assets/media/theme.mp3" type="audio/mpeg" />
   </audio>
 
   <!-- Müzik Kontrol Butonu -->
@@ -77,7 +63,7 @@
       
       <!-- Logo -->
       <a href="#" class="flex items-center gap-2">
-        <img src="logoko.png" alt="KnightVerse Logo" class="h-11 sm:h-14 w-auto object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,215,0,0.4)]" />
+        <img src="assets/img/brand/logo.webp" alt="KnightVerse Logo" class="h-11 sm:h-14 w-auto object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,215,0,0.4)]" />
       </a>
 
       <!-- Desktop Linkler -->
@@ -102,9 +88,9 @@
             </div>
             
             <a href="store.html" data-i18n="nav_store" class="px-3 py-2 rounded-lg bg-[#141414] border border-brand-gold/40 text-brand-gold font-semibold text-xs hover:bg-brand-gold/10 transition flex items-center gap-1.5">Store</a>
-            <a href="play.html" data-i18n="nav_play" class="px-3 py-2 rounded-lg bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-semibold text-xs hover:bg-emerald-500/20 transition flex items-center gap-1.5 shadow-[0_0_10px_rgba(16,185,129,0.2)]">Play</a>
+            <a href="arena.html" data-i18n="nav_play" class="px-3 py-2 rounded-lg bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-semibold text-xs hover:bg-emerald-500/20 transition flex items-center gap-1.5 shadow-[0_0_10px_rgba(16,185,129,0.2)]">Play</a>
         </div>
-        <a href="https://opensea.io" target="_blank" data-i18n="nav_opensea" class="px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-lg bg-brand-gold text-black font-semibold text-xs sm:text-sm hover:bg-brand-goldHover transition flex items-center gap-1.5 ml-1">OpenSea</a>
+        <a href="https://opensea.io" target="_blank" rel="noopener noreferrer" data-i18n="nav_opensea" class="px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-lg bg-brand-gold text-black font-semibold text-xs sm:text-sm hover:bg-brand-goldHover transition flex items-center gap-1.5 ml-1">OpenSea</a>
       </div>
     </div>
 
@@ -116,7 +102,7 @@
             <a onclick="setLanguage('cn')" class="lang-btn text-gray-500 hover:text-white">CN</a>
             <a onclick="setLanguage('kr')" class="lang-btn text-gray-500 hover:text-white">KR</a>
         </div>
-        <a href="play.html" data-i18n="nav_play" class="px-2.5 py-1.5 rounded bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-bold whitespace-nowrap shadow-[0_0_8px_rgba(16,185,129,0.2)]">Play</a>
+        <a href="arena.html" data-i18n="nav_play" class="px-2.5 py-1.5 rounded bg-emerald-900/30 border border-emerald-500/50 text-emerald-400 font-bold whitespace-nowrap shadow-[0_0_8px_rgba(16,185,129,0.2)]">Play</a>
         <a href="store.html" data-i18n="nav_store" class="px-2.5 py-1.5 rounded bg-[#161616] border border-brand-gold/40 text-brand-gold font-bold whitespace-nowrap">Store</a>
     </div>
   </nav>
@@ -126,10 +112,10 @@
     
     <!-- Yüzen NFT'ler (Sadece masaüstünde) -->
     <div class="absolute inset-0 z-0 pointer-events-none opacity-20 hidden md:block">
-      <img src="epic.jpg" class="absolute top-32 left-10 w-24 h-36 object-cover rounded-xl nft-float-1 border border-purple-500/30" />
-      <img src="legendary.jpg" class="absolute bottom-20 left-1/4 w-32 h-48 object-cover rounded-xl nft-float-2 border border-brand-gold/40 shadow-[0_0_20px_rgba(255,215,0,0.2)]" />
-      <img src="rare.jpg" class="absolute top-20 right-1/4 w-20 h-32 object-cover rounded-xl nft-float-3 border border-blue-500/30" />
-      <img src="common.jpg" class="absolute bottom-32 right-10 w-28 h-40 object-cover rounded-xl nft-float-4 border border-gray-500/30" />
+      <img src="assets/img/heroes/epic.jpg" class="absolute top-32 left-10 w-24 h-36 object-cover rounded-xl nft-float-1 border border-purple-500/30" />
+      <img src="assets/img/heroes/legendary.jpg" class="absolute bottom-20 left-1/4 w-32 h-48 object-cover rounded-xl nft-float-2 border border-brand-gold/40 shadow-[0_0_20px_rgba(255,215,0,0.2)]" />
+      <img src="assets/img/heroes/rare.jpg" class="absolute top-20 right-1/4 w-20 h-32 object-cover rounded-xl nft-float-3 border border-blue-500/30" />
+      <img src="assets/img/heroes/common.jpg" class="absolute bottom-32 right-10 w-28 h-40 object-cover rounded-xl nft-float-4 border border-gray-500/30" />
     </div>
 
     <!-- Işık Efekti -->
@@ -138,7 +124,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
       
       <div class="flex justify-center mb-4 sm:mb-6" data-aos="zoom-in" data-aos-duration="1000">
-        <img src="logoko.png" alt="KnightVerse" class="w-36 sm:w-56 h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.45)] mx-auto animate-pulse-gold" />
+        <img src="assets/img/brand/logo.webp" alt="KnightVerse" class="w-36 sm:w-56 h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.45)] mx-auto animate-pulse-gold" />
       </div>
 
       <div data-aos="fade-up" data-aos-delay="200" data-i18n="hero_badge" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-semibold uppercase tracking-wider mb-6"></div>
@@ -149,7 +135,7 @@
       
       <div data-aos="zoom-in" data-aos-delay="600" class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto sm:max-w-none">
         <a href="#teaser" data-i18n="btn_watch" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-brand-gold text-black font-bold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20"></a>
-        <a href="play.html" data-i18n="btn_enter" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-emerald-900/20 border border-emerald-500/50 text-emerald-400 font-bold text-sm hover:bg-emerald-900/40 transition flex items-center justify-center gap-2"></a>
+        <a href="arena.html" data-i18n="btn_enter" class="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-emerald-900/20 border border-emerald-500/50 text-emerald-400 font-bold text-sm hover:bg-emerald-900/40 transition flex items-center justify-center gap-2"></a>
       </div>
 
       <!-- İstatistik Kartları -->
@@ -184,7 +170,7 @@
       </div>
       <div data-aos="zoom-in" data-aos-duration="1200" class="relative rounded-2xl overflow-hidden border-2 border-brand-border/80 hover:border-brand-gold/50 transition video-glow bg-black max-w-4xl mx-auto">
         <video autoplay muted loop playsinline controls class="w-full aspect-video object-cover">
-          <source src="intro.mp4" type="video/mp4" />
+          <source src="assets/media/intro.mp4" type="video/mp4" />
         </video>
         <div data-i18n="teaser_tag" class="absolute bottom-3 left-3 hidden sm:flex items-center gap-2 px-3 py-1 rounded-md bg-black/70 backdrop-blur-md border border-brand-border text-[11px] text-gray-300"></div>
       </div>
@@ -208,7 +194,7 @@
           <div class="lg:col-span-5 flex flex-col items-center justify-center text-center relative" data-aos="zoom-in-up" data-aos-delay="200">
             <div class="relative w-64 sm:w-80 h-auto">
               <div class="absolute inset-0 bg-gradient-to-t from-amber-500/20 via-purple-600/10 to-transparent blur-2xl rounded-full"></div>
-              <img src="loot.png" alt="Chest" class="relative w-full h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.4)] animate-float mx-auto" />
+              <img src="assets/img/items/loot.webp" alt="Chest" class="relative w-full h-auto object-contain blend-logo drop-shadow-[0_0_35px_rgba(255,215,0,0.4)] animate-float mx-auto" />
             </div>
             <div data-i18n="mint_asset" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/80 border border-brand-gold/40 text-brand-gold text-xs font-mono mt-3"></div>
           </div>
@@ -239,7 +225,7 @@
             </div>
             
             <div class="flex flex-col sm:flex-row items-center gap-3">
-              <a href="https://opensea.io" target="_blank" data-i18n="btn_mint" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-brand-gold text-black font-extrabold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20"></a>
+              <a href="https://opensea.io" target="_blank" rel="noopener noreferrer" data-i18n="btn_mint" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-brand-gold text-black font-extrabold text-sm hover:bg-brand-goldHover transition flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20"></a>
               <a href="#rarity" data-i18n="btn_inspect" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#161616] border border-brand-border text-gray-300 text-sm hover:border-brand-gold hover:text-white transition flex items-center justify-center gap-2"></a>
             </div>
           </div>
@@ -253,7 +239,7 @@
             <div data-i18n="c1_title" class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1"></div>
             <div class="flex justify-between">
               <div class="text-2xl font-black text-white">0 USDT</div>
-              <img src="loot.png" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] -mr-2" />
+              <img src="assets/img/items/loot.webp" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] -mr-2" />
             </div>
           </div>
           <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs">
@@ -267,7 +253,7 @@
             <div data-i18n="c2_title" class="text-[10px] font-bold text-blue-400 uppercase tracking-wider mb-1"></div>
             <div class="flex justify-between">
               <div class="text-2xl font-black text-white">1 USDT</div>
-              <img src="loot.png" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(59,130,246,0.3)] -mr-2" />
+              <img src="assets/img/items/loot.webp" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(59,130,246,0.3)] -mr-2" />
             </div>
           </div>
           <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs">
@@ -282,7 +268,7 @@
             <div data-i18n="c3_title" class="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-1"></div>
             <div class="flex justify-between">
               <div class="text-2xl font-black text-white">2 USDT</div>
-              <img src="loot.png" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(168,85,247,0.3)] -mr-2" />
+              <img src="assets/img/items/loot.webp" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(168,85,247,0.3)] -mr-2" />
             </div>
           </div>
           <div class="mt-4 pt-3 border-t border-purple-900/50 text-xs">
@@ -296,7 +282,7 @@
             <div data-i18n="c4_title" class="text-[10px] font-bold text-brand-gold uppercase tracking-wider mb-1"></div>
             <div class="flex justify-between">
               <div class="text-2xl font-black text-white">3 USDT</div>
-              <img src="loot.png" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,215,0,0.5)] animate-pulse-gold -mr-2" />
+              <img src="assets/img/items/loot.webp" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(255,215,0,0.5)] animate-pulse-gold -mr-2" />
             </div>
           </div>
           <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs">
@@ -310,7 +296,7 @@
             <div data-i18n="c5_title" class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-1"></div>
             <div class="flex justify-between">
               <div class="text-2xl font-black text-white">5 USDT</div>
-              <img src="loot.png" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(16,185,129,0.3)] -mr-2" />
+              <img src="assets/img/items/loot.webp" class="w-16 h-16 sm:w-20 sm:h-20 object-contain blend-logo drop-shadow-[0_0_15px_rgba(16,185,129,0.3)] -mr-2" />
             </div>
           </div>
           <div class="mt-4 pt-3 border-t border-brand-border/60 text-xs">
@@ -350,7 +336,7 @@
           </div>
           <div>
             <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-stone-700 bg-[#161616] relative">
-              <img id="common-img" src="common.jpg" class="w-full h-full object-cover transition-all duration-300" />
+              <img id="common-img" src="assets/img/heroes/common.jpg" class="w-full h-full object-cover transition-all duration-300" />
             </div>
             <div class="flex items-center justify-between mb-1">
               <h4 data-i18n="t1_name" class="font-bold text-white text-lg"></h4>
@@ -373,7 +359,7 @@
           </div>
           <div>
             <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-blue-900/70 bg-[#161616] relative">
-              <img id="rare-img" src="rare.jpg" class="w-full h-full object-cover" />
+              <img id="rare-img" src="assets/img/heroes/rare.jpg" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
               <h4 data-i18n="t2_name" class="font-bold text-blue-400 text-lg"></h4>
@@ -396,7 +382,7 @@
           </div>
           <div>
             <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-purple-900/70 bg-[#161616] relative">
-              <img id="epic-img" src="epic.jpg" class="w-full h-full object-cover" />
+              <img id="epic-img" src="assets/img/heroes/epic.jpg" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
               <h4 data-i18n="t3_name" class="font-bold text-purple-400 text-lg"></h4>
@@ -419,7 +405,7 @@
           </div>
           <div>
             <div class="w-full aspect-[2/3] rounded-xl overflow-hidden mb-4 border border-brand-gold/30 bg-[#161616] relative">
-              <img id="legendary-img" src="legendary.jpg" class="w-full h-full object-cover" />
+              <img id="legendary-img" src="assets/img/heroes/legendary.jpg" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
               <h4 data-i18n="t4_name" class="font-bold text-brand-gold text-lg"></h4>
@@ -452,7 +438,7 @@
         <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-amber-600 transition" data-aos="flip-left" data-aos-delay="100">
           <div>
             <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800">
-              <img src="boss-orc.png" class="w-full h-full object-cover" />
+              <img src="assets/img/bosses/boss-orc.webp" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
               <h4 data-i18n="b1_name" class="font-bold text-amber-500 sm:text-lg"></h4>
@@ -470,7 +456,7 @@
         <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-emerald-600 transition" data-aos="flip-left" data-aos-delay="200">
           <div>
             <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800">
-              <img src="boss-spider.png" class="w-full h-full object-cover" />
+              <img src="assets/img/bosses/boss-spider.webp" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
               <h4 data-i18n="b2_name" class="font-bold text-emerald-400 sm:text-lg"></h4>
@@ -488,7 +474,7 @@
         <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-purple-600 transition" data-aos="flip-left" data-aos-delay="300">
           <div>
             <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800">
-              <img src="boss-void.png" class="w-full h-full object-cover" />
+              <img src="assets/img/bosses/boss-void.webp" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
               <h4 data-i18n="b3_name" class="font-bold text-purple-400 sm:text-lg"></h4>
@@ -506,7 +492,7 @@
         <div class="bg-brand-card border border-stone-800 rounded-2xl p-4 hover:border-red-600 transition" data-aos="flip-left" data-aos-delay="400">
           <div>
             <div class="w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-stone-800">
-              <img src="boss-dragon.png" class="w-full h-full object-cover" />
+              <img src="assets/img/bosses/boss-dragon.webp" class="w-full h-full object-cover" />
             </div>
             <div class="flex items-center justify-between mb-1">
               <h4 data-i18n="b4_name" class="font-bold text-red-500 sm:text-lg"></h4>
@@ -624,18 +610,18 @@
   <footer class="py-10 bg-black border-t border-brand-border/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 text-center sm:text-left">
       <div class="flex items-center gap-2 justify-center sm:justify-start">
-        <img src="logoko.png" alt="KnightVerse" class="h-6 w-auto object-contain blend-logo opacity-70" />
+        <img src="assets/img/brand/logo.webp" alt="KnightVerse" class="h-6 w-auto object-contain blend-logo opacity-70" />
         <span data-i18n="ft_copy"></span>
       </div>
       <div class="flex items-center gap-4 sm:gap-6 justify-center">
-        <a href="https://x.com" target="_blank" class="hover:text-brand-gold transition">X (Twitter)</a>
-        <a href="https://telegram.org" target="_blank" class="hover:text-brand-gold transition">Telegram</a>
+        <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="hover:text-brand-gold transition">X (Twitter)</a>
+        <a href="https://telegram.org" target="_blank" rel="noopener noreferrer" class="hover:text-brand-gold transition">Telegram</a>
       </div>
     </div>
   </footer>
 
   <!-- SCRIPT BÖLÜMÜ -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js" integrity="sha384-wziAfh6b/qT+3LrqebF9WeK4+J5sehS6FA10J1t3a866kJ/fvU5UwofWnQyzLtwu" crossorigin="anonymous"></script>
   <script>
     
     // ==========================================
@@ -710,10 +696,10 @@
         boss_badge: "<i data-lucide='flame' class='w-3.5 h-3.5'></i> PvE Raid Encounters", 
         boss_title: "Conquer the World Bosses", 
         boss_desc: "Team up with fellow Karus and El Morad warriors. Defeat ancient subterranean monsters to secure rare armory boxes and token pools.",
-        b1_name: "Orc Chieftain", b1_lvl: "Dungeon Lv 25", b1_desc: "Brutal fortress gatekeeper armed with spiked war clubs.", b1_v: "Fire Magic", b1_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Warrior Relics",
-        b2_name: "Venom Queen", b2_lvl: "Abyss Lv 40", b2_desc: "Deep cave arachnid radiating acidic venom waves.", b2_v: "Light Spells", b2_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Rogue Daggers",
-        b3_name: "Void Behemoth", b3_lvl: "Nether Lv 55", b3_desc: "Shadow-armored dark titan infused with abyssal flames.", b3_v: "Holy Priest", b3_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Epic Shards",
-        b4_name: "Ignis Ancient", b4_lvl: "World Raid Lv 59", b4_desc: "Ancient magma lord guarding the subterranean treasury.", b4_v: "Glacier Spells", b4_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 1,000 $KNIGHT",
+        b1_name: "Orc Chieftain", b1_lvl: "Dungeon Lv 25", b1_desc: "Brutal fortress gatekeeper armed with spiked war clubs.", b1_v: "Fire Magic", b1_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Warrior Relics",
+        b2_name: "Venom Queen", b2_lvl: "Abyss Lv 40", b2_desc: "Deep cave arachnid radiating acidic venom waves.", b2_v: "Light Spells", b2_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Rogue Daggers",
+        b3_name: "Void Behemoth", b3_lvl: "Nether Lv 55", b3_desc: "Shadow-armored dark titan infused with abyssal flames.", b3_v: "Holy Priest", b3_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Epic Shards",
+        b4_name: "Ignis Ancient", b4_lvl: "World Raid Lv 59", b4_desc: "Ancient magma lord guarding the subterranean treasury.", b4_v: "Glacier Spells", b4_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 1,000 $KNIGHT",
         lbl_vuln: "Vulnerability:", 
         lbl_loot: "Loot Drop:",
         
@@ -794,10 +780,10 @@
         boss_badge: "<i data-lucide='flame' class='w-3.5 h-3.5'></i> PvE Baskınları", 
         boss_title: "Dünya Bosslarını Fethet", 
         boss_desc: "Karus ve El Morad savaşçılarıyla takım ol. Kadim yaratıkları mağlup ederek nadir eşya kutuları ve token ödülleri kazan.",
-        b1_name: "Ork Şefi", b1_lvl: "Zindan Sv 25", b1_desc: "Dikenli savaş sopalarıyla silahlanmış acımasız kale bekçisi.", b1_v: "Ateş Büyüsü", b1_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Savaşçı Yadigarı",
-        b2_name: "Zehir Kraliçesi", b2_lvl: "Uçurum Sv 40", b2_desc: "Asidik zehir dalgaları yayan derin mağara örümceği.", b2_v: "Işık Büyüsü", b2_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Suikastçi Hançeri",
-        b3_name: "Hiçlik Devi", b3_lvl: "Cehennem Sv 55", b3_desc: "Cehennem alevleriyle aşılanmış karanlık zırhlı titan.", b3_v: "Kutsal Rahip", b3_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Destansı Parçalar",
-        b4_name: "Kadim Ignis", b4_lvl: "Baskın Sv 59", b4_desc: "Yeraltı hazinesini koruyan antik magma efendisi.", b4_v: "Buz Büyüsü", b4_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 1.000 $KNIGHT",
+        b1_name: "Ork Şefi", b1_lvl: "Zindan Sv 25", b1_desc: "Dikenli savaş sopalarıyla silahlanmış acımasız kale bekçisi.", b1_v: "Ateş Büyüsü", b1_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Savaşçı Yadigarı",
+        b2_name: "Zehir Kraliçesi", b2_lvl: "Uçurum Sv 40", b2_desc: "Asidik zehir dalgaları yayan derin mağara örümceği.", b2_v: "Işık Büyüsü", b2_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Suikastçi Hançeri",
+        b3_name: "Hiçlik Devi", b3_lvl: "Cehennem Sv 55", b3_desc: "Cehennem alevleriyle aşılanmış karanlık zırhlı titan.", b3_v: "Kutsal Rahip", b3_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> Destansı Parçalar",
+        b4_name: "Kadim Ignis", b4_lvl: "Baskın Sv 59", b4_desc: "Yeraltı hazinesini koruyan antik magma efendisi.", b4_v: "Buz Büyüsü", b4_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 1.000 $KNIGHT",
         lbl_vuln: "Zayıflık:", 
         lbl_loot: "Ganimet:",
         
@@ -876,10 +862,10 @@
         boss_badge: "<i data-lucide='flame' class='w-3.5 h-3.5'></i> PvE 突袭", 
         boss_title: "征服世界首领", 
         boss_desc: "与卡鲁斯和埃尔莫拉德的勇士组队，击败远古怪物。",
-        b1_name: "兽人酋长", b1_lvl: "地牢 25级", b1_desc: "残忍的堡垒守门人。", b1_v: "火魔法", b1_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 战士遗物",
-        b2_name: "毒液女王", b2_lvl: "深渊 40级", b2_desc: "深洞蜘蛛辐射酸性毒液波。", b2_v: "光魔法", b2_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 盗贼匕首",
-        b3_name: "虚空巨兽", b3_lvl: "下界 55级", b3_desc: "充满深渊火焰的暗影盔甲黑暗泰坦。", b3_v: "神圣牧师", b3_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 史诗碎片",
-        b4_name: "古代伊格尼斯", b4_lvl: "世界突袭 59级", b4_desc: "守卫地下宝库的远古岩浆领主。", b4_v: "冰川魔法", b4_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 1,000 $KNIGHT",
+        b1_name: "兽人酋长", b1_lvl: "地牢 25级", b1_desc: "残忍的堡垒守门人。", b1_v: "火魔法", b1_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 战士遗物",
+        b2_name: "毒液女王", b2_lvl: "深渊 40级", b2_desc: "深洞蜘蛛辐射酸性毒液波。", b2_v: "光魔法", b2_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 盗贼匕首",
+        b3_name: "虚空巨兽", b3_lvl: "下界 55级", b3_desc: "充满深渊火焰的暗影盔甲黑暗泰坦。", b3_v: "神圣牧师", b3_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 史诗碎片",
+        b4_name: "古代伊格尼斯", b4_lvl: "世界突袭 59级", b4_desc: "守卫地下宝库的远古岩浆领主。", b4_v: "冰川魔法", b4_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 1,000 $KNIGHT",
         lbl_vuln: "弱点:", 
         lbl_loot: "战利品:",
         
@@ -958,10 +944,10 @@
         boss_badge: "<i data-lucide='flame' class='w-3.5 h-3.5'></i> PvE 레이드", 
         boss_title: "월드 보스 정복", 
         boss_desc: "전사들과 팀을 이뤄 고대 몬스터를 물리치세요.",
-        b1_name: "오크 족장", b1_lvl: "던전 레벨 25", b1_desc: "잔인한 요새 문지기.", b1_v: "불 마법", b1_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 전사의 유물",
-        b2_name: "베놈 퀸", b2_lvl: "심연 레벨 40", b2_desc: "산성 독파를 방출하는 깊은 동굴 거미.", b2_v: "빛 마법", b2_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 도적의 단검",
-        b3_name: "공허의 베히모스", b3_lvl: "네더 레벨 55", b3_desc: "심연의 불꽃이 주입된 암흑 타이탄.", b3_v: "신성한 사제", b3_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 에픽 파편",
-        b4_name: "고대 이그니스", b4_lvl: "레이드 레벨 59", b4_desc: "지하 금고를 지키는 고대 마그마 군주.", b4_v: "빙하 마법", b4_l: "<img src='loot.png' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 1,000 $KNIGHT",
+        b1_name: "오크 족장", b1_lvl: "던전 레벨 25", b1_desc: "잔인한 요새 문지기.", b1_v: "불 마법", b1_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 전사의 유물",
+        b2_name: "베놈 퀸", b2_lvl: "심연 레벨 40", b2_desc: "산성 독파를 방출하는 깊은 동굴 거미.", b2_v: "빛 마법", b2_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 도적의 단검",
+        b3_name: "공허의 베히모스", b3_lvl: "네더 레벨 55", b3_desc: "심연의 불꽃이 주입된 암흑 타이탄.", b3_v: "신성한 사제", b3_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 에픽 파편",
+        b4_name: "고대 이그니스", b4_lvl: "레이드 레벨 59", b4_desc: "지하 금고를 지키는 고대 마그마 군주.", b4_v: "빙하 마법", b4_l: "<img src='assets/img/items/loot.webp' class='w-3.5 h-3.5 object-contain blend-logo inline' /> 1,000 $KNIGHT",
         lbl_vuln: "약점:", 
         lbl_loot: "전리품:",
         
@@ -991,54 +977,54 @@
       en: {
         human: {
           common: [
-            { name: "HUMAN MAGE", img: "common.jpg", desc: "Silver framed foundational human mage for early PvE encounters." }, 
-            { name: "HUMAN WARRIOR", img: "commonw.jpg", desc: "Heavy plate vanguard trained for front-line melee combat." }, 
-            { name: "HUMAN PRIEST", img: "commonp.jpg", desc: "Devoted acolyte providing basic tactical buffs and healing." }, 
-            { name: "HUMAN ROGUE", img: "commonr.jpg", desc: "Nimble human scout equipped with light dual daggers." }
+            { name: "HUMAN MAGE", img: "assets/img/heroes/common.jpg", desc: "Silver framed foundational human mage for early PvE encounters." }, 
+            { name: "HUMAN WARRIOR", img: "assets/img/heroes/commonw.jpg", desc: "Heavy plate vanguard trained for front-line melee combat." }, 
+            { name: "HUMAN PRIEST", img: "assets/img/heroes/commonp.jpg", desc: "Devoted acolyte providing basic tactical buffs and healing." }, 
+            { name: "HUMAN ROGUE", img: "assets/img/heroes/commonr.jpg", desc: "Nimble human scout equipped with light dual daggers." }
           ],
           rare: [
-            { name: "HUMAN MAGE", img: "rare.jpg", desc: "Sapphire crested battle sorceress with boosted offensive attributes." }, 
-            { name: "HUMAN WARRIOR", img: "rarew.jpg", desc: "Armored human vanguard wielding enhanced strike power." }, 
-            { name: "HUMAN PRIEST", img: "rarep.jpg", desc: "Consecrated cleric offering balanced divine shielding." }, 
-            { name: "HUMAN ROGUE", img: "rarer.jpg", desc: "Shadow assassin specializing in swift stealth strikes." }
+            { name: "HUMAN MAGE", img: "assets/img/heroes/rare.jpg", desc: "Sapphire crested battle sorceress with boosted offensive attributes." }, 
+            { name: "HUMAN WARRIOR", img: "assets/img/heroes/rarew.jpg", desc: "Armored human vanguard wielding enhanced strike power." }, 
+            { name: "HUMAN PRIEST", img: "assets/img/heroes/rarep.jpg", desc: "Consecrated cleric offering balanced divine shielding." }, 
+            { name: "HUMAN ROGUE", img: "assets/img/heroes/rarer.jpg", desc: "Shadow assassin specializing in swift stealth strikes." }
           ],
           epic: [
-            { name: "HUMAN MAGE", img: "epic.jpg", desc: "Amethyst infused shadow mage equipped for high-tier boss encounters." }, 
-            { name: "HUMAN WARRIOR", img: "epicw.jpg", desc: "Veteran berserker commander with devastating cleave attacks." }, 
-            { name: "HUMAN PRIEST", img: "epicp.jpg", desc: "Battle-hardened holy templar wielding divine judgment." }, 
-            { name: "HUMAN ROGUE", img: "epicr.jpg", desc: "Elite human shadow master dealing critical venom damage." }
+            { name: "HUMAN MAGE", img: "assets/img/heroes/epic.jpg", desc: "Amethyst infused shadow mage equipped for high-tier boss encounters." }, 
+            { name: "HUMAN WARRIOR", img: "assets/img/heroes/epicw.jpg", desc: "Veteran berserker commander with devastating cleave attacks." }, 
+            { name: "HUMAN PRIEST", img: "assets/img/heroes/epicp.jpg", desc: "Battle-hardened holy templar wielding divine judgment." }, 
+            { name: "HUMAN ROGUE", img: "assets/img/heroes/epicr.jpg", desc: "Elite human shadow master dealing critical venom damage." }
           ],
           legendary: [
-            { name: "HUMAN MAGE", img: "legendary.jpg", desc: "Apex solar sorceress delivering maximum battle frequency and token earnings." }, 
-            { name: "HUMAN WARRIOR", img: "legendaryw.jpg", desc: "Immortal titan champion possessing supreme attack and defense multipliers." }, 
-            { name: "HUMAN PRIEST", img: "legendaryp.jpg", desc: "Supreme divine avatar providing absolute party immunity and sanctuary." }, 
-            { name: "HUMAN ROGUE", img: "legendaryr.jpg", desc: "Legendary master assassin executing flawless critical takedowns." }
+            { name: "HUMAN MAGE", img: "assets/img/heroes/legendary.jpg", desc: "Apex solar sorceress delivering maximum battle frequency and token earnings." }, 
+            { name: "HUMAN WARRIOR", img: "assets/img/heroes/legendaryw.jpg", desc: "Immortal titan champion possessing supreme attack and defense multipliers." }, 
+            { name: "HUMAN PRIEST", img: "assets/img/heroes/legendaryp.jpg", desc: "Supreme divine avatar providing absolute party immunity and sanctuary." }, 
+            { name: "HUMAN ROGUE", img: "assets/img/heroes/legendaryr.jpg", desc: "Legendary master assassin executing flawless critical takedowns." }
           ]
         },
         karus: {
           common: [
-            { name: "KARUS MAGE", img: "magc.jpg", desc: "Gothic orc sorcerer wielding primal fire and ice spells." }, 
-            { name: "KARUS WARRIOR", img: "warc.jpg", desc: "Brutal orc warrior wrapped in dark steel and leather." }, 
-            { name: "KARUS PRIEST", img: "pric.jpg", desc: "Defensive orc cleric casting dark warding spells." }, 
-            { name: "KARUS ROGUE", img: "rogc.jpg", desc: "Agile orc assassin ready for deadly stealth encounters." }
+            { name: "KARUS MAGE", img: "assets/img/heroes/magc.jpg", desc: "Gothic orc sorcerer wielding primal fire and ice spells." }, 
+            { name: "KARUS WARRIOR", img: "assets/img/heroes/warc.jpg", desc: "Brutal orc warrior wrapped in dark steel and leather." }, 
+            { name: "KARUS PRIEST", img: "assets/img/heroes/pric.jpg", desc: "Defensive orc cleric casting dark warding spells." }, 
+            { name: "KARUS ROGUE", img: "assets/img/heroes/rogc.jpg", desc: "Agile orc assassin ready for deadly stealth encounters." }
           ],
           rare: [
-            { name: "KARUS MAGE", img: "magr.jpg", desc: "Dark occultist channeling intense magical destruction." }, 
-            { name: "KARUS WARRIOR", img: "warr.jpg", desc: "Fierce Karus gladiator armed with spiked heavy weaponry." }, 
-            { name: "KARUS PRIEST", img: "prir.jpg", desc: "Tribal shadow priest bolstering allies with dark blessings." }, 
-            { name: "KARUS ROGUE", img: "rogr.jpg", desc: "Lethal Karus shadow tracker excelling in critical hits." }
+            { name: "KARUS MAGE", img: "assets/img/heroes/magr.jpg", desc: "Dark occultist channeling intense magical destruction." }, 
+            { name: "KARUS WARRIOR", img: "assets/img/heroes/warr.jpg", desc: "Fierce Karus gladiator armed with spiked heavy weaponry." }, 
+            { name: "KARUS PRIEST", img: "assets/img/heroes/prir.jpg", desc: "Tribal shadow priest bolstering allies with dark blessings." }, 
+            { name: "KARUS ROGUE", img: "assets/img/heroes/rogr.jpg", desc: "Lethal Karus shadow tracker excelling in critical hits." }
           ],
           epic: [
-            { name: "KARUS MAGE", img: "mage.jpg", desc: "Master of the dark arcane arts, capable of massive AoE damage." }, 
-            { name: "KARUS WARRIOR", img: "ware.jpg", desc: "Elite orc warlord crushing defenses with overwhelming force." }, 
-            { name: "KARUS PRIEST", img: "prie.jpg", desc: "High dark cleric providing critical mass healing and curses." }, 
-            { name: "KARUS ROGUE", img: "roge.jpg", desc: "Ghostly Karus assassin striking from the deep shadows." }
+            { name: "KARUS MAGE", img: "assets/img/heroes/mage.jpg", desc: "Master of the dark arcane arts, capable of massive AoE damage." }, 
+            { name: "KARUS WARRIOR", img: "assets/img/heroes/ware.jpg", desc: "Elite orc warlord crushing defenses with overwhelming force." }, 
+            { name: "KARUS PRIEST", img: "assets/img/heroes/prie.jpg", desc: "High dark cleric providing critical mass healing and curses." }, 
+            { name: "KARUS ROGUE", img: "assets/img/heroes/roge.jpg", desc: "Ghostly Karus assassin striking from the deep shadows." }
           ],
           legendary: [
-            { name: "KARUS MAGE", img: "magl.jpg", desc: "Legendary elemental overlord of the Karus realm." }, 
-            { name: "KARUS WARRIOR", img: "warl.jpg", desc: "Unstoppable Karus juggernaut with god-tier physical power." }, 
-            { name: "KARUS PRIEST", img: "pril.jpg", desc: "Demonic sanctuary keeper holding the line against any raid." }, 
-            { name: "KARUS ROGUE", img: "rogl.jpg", desc: "Apex predator of the night, dealing devastating poison damage." }
+            { name: "KARUS MAGE", img: "assets/img/heroes/magl.jpg", desc: "Legendary elemental overlord of the Karus realm." }, 
+            { name: "KARUS WARRIOR", img: "assets/img/heroes/warl.jpg", desc: "Unstoppable Karus juggernaut with god-tier physical power." }, 
+            { name: "KARUS PRIEST", img: "assets/img/heroes/pril.jpg", desc: "Demonic sanctuary keeper holding the line against any raid." }, 
+            { name: "KARUS ROGUE", img: "assets/img/heroes/rogl.jpg", desc: "Apex predator of the night, dealing devastating poison damage." }
           ]
         }
       },
@@ -1046,54 +1032,54 @@
       tr: {
         human: {
           common: [
-            { name: "İNSAN MAGE", img: "common.jpg", desc: "Erken PvE savaşları için gümüş çerçeveli temel insan büyücüsü." }, 
-            { name: "İNSAN WARRIOR", img: "commonw.jpg", desc: "Ön saf yakın dövüşü için eğitilmiş ağır zırhlı öncü." }, 
-            { name: "İNSAN PRIEST", img: "commonp.jpg", desc: "Temel taktiksel güçlendirmeler ve iyileştirme sağlayan adanmış rahip." }, 
-            { name: "İNSAN ROGUE", img: "commonr.jpg", desc: "Hafif çift hançerlerle donatılmış çevik insan izcisi." }
+            { name: "İNSAN MAGE", img: "assets/img/heroes/common.jpg", desc: "Erken PvE savaşları için gümüş çerçeveli temel insan büyücüsü." }, 
+            { name: "İNSAN WARRIOR", img: "assets/img/heroes/commonw.jpg", desc: "Ön saf yakın dövüşü için eğitilmiş ağır zırhlı öncü." }, 
+            { name: "İNSAN PRIEST", img: "assets/img/heroes/commonp.jpg", desc: "Temel taktiksel güçlendirmeler ve iyileştirme sağlayan adanmış rahip." }, 
+            { name: "İNSAN ROGUE", img: "assets/img/heroes/commonr.jpg", desc: "Hafif çift hançerlerle donatılmış çevik insan izcisi." }
           ],
           rare: [
-            { name: "İNSAN MAGE", img: "rare.jpg", desc: "Artırılmış saldırı özelliklerine sahip safir tepeli savaş büyücüsü." }, 
-            { name: "İNSAN WARRIOR", img: "rarew.jpg", desc: "Gelişmiş vuruş gücüne sahip zırhlı insan öncüsü." }, 
-            { name: "İNSAN PRIEST", img: "rarep.jpg", desc: "Dengeli ilahi kalkanlar sunan kutsanmış din adamı." }, 
-            { name: "İNSAN ROGUE", img: "rarer.jpg", desc: "Hızlı gizlilik saldırılarında uzmanlaşmış gölge suikastçısı." }
+            { name: "İNSAN MAGE", img: "assets/img/heroes/rare.jpg", desc: "Artırılmış saldırı özelliklerine sahip safir tepeli savaş büyücüsü." }, 
+            { name: "İNSAN WARRIOR", img: "assets/img/heroes/rarew.jpg", desc: "Gelişmiş vuruş gücüne sahip zırhlı insan öncüsü." }, 
+            { name: "İNSAN PRIEST", img: "assets/img/heroes/rarep.jpg", desc: "Dengeli ilahi kalkanlar sunan kutsanmış din adamı." }, 
+            { name: "İNSAN ROGUE", img: "assets/img/heroes/rarer.jpg", desc: "Hızlı gizlilik saldırılarında uzmanlaşmış gölge suikastçısı." }
           ],
           epic: [
-            { name: "İNSAN MAGE", img: "epic.jpg", desc: "Yüksek seviye boss savaşları için donatılmış ametist aşılanmış gölge büyücüsü." }, 
-            { name: "İNSAN WARRIOR", img: "epicw.jpg", desc: "Yıkıcı yarma saldırılarına sahip usta berserker komutanı." }, 
-            { name: "İNSAN PRIEST", img: "epicp.jpg", desc: "Savaşta sertleşmiş, ilahi yargı dağıtan kutsal tapınak şövalyesi." }, 
-            { name: "İNSAN ROGUE", img: "epicr.jpg", desc: "Kritik zehir hasarı veren elit insan gölge efendisi." }
+            { name: "İNSAN MAGE", img: "assets/img/heroes/epic.jpg", desc: "Yüksek seviye boss savaşları için donatılmış ametist aşılanmış gölge büyücüsü." }, 
+            { name: "İNSAN WARRIOR", img: "assets/img/heroes/epicw.jpg", desc: "Yıkıcı yarma saldırılarına sahip usta berserker komutanı." }, 
+            { name: "İNSAN PRIEST", img: "assets/img/heroes/epicp.jpg", desc: "Savaşta sertleşmiş, ilahi yargı dağıtan kutsal tapınak şövalyesi." }, 
+            { name: "İNSAN ROGUE", img: "assets/img/heroes/epicr.jpg", desc: "Kritik zehir hasarı veren elit insan gölge efendisi." }
           ],
           legendary: [
-            { name: "İNSAN MAGE", img: "legendary.jpg", desc: "Maksimum savaş frekansı ve token kazancı sağlayan apex güneş büyücüsü." }, 
-            { name: "İNSAN WARRIOR", img: "legendaryw.jpg", desc: "Üstün saldırı ve savunma çarpanlarına sahip ölümsüz titan şampiyonu." }, 
-            { name: "İNSAN PRIEST", img: "legendaryp.jpg", desc: "Mutlak parti dokunulmazlığı sağlayan yüce ilahi avatar." }, 
-            { name: "İNSAN ROGUE", img: "legendaryr.jpg", desc: "Kusursuz kritik alt etmeler gerçekleştiren efsanevi usta suikastçı." }
+            { name: "İNSAN MAGE", img: "assets/img/heroes/legendary.jpg", desc: "Maksimum savaş frekansı ve token kazancı sağlayan apex güneş büyücüsü." }, 
+            { name: "İNSAN WARRIOR", img: "assets/img/heroes/legendaryw.jpg", desc: "Üstün saldırı ve savunma çarpanlarına sahip ölümsüz titan şampiyonu." }, 
+            { name: "İNSAN PRIEST", img: "assets/img/heroes/legendaryp.jpg", desc: "Mutlak parti dokunulmazlığı sağlayan yüce ilahi avatar." }, 
+            { name: "İNSAN ROGUE", img: "assets/img/heroes/legendaryr.jpg", desc: "Kusursuz kritik alt etmeler gerçekleştiren efsanevi usta suikastçı." }
           ]
         },
         karus: {
           common: [
-            { name: "KARUS MAGE", img: "magc.jpg", desc: "İlkel ateş ve buz büyüleri yapan gotik ork büyücüsü." }, 
-            { name: "KARUS WARRIOR", img: "warc.jpg", desc: "Karanlık çelik ve deriye sarılmış acımasız ork savaşçısı." }, 
-            { name: "KARUS PRIEST", img: "pric.jpg", desc: "Karanlık koruma büyüleri yapan savunmacı ork din adamı." }, 
-            { name: "KARUS ROGUE", img: "rogc.jpg", desc: "Ölümcül gizlilik karşılaşmalarına hazır çevik ork suikastçısı." }
+            { name: "KARUS MAGE", img: "assets/img/heroes/magc.jpg", desc: "İlkel ateş ve buz büyüleri yapan gotik ork büyücüsü." }, 
+            { name: "KARUS WARRIOR", img: "assets/img/heroes/warc.jpg", desc: "Karanlık çelik ve deriye sarılmış acımasız ork savaşçısı." }, 
+            { name: "KARUS PRIEST", img: "assets/img/heroes/pric.jpg", desc: "Karanlık koruma büyüleri yapan savunmacı ork din adamı." }, 
+            { name: "KARUS ROGUE", img: "assets/img/heroes/rogc.jpg", desc: "Ölümcül gizlilik karşılaşmalarına hazır çevik ork suikastçısı." }
           ],
           rare: [
-            { name: "KARUS MAGE", img: "magr.jpg", desc: "Yoğun büyü yıkımını yönlendiren karanlık okültist." }, 
-            { name: "KARUS WARRIOR", img: "warr.jpg", desc: "Çivili ağır silahlarla donanmış vahşi Karus gladyatörü." }, 
-            { name: "KARUS PRIEST", img: "prir.jpg", desc: "Müttefiklerini karanlık kutsamalarla destekleyen kabile gölge rahibi." }, 
-            { name: "KARUS ROGUE", img: "rogr.jpg", desc: "Kritik vuruşlarda mükemmel olan ölümcül Karus gölge izleyicisi." }
+            { name: "KARUS MAGE", img: "assets/img/heroes/magr.jpg", desc: "Yoğun büyü yıkımını yönlendiren karanlık okültist." }, 
+            { name: "KARUS WARRIOR", img: "assets/img/heroes/warr.jpg", desc: "Çivili ağır silahlarla donanmış vahşi Karus gladyatörü." }, 
+            { name: "KARUS PRIEST", img: "assets/img/heroes/prir.jpg", desc: "Müttefiklerini karanlık kutsamalarla destekleyen kabile gölge rahibi." }, 
+            { name: "KARUS ROGUE", img: "assets/img/heroes/rogr.jpg", desc: "Kritik vuruşlarda mükemmel olan ölümcül Karus gölge izleyicisi." }
           ],
           epic: [
-            { name: "KARUS MAGE", img: "mage.jpg", desc: "Büyük AoE hasarı verebilen karanlık mistik sanatların ustası." }, 
-            { name: "KARUS WARRIOR", img: "ware.jpg", desc: "Ezip geçen gücüyle savunmaları kıran elit ork savaş beyi." }, 
-            { name: "KARUS PRIEST", img: "prie.jpg", desc: "Kritik kitle iyileştirmesi ve lanetler sağlayan yüksek karanlık din adamı." }, 
-            { name: "KARUS ROGUE", img: "roge.jpg", desc: "Derin gölgelerden saldıran hayaletimsi Karus suikastçısı." }
+            { name: "KARUS MAGE", img: "assets/img/heroes/mage.jpg", desc: "Büyük AoE hasarı verebilen karanlık mistik sanatların ustası." }, 
+            { name: "KARUS WARRIOR", img: "assets/img/heroes/ware.jpg", desc: "Ezip geçen gücüyle savunmaları kıran elit ork savaş beyi." }, 
+            { name: "KARUS PRIEST", img: "assets/img/heroes/prie.jpg", desc: "Kritik kitle iyileştirmesi ve lanetler sağlayan yüksek karanlık din adamı." }, 
+            { name: "KARUS ROGUE", img: "assets/img/heroes/roge.jpg", desc: "Derin gölgelerden saldıran hayaletimsi Karus suikastçısı." }
           ],
           legendary: [
-            { name: "KARUS MAGE", img: "magl.jpg", desc: "Karus diyarının efsanevi elemental efendisi." }, 
-            { name: "KARUS WARRIOR", img: "warl.jpg", desc: "Tanrısal fiziksel güce sahip durdurulamaz Karus gücü." }, 
-            { name: "KARUS PRIEST", img: "pril.jpg", desc: "Herhangi bir baskına karşı hattı tutan şeytani sığınak bekçisi." }, 
-            { name: "KARUS ROGUE", img: "rogl.jpg", desc: "Yıkıcı zehir hasarı veren gecenin apex yırtıcısı." }
+            { name: "KARUS MAGE", img: "assets/img/heroes/magl.jpg", desc: "Karus diyarının efsanevi elemental efendisi." }, 
+            { name: "KARUS WARRIOR", img: "assets/img/heroes/warl.jpg", desc: "Tanrısal fiziksel güce sahip durdurulamaz Karus gücü." }, 
+            { name: "KARUS PRIEST", img: "assets/img/heroes/pril.jpg", desc: "Herhangi bir baskına karşı hattı tutan şeytani sığınak bekçisi." }, 
+            { name: "KARUS ROGUE", img: "assets/img/heroes/rogl.jpg", desc: "Yıkıcı zehir hasarı veren gecenin apex yırtıcısı." }
           ]
         }
       },
@@ -1101,54 +1087,54 @@
       cn: { 
         human: { 
           common: [
-            { name: "人类法师", img: "common.jpg", desc: "早期 PvE 的基础法师。" },
-            { name: "人类战士", img: "commonw.jpg", desc: "前线近战先锋。" },
-            { name: "人类牧师", img: "commonp.jpg", desc: "提供战术增益和治疗。" },
-            { name: "人类盗贼", img: "commonr.jpg", desc: "装备轻型双匕首的侦察兵。" }
+            { name: "人类法师", img: "assets/img/heroes/common.jpg", desc: "早期 PvE 的基础法师。" },
+            { name: "人类战士", img: "assets/img/heroes/commonw.jpg", desc: "前线近战先锋。" },
+            { name: "人类牧师", img: "assets/img/heroes/commonp.jpg", desc: "提供战术增益和治疗。" },
+            { name: "人类盗贼", img: "assets/img/heroes/commonr.jpg", desc: "装备轻型双匕首的侦察兵。" }
           ], 
           rare: [
-            { name: "人类法师", img: "rare.jpg", desc: "拥有强大攻击属性的战斗法师。" },
-            { name: "人类战士", img: "rarew.jpg", desc: "强大的装甲先锋。" },
-            { name: "人类牧师", img: "rarep.jpg", desc: "提供神圣护盾的牧师。" },
-            { name: "人类盗贼", img: "rarer.jpg", desc: "擅长快速隐身打击的刺客。" }
+            { name: "人类法师", img: "assets/img/heroes/rare.jpg", desc: "拥有强大攻击属性的战斗法师。" },
+            { name: "人类战士", img: "assets/img/heroes/rarew.jpg", desc: "强大的装甲先锋。" },
+            { name: "人类牧师", img: "assets/img/heroes/rarep.jpg", desc: "提供神圣护盾的牧师。" },
+            { name: "人类盗贼", img: "assets/img/heroes/rarer.jpg", desc: "擅长快速隐身打击的刺客。" }
           ], 
           epic: [
-            { name: "人类法师", img: "epic.jpg", desc: "为高级首领战配备的暗影法师。" },
-            { name: "人类战士", img: "epicw.jpg", desc: "拥有毁灭性顺劈斩的狂战士指挥官。" },
-            { name: "人类牧师", img: "epicp.jpg", desc: "挥舞神圣审判的圣殿骑士。" },
-            { name: "人类盗贼", img: "epicr.jpg", desc: "造成致命毒伤的精英暗影大师。" }
+            { name: "人类法师", img: "assets/img/heroes/epic.jpg", desc: "为高级首领战配备的暗影法师。" },
+            { name: "人类战士", img: "assets/img/heroes/epicw.jpg", desc: "拥有毁灭性顺劈斩的狂战士指挥官。" },
+            { name: "人类牧师", img: "assets/img/heroes/epicp.jpg", desc: "挥舞神圣审判的圣殿骑士。" },
+            { name: "人类盗贼", img: "assets/img/heroes/epicr.jpg", desc: "造成致命毒伤的精英暗影大师。" }
           ], 
           legendary: [
-            { name: "人类法师", img: "legendary.jpg", desc: "提供最大战斗频率和代币收益的太阳法师。" },
-            { name: "人类战士", img: "legendaryw.jpg", desc: "拥有最高攻防乘数的不朽泰坦。" },
-            { name: "人类牧师", img: "legendaryp.jpg", desc: "提供绝对团队免疫的最高神圣化身。" },
-            { name: "人类盗贼", img: "legendaryr.jpg", desc: "执行完美暴击击杀的传奇刺客大师。" }
+            { name: "人类法师", img: "assets/img/heroes/legendary.jpg", desc: "提供最大战斗频率和代币收益的太阳法师。" },
+            { name: "人类战士", img: "assets/img/heroes/legendaryw.jpg", desc: "拥有最高攻防乘数的不朽泰坦。" },
+            { name: "人类牧师", img: "assets/img/heroes/legendaryp.jpg", desc: "提供绝对团队免疫的最高神圣化身。" },
+            { name: "人类盗贼", img: "assets/img/heroes/legendaryr.jpg", desc: "执行完美暴击击杀的传奇刺客大师。" }
           ] 
         }, 
         karus: { 
           common: [
-            { name: "兽人法师", img: "magc.jpg", desc: "挥舞原始冰火法术的兽人法师。" },
-            { name: "兽人战士", img: "warc.jpg", desc: "身披黑钢的残忍兽人战士。" },
-            { name: "兽人牧师", img: "pric.jpg", desc: "施展黑暗结界的防御牧师。" },
-            { name: "兽人盗贼", img: "rogc.jpg", desc: "准备进行致命隐身遭遇战的敏捷刺客。" }
+            { name: "兽人法师", img: "assets/img/heroes/magc.jpg", desc: "挥舞原始冰火法术的兽人法师。" },
+            { name: "兽人战士", img: "assets/img/heroes/warc.jpg", desc: "身披黑钢的残忍兽人战士。" },
+            { name: "兽人牧师", img: "assets/img/heroes/pric.jpg", desc: "施展黑暗结界的防御牧师。" },
+            { name: "兽人盗贼", img: "assets/img/heroes/rogc.jpg", desc: "准备进行致命隐身遭遇战的敏捷刺客。" }
           ], 
           rare: [
-            { name: "兽人法师", img: "magr.jpg", desc: "引导强烈魔法破坏的黑暗术士。" },
-            { name: "兽人战士", img: "warr.jpg", desc: "装备重型武器的凶猛角斗士。" },
-            { name: "兽人牧师", img: "prir.jpg", desc: "用黑暗祝福支援盟友的部落暗影牧师。" },
-            { name: "兽人盗贼", img: "rogr.jpg", desc: "擅长暴击的致命暗影追踪者。" }
+            { name: "兽人法师", img: "assets/img/heroes/magr.jpg", desc: "引导强烈魔法破坏的黑暗术士。" },
+            { name: "兽人战士", img: "assets/img/heroes/warr.jpg", desc: "装备重型武器的凶猛角斗士。" },
+            { name: "兽人牧师", img: "assets/img/heroes/prir.jpg", desc: "用黑暗祝福支援盟友的部落暗影牧师。" },
+            { name: "兽人盗贼", img: "assets/img/heroes/rogr.jpg", desc: "擅长暴击的致命暗影追踪者。" }
           ], 
           epic: [
-            { name: "兽人法师", img: "mage.jpg", desc: "黑暗秘术大师，能造成大量 AoE 伤害。" },
-            { name: "兽人战士", img: "ware.jpg", desc: "以压倒性力量摧毁防御的精英兽人督军。" },
-            { name: "兽人牧师", img: "prie.jpg", desc: "提供群体治疗和诅咒的高级黑暗牧师。" },
-            { name: "兽人盗贼", img: "roge.jpg", desc: "从深影中出击的幽灵刺客。" }
+            { name: "兽人法师", img: "assets/img/heroes/mage.jpg", desc: "黑暗秘术大师，能造成大量 AoE 伤害。" },
+            { name: "兽人战士", img: "assets/img/heroes/ware.jpg", desc: "以压倒性力量摧毁防御的精英兽人督军。" },
+            { name: "兽人牧师", img: "assets/img/heroes/prie.jpg", desc: "提供群体治疗和诅咒的高级黑暗牧师。" },
+            { name: "兽人盗贼", img: "assets/img/heroes/roge.jpg", desc: "从深影中出击的幽灵刺客。" }
           ], 
           legendary: [
-            { name: "兽人法师", img: "magl.jpg", desc: "卡鲁斯领域的传奇元素领主。" },
-            { name: "兽人战士", img: "warl.jpg", desc: "拥有神级物理力量的不可阻挡的剑圣。" },
-            { name: "兽人牧师", img: "pril.jpg", desc: "对抗任何突袭的恶魔圣所守护者。" },
-            { name: "兽人盗贼", img: "rogl.jpg", desc: "造成毁灭性毒伤的暗夜顶级掠食者。" }
+            { name: "兽人法师", img: "assets/img/heroes/magl.jpg", desc: "卡鲁斯领域的传奇元素领主。" },
+            { name: "兽人战士", img: "assets/img/heroes/warl.jpg", desc: "拥有神级物理力量的不可阻挡的剑圣。" },
+            { name: "兽人牧师", img: "assets/img/heroes/pril.jpg", desc: "对抗任何突袭的恶魔圣所守护者。" },
+            { name: "兽人盗贼", img: "assets/img/heroes/rogl.jpg", desc: "造成毁灭性毒伤的暗夜顶级掠食者。" }
           ] 
         } 
       },
@@ -1156,54 +1142,54 @@
       kr: { 
         human: { 
           common: [
-            { name: "인간 마법사", img: "common.jpg", desc: "초기 PvE 조우를 위한 기본 인간 마법사." },
-            { name: "인간 전사", img: "commonw.jpg", desc: "최전선 근접 전투 뱅가드." },
-            { name: "인간 사제", img: "commonp.jpg", desc: "기본 버프와 치유를 제공하는 사제." },
-            { name: "인간 도적", img: "commonr.jpg", desc: "가벼운 쌍단검을 장착한 민첩한 정찰병." }
+            { name: "인간 마법사", img: "assets/img/heroes/common.jpg", desc: "초기 PvE 조우를 위한 기본 인간 마법사." },
+            { name: "인간 전사", img: "assets/img/heroes/commonw.jpg", desc: "최전선 근접 전투 뱅가드." },
+            { name: "인간 사제", img: "assets/img/heroes/commonp.jpg", desc: "기본 버프와 치유를 제공하는 사제." },
+            { name: "인간 도적", img: "assets/img/heroes/commonr.jpg", desc: "가벼운 쌍단검을 장착한 민첩한 정찰병." }
           ], 
           rare: [
-            { name: "인간 마법사", img: "rare.jpg", desc: "강력한 공격 속성을 지닌 전투 마법사." },
-            { name: "인간 전사", img: "rarew.jpg", desc: "향상된 타격력을 지닌 장갑 전사." },
-            { name: "인간 사제", img: "rarep.jpg", desc: "균형 잡힌 신성한 방패를 제공하는 사제." },
-            { name: "인간 도적", img: "rarer.jpg", desc: "빠른 은신 공격에 특화된 암살자." }
+            { name: "인간 마법사", img: "assets/img/heroes/rare.jpg", desc: "강력한 공격 속성을 지닌 전투 마법사." },
+            { name: "인간 전사", img: "assets/img/heroes/rarew.jpg", desc: "향상된 타격력을 지닌 장갑 전사." },
+            { name: "인간 사제", img: "assets/img/heroes/rarep.jpg", desc: "균형 잡힌 신성한 방패를 제공하는 사제." },
+            { name: "인간 도적", img: "assets/img/heroes/rarer.jpg", desc: "빠른 은신 공격에 특화된 암살자." }
           ], 
           epic: [
-            { name: "인간 마법사", img: "epic.jpg", desc: "고위급 보스전에 장비된 암흑 마법사." },
-            { name: "인간 전사", img: "epicw.jpg", desc: "파괴적인 쪼개기 공격을 하는 광전사 사령관." },
-            { name: "인간 사제", img: "epicp.jpg", desc: "신성한 심판을 휘두르는 성전사." },
-            { name: "인간 도적", img: "epicr.jpg", desc: "치명적인 독 피해를 입히는 엘리트 암흑 마스터." }
+            { name: "인간 마법사", img: "assets/img/heroes/epic.jpg", desc: "고위급 보스전에 장비된 암흑 마법사." },
+            { name: "인간 전사", img: "assets/img/heroes/epicw.jpg", desc: "파괴적인 쪼개기 공격을 하는 광전사 사령관." },
+            { name: "인간 사제", img: "assets/img/heroes/epicp.jpg", desc: "신성한 심판을 휘두르는 성전사." },
+            { name: "인간 도적", img: "assets/img/heroes/epicr.jpg", desc: "치명적인 독 피해를 입히는 엘리트 암흑 마스터." }
           ], 
           legendary: [
-            { name: "인간 마법사", img: "legendary.jpg", desc: "최고의 전투 빈도와 토큰 수익을 제공하는 태양 마법사." },
-            { name: "인간 전사", img: "legendaryw.jpg", desc: "최고의 공격 및 방어 배율을 지닌 불멸의 타이탄." },
-            { name: "인간 사제", img: "legendaryp.jpg", desc: "절대적인 파티 면역을 제공하는 최고 신성한 아바타." },
-            { name: "인간 도적", img: "legendaryr.jpg", desc: "완벽한 치명타 테이크다운을 실행하는 전설적인 암살자 마스터." }
+            { name: "인간 마법사", img: "assets/img/heroes/legendary.jpg", desc: "최고의 전투 빈도와 토큰 수익을 제공하는 태양 마법사." },
+            { name: "인간 전사", img: "assets/img/heroes/legendaryw.jpg", desc: "최고의 공격 및 방어 배율을 지닌 불멸의 타이탄." },
+            { name: "인간 사제", img: "assets/img/heroes/legendaryp.jpg", desc: "절대적인 파티 면역을 제공하는 최고 신성한 아바타." },
+            { name: "인간 도적", img: "assets/img/heroes/legendaryr.jpg", desc: "완벽한 치명타 테이크다운을 실행하는 전설적인 암살자 마스터." }
           ] 
         }, 
         karus: { 
           common: [
-            { name: "오크 마법사", img: "magc.jpg", desc: "원시 불과 얼음 마법을 휘두르는 고딕 오크 마법사." },
-            { name: "오크 전사", img: "warc.jpg", desc: "검은 강철로 둘러싸인 잔인한 오크 전사." },
-            { name: "오크 사제", img: "pric.jpg", desc: "어둠의 보호 마법을 시전하는 방어 사제." },
-            { name: "오크 도적", img: "rogc.jpg", desc: "치명적인 은신 전투를 준비하는 민첩한 암살자." }
+            { name: "오크 마법사", img: "assets/img/heroes/magc.jpg", desc: "원시 불과 얼음 마법을 휘두르는 고딕 오크 마법사." },
+            { name: "오크 전사", img: "assets/img/heroes/warc.jpg", desc: "검은 강철로 둘러싸인 잔인한 오크 전사." },
+            { name: "오크 사제", img: "assets/img/heroes/pric.jpg", desc: "어둠의 보호 마법을 시전하는 방어 사제." },
+            { name: "오크 도적", img: "assets/img/heroes/rogc.jpg", desc: "치명적인 은신 전투를 준비하는 민첩한 암살자." }
           ], 
           rare: [
-            { name: "오크 마법사", img: "magr.jpg", desc: "강렬한 마법 파괴를 집중시키는 어둠의 주술사." },
-            { name: "오크 전사", img: "warr.jpg", desc: "스파이크가 달린 중무기를 장착한 사나운 검투사." },
-            { name: "오크 사제", img: "prir.jpg", desc: "어둠의 축복으로 아군을 지원하는 부족 암흑 사제." },
-            { name: "오크 도적", img: "rogr.jpg", desc: "치명타가 뛰어난 치명적인 암흑 추적자." }
+            { name: "오크 마법사", img: "assets/img/heroes/magr.jpg", desc: "강렬한 마법 파괴를 집중시키는 어둠의 주술사." },
+            { name: "오크 전사", img: "assets/img/heroes/warr.jpg", desc: "스파이크가 달린 중무기를 장착한 사나운 검투사." },
+            { name: "오크 사제", img: "assets/img/heroes/prir.jpg", desc: "어둠의 축복으로 아군을 지원하는 부족 암흑 사제." },
+            { name: "오크 도적", img: "assets/img/heroes/rogr.jpg", desc: "치명타가 뛰어난 치명적인 암흑 추적자." }
           ], 
           epic: [
-            { name: "오크 마법사", img: "mage.jpg", desc: "막대한 광역 피해를 입히는 어둠의 비전 예술의 대가." },
-            { name: "오크 전사", img: "ware.jpg", desc: "압도적인 힘으로 방어를 부수는 엘리트 오크 장군." },
-            { name: "오크 사제", img: "prie.jpg", desc: "대규모 치유와 저주를 제공하는 고위 암흑 사제." },
-            { name: "오크 도적", img: "roge.jpg", desc: "깊은 그림자 속에서 공격하는 유령 암살자." }
+            { name: "오크 마법사", img: "assets/img/heroes/mage.jpg", desc: "막대한 광역 피해를 입히는 어둠의 비전 예술의 대가." },
+            { name: "오크 전사", img: "assets/img/heroes/ware.jpg", desc: "압도적인 힘으로 방어를 부수는 엘리트 오크 장군." },
+            { name: "오크 사제", img: "assets/img/heroes/prie.jpg", desc: "대규모 치유와 저주를 제공하는 고위 암흑 사제." },
+            { name: "오크 도적", img: "assets/img/heroes/roge.jpg", desc: "깊은 그림자 속에서 공격하는 유령 암살자." }
           ], 
           legendary: [
-            { name: "오크 마법사", img: "magl.jpg", desc: "카루스 왕국의 전설적인 정령 군주." },
-            { name: "오크 전사", img: "warl.jpg", desc: "신급 물리력을 지닌 멈출 수 없는 저거너트." },
-            { name: "오크 사제", img: "pril.jpg", desc: "모든 레이드에 맞서 선을 유지하는 악마 성소 수호자." },
-            { name: "오크 도적", img: "rogl.jpg", desc: "파괴적인 독 피해를 입히는 밤의 최상위 포식자." }
+            { name: "오크 마법사", img: "assets/img/heroes/magl.jpg", desc: "카루스 왕국의 전설적인 정령 군주." },
+            { name: "오크 전사", img: "assets/img/heroes/warl.jpg", desc: "신급 물리력을 지닌 멈출 수 없는 저거너트." },
+            { name: "오크 사제", img: "assets/img/heroes/pril.jpg", desc: "모든 레이드에 맞서 선을 유지하는 악마 성소 수호자." },
+            { name: "오크 도적", img: "assets/img/heroes/rogl.jpg", desc: "파괴적인 독 피해를 입히는 밤의 최상위 포식자." }
           ] 
         } 
       }
@@ -1296,7 +1282,9 @@
     setFaction('human');
 
     // Kaydırma Animasyonlarını (AOS) Başlat
-    AOS.init({ duration: 800, once: true, offset: 100 });
+    // scroll animations; if the library could not load, show everything instead of leaving it hidden
+    if (window.AOS) AOS.init({ duration: 800, once: true, offset: 100 });
+    else document.querySelectorAll('[data-aos]').forEach(el => el.removeAttribute('data-aos'));
     
     // Sandık Mint İlerleme Çubuğu
     let currentMinted = 0; 
@@ -1312,14 +1300,14 @@
     // Arkaplan Müziği Sistemi
     const audio = document.getElementById('bgMusic');
     const audioBtn = document.getElementById('audioToggle');
-    const audioIcon = document.getElementById('audioIcon');
+    const audioIcon = () => document.getElementById('audioIcon'); // re-read: createIcons() swaps the element
     let hasInteracted = false;
 
     function playAudioOnFirstClick() {
       if (!hasInteracted) {
         audio.play().then(() => { 
           hasInteracted = true; 
-          audioIcon.classList.add('animate-pulse-gold'); 
+          audioIcon().classList.add('animate-pulse-gold'); 
         }).catch(e => { console.log("Otomatik oynatma engellendi."); });
       }
     }
@@ -1331,12 +1319,12 @@
       e.stopPropagation();
       if (audio.paused) { 
         audio.play(); 
-        audioIcon.setAttribute('data-lucide', 'volume-2'); 
-        audioIcon.classList.add('animate-pulse-gold'); 
+        audioIcon().setAttribute('data-lucide', 'volume-2'); 
+        audioIcon().classList.add('animate-pulse-gold'); 
       } else { 
         audio.pause(); 
-        audioIcon.setAttribute('data-lucide', 'volume-x'); 
-        audioIcon.classList.remove('animate-pulse-gold'); 
+        audioIcon().setAttribute('data-lucide', 'volume-x'); 
+        audioIcon().classList.remove('animate-pulse-gold'); 
       }
       lucide.createIcons();
     });

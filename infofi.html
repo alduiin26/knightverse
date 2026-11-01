@@ -2,28 +2,13 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self'; connect-src 'self' blob: https://ghnyalgjoahltifsjsqb.supabase.co http://localhost:* http://127.0.0.1:*; object-src 'none'; base-uri 'self'; form-action 'self'" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KnightVerse | InfoFi Event</title>
-    <link rel="icon" type="image/png" href="logoko.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            gold: '#FFD700',
-                            goldHover: '#e6c200',
-                            dark: '#0a0a0a',
-                            card: '#121212',
-                            border: '#262626'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/brand/favicon-32.png" />
+    <link rel="apple-touch-icon" href="assets/img/brand/apple-touch-icon.png" />
+    <script src="assets/js/icons.js"></script>
     <style>
         .gold-glow { box-shadow: 0 0 15px rgba(255, 215, 0, 0.15); }
         .qbtn { font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 6px; border: 1px solid; transition: background .15s, color .15s, opacity .15s; white-space: nowrap; cursor: pointer; }
@@ -39,6 +24,7 @@
         #toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); z-index: 60; max-width: min(92vw, 460px); padding: 10px 16px; border-radius: 10px; background: #18181b; border: 1px solid #3f3f46; color: #fff; font-size: 13px; font-weight: 600; text-align: center; opacity: 0; pointer-events: none; transition: all .25s; }
         #toast.show { opacity: 1; transform: translate(-50%, 0); }
     </style>
+    <link rel="stylesheet" href="assets/css/site.css" />
 </head>
 <body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black min-h-screen flex flex-col">
 
@@ -48,7 +34,7 @@
             <a href="index.html" class="flex items-center gap-2 text-gray-400 hover:text-brand-gold transition text-sm font-semibold">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
             </a>
-            <img src="logoko.png" alt="KnightVerse" class="h-8 w-auto object-contain mix-blend-screen opacity-80" />
+            <img src="assets/img/brand/logo.webp" alt="KnightVerse" class="h-8 w-auto object-contain mix-blend-screen opacity-80" />
         </div>
     </nav>
 

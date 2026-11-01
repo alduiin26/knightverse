@@ -18,7 +18,7 @@ export const BOSS_PHASES = [0.66, 0.33];
 export const BOSSES = {
   spider: {
     id: 'spider', name: 'Venom Broodmother', title: 'Giant Spider', theme: 'swamp',
-    img: 'boss-spider.png', model: 'boss-spider', color: 0x7dff4a, scale: 1.3,
+    img: 'boss-spider.webp', model: 'boss-spider', color: 0x7dff4a, scale: 1.3,
     difficulty: 2, winPoints: 12, recommend: 'Rare or better',
     desc: 'A giant spider from the poison caves. Average health and average damage, but her venom piles up fast.',
     stats: { maxHP: 17000, power: 104, speed: 128, critChance: 0.1, critDmg: 1.5, dr: 0.1, evade: 0.06, resist: 0.3 },
@@ -31,7 +31,7 @@ export const BOSSES = {
   },
   troll: {
     id: 'troll', name: 'Troll King', title: 'Lord of the Broken Hills', theme: 'stone',
-    img: 'boss-orc.png', model: 'boss-troll', color: 0xffb347, scale: 1.05,
+    img: 'boss-orc.webp', model: 'boss-troll', color: 0xffb347, scale: 1.05,
     difficulty: 3, winPoints: 15, recommend: 'Epic or better',
     desc: 'A crowned brute with a spiked club. Hits hard, cracks armor and shrugs off small wounds.',
     stats: { maxHP: 23500, power: 120, speed: 122, critChance: 0.12, critDmg: 1.6, dr: 0.18, evade: 0.02, resist: 0.35 },
@@ -44,7 +44,7 @@ export const BOSSES = {
   },
   ultima: {
     id: 'ultima', name: 'Mor Ultima', title: 'The Violet Colossus', theme: 'void',
-    img: 'boss-void.png', model: 'boss-ultima', color: 0xc05cff, scale: 1.0,
+    img: 'boss-void.webp', model: 'boss-ultima', color: 0xc05cff, scale: 1.0,
     difficulty: 4, winPoints: 20, recommend: 'Strong Epic or Legendary',
     desc: 'A colossus of black stone and violet fire. High health, high damage and it gets stronger as it breaks.',
     stats: { maxHP: 19000, power: 112, speed: 134, critChance: 0.12, critDmg: 1.6, dr: 0.2, evade: 0.04, resist: 0.42 },
@@ -57,7 +57,7 @@ export const BOSSES = {
   },
   dragon: {
     id: 'dragon', name: 'Ancient Dragon', title: 'Flame of the Deep Caverns', theme: 'lava',
-    img: 'boss-dragon.png', model: 'boss-dragon', color: 0xff5a1a, scale: 1.2,
+    img: 'boss-dragon.webp', model: 'boss-dragon', color: 0xff5a1a, scale: 1.2,
     difficulty: 5, winPoints: 30, recommend: '5 Legendary heroes',
     desc: 'The oldest dragon of the caverns. Very high power, high health and devastating fire. Only a full Legendary team stands a chance.',
     stats: { maxHP: 15000, power: 106, speed: 148, critChance: 0.15, critDmg: 1.6, dr: 0.24, evade: 0.05, resist: 0.5 },

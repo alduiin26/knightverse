@@ -2,21 +2,14 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self'; connect-src 'self' blob: https://ghnyalgjoahltifsjsqb.supabase.co http://localhost:* http://127.0.0.1:*; object-src 'none'; base-uri 'self'; form-action 'self'" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KnightVerse | Real Yield Store & Vault</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: { gold: '#FFD700', border: '#262626', card: '#121212' }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/brand/favicon-32.png" />
+    <link rel="apple-touch-icon" href="assets/img/brand/apple-touch-icon.png" />
+    <script src="assets/js/icons.js"></script>
+    <link rel="stylesheet" href="assets/css/site.css" />
 </head>
 <body class="bg-[#050505] text-gray-300 font-sans min-h-screen flex flex-col">
 
@@ -110,16 +103,16 @@
 
         // Ürün Veritabanı
         const products = [
-            { id: 1, type: 'NPoint', name: '400 NPoint', usd: 5, tl: 234, img: '400kc.jpeg' },
-            { id: 2, type: 'NPoint', name: '800 NPoint', usd: 10, tl: 468, img: '800kc.jpeg' },
-            { id: 3, type: 'NPoint', name: '1200 NPoint', usd: 15, tl: 702, img: '1200kc.jpeg' },
-            { id: 4, type: 'NPoint', name: '1600 NPoint', usd: 20, tl: 936, img: '1600kc.jpeg' },
-            { id: 5, type: 'NPoint', name: '2000 NPoint', usd: 25, tl: 1170, img: '2000kc.jpeg' },
-            { id: 6, type: 'NPoint', name: '2400 NPoint', usd: 30, tl: 1404, img: '2400kc.jpeg' },
-            { id: 7, type: 'NPoint', name: '3200 NPoint', usd: 40, tl: 1872, img: '3200kc.jpeg' },
-            { id: 8, type: 'Premium', name: 'Bronze Premium', usd: 9, tl: 420, img: 'bronz.jpeg' },
-            { id: 9, type: 'Premium', name: 'Gold Premium', usd: 25, tl: 1170, img: 'gold.jpeg' },
-            { id: 10, type: 'Premium', name: 'Platinum Premium', usd: 30, tl: 1404, img: 'plat.jpeg' }
+            { id: 1, type: 'NPoint', name: '400 NPoint', usd: 5, tl: 234, img: 'assets/img/store/400kc.jpeg' },
+            { id: 2, type: 'NPoint', name: '800 NPoint', usd: 10, tl: 468, img: 'assets/img/store/800kc.jpeg' },
+            { id: 3, type: 'NPoint', name: '1200 NPoint', usd: 15, tl: 702, img: 'assets/img/store/1200kc.jpeg' },
+            { id: 4, type: 'NPoint', name: '1600 NPoint', usd: 20, tl: 936, img: 'assets/img/store/1600kc.jpeg' },
+            { id: 5, type: 'NPoint', name: '2000 NPoint', usd: 25, tl: 1170, img: 'assets/img/store/2000kc.jpeg' },
+            { id: 6, type: 'NPoint', name: '2400 NPoint', usd: 30, tl: 1404, img: 'assets/img/store/2400kc.jpeg' },
+            { id: 7, type: 'NPoint', name: '3200 NPoint', usd: 40, tl: 1872, img: 'assets/img/store/3200kc.jpeg' },
+            { id: 8, type: 'Premium', name: 'Bronze Premium', usd: 9, tl: 420, img: 'assets/img/store/bronz.jpeg' },
+            { id: 9, type: 'Premium', name: 'Gold Premium', usd: 25, tl: 1170, img: 'assets/img/store/gold.jpeg' },
+            { id: 10, type: 'Premium', name: 'Platinum Premium', usd: 30, tl: 1404, img: 'assets/img/store/plat.jpeg' }
         ];
 
         let currentDiscount = 0; // Yüzdelik indirim (0, 3, 4, 5, 8)
