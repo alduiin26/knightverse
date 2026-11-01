@@ -14,6 +14,17 @@ const DAILY = ['like', 'retweet', 'reply'];
 const BATTLE_TTL_HOURS = 3;
 const MAX_ACCOUNTS_PER_IP_PER_DAY = 3;
 
+// "Connect with X" (OAuth 2.0 with PKCE). We only ask to read the account, to learn who it is.
+export const X_LOGIN = {
+  authorize: 'https://x.com/i/oauth2/authorize',
+  token: 'https://api.x.com/2/oauth2/token',
+  me: 'https://api.x.com/2/users/me',
+  revoke: 'https://api.x.com/2/oauth2/revoke',
+  scope: 'tweet.read users.read',
+  redirect: 'https://alduiin26.github.io/knightverse/infofi.html',
+  loginMinutes: 15,
+};
+
 class UserError extends Error {
   constructor(code, extra = {}) { super(code); this.code = code; this.extra = extra; this.userError = true; }
 }
@@ -23,6 +34,7 @@ const hex = buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, 
 async function sha256(text) { return hex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text))); }
 function randomToken() { const a = new Uint8Array(24); crypto.getRandomValues(a); return hex(a); }
 function randomSeed() { const a = new Uint32Array(1); crypto.getRandomValues(a); return a[0] >>> 1; }
+const b64url = buf => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 function safeEqual(a, b) {
   if (typeof a !== 'string' || typeof b !== 'string' || !a || a.length !== b.length) return false;
   let r = 0; for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
@@ -42,9 +54,24 @@ export async function fingerprint() {
   return (await sha256(JSON.stringify({ ROSTER, SKILLS, STATUS_INFO, BOSSES, BOSS_PHASES, RULES, QUEST }) + code)).slice(0, 16);
 }
 
-export function createHandler({ query, env = {} }) {
+export function createHandler({ query, env = {}, fetch: fetchImpl }) {
   const q = async (sql, params = []) => query(sql, params);
   const one = async (sql, params) => (await q(sql, params))[0] || null;
+  const http = fetchImpl || ((...a) => globalThis.fetch(...a));
+
+  async function setting(key) {
+    const r = await one('select value from kv_settings where key = $1', [key]);
+    return r ? r.value : '';
+  }
+  // X app settings: Client ID comes from the admin panel (or the X_CLIENT_ID secret).
+  // A Client Secret is only needed for "Web App" type X apps and must be a function secret.
+  async function xConfig() {
+    return {
+      clientId: env.X_CLIENT_ID || await setting('x_client_id'),
+      secret: env.X_CLIENT_SECRET || '',
+      redirect: env.X_REDIRECT_URI || X_LOGIN.redirect,
+    };
+  }
 
   async function auth(body) {
     const token = String(body.token || '');
@@ -62,7 +89,7 @@ export function createHandler({ query, env = {} }) {
   }
 
   function profile(p) {
-    return { nickname: p.nickname, x_handle: p.x_handle, game_points: p.game_points, infofi_points: p.infofi_points, wins: p.wins, battles: p.battles };
+    return { nickname: p.nickname, x_handle: p.x_id ? p.x_handle : null, game_points: p.game_points, infofi_points: p.infofi_points, wins: p.wins, battles: p.battles };
   }
 
   async function usesToday(p) {
@@ -91,9 +118,43 @@ export function createHandler({ query, env = {} }) {
     };
   }
 
-  function requireAdmin(body) {
-    if (!env.ADMIN_KEY) fail('admin_not_configured');
-    if (!safeEqual(String(body.admin_key || ''), env.ADMIN_KEY)) fail('admin_denied');
+  // admin password: the ADMIN_KEY secret, or its sha256 saved in kv_settings
+  async function requireAdmin(body) {
+    const given = String(body.admin_key || '');
+    if (env.ADMIN_KEY && safeEqual(given, env.ADMIN_KEY)) return;
+    const saved = await setting('admin_key_sha256');
+    if (!saved && !env.ADMIN_KEY) fail('admin_not_configured');
+    if (saved && given && safeEqual(await sha256(given), saved)) return;
+    fail('admin_denied');
+  }
+
+  function requireX(p) { if (!p.x_id || !p.x_handle) fail('link_x_first'); }
+
+  // swap the one-time code from X for a token, ask X who the user is, then hand the token back
+  async function xWhoAmI(x, code, verifier) {
+    const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+    if (x.secret) headers.Authorization = 'Basic ' + btoa(`${x.clientId}:${x.secret}`);
+    const form = obj => new URLSearchParams(obj).toString();
+    let token;
+    try {
+      const r = await http(X_LOGIN.token, { method: 'POST', headers, body: form({ code, grant_type: 'authorization_code', redirect_uri: x.redirect, code_verifier: verifier, client_id: x.clientId }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || !j.access_token) { console.error('x token', r.status, JSON.stringify(j).slice(0, 300)); fail('x_failed'); }
+      token = j.access_token;
+    } catch (e) { if (e.userError) throw e; console.error('x token request', String(e)); fail('x_failed'); }
+    try {
+      const r = await http(X_LOGIN.me, { headers: { Authorization: `Bearer ${token}` } });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || !j.data || !j.data.id) {
+        console.error('x users/me', r.status, JSON.stringify(j).slice(0, 300));
+        fail(r.status === 429 || r.status === 402 || r.status === 403 ? 'x_busy' : 'x_failed');
+      }
+      return { id: String(j.data.id), username: String(j.data.username || '') };
+    } catch (e) { if (e.userError) throw e; console.error('x users/me request', String(e)); fail('x_failed'); }
+    finally {
+      // we never keep the token: it is only used for this one lookup
+      try { await http(X_LOGIN.revoke, { method: 'POST', headers, body: form({ token, token_type_hint: 'access_token', client_id: x.clientId }) }); } catch { /* it expires in 2 hours anyway */ }
+    }
   }
 
   const actions = {
@@ -119,20 +180,46 @@ export function createHandler({ query, env = {} }) {
       return { profile: profile(p), ranks: await ranks(p), uses: await usesToday(p), limit: RULES.dailyUses };
     },
 
-    async set_x(body) {
+    // ------------------------------------------------------------ Connect with X
+    async x_auth_start(body) {
       const p = await auth(body);
-      const m = XHANDLE.exec(String(body.x_handle || '').trim());
-      if (!m) fail('bad_x_handle');
-      const taken = await one('select 1 as x from players where lower(x_handle) = lower($1) and id <> $2', [m[1], p.id]);
-      if (taken) fail('x_taken');
-      const r = await one('update players set x_handle = $1 where id = $2 returning *', [m[1], p.id]);
+      const x = await xConfig();
+      if (!x.clientId) fail('x_not_configured');
+      await q(`delete from x_logins where player_id = $1 or created_at < now() - interval '${X_LOGIN.loginMinutes} minutes' returning state`, [p.id]);
+      const state = randomToken();
+      const v = new Uint8Array(32); crypto.getRandomValues(v);
+      const verifier = b64url(v);
+      const challenge = b64url(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier)));
+      await q('insert into x_logins (state, player_id, verifier) values ($1, $2, $3) returning state', [state, p.id, verifier]);
+      const params = new URLSearchParams({ response_type: 'code', client_id: x.clientId, redirect_uri: x.redirect, scope: X_LOGIN.scope, state, code_challenge: challenge, code_challenge_method: 'S256' });
+      return { url: `${X_LOGIN.authorize}?${params.toString().replace(/\+/g, '%20')}` };
+    },
+
+    async x_auth_finish(body) {
+      const p = await auth(body);
+      const x = await xConfig();
+      if (!x.clientId) fail('x_not_configured');
+      const code = String(body.code || ''), state = String(body.state || '');
+      const login = await one(`delete from x_logins where state = $1 and player_id = $2 returning verifier, (created_at > now() - interval '${X_LOGIN.loginMinutes} minutes') as fresh`, [state, p.id]);
+      if (!login || !login.fresh || !code) fail('x_expired');
+      const user = await xWhoAmI(x, code, login.verifier);
+      if (!XHANDLE.test(user.username)) fail('x_failed');
+      // one X account belongs to one player, forever
+      const bound = await one(`insert into x_accounts (x_id, player_id, username) values ($1, $2, $3)
+        on conflict (x_id) do update set username = excluded.username where x_accounts.player_id = excluded.player_id returning player_id`, [user.id, p.id, user.username]);
+      if (!bound) fail('x_taken');
+      const other = await one('select 1 as x from players where x_id = $1 and id <> $2', [user.id, p.id]);
+      if (other) fail('x_taken');
+      // someone renamed on X and this name now belongs to a different account: drop the stale label
+      await q('update players set x_handle = null where lower(x_handle) = lower($1) and id <> $2 returning id', [user.username, p.id]);
+      const r = await one('update players set x_id = $1, x_handle = $2, x_verified_at = now() where id = $3 returning *', [user.id, user.username, p.id]);
       return { profile: profile(r) };
     },
 
     async leaderboard(body) {
       const kind = body.kind === 'infofi' ? 'infofi' : 'game';
       const col = kind === 'infofi' ? 'infofi_points' : 'game_points';
-      const rows = await q(`select nickname, x_handle, ${col} as points, wins, battles from players where not banned and ${col} > 0 order by ${col} desc, created_at asc limit 500`);
+      const rows = await q(`select nickname, case when x_id is not null then x_handle end as x_handle, ${col} as points, wins, battles from players where not banned and ${col} > 0 order by ${col} desc, created_at asc limit 500`);
       return { kind, rows: rows.map((r, i) => ({ rank: i + 1, nickname: r.nickname, x_handle: r.x_handle, points: Number(r.points), wins: Number(r.wins), battles: Number(r.battles) })) };
     },
 
@@ -183,11 +270,12 @@ export function createHandler({ query, env = {} }) {
     async tasks(body) {
       let p = null;
       if (body.token) { try { p = await auth(body); } catch { p = null; } }
-      return { tasks: await taskState(p), profile: p ? profile(p) : null, ranks: p ? await ranks(p) : null };
+      return { tasks: await taskState(p), profile: p ? profile(p) : null, ranks: p ? await ranks(p) : null, x_login: !!(await xConfig()).clientId };
     },
 
     async task_start(body) {
       const p = await auth(body);
+      requireX(p);
       const task = String(body.task || '');
       let round = 0;
       if (DAILY.includes(task)) {
@@ -201,6 +289,7 @@ export function createHandler({ query, env = {} }) {
 
     async task_claim(body) {
       const p = await auth(body);
+      requireX(p);
       const task = String(body.task || '');
       let round = 0, points = QUEST.follow.points;
       if (DAILY.includes(task)) {
@@ -216,7 +305,7 @@ export function createHandler({ query, env = {} }) {
 
     async submit_post(body) {
       const p = await auth(body);
-      if (!p.x_handle) fail('link_x_first');
+      requireX(p);
       const t = parseTweet(body.url);
       if (!t) fail('bad_post_url');
       if (t.user.toLowerCase() !== p.x_handle.toLowerCase()) fail('post_not_yours');
@@ -230,18 +319,31 @@ export function createHandler({ query, env = {} }) {
 
     // ------------------------------------------------------------ admin panel
     async admin_overview(body) {
-      requireAdmin(body);
+      await requireAdmin(body);
       const c = await one(`select (select count(*)::int from players) as players,
         (select count(*)::int from players where last_seen > now() - interval '1 day') as active_today,
         (select count(*)::int from battles where day = (now() at time zone 'utc')::date) as battles_today,
-        (select count(*)::int from post_submissions where status = 'pending') as pending_posts`);
+        (select count(*)::int from post_submissions where status = 'pending') as pending_posts,
+        (select count(*)::int from players where x_id is not null) as x_connected`);
       const tasks = await q('select kind, tweet_url, tweet_id, round, points, updated_at from daily_tasks order by kind');
       const claims = await q(`select c.task, count(*)::int as n from task_claims c join daily_tasks t on t.kind = c.task and t.round = c.round where c.claimed_at is not null group by c.task`);
-      return { counts: c, tasks, claims };
+      const xc = await xConfig();
+      const x = { on: !!xc.clientId, client_id_end: xc.clientId ? xc.clientId.slice(-4) : '', from_secret: !!env.X_CLIENT_ID, redirect: xc.redirect };
+      return { counts: c, tasks, claims, x };
+    },
+
+    // Client ID of the X app (from the X developer portal). It is not secret.
+    async admin_set_x(body) {
+      await requireAdmin(body);
+      const id = String(body.client_id || '').trim();
+      if (!id) { await q(`delete from kv_settings where key = 'x_client_id' returning key`); return { on: false }; }
+      if (!/^[A-Za-z0-9_\-:.]{10,120}$/.test(id)) fail('bad_client_id');
+      await q(`insert into kv_settings (key, value) values ('x_client_id', $1) on conflict (key) do update set value = excluded.value, updated_at = now() returning key`, [id]);
+      return { on: true };
     },
 
     async admin_set_task(body) {
-      requireAdmin(body);
+      await requireAdmin(body);
       const kind = String(body.kind || '');
       if (!DAILY.includes(kind)) fail('bad_task');
       const t = parseTweet(body.url);
@@ -253,7 +355,7 @@ export function createHandler({ query, env = {} }) {
     },
 
     async admin_posts(body) {
-      requireAdmin(body);
+      await requireAdmin(body);
       const status = ['pending', 'approved', 'rejected'].includes(body.status) ? body.status : 'pending';
       const rows = await q(`select s.id, s.url, s.status, s.created_at, p.nickname, p.x_handle, p.infofi_points
         from post_submissions s join players p on p.id = s.player_id where s.status = $1 order by s.created_at ${status === 'pending' ? 'asc' : 'desc'} limit 200`, [status]);
@@ -261,14 +363,14 @@ export function createHandler({ query, env = {} }) {
     },
 
     async admin_review(body) {
-      requireAdmin(body);
+      await requireAdmin(body);
       const r = await one('select * from kv_review_post($1, $2, $3)', [Number(body.id), !!body.approve, QUEST.post.points]);
       if (r.status === 'not_pending') fail('not_pending');
       return { status: r.status };
     },
 
     async admin_ban(body) {
-      requireAdmin(body);
+      await requireAdmin(body);
       const r = await one('update players set banned = $1 where lower(nickname) = lower($2) returning nickname, banned', [!!body.banned, String(body.nickname || '')]);
       if (!r) fail('player_not_found');
       return { player: r };
@@ -277,7 +379,7 @@ export function createHandler({ query, env = {} }) {
     async config() {
       return {
         version: await fingerprint(),
-        rules: RULES, quest: QUEST,
+        rules: RULES, quest: QUEST, x_login: !!(await xConfig()).clientId,
         bosses: Object.values(BOSSES).map(b => ({ id: b.id, name: b.name, winPoints: b.winPoints })),
         heroes: ROSTER.length,
       };
