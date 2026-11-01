@@ -302,6 +302,77 @@ class CameraDirector {
   }
 }
 
+
+// ---------------------------------------------------------------------------
+// Arena themes: sky, fog, light colors and a few props. 'arena' is the PvP look.
+// ---------------------------------------------------------------------------
+const THEMES = {
+  arena: {
+    sky: { Top: [0.20, 0.13, 0.30], Mid: [0.86, 0.46, 0.22], Hor: [1.0, 0.76, 0.45], Low: [0.42, 0.22, 0.20], Sun: [1.0, 0.8, 0.45], CloudA: [1.0, 0.84, 0.62], CloudB: [0.58, 0.34, 0.38] },
+    fog: [0xd9905a, 55, 150], hemi: [0xffe2c4, 0x3a2b3a, 1.05], sun: [0xffd2a2, 2.6], rim: [0x9fb6ff, 0.75],
+    ember: [1.0, 0.62, 0.25], beam: 0xfff1c4, floorGlow: 0xffffff, floorTint: 0xffffff, props: false,
+  },
+  lava: {
+    sky: { Top: [0.06, 0.015, 0.02], Mid: [0.42, 0.07, 0.03], Hor: [1.0, 0.36, 0.08], Low: [0.28, 0.04, 0.02], Sun: [1.0, 0.45, 0.15], CloudA: [0.55, 0.16, 0.08], CloudB: [0.12, 0.04, 0.05] },
+    fog: [0x4a1608, 40, 125], hemi: [0xffc8a8, 0x2a0805, 0.95], sun: [0xff8a4a, 2.3], rim: [0xff3a1a, 1.2],
+    ember: [1.0, 0.42, 0.1], beam: 0xff6a2a, floorGlow: 0xff7a3a, floorTint: 0xe0c4b4, props: true,
+  },
+  swamp: {
+    sky: { Top: [0.015, 0.03, 0.025], Mid: [0.05, 0.13, 0.08], Hor: [0.24, 0.46, 0.26], Low: [0.03, 0.07, 0.04], Sun: [0.55, 0.95, 0.45], CloudA: [0.2, 0.36, 0.22], CloudB: [0.05, 0.1, 0.07] },
+    fog: [0x13251a, 34, 110], hemi: [0xb8d8b8, 0x0a140c, 0.9], sun: [0xd8f0c8, 2.0], rim: [0x6dff4a, 0.9],
+    ember: [0.5, 1.0, 0.35], beam: 0x8aff6a, floorGlow: 0x7dff5a, floorTint: 0xb4b8a4, props: true,
+  },
+  stone: {
+    sky: { Top: [0.10, 0.13, 0.20], Mid: [0.33, 0.40, 0.50], Hor: [0.88, 0.84, 0.76], Low: [0.2, 0.22, 0.25], Sun: [1.0, 0.92, 0.75], CloudA: [0.75, 0.78, 0.82], CloudB: [0.3, 0.33, 0.4] },
+    fog: [0x55606c, 45, 135], hemi: [0xdce6ff, 0x2a2e35, 1.0], sun: [0xfff0d8, 2.4], rim: [0x9fb6ff, 0.9],
+    ember: [1.0, 0.85, 0.6], beam: 0xdfe8ff, floorGlow: 0xffd27a, floorTint: 0xd0d0d0, props: true,
+  },
+  void: {
+    sky: { Top: [0.035, 0.01, 0.07], Mid: [0.2, 0.05, 0.33], Hor: [0.55, 0.25, 0.75], Low: [0.05, 0.12, 0.1], Sun: [0.75, 0.45, 1.0], CloudA: [0.42, 0.22, 0.58], CloudB: [0.08, 0.04, 0.14] },
+    fog: [0x22103a, 38, 120], hemi: [0xd8b0ff, 0x08060f, 0.95], sun: [0xc8a0ff, 2.0], rim: [0x4dffb0, 1.1],
+    ember: [0.78, 0.42, 1.0], beam: 0xb46aff, floorGlow: 0xb46aff, floorTint: 0xb8b0c8, props: true,
+  },
+};
+
+function buildThemeProps(name, world) {
+  const g = new THREE.Group();
+  const mat = (c, e = 0, ei = 1.6) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.6, metalness: 0.15, flatShading: true, emissive: e, emissiveIntensity: e ? ei : 1 });
+  const spots = [];
+  for (let i = 0; i < 16; i++) {
+    const a = (i / 16) * Math.PI * 2 + 0.2;
+    if (Math.cos(a) > 0.55) continue; // keep the camera side open
+    spots.push([Math.sin(a) * (19.5 + (i % 3) * 1.6), Math.cos(a) * (19.5 + (i % 3) * 1.6), a]);
+  }
+  const rnd = seeded(name.length * 97 + 13);
+  const r = (a, b) => a + rnd() * (b - a);
+  for (const [x, z, a] of spots) {
+    const p = new THREE.Group(); p.position.set(x, -0.7, z); p.rotation.y = a;
+    if (name === 'lava') {
+      const n = 2 + Math.floor(rnd() * 3);
+      for (let k = 0; k < n; k++) { const h = r(2, 6); const m = new THREE.Mesh(new THREE.ConeGeometry(r(0.5, 1.1), h, 5), mat(0x1a1210, 0xff4a10, 0.35)); m.position.set(r(-1.5, 1.5), h / 2, r(-1.5, 1.5)); m.rotation.set(r(-0.2, 0.2), r(0, 3), r(-0.2, 0.2)); p.add(m); }
+      const pool = new THREE.Mesh(new THREE.CircleGeometry(r(1.2, 2.2), 12), new THREE.MeshBasicMaterial({ color: 0xff6a1a })); pool.rotation.x = -Math.PI / 2; pool.position.y = 0.05; p.add(pool);
+    } else if (name === 'swamp') {
+      const n = 2 + Math.floor(rnd() * 3);
+      for (let k = 0; k < n; k++) { const h = r(1.2, 3.6); const m = new THREE.Mesh(new THREE.OctahedronGeometry(1, 0), mat(0x2a6a2a, 0x5dff2a, 1.4)); m.scale.set(r(0.3, 0.6), h, r(0.3, 0.6)); m.position.set(r(-1.5, 1.5), h * 0.7, r(-1.5, 1.5)); m.rotation.set(r(-0.4, 0.4), r(0, 3), r(-0.4, 0.4)); p.add(m); }
+      const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(r(0.8, 1.6), 0), mat(0x1d241a)); rock.position.y = 0.4; p.add(rock);
+    } else if (name === 'stone') {
+      if (rnd() < 0.5) {
+        const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.4, 5, 6), mat(0x3a2a20)); trunk.position.y = 2.5; trunk.rotation.z = r(-0.2, 0.2); p.add(trunk);
+        for (let k = 0; k < 4; k++) { const b = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.14, 2.2, 5), mat(0x3a2a20)); b.position.set(0, 3.5 + k * 0.4, 0); b.rotation.set(r(-1, 1), r(0, 6), r(0.6, 1.2) * (k % 2 ? 1 : -1)); b.translateY(1); p.add(b); }
+      }
+      for (let k = 0; k < 2; k++) { const m = new THREE.Mesh(new THREE.DodecahedronGeometry(r(0.9, 2), 0), mat(0x5a5e66)); m.position.set(r(-2, 2), 0.5, r(-2, 2)); m.scale.y = r(0.6, 1.2); p.add(m); }
+    } else if (name === 'void') {
+      const n = 2 + Math.floor(rnd() * 2);
+      for (let k = 0; k < n; k++) { const h = r(1.5, 4.5); const m = new THREE.Mesh(new THREE.OctahedronGeometry(1, 0), mat(0x2a1640, 0xb040ff, 1.5)); m.scale.set(r(0.3, 0.7), h, r(0.3, 0.7)); m.position.set(r(-1.5, 1.5), h * 0.8 + r(0, 2), r(-1.5, 1.5)); m.userData.fy = m.position.y; m.userData.ph = r(0, 6); p.add(m); }
+      const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(r(0.8, 1.4), 0), mat(0x14101a)); rock.position.y = 0.3; p.add(rock);
+    }
+    g.add(p);
+  }
+  g.traverse(o => { if (o.isMesh) o.castShadow = false; });
+  if (name === 'void' && !world._voidAnim) world._voidAnim = true, world.animated.push(t => { if (world.themeName !== 'void' || !world.themeProps) return; world.themeProps.traverse(o => { if (o.userData.fy != null) o.position.y = o.userData.fy + Math.sin(t * 0.8 + o.userData.ph) * 0.4; }); });
+  return g;
+}
+
 // ---------------------------------------------------------------------------
 // World
 // ---------------------------------------------------------------------------
@@ -327,6 +398,9 @@ export class World {
     this.braziers = [];
     this.rocks = [];
     this.animated = [];
+    this.pillars = [];
+    this.themeName = 'arena';
+    this.themeProps = null;
 
     this._sky();
     this._lights();
@@ -343,6 +417,8 @@ export class World {
     this.scene.traverse(o => { if (o.material) { const m = Array.isArray(o.material) ? o.material : [o.material]; m.forEach(x => (x.needsUpdate = true)); } });
   }
 
+  get portrait() { return this.container.clientWidth / this.container.clientHeight < 0.9; }
+
   resize() {
     const w = this.container.clientWidth, h = this.container.clientHeight;
     this.renderer.setSize(w, h);
@@ -350,39 +426,41 @@ export class World {
     const aspect = w / h, d = this.director;
     if (aspect < 0.9) {
       // phones in portrait: higher, more top-down view so the two rows don't overlap
-      d.home.pos.set(0, 21, 13); d.home.look.set(0, 0, 0.3); d.home.fov = 50;
-      d.aspectFactor = Math.min(1.45, 1.25 * Math.pow(0.6 / aspect, 0.3));
+      if (this.layout === 'boss') { d.home.pos.set(0, 22, 14.5); d.home.look.set(0, 0.6, -0.4); d.home.fov = 54; }
+      else { d.home.pos.set(0, 21, 13); d.home.look.set(0, 0, 0.3); d.home.fov = 50; }
+      d.aspectFactor = Math.min(this.layout === 'boss' ? 1.6 : 1.45, (this.layout === 'boss' ? 1.38 : 1.25) * Math.pow(0.6 / aspect, 0.3));
     } else {
-      d.home.pos.set(0, 12.2, 19.5); d.home.look.set(0, 0.4, -1.4); d.home.fov = 40;
+      if (this.layout === 'boss') { d.home.pos.set(0, 15.5, 23.5); d.home.look.set(0, 1.2, -0.8); d.home.fov = 42; }
+      else { d.home.pos.set(0, 12.2, 19.5); d.home.look.set(0, 0.4, -1.4); d.home.fov = 40; }
       d.aspectFactor = aspect < 1.35 ? Math.pow(1.35 / aspect, 0.85) : 1;
     }
   }
 
   _sky() {
     const mat = new THREE.ShaderMaterial({
-      uniforms: { uTime: { value: 0 }, uDim: { value: 0 } },
+      uniforms: { uTime: { value: 0 }, uDim: { value: 0 }, uTop: { value: new THREE.Color(0.20, 0.13, 0.30) }, uMid: { value: new THREE.Color(0.86, 0.46, 0.22) }, uHor: { value: new THREE.Color(1.0, 0.76, 0.45) }, uLow: { value: new THREE.Color(0.42, 0.22, 0.20) }, uSun: { value: new THREE.Color(1.0, 0.8, 0.45) }, uCloudA: { value: new THREE.Color(1.0, 0.84, 0.62) }, uCloudB: { value: new THREE.Color(0.58, 0.34, 0.38) } },
       vertexShader: `varying vec3 vDir; void main(){ vDir = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
       fragmentShader: `
-        uniform float uTime; uniform float uDim; varying vec3 vDir;
+        uniform float uTime; uniform float uDim; uniform vec3 uTop; uniform vec3 uMid; uniform vec3 uHor; uniform vec3 uLow; uniform vec3 uSun; uniform vec3 uCloudA; uniform vec3 uCloudB; varying vec3 vDir;
         float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453); }
         float noise(vec2 p){ vec2 i=floor(p), f=fract(p); f=f*f*(3.0-2.0*f);
           return mix(mix(hash(i),hash(i+vec2(1,0)),f.x), mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x), f.y); }
         float fbm(vec2 p){ float v=0.0, a=0.5; for(int i=0;i<5;i++){ v+=a*noise(p); p*=2.03; a*=0.5; } return v; }
         void main(){
           vec3 d = normalize(vDir); float h = d.y;
-          vec3 top = vec3(0.20,0.13,0.30), mid = vec3(0.86,0.46,0.22), hor = vec3(1.0,0.76,0.45), low = vec3(0.42,0.22,0.20);
+          vec3 top = uTop, mid = uMid, hor = uHor, low = uLow;
           vec3 col = mix(hor, mid, smoothstep(0.0, 0.16, h));
           col = mix(col, top, smoothstep(0.16, 0.8, h));
           if (h < 0.0) col = mix(hor * 0.85, low, smoothstep(0.0, -0.35, h));
           vec3 sunDir = normalize(vec3(-0.25, 0.10, -1.0));
           float s = max(dot(d, sunDir), 0.0);
-          col += vec3(1.0,0.8,0.45) * pow(s, 60.0) * 1.6 + vec3(1.0,0.55,0.25) * pow(s, 6.0) * 0.35;
+          col += uSun * pow(s, 60.0) * 1.6 + uSun * vec3(1.0,0.7,0.55) * pow(s, 6.0) * 0.35;
           vec2 uv = d.xz / (abs(d.y) + 0.22);
           float c = fbm(uv * 1.3 + vec2(uTime * 0.012, uTime * 0.004));
           float upper = smoothstep(0.42, 0.78, c) * smoothstep(0.0, 0.2, h) * (1.0 - smoothstep(0.45, 0.85, h));
-          col = mix(col, mix(vec3(1.0,0.84,0.62), vec3(0.58,0.34,0.38), smoothstep(0.05, 0.45, h)), upper * 0.75);
+          col = mix(col, mix(uCloudA, uCloudB, smoothstep(0.05, 0.45, h)), upper * 0.75);
           float sea = smoothstep(0.35, 0.7, fbm(uv * 0.9 - vec2(uTime * 0.01, 0.0))) * smoothstep(0.0, -0.08, h);
-          col = mix(col, vec3(1.0,0.78,0.6), sea * 0.55);
+          col = mix(col, uCloudA * 0.95, sea * 0.55);
           col *= 1.0 - uDim * 0.75;
           gl_FragColor = vec4(col, 1.0);
         }`,
@@ -484,7 +562,9 @@ export class World {
     }
     g.position.set(x, -0.7, z);
     g.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+    g.userData.height = h;
     this.scene.add(g);
+    this.pillars.push(g);
   }
 
   _statue(x, z, rotY) {
@@ -531,7 +611,8 @@ export class World {
     gem.position.set(0, 14.2, -28.9); this.scene.add(gem); this.animated.push(t => { gem.rotation.y = t * 0.8; });
     const beam = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.2, 120, 24, 1, true), makeBeamMaterial(0xfff1c4, 1.2));
     beam.position.set(0, 58, -31); this.scene.add(beam); this.lightBeam = beam;
-    const beamGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: this.glowTex, color: 0xffe9b0, blending: THREE.AdditiveBlending, transparent: true, depthWrite: false, opacity: 0.8 }));
+    this.beamGlowSprite = null;
+    const beamGlow = this.beamGlowSprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: this.glowTex, color: 0xffe9b0, blending: THREE.AdditiveBlending, transparent: true, depthWrite: false, opacity: 0.8 }));
     beamGlow.scale.set(16, 10, 1); beamGlow.position.set(0, 2, -31); this.scene.add(beamGlow);
 
     // floating rocks
@@ -559,7 +640,7 @@ export class World {
     geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
     geo.setAttribute('seed', new THREE.BufferAttribute(seed, 1));
     const mat = new THREE.ShaderMaterial({
-      uniforms: { uTime: { value: 0 }, uMap: { value: this.glowTex }, uPR: { value: this.renderer.getPixelRatio() } },
+      uniforms: { uTime: { value: 0 }, uMap: { value: this.glowTex }, uPR: { value: this.renderer.getPixelRatio() }, uColor: { value: new THREE.Color(1.0, 0.62, 0.25) } },
       vertexShader: `
         attribute float seed; uniform float uTime; uniform float uPR; varying float vA;
         void main(){
@@ -573,11 +654,71 @@ export class World {
           vA = 0.35 + 0.65 * abs(sin(t * 3.0 + seed * 20.0));
           gl_Position = projectionMatrix * mv;
         }`,
-      fragmentShader: `uniform sampler2D uMap; varying float vA; void main(){ vec4 c = texture2D(uMap, gl_PointCoord); gl_FragColor = vec4(1.0, 0.62, 0.25, c.a * vA); }`,
+      fragmentShader: `uniform sampler2D uMap; uniform vec3 uColor; varying float vA; void main(){ vec4 c = texture2D(uMap, gl_PointCoord); gl_FragColor = vec4(uColor, c.a * vA); }`,
       transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
     });
     this.emberMat = mat;
     this.scene.add(new THREE.Points(geo, mat));
+  }
+
+
+  // ------------------------------------------------------------------ layout (camera framing per mode)
+  setLayout(mode) {
+    this.layout = mode;
+    this.resize();
+  }
+
+  // ------------------------------------------------------------------ arena themes (one per boss)
+  setTheme(name) {
+    const T = THEMES[name] || THEMES.arena;
+    this.themeName = name;
+    const u = this.skyMat.uniforms;
+    for (const k of ['Top', 'Mid', 'Hor', 'Low', 'Sun', 'CloudA', 'CloudB']) u['u' + k].value.setRGB(...T.sky[k]);
+    this.scene.fog.color.setHex(T.fog[0]); this.scene.fog.near = T.fog[1]; this.scene.fog.far = T.fog[2];
+    this.hemi.color.setHex(T.hemi[0]); this.hemi.groundColor.setHex(T.hemi[1]);
+    this.sun.color.setHex(T.sun[0]); this.rim.color.setHex(T.rim[0]);
+    this.baseIntensity = { hemi: T.hemi[2], sun: T.sun[1], rim: T.rim[1] };
+    this.emberMat.uniforms.uColor.value.setRGB(...T.ember);
+    this.lightBeam.material.uniforms.uColor.value.setHex(T.beam);
+    if (this.beamGlowSprite) this.beamGlowSprite.material.color.setHex(T.beam);
+    this.floorMat.emissive.setHex(T.floorGlow);
+    this.floorMat.color.setHex(T.floorTint);
+    if (this.themeProps) { this.scene.remove(this.themeProps); this.themeProps.traverse(o => { if (o.isMesh) { o.geometry.dispose(); } }); }
+    this.themeProps = T.props ? buildThemeProps(name, this) : null;
+    if (this.themeProps) this.scene.add(this.themeProps);
+  }
+
+  // ------------------------------------------------------------------ optional .glb surroundings
+  // models: { rock: gltf|null, tower: gltf|null, settings }
+  applyEnvModels({ rock, tower, settings = {} }) {
+    const fit = (gltf, height, rotY) => {
+      const m = gltf.scene.clone(true);
+      m.rotation.y = (rotY || 0) * Math.PI / 180;
+      const box = new THREE.Box3().setFromObject(m), size = box.getSize(new THREE.Vector3());
+      m.scale.multiplyScalar(height / Math.max(0.001, size.y));
+      const b2 = new THREE.Box3().setFromObject(m), c = b2.getCenter(new THREE.Vector3());
+      m.position.x -= c.x; m.position.y -= b2.min.y; m.position.z -= c.z;
+      m.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+      const g = new THREE.Group(); g.add(m); return g;
+    };
+    if (rock) {
+      const set = settings['env-rock'] || {};
+      for (const r of this.rocks) {
+        const size = r.geometry.parameters.radius || 1.5;
+        const g = fit(rock, (set.height || 3) * size / 1.6, set.rotateY);
+        g.position.copy(r.position); g.rotation.copy(r.rotation); g.userData = r.userData;
+        this.scene.remove(r); this.scene.add(g);
+        this.rocks[this.rocks.indexOf(r)] = g;
+      }
+    }
+    if (tower) {
+      const set = settings['env-tower'] || {};
+      this.pillars.forEach((p, i) => {
+        const g = fit(tower, (set.height || 14) * (p.userData.height / 12), set.rotateY);
+        g.position.copy(p.position); g.rotation.y = Math.atan2(-p.position.x, -p.position.z);
+        this.scene.remove(p); this.scene.add(g); this.pillars[i] = g;
+      });
+    }
   }
 
   update(realDt, gameDt) {

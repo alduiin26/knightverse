@@ -26,6 +26,18 @@
     </script>
     <style>
         .gold-glow { box-shadow: 0 0 15px rgba(255, 215, 0, 0.15); }
+        .qbtn { font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 6px; border: 1px solid; transition: background .15s, color .15s, opacity .15s; white-space: nowrap; cursor: pointer; }
+        .qbtn:disabled { opacity: .4; cursor: not-allowed; }
+        .qbtn.act { background: rgba(255, 215, 0, .1); color: #FFD700; border-color: rgba(255, 215, 0, .4); }
+        .qbtn.act:not(:disabled):hover { background: #FFD700; color: #000; }
+        .qbtn.chk { background: rgba(16, 185, 129, .12); color: #34d399; border-color: rgba(52, 211, 153, .45); }
+        .qbtn.chk:not(:disabled):hover { background: #10b981; color: #000; }
+        .qbtn.done { background: rgba(16, 185, 129, .18); color: #34d399; border-color: rgba(52, 211, 153, .5); opacity: 1 !important; }
+        .qrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px; background: #181818; border-radius: 8px; border: 1px solid #262626; }
+        .qrow .pts { font-size: 11px; font-weight: 800; color: #FFD700; }
+        .qrow .btns { display: flex; gap: 6px; flex: none; }
+        #toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); z-index: 60; max-width: min(92vw, 460px); padding: 10px 16px; border-radius: 10px; background: #18181b; border: 1px solid #3f3f46; color: #fff; font-size: 13px; font-weight: 600; text-align: center; opacity: 0; pointer-events: none; transition: all .25s; }
+        #toast.show { opacity: 1; transform: translate(-50%, 0); }
     </style>
 </head>
 <body class="bg-[#050505] text-[#DDDDDD] font-sans antialiased selection:bg-brand-gold selection:text-black min-h-screen flex flex-col">
@@ -42,7 +54,7 @@
 
     <!-- MAIN CONTENT -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full">
-        
+
         <!-- HEADER -->
         <div class="text-center mb-8">
             <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-2">InfoFi <span class="text-brand-gold">Airdrop & Quest</span> Network</h1>
@@ -51,14 +63,11 @@
 
         <!-- STATUS PANEL -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <!-- 1. Connect Box -->
-            <div class="bg-brand-card border border-brand-border rounded-xl p-4 flex flex-col justify-center items-center text-center">
-                <button class="bg-[#1DA1F2] hover:bg-[#1a91da] text-white font-bold py-2.5 px-6 rounded-lg w-full sm:w-auto flex items-center justify-center gap-2 transition shadow-lg">
-                    <i data-lucide="twitter" class="w-4 h-4"></i> Connect with X (Twitter)
-                </button>
-                <span class="text-[10px] text-gray-500 mt-2">*Quest verifications are automated after connection.</span>
+            <!-- 1. Account / X box -->
+            <div class="bg-brand-card border border-brand-border rounded-xl p-4 flex flex-col justify-center items-center text-center" id="accountBox">
+                <div class="text-sm text-gray-500">Loading…</div>
             </div>
-            
+
             <!-- 2. Score Box -->
             <div class="bg-brand-card border border-brand-gold/30 rounded-xl p-4 flex flex-col justify-center items-center text-center gold-glow">
                 <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">Your Status</div>
@@ -82,36 +91,20 @@
                     <i data-lucide="clock" class="w-5 h-5"></i>
                     <span id="clock">Loading...</span>
                 </div>
+                <span class="text-[10px] text-gray-500 mt-1">Daily quests reset when new posts are published.</span>
             </div>
         </div>
 
         <!-- QUEST CARDS -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-            
+
             <!-- Main Quests (One-time) -->
             <div class="bg-brand-card border border-brand-border rounded-xl p-5 flex flex-col">
                 <h3 class="text-lg font-bold text-white mb-1 border-b border-brand-border pb-3 flex items-center gap-2">
                     <i data-lucide="shield-check" class="w-5 h-5 text-brand-gold"></i> Main Quests
                 </h3>
-                <p class="text-[11px] text-gray-400 my-3">One-time tasks. Click the button to perform the action; the system will verify automatically.</p>
-                <ul class="space-y-3 mt-auto">
-                    <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">Follow @_KnightVerse</span>
-                        <a href="https://x.com/intent/follow?screen_name=_KnightVerse" target="_blank" class="bg-brand-gold/10 hover:bg-brand-gold text-brand-gold hover:text-black border border-brand-gold/40 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+500 Pts</a>
-                    </li>
-                    <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">Like Pinned Post</span>
-                        <a href="https://x.com/intent/like?tweet_id=2106481173333450865" target="_blank" class="bg-brand-gold/10 hover:bg-brand-gold text-brand-gold hover:text-black border border-brand-gold/40 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+100 Pts</a>
-                    </li>
-                    <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">Retweet Pinned Post</span>
-                        <a href="https://x.com/intent/retweet?tweet_id=2106481173333450865" target="_blank" class="bg-brand-gold/10 hover:bg-brand-gold text-brand-gold hover:text-black border border-brand-gold/40 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+200 Pts</a>
-                    </li>
-                    <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">Reply to Pinned Post</span>
-                        <a href="https://x.com/intent/tweet?in_reply_to=2106481173333450865" target="_blank" class="bg-brand-gold/10 hover:bg-brand-gold text-brand-gold hover:text-black border border-brand-gold/40 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+100 Pts</a>
-                    </li>
-                </ul>
+                <p class="text-[11px] text-gray-400 my-3">One-time task. Open it, complete it on X, then press Check. Points are added after a 30 second check.</p>
+                <ul class="space-y-3 mt-auto" id="mainQuests"></ul>
             </div>
 
             <!-- Daily Content Creation -->
@@ -119,13 +112,13 @@
                 <h3 class="text-lg font-bold text-white mb-1 border-b border-brand-border pb-3 flex items-center gap-2">
                     <i data-lucide="pen-tool" class="w-5 h-5 text-blue-400"></i> Daily Content
                 </h3>
-                <p class="text-[11px] text-gray-400 my-3">Publish a high-quality post mentioning @_KnightVerse. Submit the link for manual review. (100-500 Points).</p>
+                <p class="text-[11px] text-gray-400 my-3">Share a post on X that mentions <b class="text-gray-200">@_KnightVerse</b> and uses <b class="text-gray-200">#KnightVerse</b>. Submit the link below. The team reviews every post; approved posts earn <b class="text-brand-gold">+30 points</b>. One post per day.</p>
                 <div class="mt-auto">
                     <div class="flex gap-2">
-                        <input type="text" id="tweetUrl" placeholder="https://x.com/user/status/..." class="w-full bg-[#181818] border border-brand-border rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition">
-                        <button onclick="submitTweet()" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold px-4 py-2 rounded-lg transition whitespace-nowrap">Submit</button>
+                        <input type="text" id="tweetUrl" placeholder="https://x.com/you/status/..." class="w-full bg-[#181818] border border-brand-border rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition">
+                        <button id="submitBtn" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold px-4 py-2 rounded-lg transition whitespace-nowrap">Submit</button>
                     </div>
-                    <span class="text-[10px] text-red-400 mt-2 block">*Duplicate links are rejected. Requires manual team approval.</span>
+                    <span class="text-[10px] text-gray-500 mt-2 block">*The post must be from the X account you linked. Duplicate links are rejected.</span>
                     <div id="submitMsg" class="mt-2 text-xs font-semibold"></div>
                 </div>
             </div>
@@ -135,53 +128,43 @@
                 <h3 class="text-lg font-bold text-white mb-1 border-b border-brand-border pb-3 flex items-center gap-2">
                     <i data-lucide="repeat" class="w-5 h-5 text-purple-400"></i> Daily Engagement
                 </h3>
-                <p class="text-[11px] text-gray-400 my-3">Interact with our latest updates to earn extra points. These tasks reset every 24 hours.</p>
-                <ul class="space-y-3 mt-auto">
-                    <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">Like Latest Post</span>
-                        <a href="https://x.com/intent/like?tweet_id=2106481173333450865" target="_blank" class="bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/50 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+50 Pts</a>
-                    </li>
-                    <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">Retweet Latest Post</span>
-                        <a href="https://x.com/intent/retweet?tweet_id=2106481173333450865" target="_blank" class="bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/50 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+50 Pts</a>
-                    </li>
-                    <li class="flex items-center justify-between p-3 bg-[#181818] rounded-lg border border-[#262626]">
-                        <span class="text-sm font-medium text-gray-200">Reply to Latest Post</span>
-                        <a href="https://x.com/intent/tweet?in_reply_to=2106481173333450865" target="_blank" class="bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/50 text-xs font-bold py-1.5 px-3 rounded-md transition cursor-pointer">+50 Pts</a>
-                    </li>
-                </ul>
+                <p class="text-[11px] text-gray-400 my-3">Interact with our latest post. Open each task, do it on X, then press Check. When we publish a new post, these tasks open again.</p>
+                <ul class="space-y-3 mt-auto" id="dailyQuests"></ul>
             </div>
         </div>
 
         <!-- LEADERBOARD -->
         <div class="bg-brand-card border border-brand-border rounded-xl p-4 sm:p-6 overflow-hidden">
-            <h3 class="text-lg font-bold text-brand-gold mb-4 flex items-center gap-2">
-                <i data-lucide="trophy" class="w-5 h-5"></i> Top 500 Leaderboard
-            </h3>
-            
+            <div class="flex items-center justify-between gap-3 mb-4 flex-wrap">
+                <h3 class="text-lg font-bold text-brand-gold flex items-center gap-2">
+                    <i data-lucide="trophy" class="w-5 h-5"></i> InfoFi Top 500 Leaderboard
+                </h3>
+                <a href="leaderboard.html" class="text-xs text-gray-400 hover:text-brand-gold">Arena rankings &rarr;</a>
+            </div>
+
             <div class="overflow-x-auto w-full">
                 <table class="w-full text-left text-xs sm:text-sm whitespace-nowrap">
                     <thead>
                         <tr class="border-b border-brand-border text-gray-400">
                             <th class="pb-3 font-semibold px-4">Rank</th>
+                            <th class="pb-3 font-semibold px-4">Fighter</th>
                             <th class="pb-3 font-semibold px-4">X (Twitter) Account</th>
-                            <th class="pb-3 font-semibold px-4">Wallet Address</th>
                             <th class="pb-3 font-semibold px-4 text-right">Total Points</th>
                         </tr>
                     </thead>
                     <tbody id="leaderboardBody" class="divide-y divide-brand-border/60 text-gray-300">
-                        <!-- Filled by JS -->
+                        <tr><td colspan="4" class="py-8 text-center text-gray-500">Loading…</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <!-- PAGINATION -->
             <div class="flex items-center justify-between mt-6 pt-4 border-t border-brand-border">
-                <button onclick="prevPage()" class="px-4 py-2 bg-[#181818] border border-brand-border rounded-lg text-sm hover:bg-[#262626] transition flex items-center gap-2">
+                <button id="prevBtn" class="px-4 py-2 bg-[#181818] border border-brand-border rounded-lg text-sm hover:bg-[#262626] transition flex items-center gap-2">
                     <i data-lucide="chevron-left" class="w-4 h-4"></i> Prev
                 </button>
-                <span id="pageInfo" class="text-xs text-gray-400 font-mono">Page 1 / 50</span>
-                <button onclick="nextPage()" class="px-4 py-2 bg-[#181818] border border-brand-border rounded-lg text-sm hover:bg-[#262626] transition flex items-center gap-2">
+                <span id="pageInfo" class="text-xs text-gray-400 font-mono">Page 1 / 1</span>
+                <button id="nextBtn" class="px-4 py-2 bg-[#181818] border border-brand-border rounded-lg text-sm hover:bg-[#262626] transition flex items-center gap-2">
                     Next <i data-lucide="chevron-right" class="w-4 h-4"></i>
                 </button>
             </div>
@@ -193,12 +176,10 @@
     <footer class="py-6 bg-black border-t border-brand-border/60 text-center text-xs text-gray-600">
         © 2026 KnightVerse. Event points will be utilized for Alpha testnet access and subsequent airdrop allocations.
     </footer>
+    <div id="toast"></div>
 
     <script>
-        // Init Icons
-        lucide.createIcons();
-
-        // 1. GMT CLOCK
+        // GMT clock
         function updateClock() {
             const now = new Date();
             const options = { timeZone: 'GMT', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
@@ -206,92 +187,217 @@
         }
         setInterval(updateClock, 1000);
         updateClock();
+    </script>
+    <script type="module">
+        import { api, loadMe, openAccount, esc, errText } from './arena/api.js';
+        const $ = s => document.querySelector(s);
+        const icons = () => { try { lucide.createIcons(); } catch { /* icons are optional */ } };
+        let me = null, tasks = null, rows = [], page = 1;
+        const PER = 10;
+        const timers = {};
 
-        // 2. LINK CHECKER (Anti-Spam Simulation)
-        let submittedUrls = new Set();
-        function submitTweet() {
-            const urlInput = document.getElementById('tweetUrl').value.trim();
-            const msgBox = document.getElementById('submitMsg');
-            
-            if(urlInput === "") {
-                msgBox.style.color = "#ef4444"; // red-500
-                msgBox.innerText = "Please enter a valid URL!";
+        function toast(msg) {
+            const t = $('#toast'); t.textContent = msg; t.className = 'show';
+            clearTimeout(toast._t); toast._t = setTimeout(() => { t.className = ''; }, 3200);
+        }
+        const hasAccount = () => !!(me && me.profile);
+
+        async function ensureAccount(reason) {
+            if (hasAccount()) return true;
+            await openAccount({ reason });
+            await refresh();
+            return hasAccount();
+        }
+
+        // ---------------------------------------------------------- account + X box
+        function renderAccount() {
+            const box = $('#accountBox');
+            if (me && me.offline) {
+                box.innerHTML = `<div class="text-sm text-red-300">Can't reach the server right now.</div><button id="retry" class="mt-2 text-xs text-brand-gold underline">Try again</button>`;
+                $('#retry').onclick = refresh; return;
+            }
+            if (!hasAccount()) {
+                box.innerHTML = `<button id="createBtn" class="bg-brand-gold hover:bg-brand-goldHover text-black font-bold py-2.5 px-6 rounded-lg w-full sm:w-auto transition shadow-lg">Create your fighter</button>
+                    <button id="restoreBtn" class="text-[11px] text-gray-400 hover:text-brand-gold underline mt-2">I have a recovery code</button>
+                    <span class="text-[10px] text-gray-500 mt-1">One account for quests and the Arena.</span>`;
+                $('#createBtn').onclick = async () => { await openAccount(); refresh(); };
+                $('#restoreBtn').onclick = async () => { await openAccount({ startWith: 'restore' }); refresh(); };
                 return;
             }
-            if(submittedUrls.has(urlInput)) {
-                msgBox.style.color = "#ef4444";
-                msgBox.innerText = "Error: This link has already been submitted!";
+            const p = me.profile;
+            if (!p.x_handle) {
+                box.innerHTML = `<div class="text-xs text-gray-400 mb-2">Signed in as <b class="text-white">${esc(p.nickname)}</b> &middot; <button id="accBtn" class="underline hover:text-brand-gold">account</button></div>
+                    <div class="flex gap-2 w-full max-w-xs"><input id="xIn" placeholder="@your_x_username" class="w-full bg-[#181818] border border-brand-border rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#1DA1F2]">
+                    <button id="xBtn" class="bg-[#1DA1F2] hover:bg-[#1a91da] text-white font-bold px-3 rounded-lg text-sm whitespace-nowrap">Link X</button></div>
+                    <span class="text-[10px] text-gray-500 mt-2">Link the X account you use for the quests.</span>`;
+                $('#xBtn').onclick = linkX;
+                $('#xIn').onkeydown = e => { if (e.key === 'Enter') linkX(); };
             } else {
-                submittedUrls.add(urlInput);
-                msgBox.style.color = "#10b981"; // emerald-500
-                msgBox.innerText = "Success! Link queued for manual team review.";
-                document.getElementById('tweetUrl').value = "";
+                box.innerHTML = `<div class="flex items-center gap-2 text-white font-bold"><i data-lucide="twitter" class="w-4 h-4 text-[#1DA1F2]"></i> @${esc(p.x_handle)}</div>
+                    <div class="text-xs text-gray-400 mt-1">Fighter: <b class="text-gray-200">${esc(p.nickname)}</b> &middot; <button id="accBtn" class="underline hover:text-brand-gold">recovery code</button></div>`;
+            }
+            const acc = $('#accBtn');
+            if (acc) acc.onclick = async () => { await openAccount({ startWith: 'code' }); refresh(); };
+            icons();
+        }
+
+        async function linkX() {
+            const v = $('#xIn').value.trim();
+            try { const r = await api('set_x', { x_handle: v }); me.profile = r.profile; renderAccount(); toast('X account linked.'); }
+            catch (e) { toast(errText(e)); }
+        }
+
+        function renderStatus() {
+            const p = hasAccount() ? me.profile : null;
+            $('#userRank').textContent = p && me.ranks && me.ranks.infofi ? '#' + me.ranks.infofi : '#---';
+            $('#userPoints').textContent = p ? p.infofi_points.toLocaleString() : '0';
+        }
+
+        // ---------------------------------------------------------- quests
+        const LABEL = { like: 'Like Latest Post', retweet: 'Retweet Latest Post', reply: 'Reply to Latest Post' };
+        const ACTION = { like: 'Like', retweet: 'Retweet', reply: 'Reply', follow: 'Follow' };
+        const intent = (task, t) => task === 'follow' ? `https://x.com/intent/follow?screen_name=${encodeURIComponent(t.handle)}`
+            : task === 'like' ? `https://x.com/intent/like?tweet_id=${t.tweet_id}`
+            : task === 'retweet' ? `https://x.com/intent/retweet?tweet_id=${t.tweet_id}`
+            : `https://x.com/intent/tweet?in_reply_to=${t.tweet_id}`;
+
+        function questRow(task, t, label) {
+            const id = 'q-' + task;
+            if (t.state === 'none') return `<li class="qrow" id="${id}"><span class="text-sm font-medium text-gray-500">${label}</span><span class="text-[11px] text-gray-500">No post yet</span></li>`;
+            const done = t.state === 'done';
+            return `<li class="qrow" id="${id}">
+                <span class="text-sm font-medium text-gray-200">${label}<br><span class="pts">+${t.points} Pts</span></span>
+                <span class="btns">
+                    <button class="qbtn act" data-act="${task}" ${done ? 'disabled' : ''}>${ACTION[task]}</button>
+                    <button class="qbtn ${done ? 'done' : 'chk'}" data-chk="${task}" ${done ? 'disabled' : ''}>${done ? 'Done ✓' : 'Check'}</button>
+                </span></li>`;
+        }
+
+        function renderQuests() {
+            if (!tasks) return;
+            $('#mainQuests').innerHTML = questRow('follow', tasks.follow, `Follow @${esc(tasks.follow.handle)}`);
+            const order = ['like', 'retweet', 'reply'];
+            $('#dailyQuests').innerHTML = order.map(k => { const t = tasks.daily.find(d => d.kind === k); return t ? questRow(k, t, LABEL[k]) : ''; }).join('');
+            for (const b of document.querySelectorAll('[data-act]')) b.onclick = () => openTask(b.dataset.act);
+            for (const b of document.querySelectorAll('[data-chk]')) b.onclick = () => checkTask(b.dataset.chk);
+            // resume a running check after a reload
+            for (const t of [{ task: 'follow', ...tasks.follow }, ...tasks.daily.map(d => ({ task: d.kind, ...d }))]) {
+                if (t.state === 'started' && timers[t.task]) startCountdown(t.task, t.wait_left);
+            }
+            const post = tasks.post.today;
+            const msg = $('#submitMsg');
+            if (post) {
+                msg.style.color = post.status === 'approved' ? '#34d399' : post.status === 'rejected' ? '#f87171' : '#facc15';
+                msg.innerHTML = `Today's post: ${post.status === 'pending' ? 'waiting for review' : post.status} &middot; <a class="underline" href="${esc(post.url)}" target="_blank" rel="noopener">view</a>`;
             }
         }
 
-        // 3. TABLE PAGINATION
-        const totalUsers = 500;
-        const usersPerPage = 10;
-        let currentPage = 1;
-        const totalPages = Math.ceil(totalUsers / usersPerPage);
-        
-        // Generate Dummy Data
-        let leaderboardData = [];
-        for(let i=1; i<=totalUsers; i++) {
-            leaderboardData.push({
-                rank: i,
-                twitter: "@web3_player" + i,
-                wallet: "0x" + Math.floor(1000 + Math.random()*9000) + "...abcd",
-                points: 15000 - (i * 25)
-            });
+        const taskOf = task => task === 'follow' ? tasks.follow : tasks.daily.find(d => d.kind === task);
+
+        async function openTask(task) {
+            const t = taskOf(task);
+            // open X right away (inside the click) so the browser does not block the new tab
+            const win = window.open(intent(task, t), '_blank');
+            if (win) { try { win.opener = null; } catch { /* ignore */ } }
+            if (!(await ensureAccount('You need a fighter account to collect quest points.'))) return;
+            try {
+                const r = await api('task_start', { task });
+                tasks = r.tasks;
+                if (!win) toast('Your browser blocked the X window. Allow pop-ups and try again.');
+                timers[task] = true;
+                renderQuests();
+            } catch (e) { toast(errText(e)); }
         }
 
-        function renderTable() {
-            const tbody = document.getElementById('leaderboardBody');
-            tbody.innerHTML = "";
-            
-            const startIndex = (currentPage - 1) * usersPerPage;
-            const endIndex = startIndex + usersPerPage;
-            const currentData = leaderboardData.slice(startIndex, endIndex);
-
-            currentData.forEach(user => {
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-[#121212] transition";
-                
-                // Color top 3 ranks
-                let rankStyle = "text-gray-300";
-                if(user.rank === 1) rankStyle = "text-brand-gold font-black text-base";
-                if(user.rank === 2) rankStyle = "text-gray-300 font-bold";
-                if(user.rank === 3) rankStyle = "text-amber-700 font-bold";
-
-                tr.innerHTML = `
-                    <td class="py-4 px-4 ${rankStyle}">#${user.rank}</td>
-                    <td class="py-4 px-4 font-medium">${user.twitter}</td>
-                    <td class="py-4 px-4 font-mono text-xs text-gray-500">${user.wallet}</td>
-                    <td class="py-4 px-4 text-right text-brand-gold font-bold">${user.points.toLocaleString()}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-            
-            document.getElementById('pageInfo').innerText = `Page ${currentPage} / ${totalPages}`;
+        function startCountdown(task, seconds) {
+            const btn = document.querySelector(`[data-chk="${task}"]`);
+            if (!btn) return;
+            clearInterval(timers['i_' + task]);
+            let left = Math.max(0, seconds) + 1; // one extra second so the server's 30 s have surely passed
+            const tick = async () => {
+                const b = document.querySelector(`[data-chk="${task}"]`);
+                if (!b) { clearInterval(timers['i_' + task]); return; }
+                if (left > 0) { b.disabled = true; b.textContent = `Checking ${left}s`; left--; return; }
+                clearInterval(timers['i_' + task]);
+                b.textContent = 'Checking…';
+                await claim(task);
+            };
+            tick();
+            timers['i_' + task] = setInterval(tick, 1000);
         }
 
-        function prevPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                renderTable();
+        async function checkTask(task) {
+            if (!(await ensureAccount('You need a fighter account to collect quest points.'))) return;
+            const t = taskOf(task);
+            if (t.state === 'todo') { toast(`Press "${ACTION[task]}" first, complete it on X, then check.`); return; }
+            if (t.state === 'started') startCountdown(task, t.wait_left || 0);
+        }
+
+        async function claim(task) {
+            try {
+                const r = await api('task_claim', { task });
+                tasks = r.tasks;
+                me.profile.infofi_points = r.infofi_points;
+                me.ranks = { ...(me.ranks || {}), infofi: r.rank };
+                toast(`+${r.points} points!`);
+                renderStatus(); renderQuests(); loadBoard();
+            } catch (e) {
+                if (e.code === 'too_early') { startCountdown(task, e.data.wait_left || 5); return; }
+                toast(errText(e));
+                await refresh();
             }
         }
 
-        function nextPage() {
-            if (currentPage < totalPages) {
-                currentPage++;
-                renderTable();
-            }
+        async function submitPost() {
+            const msg = $('#submitMsg');
+            const url = $('#tweetUrl').value.trim();
+            if (!url) { msg.style.color = '#ef4444'; msg.textContent = 'Please paste the link to your post.'; return; }
+            if (!(await ensureAccount('You need a fighter account to submit posts.'))) return;
+            try {
+                const r = await api('submit_post', { url });
+                tasks = r.tasks; $('#tweetUrl').value = '';
+                renderQuests();
+                msg.style.color = '#10b981'; msg.textContent = 'Submitted! The team will review your post.';
+            } catch (e) { msg.style.color = '#ef4444'; msg.textContent = errText(e); }
         }
+        $('#submitBtn').onclick = submitPost;
 
-        // Initial Load
-        renderTable();
+        // ---------------------------------------------------------- leaderboard
+        function renderBoard() {
+            const tbody = $('#leaderboardBody');
+            const pages = Math.max(1, Math.ceil(rows.length / PER));
+            page = Math.min(Math.max(1, page), pages);
+            const mine = hasAccount() ? me.profile.nickname.toLowerCase() : null;
+            const slice = rows.slice((page - 1) * PER, page * PER);
+            tbody.innerHTML = slice.length ? slice.map(u => {
+                let rankStyle = 'text-gray-300';
+                if (u.rank === 1) rankStyle = 'text-brand-gold font-black text-base';
+                if (u.rank === 2) rankStyle = 'text-gray-300 font-bold';
+                if (u.rank === 3) rankStyle = 'text-amber-700 font-bold';
+                return `<tr class="hover:bg-[#121212] transition ${u.nickname.toLowerCase() === mine ? 'bg-yellow-500/10' : ''}">
+                    <td class="py-4 px-4 ${rankStyle}">#${u.rank}</td>
+                    <td class="py-4 px-4 font-medium">${esc(u.nickname)}</td>
+                    <td class="py-4 px-4">${u.x_handle ? `<a class="text-sky-400 hover:underline" href="https://x.com/${esc(u.x_handle)}" target="_blank" rel="noopener nofollow">@${esc(u.x_handle)}</a>` : '<span class="text-gray-600">-</span>'}</td>
+                    <td class="py-4 px-4 text-right text-brand-gold font-bold">${u.points.toLocaleString()}</td></tr>`;
+            }).join('') : '<tr><td colspan="4" class="py-8 text-center text-gray-500">No points yet. Complete a quest to be first!</td></tr>';
+            $('#pageInfo').innerText = `Page ${page} / ${pages}`;
+        }
+        async function loadBoard() {
+            try { rows = (await api('leaderboard', { kind: 'infofi' })).rows; renderBoard(); }
+            catch (e) { $('#leaderboardBody').innerHTML = `<tr><td colspan="4" class="py-8 text-center text-gray-500">${esc(errText(e))}</td></tr>`; }
+        }
+        $('#prevBtn').onclick = () => { page--; renderBoard(); };
+        $('#nextBtn').onclick = () => { page++; renderBoard(); };
+
+        async function refresh() {
+            me = await loadMe();
+            try { const r = await api('tasks'); tasks = r.tasks; if (hasAccount() && r.ranks) me.ranks = r.ranks; }
+            catch (e) { if (!me) me = { offline: true }; }
+            renderAccount(); renderStatus(); renderQuests(); icons();
+        }
+        await refresh();
+        loadBoard();
+        icons();
     </script>
 </body>
 </html>

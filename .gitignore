@@ -1,0 +1,5 @@
+# Copies of arena/engine.js, arena/data.js and arena/bosses.js for the server function.
+# Created by supabase/sync-engine.sh before deploying, so they are not stored twice.
+supabase/functions/api/engine.js
+supabase/functions/api/data.js
+supabase/functions/api/bosses.js

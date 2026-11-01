@@ -8,10 +8,19 @@ import { tween, ease } from './core.js';
 
 // ---------------------------------------------------------------------------
 // 3D MODEL HOOK
-// When a .glb model is ready, put the file in arena/models/ and add its path here.
-// Example:  'human-mage': 'arena/models/human-mage.glb',
-// Heroes without a model keep using the procedural model below.
-// Optional animation clips are picked up by name: idle, attack, cast, hit, death.
+// When a .glb model is ready, put the file in arena/models/ and fill in its path below.
+// Anything without a model keeps using the built-in procedural model, so the game
+// always works. Animation clips inside the .glb are picked up by name:
+//   idle, attack, cast, hit, death   (e.g. a clip called "Orc_Attack_01" counts as attack)
+//
+// Heroes (one model per faction + class, rarity colors are added by the game):
+//   'human-warrior', 'human-rogue', 'human-mage', 'human-priest',
+//   'orc-warrior', 'orc-rogue', 'orc-mage', 'orc-priest'
+// Bosses:
+//   'boss-spider', 'boss-troll', 'boss-ultima', 'boss-dragon'
+// Arena surroundings (optional):
+//   'env-rock'   replaces every floating rock
+//   'env-tower'  replaces every pillar / tower around the arena
 // ---------------------------------------------------------------------------
 export const MODEL_LIBRARY = {
   // 'human-warrior': 'arena/models/human-warrior.glb',
@@ -22,6 +31,25 @@ export const MODEL_LIBRARY = {
   // 'orc-mage':      'arena/models/orc-mage.glb',
   // 'human-priest':  'arena/models/human-priest.glb',
   // 'orc-priest':    'arena/models/orc-priest.glb',
+  // 'boss-spider':   'arena/models/boss-spider.glb',
+  // 'boss-troll':    'arena/models/boss-troll.glb',
+  // 'boss-ultima':   'arena/models/boss-ultima.glb',
+  // 'boss-dragon':   'arena/models/boss-dragon.glb',
+  // 'env-rock':      'arena/models/env-rock.glb',
+  // 'env-tower':     'arena/models/env-tower.glb',
+};
+
+// Size / facing fixes per model, in case a generated model comes out too big, too small or turned.
+//   height: how tall it stands in the arena (heroes are 2.4)
+//   rotateY: extra turn in degrees if the model faces the wrong way (try 180 or 90)
+export const MODEL_SETTINGS = {
+  hero: { height: 2.4, rotateY: 0 },
+  'boss-spider': { height: 3.6, rotateY: 0 },
+  'boss-troll': { height: 5.6, rotateY: 0 },
+  'boss-ultima': { height: 6.0, rotateY: 0 },
+  'boss-dragon': { height: 5.2, rotateY: 0 },
+  'env-rock': { height: 3, rotateY: 0 },
+  'env-tower': { height: 14, rotateY: 0 },
 };
 
 // Skill effect colors per faction + class
@@ -43,7 +71,8 @@ const PALETTE = {
   },
 };
 
-const gltfCache = {};
+export const gltfCache = {};
+export const getModel = key => gltfCache[key] || null;
 
 export async function preloadModels() {
   const entries = Object.entries(MODEL_LIBRARY).filter(([, url]) => !!url);
@@ -63,7 +92,7 @@ export function buildHero(nft) {
 // ---------------------------------------------------------------------------
 // shared hero behaviour
 // ---------------------------------------------------------------------------
-class HeroBase {
+export class HeroBase {
   constructor() {
     this.root = new THREE.Group();
     this.body = new THREE.Group();
@@ -117,7 +146,7 @@ class HeroBase {
 // ---------------------------------------------------------------------------
 // procedural hero
 // ---------------------------------------------------------------------------
-function std(color, o = {}) {
+export function std(color, o = {}) {
   return new THREE.MeshStandardMaterial({
     color, roughness: o.r ?? 0.6, metalness: o.m ?? 0.1, flatShading: o.flat ?? true,
     emissive: o.e ?? 0x000000, emissiveIntensity: o.ei ?? 1, side: o.side ?? THREE.FrontSide,
@@ -408,7 +437,7 @@ class ProceduralHero extends HeroBase {
 }
 
 let _auraTex = null;
-function AURA_TEX() {
+export function AURA_TEX() {
   if (_auraTex) return _auraTex;
   const S = 256, C = S / 2, c = document.createElement('canvas'); c.width = c.height = S;
   const g = c.getContext('2d');
@@ -430,23 +459,30 @@ function buildProcedural(nft) { return new ProceduralHero(nft); }
 // ---------------------------------------------------------------------------
 // glTF hero (used automatically when a model is registered in MODEL_LIBRARY)
 // ---------------------------------------------------------------------------
-class GLTFHero extends HeroBase {
-  constructor(nft, gltf) {
+export class GLTFHero extends HeroBase {
+  // opts: { theme, cls, faction, rarity, key, anchors }  (heroes pass an nft, bosses pass opts)
+  constructor(nft, gltf, opts = {}) {
     super();
-    this.theme = THEME[`${nft.faction}-${nft.cls}`];
-    this.cls = nft.cls; this.faction = nft.faction;
+    const key = opts.key || `${nft.faction}-${nft.cls}`;
+    const set = MODEL_SETTINGS[key] || MODEL_SETTINGS.hero;
+    this.theme = opts.theme ?? THEME[key];
+    this.cls = opts.cls ?? nft.cls; this.faction = opts.faction ?? nft.faction;
     const model = SkeletonUtils.clone(gltf.scene);
+    model.rotation.y = (set.rotateY || 0) * Math.PI / 180;
     const box = new THREE.Box3().setFromObject(model);
     const size = box.getSize(new THREE.Vector3());
-    model.scale.setScalar(2.4 / Math.max(0.001, size.y));
+    const H = set.height || 2.4;
+    model.scale.multiplyScalar(H / Math.max(0.001, size.y));
     const box2 = new THREE.Box3().setFromObject(model), c = box2.getCenter(new THREE.Vector3());
-    model.position.set(-c.x, -box2.min.y, -c.z);
+    model.position.x -= c.x; model.position.y -= box2.min.y; model.position.z -= c.z;
     model.traverse(o => {
       if (o.isMesh) {
         o.castShadow = true;
-        o.material = o.material.clone();
-        this.allMats.push(o.material);
-        if (o.material.emissive) this.flashMats.push(o.material);
+        o.material = Array.isArray(o.material) ? o.material.map(m => m.clone()) : o.material.clone();
+        for (const m of Array.isArray(o.material) ? o.material : [o.material]) {
+          this.allMats.push(m);
+          if (m.emissive) this.flashMats.push(m);
+        }
       }
     });
     this.body.add(model);
@@ -457,13 +493,16 @@ class GLTFHero extends HeroBase {
       for (const k of ['idle', 'attack', 'cast', 'hit', 'death']) if (n.includes(k) && !this.clips[k]) this.clips[k] = clip;
     }
     if (this.mixer && this.clips.idle) this.mixer.clipAction(this.clips.idle).play();
-    const rar = RARITIES[nft.rarity];
-    const aura = this.aura = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 2.4),
-      new THREE.MeshBasicMaterial({ map: AURA_TEX(), color: rar.hex, transparent: true, opacity: 0.45, blending: THREE.AdditiveBlending, depthWrite: false }));
+    const rarHex = opts.rarity ? RARITIES[opts.rarity].hex : nft ? RARITIES[nft.rarity].hex : this.theme;
+    const auraSize = Math.max(2.4, size.x * (H / Math.max(0.001, size.y)) * 1.1);
+    const aura = this.aura = new THREE.Mesh(new THREE.PlaneGeometry(auraSize, auraSize),
+      new THREE.MeshBasicMaterial({ map: AURA_TEX(), color: rarHex, transparent: true, opacity: 0.45, blending: THREE.AdditiveBlending, depthWrite: false }));
     aura.rotation.x = -Math.PI / 2; aura.position.y = 0.03; this.root.add(aura);
+    this.allMats.push(aura.material);
     const grp = (x, y, z) => { const g = new THREE.Group(); g.position.set(x, y, z); this.body.add(g); return g; };
-    this.tip = grp(-0.45, 1.5, 0.5); this.chest = grp(0, 1.4, 0.3); this.top = grp(0, 2.55, 0);
-    this.height = 2.4;
+    const k = H / 2.4;
+    this.tip = grp(-0.45 * k, 1.5 * k, 0.5 * k); this.chest = grp(0, 1.4 * k * (opts.key ? 0.9 : 1), 0.3 * k); this.top = grp(0, H + 0.15, 0);
+    this.height = H;
   }
   trigger(name) {
     if (!this.mixer || !this.clips[name]) return;
@@ -474,9 +513,10 @@ class GLTFHero extends HeroBase {
     this._updateCommon(dt, fx);
     if (this.mixer) this.mixer.update(dt);
     const a = this.act, br = Math.sin(this.t * 2.2 + this.phase);
-    this.body.position.y = -a.crouch * 0.25 + (this.mixer ? 0 : br * 0.02);
-    this.body.rotation.x = a.torsoX * 0.6;
-    this.body.rotation.y = a.torsoY * 0.6;
+    this.body.position.y = -(a.crouch || 0) * 0.25 + (this.mixer ? 0 : br * 0.02);
+    this.body.position.z = (a.lunge || 0) * 1.2;
+    this.body.rotation.x = (a.torsoX || 0) * 0.6 - (a.rear || 0) * 0.35;
+    this.body.rotation.y = (a.torsoY || 0) * 0.6;
   }
 }
 
