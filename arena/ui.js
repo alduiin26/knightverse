@@ -385,7 +385,9 @@ export class UI {
   showResult(res) {
     this.show('result');
     const r = $('#result');
-    r.className = 'active ' + (res.win ? 'win' : 'lose');
+    // only swap win/lose; the 'screen' class must stay so the panel can be hidden again
+    r.classList.toggle('win', res.win);
+    r.classList.toggle('lose', !res.win);
     $('#resTitle').textContent = res.win ? 'VICTORY' : 'DEFEAT';
     $('#resVs').innerHTML = `<span class="${res.win ? 'w' : 'l'}">${res.win ? 'WIN' : 'LOSE'}</span><b>You</b><i>VS</i><b>${res.rival}</b><span class="${res.win ? 'l' : 'w'}">${res.win ? 'LOSE' : 'WIN'}</span>`;
     const mvp = res.mvp;
