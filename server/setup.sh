@@ -21,9 +21,9 @@ DEPLOY_USER=kvdeploy
 HOME_DIR=/opt/knightverse
 WEB=/var/www/knightverse
 
-say()  { printf '\n\033[1;33m== %s\033[0m\n' "$*"; }
-ok()   { printf '   \033[32mOK\033[0m %s\n' "$*"; }
-warn() { printf '   \033[31m!!\033[0m %s\n' "$*"; }
+say()  { printf '\n== %s\n' "$*"; }
+ok()   { printf '   OK %s\n' "$*"; }
+warn() { printf '   !! %s\n' "$*"; }
 
 [ "$(id -u)" -eq 0 ] || { echo "Run this as root."; exit 1; }
 # shellcheck disable=SC1091
@@ -137,10 +137,20 @@ www.$DOMAIN {
 	redir https://$DOMAIN{uri} permanent
 }
 EOF
-caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null
 caddy fmt --overwrite /etc/caddy/Caddyfile
+# check the config as the caddy user, so files it opens (the access log) stay caddy's
+runuser -u caddy -- caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null 2>&1 \
+  || caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+touch /var/log/caddy/access.log
+chown -R caddy:caddy /var/log/caddy
 systemctl enable -q caddy
-systemctl reload caddy 2>/dev/null || systemctl restart caddy
+systemctl restart caddy
+sleep 3
+if ! systemctl is-active -q caddy; then
+  journalctl -u caddy -n 15 --no-pager
+  warn "Caddy did not start (details above)"
+  exit 1
+fi
 ok "Caddy is serving $DOMAIN (HTTPS certificate is fetched automatically)"
 
 say "5/6 Publishing the site from GitHub"
